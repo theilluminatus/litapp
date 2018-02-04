@@ -11,15 +11,17 @@ export interface Slide {
 
 @IonicPage()
 @Component({
-  selector: 'page-tutorial',
-  templateUrl: 'tutorial.html'
+  selector: 'page-story',
+  templateUrl: 'story.html'
 })
-export class TutorialPage {
+export class StoryPage {
   slides: Slide[];
   showSkip = true;
   dir: string = 'ltr';
+  item: any;
 
   constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
+    this.item = navParams.get('item') || items.defaultItem;
     this.dir = platform.dir();
     translate.get(["TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE1_DESCRIPTION",
