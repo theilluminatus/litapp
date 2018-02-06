@@ -9,7 +9,7 @@ import { Items } from '../../providers/providers';
   selector: 'page-list-master',
   templateUrl: 'list-master.html'
 })
-export class ListMasterPage {
+export class StoryListPage {
   currentItems: Item[];
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
@@ -23,11 +23,11 @@ export class ListMasterPage {
   }
 
   /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
+   * Prompt the user to add a new item. This shows our ListCreatePage in a
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create('ItemCreatePage');
+    let addModal = this.modalCtrl.create('ListCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
