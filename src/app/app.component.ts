@@ -23,7 +23,7 @@ import { Settings } from '../providers/providers';
     </ion-content>
 
   </ion-menu>
-  <ion-nav #content root="TabsPage"></ion-nav>`
+  <ion-nav #content [root]="pages[0].component"></ion-nav>`
 })
 export class MyApp {
 
