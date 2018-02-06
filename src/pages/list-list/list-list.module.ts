@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ListListPage } from './list-list';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ListListPage } from './list-list';
   ],
   imports: [
     IonicPageModule.forChild(ListListPage),
+    TranslateModule.forChild()
   ],
 })
 export class ListListPageModule {}

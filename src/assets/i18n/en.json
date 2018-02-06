@@ -39,5 +39,7 @@
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
 
-  "FEED_TITLE": "My Feed"
+  "FEED_TITLE": "My Feed",
+  
+  "LISTLIST_TITLE": "My Lists"
 }
