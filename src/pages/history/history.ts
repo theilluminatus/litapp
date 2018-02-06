@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the HistoryPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Story } from '../../models/story';
+import { Stories } from '../../providers/providers';
+
 
 @IonicPage()
 @Component({
@@ -15,11 +12,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HistoryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  stories: Story[];
+
+  constructor(public navCtrl: NavController, public s: Stories, public navParams: NavParams) {
+  	this.stories = this.s.query();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HistoryPage');
+    
   }
 
 }

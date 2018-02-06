@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Item } from '../../models/item';
-import { Items } from '../../providers/providers';
+import { Story } from '../../models/story';
+import { Stories } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -11,20 +11,21 @@ import { Items } from '../../providers/providers';
 })
 export class SearchPage {
 
-  currentItems: any = [];
+  currentStories: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public stories: Stories) { }
 
   /**
-   * Perform a service for the proper items.
+   * Perform a service for the proper stories.
    */
-  getItems(ev) {
+  getStories(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {
-      this.currentItems = [];
+      this.currentStories = [];
       return;
     }
-    this.currentItems = this.items.query({
+
+    this.currentStories = this.stories.query({
       name: val
     });
   }
@@ -32,9 +33,9 @@ export class SearchPage {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: Item) {
+  openStory(story: Story) {
     this.navCtrl.push('StoryPage', {
-      item: item
+      story: story
     });
   }
 

@@ -1,0 +1,10 @@
+
+<ion-list>
+  <ion-item *ngFor="let story of stories">
+    <button ion-item (click)="openStory(story)">
+      <h2>{{story.name}}</h2>
+      <p>{{story.description}}</p>
+      <ion-note item-end>READ?</ion-note>
+    </button>
+  </ion-item>
+</ion-list>
