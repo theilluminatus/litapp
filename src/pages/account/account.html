@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'ACCOUNT_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content scroll="false">
+  <div padding>
+    <button ion-button block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
+    <button ion-button block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>
+  </div>
+</ion-content>
