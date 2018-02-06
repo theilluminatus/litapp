@@ -6,4 +6,4 @@ export const MainPage = 'TabsPage';
 export const Tab1Root = 'HistoryPage';
 export const Tab2Root = 'SearchPage';
 export const Tab3Root = 'FeedPage';
-export const Tab4Root = 'ListsPage';
+export const Tab4Root = 'ListListPage';
