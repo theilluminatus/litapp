@@ -1,16 +1,46 @@
 <ion-header>
 
-  <ion-navbar>
-  	<button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<button ion-button icon-only menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+		<ion-buttons end>
+			<button end ion-button icon-only (click)="panel.open()">
+				<ion-icon name="star-outline"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+
+	<ion-toolbar no-border-top>
+		<ion-searchbar (ionInput)="getStories($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" #searchbar></ion-searchbar>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="saveSearch(searchbar.value)">
+				<ion-icon name="star"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getStories($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
-  <story-list [stories]="currentStories"></story-list>
+	<ion-nav #stars></ion-nav>
+	<ion-menu side="right" [content]="stars" #panel>
+		<ion-list>
+			<ion-list-header>
+				Starred Queryies
+			</ion-list-header>
+
+			<ion-item *ngFor="let query of starredQueries">
+				<ion-label (click)="search(query)">{{query}}</ion-label>
+				<button ion-button icon-only color="trash" item-end (click)="delete(query)">
+					<ion-icon name="remove"></ion-icon>
+				</button>
+
+			</ion-item>
+		</ion-list>
+	</ion-menu>
+
+	<story-list [stories]="currentStories"></story-list>
 </ion-content>
