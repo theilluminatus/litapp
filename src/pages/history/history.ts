@@ -7,19 +7,29 @@ import { Stories } from '../../providers/providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-history',
-  templateUrl: 'history.html',
+	selector: 'page-history',
+	templateUrl: 'history.html',
 })
 export class HistoryPage {
+	downloadFilterActive = false;
+	stories: Story[];
 
-  stories: Story[];
+	constructor(public navCtrl: NavController, public s: Stories, public navParams: NavParams) {
+		this.stories = this.s.query();
+	}
 
-  constructor(public navCtrl: NavController, public s: Stories, public navParams: NavParams) {
-  	this.stories = this.s.query();
-  }
+	ionViewDidLoad() {
 
-  ionViewDidLoad() {
-    
-  }
+	}
+
+	toggleDownloadFilter() {
+		this.downloadFilterActive = !this.downloadFilterActive;
+		if (this.downloadFilterActive)
+			this.stories = this.s.query({
+				downloaded: true
+			});
+		else
+			this.stories = this.s.query();
+	}
 
 }

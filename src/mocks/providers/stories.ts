@@ -14,49 +14,56 @@ export class Stories {
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Burt is a Bear.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": true
       },
       {
         "name": "Charlie Cheetah",
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Charlie is a Cheetah.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": false
       },
       {
         "name": "Donald Duck",
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Donald is a Duck.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": true
       },
       {
         "name": "Eva Eagle",
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Eva is an Eagle.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": false
       },
       {
         "name": "Ellie Elephant",
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Ellie is an Elephant.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": true
       },
       {
         "name": "Molly Mouse",
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Molly is a Mouse.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": false
       },
       {
         "name": "Paul Puppy",
         "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "description": "Paul is a Puppy.",
         "author": "Author",
-        "length": 10
+        "length": 10,
+        "downloaded": false
       }
     ];
 
