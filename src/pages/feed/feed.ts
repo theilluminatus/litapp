@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the FeedPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { FeedItem } from '../../models/feeditem';
+import { Feed } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,32 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FeedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  feed: FeedItem[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public f: Feed ) {
+  	this.feed = this.f.query();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FeedPage');
+  loadMore(event) {
+    this.feed.push(
+      this.feed[Math.floor(Math.random()*this.feed.length)]
+    );
+    event.complete();
+  }
+
+  openFollowing() {
+  	this.navCtrl.push('FollowingPage');
+  }
+
+  openItem(item: FeedItem) {
+  	if (item.subject == "author")
+  		this.navCtrl.push('AuthorPage', {
+  			author: item.author
+  		});
+  	else if (item.subject == "story")
+		this.navCtrl.push('StoryPage', {
+			story: item.story
+		});
   }
 
 }

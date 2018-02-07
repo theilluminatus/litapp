@@ -42,5 +42,7 @@
 
   "FEED_TITLE": "My Feed",
   
-  "LISTLIST_TITLE": "My Lists"
+  "LISTLIST_TITLE": "My Lists",
+
+  "FOLLOWING_TITLE": "Followed Authors"
 }

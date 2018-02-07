@@ -5,11 +5,30 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ 'FEED_TITLE' | translate }}</ion-title>
+    <ion-buttons end>
+		<button end ion-button icon-only (click)="openFollowing()">
+			<ion-icon name="people"></ion-icon>
+		</button>
+	</ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let item of feed" (click)="openItem(item)">
+
+      <ion-img *ngIf="item.subject=='author'" [src]="item.picture"></ion-img>
+      <p>{{item.author}} {{item.text}}</p>
+      <h2 *ngIf="item.subject=='story'">{{item.name}}</h2>
+      <p>{{item.timestamp}}</p>
+      
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

@@ -22,5 +22,5 @@ export interface Story {
   description: string;
   author: string;
   length: number;
-  lists: List[] = [];
+  lists: List[];
 }

@@ -34,7 +34,6 @@ export class SearchPage {
   }
 
   loadMore(event) {
-    console.log(true);
     this.currentStories.push(
       this.currentStories[Math.floor(Math.random()*this.currentStories.length)]
     );

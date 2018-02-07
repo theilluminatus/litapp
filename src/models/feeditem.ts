@@ -19,4 +19,5 @@ export interface FeedItem {
   subject: string;
   picture: string;
   text: string;
+  timestamp: string;
 }

@@ -9,43 +9,57 @@ export class Feed {
   constructor() {
     let feeditems = [
       {
-        "name": "Burt Bear",
+        "name": "",
+        "author": "Bert",
         "subject": "author",
         "picture": "assets/img/speakers/bear.jpg",
-        "text": "Burt is a Bear."
+        "text": "edited his bio.",
+        "timestamp": "31/12/2017"
       },
       {
-        "name": "Charlie Cheetah",
+        "name": "Paul is a Puppy",
+        "author": "John",
         "subject": "story",
-        "text": "Charlie is a Cheetah."
+        "text": "published a new story.",
+        "timestamp": "30/12/2017"
       },
       {
         "name": "Donald Duck",
+        "author": "John",
         "subject": "story",
-        "text": "Donald is a Duck."
+        "text": "published a new story.",
+        "timestamp": "29/12/2017"
       },
       {
-        "name": "Eva Eagle",
+        "name": "",
+        "author": "John",
         "subject": "author",
         "picture": "assets/img/speakers/eagle.jpg",
-        "text": "Eva is an Eagle."
+        "text": "changed her relationship status.",
+        "timestamp": "28/12/2017"
       },
       {
-        "name": "Ellie Elephant",
+        "name": "",
+        "author": "Inge",
         "subject": "author",
         "picture": "assets/img/speakers/elephant.jpg",
-        "text": "Ellie is an Elephant."
+        "text": "changed her birthday.",
+        "timestamp": "27/12/2017"
       },
       {
         "name": "Molly Mouse",
+        "author": "John",
         "subject": "story",
-        "text": "Molly is a Mouse."
+        "text": "published a new story.",
+        "timestamp": "10/12/2017"
       },
       {
-        "name": "Paul Puppy",
+        "name": "",
+        "author": "Peter",
         "subject": "author",
         "picture": "assets/img/speakers/puppy.jpg",
-        "text": "Paul is a Puppy."
+        "text": "edited his bio.",
+        "timestamp": "9/12/2017"
       }
     ];
 

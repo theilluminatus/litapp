@@ -19,5 +19,5 @@ export interface List {
   id: any;
   name: string;
   description: string;
-  stories: Story[] = [];
+  stories: Story[];
 }
