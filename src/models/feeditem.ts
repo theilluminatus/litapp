@@ -1,4 +1,7 @@
 
+import { Author } from './author';
+import { Story } from './story';
+
 export class FeedItem {
 
   constructor(fields: any) {
@@ -14,10 +17,9 @@ export class FeedItem {
 export interface FeedItem {
   [prop: string]: any;
 
-  id: any;
-  name: string;
+  author: Author;
+  story: Story;
   subject: string;
-  picture: string;
   text: string;
   timestamp: string;
 }

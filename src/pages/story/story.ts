@@ -3,6 +3,8 @@ import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, 
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { Author } from '../../models/author';
+
 @IonicPage()
 @Component({
   selector: 'page-story',
@@ -63,6 +65,12 @@ export class StoryPage implements OnInit {
 
     popover.present({
       ev: ev
+    });
+  }
+
+  showAuthor(author: Author) {
+    this.navCtrl.push('AuthorPage', {
+      author: author
     });
   }
 

@@ -1,30 +1,16 @@
 import { Injectable } from '@angular/core';
 
 import { List } from '../../models/list';
+import { deflists } from '../data';
+
 
 @Injectable()
-export class Lists {
-  lists: List[] = [];
+export class Lists {;
 
-  constructor() {
-    let lists = [
-      {
-        "name": "Favourites",
-        "description": "heart."
-      },
-      {
-        "name": "ToRead",
-        "description": "Waiting."
-      },
-      {
-        "name": "Read",
-        "description": "All stories."
-      },
-    ];
+  lists: List[];
 
-    for (let list of lists) {
-      this.lists.push(new List(list));
-    }
+  constructor() { 
+    this.lists = deflists;
   }
 
   query(params?: any) {

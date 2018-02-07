@@ -15,8 +15,6 @@ export class ListViewPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public s: Stories) {
   	this.list = navParams.get('list');
-  	this.list["stories"] = this.s.query();
-
   }
 
 }

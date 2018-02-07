@@ -1,4 +1,6 @@
 
+import { Story } from './story';
+
 export class Author {
 
   constructor(fields: any) {
@@ -13,4 +15,11 @@ export class Author {
 
 export interface Author {
   [prop: string]: any;
+
+  id: any;
+  name: string;
+  picture: string;
+  bio: string;
+  stories: Story[];
+  favs: Story[];
 }

@@ -1,5 +1,6 @@
 
-import { Story } from './story';
+import { Author } from './author';
+import { List } from './list';
 
 export class Story {
 
@@ -20,7 +21,8 @@ export interface Story {
   title: string;
   content: string;
   description: string;
-  author: string;
+  rating: number;
+  author: Author;
   length: number;
   lists: List[];
 }

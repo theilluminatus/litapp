@@ -20,9 +20,9 @@
   <ion-list>
     <ion-item *ngFor="let item of feed" (click)="openItem(item)">
 
-      <ion-img *ngIf="item.subject=='author'" [src]="item.picture"></ion-img>
-      <p>{{item.author}} {{item.text}}</p>
-      <h2 *ngIf="item.subject=='story'">{{item.name}}</h2>
+      <ion-img *ngIf="item.subject=='author'" [src]="item.author.picture"></ion-img>
+      <p><a (click)="openAuthor(item.author)">{{item.author.name}}</a> {{item.text}}</p>
+      <h2 *ngIf="item.subject=='story'">{{item.story.title}}</h2>
       <p>{{item.timestamp}}</p>
       
     </ion-item>

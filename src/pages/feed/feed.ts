@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FeedItem } from '../../models/feeditem';
+import { Author } from '../../models/author';
 import { Feed } from '../../providers/providers';
 
 @IonicPage()
@@ -30,13 +31,17 @@ export class FeedPage {
 
   openItem(item: FeedItem) {
   	if (item.subject == "author")
-  		this.navCtrl.push('AuthorPage', {
-  			author: item.author
-  		});
+  		this.openAuthor(item.author);
   	else if (item.subject == "story")
 		this.navCtrl.push('StoryPage', {
 			story: item.story
 		});
+  }
+
+  openAuthor(author: Author) {
+    this.navCtrl.push('AuthorPage', {
+      author: author
+    });
   }
 
 }
