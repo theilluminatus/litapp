@@ -1,4 +1,6 @@
 
+import { Story } from './story';
+
 export class List {
 
   constructor(fields: any) {
@@ -17,4 +19,5 @@ export interface List {
   id: any;
   name: string;
   description: string;
+  stories: Story[] = [];
 }

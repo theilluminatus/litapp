@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ListListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { List } from '../../models/list';
+import { Lists } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  lists: List[];
+
+  constructor(public navCtrl: NavController, public l: Lists) {
+  	this.lists = this.l.query();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListListPage');
+  openList(list: List) {
+    this.navCtrl.push('ListViewPage', {
+      list: list
+    });
   }
 
 }

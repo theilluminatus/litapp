@@ -7,12 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>list-view</ion-title>
+    <ion-title>{{ list.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+	<story-list [stories]="list.stories"></story-list>
 </ion-content>

@@ -1,4 +1,6 @@
 
+import { Story } from './story';
+
 export class Story {
 
   constructor(fields: any) {
@@ -20,4 +22,5 @@ export interface Story {
   description: string;
   author: string;
   length: number;
+  lists: List[] = [];
 }

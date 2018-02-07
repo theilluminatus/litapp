@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-  	<button ion-button icon-only menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ 'LISTLIST_TITLE' | translate }}</ion-title>
@@ -10,6 +10,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+<ion-list>
+
+  <ion-item (click)="openList(list)" *ngFor="let list of lists">
+    <h2>{{list.name}}</h2>
+    <p>{{list.description}}</p>
+  </ion-item>
+
+</ion-list>
 
 </ion-content>
