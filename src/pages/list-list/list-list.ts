@@ -23,4 +23,8 @@ export class ListListPage {
     });
   }
 
+  addList() {
+    this.navCtrl.push('ListCreatePage');
+  }
+
 }

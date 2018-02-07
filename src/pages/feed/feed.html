@@ -6,11 +6,11 @@
     </button>
     <ion-title>{{ 'FEED_TITLE' | translate }}</ion-title>
     <ion-buttons end>
-		<button end ion-button icon-only (click)="openFollowing()">
-			<ion-icon name="people"></ion-icon>
-		</button>
-	</ion-buttons>
-  </ion-navbar>
+      <button end ion-button icon-only (click)="openFollowing()">
+       <ion-icon name="people"></ion-icon>
+     </button>
+   </ion-buttons>
+ </ion-navbar>
 
 </ion-header>
 
@@ -33,7 +33,7 @@
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
 </ion-content>

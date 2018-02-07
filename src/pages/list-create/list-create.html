@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'ITEM_CREATE_TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'LISTCREATE_TITLE' | translate }}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
         <span color="primary" showWhen="ios">
@@ -23,24 +23,25 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
-    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
-    <div class="profile-image-wrapper" (click)="getPicture()">
-      <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
-        <ion-icon name="add"></ion-icon>
-        <div>
-          {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
-        </div>
-      </div>
-      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
-    </div>
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'ITEM_NAME_PLACEHOLDER' | translate }}" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="{{ 'LISTCREATE_NAME' | translate }}" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'ITEM_ABOUT_PLACEHOLDER' | translate }}" formControlName="about"></ion-input>
+        <ion-input type="text" placeholder="{{ 'LISTCREATE_DESCRIPTION' | translate }}" formControlName="description"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list radio-group formControlName="visibility">
+      <ion-item>
+        <ion-label>{{ 'LISTCREATE_VISIBILITY_PUBLIC' | translate }}</ion-label>
+        <ion-radio value="public" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ 'LISTCREATE_VISIBILITY_PRIVATE' | translate }}</ion-label>
+        <ion-radio value="private"></ion-radio>
       </ion-item>
     </ion-list>
   </form>

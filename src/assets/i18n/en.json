@@ -34,6 +34,7 @@
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete",
+  "EDIT_BUTTON": "Edit",
 
   "HISTORY_TITLE": "History",
 
@@ -43,6 +44,11 @@
   "FEED_TITLE": "My Feed",
   
   "LISTLIST_TITLE": "My Lists",
+  "LISTCREATE_TITLE": "Create new list",
+  "LISTCREATE_NAME": "Name",
+  "LISTCREATE_DESCRIPTION": "Description",
+  "LISTCREATE_VISIBILITY_PUBLIC": "Public",
+  "LISTCREATE_VISIBILITY_PRIVATE": "Private",
 
   "FOLLOWING_TITLE": "Followed Authors"
 }
