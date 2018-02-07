@@ -27,4 +27,20 @@ export class ListListPage {
     this.navCtrl.push('ListCreatePage');
   }
 
+  edit(list: List, event) {
+    event.stopPropagation();
+    this.navCtrl.push('ListCreatePage', {
+      list: list
+    });
+  }
+
+  delete(list: List, event) {
+    // TODO: delete list from db
+    event.stopPropagation();
+    this.lists.forEach((item,index) => {
+      if (item == list)
+        this.lists.splice(index, 1);
+    });
+  }
+
 }

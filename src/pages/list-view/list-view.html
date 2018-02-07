@@ -7,7 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ list.name }}</ion-title>
+    <ion-title>
+    	<ion-icon [name]="list.visibility=='private' ? 'lock' : ''"></ion-icon>
+    	{{ list.name }}
+    </ion-title>
   </ion-navbar>
 
 </ion-header>

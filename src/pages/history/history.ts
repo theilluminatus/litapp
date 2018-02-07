@@ -18,10 +18,6 @@ export class HistoryPage {
 		this.stories = this.s.query();
 	}
 
-	ionViewDidLoad() {
-
-	}
-
 	toggleDownloadFilter() {
 		this.downloadFilterActive = !this.downloadFilterActive;
 		if (this.downloadFilterActive)

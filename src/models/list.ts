@@ -19,5 +19,6 @@ export interface List {
   id: any;
   name: string;
   description: string;
+  visibility: string;
   stories: Story[];
 }

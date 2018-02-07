@@ -18,10 +18,17 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item (click)="openList(list)" *ngFor="let list of lists">
-      <h2>{{list.name}}</h2>
-      <p>{{list.description}}</p>
-    </ion-item>
+    <ion-item-sliding (click)="openList(list)" *ngFor="let list of lists">
+      <ion-item>
+        <ion-icon [name]="list.visibility=='private' ? 'lock' : ''"></ion-icon>
+        <h2>{{list.name}}</h2>
+        <p>{{list.description}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="edit(list, $event)">Edit</button>
+        <button ion-button color="danger" (click)="delete(list, $event)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
 </ion-content>

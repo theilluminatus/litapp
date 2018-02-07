@@ -122,18 +122,21 @@ let deflists: List[] = [
     "id": 0,
     "name": "Favourites",
     "description": "heart.",
+    "visibility": "public",
     "stories": defstories
   }),
   new List({
     "id": 1,
     "name": "ToRead",
     "description": "Waiting.",
+    "visibility": "public",
     "stories": [defstories[0], defstories[2], defstories[4]]
   }),
   new List({
     "id": 2,
     "name": "Read",
     "description": "All stories.",
+    "visibility": "private",
     "stories": []
   })
 ];

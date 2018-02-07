@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+
+import { List } from '../../models/list';
 
 @IonicPage()
 @Component({
@@ -11,24 +12,18 @@ import { IonicPage, NavController, ViewController } from 'ionic-angular';
 export class ListCreatePage {
 
   isReadyToSave: boolean;
-  item: any;
+  list: List;
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    this.form = formBuilder.group({
-      name: ['', Validators.required],
-      description: [''],
-      visibility: ['public'],
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, fb: FormBuilder, navParams: NavParams) {
+
+    this.list = navParams.get('list');
+    this.form = fb.group({
+      id: [this.list ? this.list.id : -1 , Validators.required],
+      name: [this.list ? this.list.name : '', Validators.required],
+      description: [this.list ? this.list.description : ''],
+      visibility: [this.list ? this.list.visibility : 'public'],
     });
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-  }
-
-  ionViewDidLoad() {
-
   }
 
   cancel() {
@@ -36,7 +31,13 @@ export class ListCreatePage {
   }
 
   done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
+    if (!this.form.valid) return;
+
+    // TODO: persist new and edited lists to db
+    this.list.name = this.form.value.name;
+    this.list.description = this.form.value.description;
+    this.list.visibility = this.form.value.visibility;
+
+    this.viewCtrl.dismiss();
   }
 }

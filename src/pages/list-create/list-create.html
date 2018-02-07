@@ -11,7 +11,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+      <button ion-button (click)="done()" [disabled]="!form.valid" strong>
         <span color="primary" showWhen="ios">
           {{ 'DONE_BUTTON' | translate }}
         </span>
