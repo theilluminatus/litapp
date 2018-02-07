@@ -7,6 +7,13 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
+
+  <ion-list>
+    <ion-item (click)="showAuthor(author)" *ngFor="let author of authors">
+      <ion-img [src]="author.picture"></ion-img>
+      <h2>{{author.name}}</h2>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

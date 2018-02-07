@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Author } from '../../models/author';
+import { Authors } from '../../providers/providers';
+
 @IonicPage()
 @Component({
   selector: 'page-following',
@@ -8,11 +11,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FollowingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  authors: Author[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public a: Authors) {
+  	this.authors = this.a.query({ following: true });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FollowingPage');
+  showAuthor(author: Author) {
+    this.navCtrl.push('AuthorPage', {
+      author: author
+    });
   }
 
 }

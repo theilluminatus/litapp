@@ -20,6 +20,7 @@ export interface Author {
   name: string;
   picture: string;
   bio: string;
+  following: boolean;
   stories: Story[];
   favs: Story[];
 }

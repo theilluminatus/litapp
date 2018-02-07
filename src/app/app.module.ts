@@ -10,8 +10,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { Stories } from '../mocks/providers/stories';
-import { Feed } from '../mocks/providers/feed';
+import { Authors } from '../mocks/providers/authors';
 import { Lists } from '../mocks/providers/lists';
+import { Feed } from '../mocks/providers/feed';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
@@ -62,8 +63,9 @@ export function provideSettings(storage: Storage) {
   providers: [
     Api,
     Stories,
-    Feed,
+    Authors,
     Lists,
+    Feed,
     User,
     Camera,
     SplashScreen,

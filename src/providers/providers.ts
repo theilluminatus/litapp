@@ -1,15 +1,17 @@
 import { Api } from './api/api';
 import { Stories } from '../mocks/providers/stories';
-import { Feed } from '../mocks/providers/feed';
+import { Authors } from '../mocks/providers/authors';
 import { Lists } from '../mocks/providers/lists';
+import { Feed } from '../mocks/providers/feed';
 import { Settings } from './settings/settings';
 import { User } from './user/user';
 
 export {
     Api,
     Stories,
-    Feed,
+    Authors,
     Lists,
+    Feed,
     Settings,
     User
 };

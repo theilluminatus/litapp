@@ -90,6 +90,7 @@ let defauthors: Author[] = [
     "name": "John",
     "picture": "assets/img/speakers/bear.jpg",
     "bio": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "following": true,
     "stories": [ defstories[0], defstories[1], defstories[2] ],
     "favs": [ defstories[4], defstories[5] ]
   }),
@@ -98,6 +99,7 @@ let defauthors: Author[] = [
     "name": "Bert",
     "picture": "assets/img/speakers/elephant.jpg",
     "bio": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "following": false,
     "stories": [ defstories[4], defstories[5] ],
     "favs": [ defstories[6] ]
   }),
@@ -106,6 +108,7 @@ let defauthors: Author[] = [
     "name": "Megan",
     "picture": "assets/img/speakers/eagle.jpg",
     "bio": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "following": true,
     "stories": [ defstories[6] ],
     "favs": []
   })
