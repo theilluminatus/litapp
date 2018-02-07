@@ -6,8 +6,25 @@
         </span>
       </ion-title>
     <ion-buttons end>
+
+      <button ion-button icon-only (click)="showComments($event)">
+        <ion-icon name="text" [style.color]="settings.color"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="showSeries($event)">
+        <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="bookmark($event)">
+        <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
+      </button>
+
+      <button ion-button icon-only (click)="showAuthor($event)">
+        <ion-icon name="person" [style.color]="settings.color"></ion-icon>
+      </button>
+
       <button ion-button icon-only (click)="showPopover($event)">
-        <ion-icon name="more" [style.color]="settings.color"></ion-icon>
+        <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -15,7 +32,7 @@
 
 <ion-content no-bounce>
 
-  <ion-slides #view pager="true" paginationType="fraction" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color">
+  <ion-slides #slidesElement (ionSlideDidChange)="slideChanged()" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color">
     <ion-slide *ngFor="let slide of slides"
       [style.fontSize]="settings.fontsize + 'px'"
       [style.lineHeight]="settings.lineheight + 'px'"
@@ -26,4 +43,12 @@
       <p [innerHTML]="slide.content"></p>
     </ion-slide>
   </ion-slides>
+
+  <div class="pagination"
+    [style.background]="settings.background"
+    [style.color]="settings.color">
+    <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
+      pin="true" snaps="true" step="1" min="1" [max]="slides.length"></ion-range>
+    <span>{{slidesElement.getActiveIndex()+1}} / {{slides.length}}</span>
+  </div>
 </ion-content>

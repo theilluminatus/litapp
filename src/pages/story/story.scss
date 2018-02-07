@@ -1,13 +1,17 @@
 page-story {
 
+  .toolbar-background {
+    background: transparent;
+    border-color: transparent;
+  }
+
   .content {
     background: black;
     color: white;
   }
 
-  .toolbar-background {
-    background: transparent;
-    border-color: transparent;
+  .slides {
+    height: calc( 100% - 40px);
   }
 
   .swiper-slide {
@@ -21,15 +25,33 @@ page-story {
     overflow-y: auto;
   }
 
-  .swiper-pagination-fraction {
-    text-align: right;
-    padding-right: 15px;
-  }
-
   p {
     padding: 0 20px;
     margin-bottom: 20px;
     white-space: pre-wrap;
+  }
+
+  .pagination {
+
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .range {
+      padding: 0;
+      margin-left: 25px;
+      width: calc( 100% - 100px );
+    }
+
+    .range-md .range-pin {
+      z-index: 9999;
+    }
+
+    span {
+      margin-left: 10px;
+      text-align: right;
+    }
   }
 
 }

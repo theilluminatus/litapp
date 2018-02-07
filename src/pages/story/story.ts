@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, MenuController, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
+import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,7 +13,8 @@ export class StoryPage implements OnInit {
   dir: string = 'ltr';
   slidesPerView: number = 1;
   story: any;
-  @ViewChild("view") view: any;
+  @ViewChild("slidesElement") slidesElement: Slides;
+  @ViewChild("range") range: any;
 
   // TODO: persist settings
   settings = {
@@ -46,9 +47,10 @@ export class StoryPage implements OnInit {
     //   alert(str.charAt(i));
     // }
 
-    // let linesPerSlide = this.view.contentHeight / lineheight;
+    // let linesPerSlide = this.slidesElement.contentHeight / lineheight;
 
     this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
+    this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
     this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
   }
 
@@ -60,6 +62,12 @@ export class StoryPage implements OnInit {
     popover.present({
       ev: ev
     });
+  }
+
+  slideChanged() {
+    // TODO: persist current slide index to db
+    let currentIndex = this.slidesElement.getActiveIndex();
+    this.range.setValue(currentIndex+1);
   }
 
   ionViewDidEnter() {
