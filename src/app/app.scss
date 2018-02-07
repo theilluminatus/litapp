@@ -1,16 +1,27 @@
 // http://ionicframework.com/docs/v2/theming/
 
+.ion-page .list .item {
+	padding-left: 0;
+}
 
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+.ion-page .list .item-inner {
+	padding-right: 0;
+}
+
+ion-app.md [padding] .scroll-content {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+[padding] h1:first-child,
+[padding] h2:first-child,
+[padding] h3:first-child,
+[padding] h4:first-child,
+[padding] h5:first-child,
+[padding] h6:first-child {
+	margin-top: 1.6rem;
+}
+
+.refresher-refreshing .spinner-ios line, .refresher-refreshing .spinner-ios-small line, .refresher-refreshing .spinner-crescent circle, .spinner-md-crescent circle {
+	stroke: #666;
+}

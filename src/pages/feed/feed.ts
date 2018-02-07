@@ -15,7 +15,12 @@ export class FeedPage {
   feed: FeedItem[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public f: Feed ) {
+    this.feed = this.f.query();
+  }
+
+  refresh(event) {
   	this.feed = this.f.query();
+    event.complete();
   }
 
   loadMore(event) {
@@ -38,7 +43,9 @@ export class FeedPage {
 		});
   }
 
-  openAuthor(author: Author) {
+  openAuthor(author: Author, event?) {
+    if (event)
+      event.stopPropagation();
     this.navCtrl.push('AuthorPage', {
       author: author
     });

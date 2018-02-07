@@ -14,7 +14,6 @@ export class AuthorPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.author = navParams.get('author');
-  	console.log(this.author);
   }
 
 }

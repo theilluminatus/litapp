@@ -10,15 +10,13 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
 
-<ion-list>
-
-  <ion-item (click)="openList(list)" *ngFor="let list of lists">
-    <h2>{{list.name}}</h2>
-    <p>{{list.description}}</p>
-  </ion-item>
-
-</ion-list>
+  <ion-list>
+    <ion-item (click)="openList(list)" *ngFor="let list of lists">
+      <h2>{{list.name}}</h2>
+      <p>{{list.description}}</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

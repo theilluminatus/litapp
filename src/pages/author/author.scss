@@ -1,3 +1,27 @@
 page-author {
 
+	ion-img {
+		float: left;
+		width: 100px;
+		height: 100px;
+		margin-top: 1.6rem;
+		margin-right: 15px;
+	}
+
+	.bio {
+		white-space: pre-wrap;
+		max-height: 150px;
+		overflow-y: hidden;
+		margin-bottom: 25px;
+	}
+
+	.bio:hover {
+		max-height: unset;
+	}
+
+	story-list ion-list {
+		max-height: 500px;
+		overflow-y: auto;
+	}
+
 }

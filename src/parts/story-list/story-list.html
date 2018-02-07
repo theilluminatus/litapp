@@ -5,6 +5,7 @@
     <ion-item (click)="openStory(story)">
       <h2>{{story.title}}</h2>
       <p>{{story.description}}</p>
+      <p><em>by {{story.author.name}}</em></p>
       <ion-note item-end>READ?</ion-note>
   	</ion-item>
 	<ion-item-options>

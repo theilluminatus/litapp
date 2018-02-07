@@ -21,8 +21,8 @@ export class SearchPage {
     // TODO: load starredQueries from db
   }
 
-  getStories(ev) {
-    let val = ev.target.value;
+  getStories(ev, query?) {
+    let val = query ? query : ev.target.value;
     if (!val || !val.trim()) {
       this.currentStories = [];
       return;
@@ -53,6 +53,7 @@ export class SearchPage {
 
   search(query: string) {
     this.searchbar.value = query;
+    this.getStories(null, query);
     this.panel.close();
   }
 
