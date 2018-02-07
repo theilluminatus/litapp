@@ -21,7 +21,7 @@ export class StoryListPage {
   }
 
   delete(story: Story) {
-    // TODO: persist to db
+    // TODO: persist to db + remove download if downloaded
     this.stories.forEach((item,index) => {
       if (item == story)
         this.stories.splice(index, 1);
