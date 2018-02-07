@@ -14,7 +14,7 @@ export class SearchPage {
   @ViewChild("searchbar") searchbar: any;
   @ViewChild("panel") panel: any;
 
-  currentStories: any = [];
+  currentStories: Story[] = [];
   starredQueries: string[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public stories: Stories) {
@@ -31,6 +31,14 @@ export class SearchPage {
     this.currentStories = this.stories.query({
       title: val
     });
+  }
+
+  loadMore(event) {
+    console.log(true);
+    this.currentStories.push(
+      this.currentStories[Math.floor(Math.random()*this.currentStories.length)]
+    );
+    event.complete();
   }
 
   openStory(story: Story) {
