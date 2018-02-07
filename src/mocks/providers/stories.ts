@@ -77,10 +77,10 @@ export class Stories {
 
   query(params?: any) {
     if (!params) {
-      return this.stories;
+      return this.stories.slice();
     }
 
-    return this.stories.filter((story) => {
+    return this.stories.slice().filter((story) => {
       for (let key in params) {
         let field = story[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {

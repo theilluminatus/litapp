@@ -29,7 +29,7 @@ export class SearchPage {
     }
 
     this.currentStories = this.stories.query({
-      name: val
+      title: val
     });
   }
 

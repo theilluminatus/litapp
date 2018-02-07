@@ -15,7 +15,7 @@ export interface Story {
   [prop: string]: any;
 
   id: any;
-  name: string;
+  title: string;
   content: string;
   description: string;
   author: string;

@@ -52,6 +52,8 @@ export class StoryPage implements OnInit {
     this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
     this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
     this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
+
+    // TODO: get current page from db
   }
 
   showPopover(ev: UIEvent) {
