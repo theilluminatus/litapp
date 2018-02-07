@@ -1,12 +1,28 @@
-<ion-header no-shadow>
-  <ion-navbar>
-    
+<ion-header no-border>
+  <ion-navbar [style.background]="settings.background">
+    <ion-title>
+      <span [style.color]="settings.color">
+        {{ story.title }}
+        </span>
+      </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showPopover($event)">
+        <ion-icon name="more" [style.color]="settings.color"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce>
-  <ion-slides pager="false" dir="{{dir}}">
-    <ion-slide *ngFor="let slide of slides">
+
+  <ion-slides #view pager="true" paginationType="fraction" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color">
+    <ion-slide *ngFor="let slide of slides"
+      [style.fontSize]="settings.fontsize + 'px'"
+      [style.lineHeight]="settings.lineheight + 'px'"
+      [style.fontFamily]="settings.font + ', sans-serif'"
+      [style.textAlign]="settings.textalign"
+      [style.background]="settings.background"
+      [style.color]="settings.color">
       <p [innerHTML]="slide.content"></p>
     </ion-slide>
   </ion-slides>

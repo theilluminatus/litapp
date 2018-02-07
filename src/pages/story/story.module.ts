@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { StoryPage } from './story';
+import { StoryPopoverModule } from './popover.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -9,10 +10,11 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     IonicPageModule.forChild(StoryPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    StoryPopoverModule
   ],
   exports: [
-    StoryPage
-  ]
+    StoryPage,
+  ],
 })
 export class StoryPageModule { }

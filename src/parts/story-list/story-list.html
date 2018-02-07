@@ -3,7 +3,7 @@
 
   <ion-item-sliding *ngFor="let story of stories">
     <ion-item (click)="openStory(story)">
-      <h2>{{story.name}}</h2>
+      <h2>{{story.title}}</h2>
       <p>{{story.description}}</p>
       <ion-note item-end>READ?</ion-note>
   	</ion-item>

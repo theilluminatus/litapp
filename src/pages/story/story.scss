@@ -10,15 +10,26 @@ page-story {
     border-color: transparent;
   }
 
+  .swiper-slide {
+    font-size: inherit;
+    text-align: inherit;
+  }
+
   .slide-zoom {
     height: 100%;
+    text-align: inherit;
+    overflow-y: auto;
+  }
+
+  .swiper-pagination-fraction {
+    text-align: right;
+    padding-right: 15px;
   }
 
   p {
-    padding: 0 40px;
-    font-size: 14px;
-    line-height: 1.5;
-    text-align: left;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
   }
 
 }

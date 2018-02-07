@@ -10,56 +10,56 @@ export class Stories {
   constructor() {
     let stories = [
       {
-        "name": "Burt Bear",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Burt Bear",
+        "content": "",
         "description": "Burt is a Bear.",
         "author": "Author",
         "length": 10,
         "downloaded": true
       },
       {
-        "name": "Charlie Cheetah",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Charlie Cheetah",
+        "content": "",
         "description": "Charlie is a Cheetah.",
         "author": "Author",
         "length": 10,
         "downloaded": false
       },
       {
-        "name": "Donald Duck",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Donald Duck",
+        "content": "",
         "description": "Donald is a Duck.",
         "author": "Author",
         "length": 10,
         "downloaded": true
       },
       {
-        "name": "Eva Eagle",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Eva Eagle",
+        "content": "",
         "description": "Eva is an Eagle.",
         "author": "Author",
         "length": 10,
         "downloaded": false
       },
       {
-        "name": "Ellie Elephant",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Ellie Elephant",
+        "content": "",
         "description": "Ellie is an Elephant.",
         "author": "Author",
         "length": 10,
         "downloaded": true
       },
       {
-        "name": "Molly Mouse",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Molly Mouse",
+        "content": "",
         "description": "Molly is a Mouse.",
         "author": "Author",
         "length": 10,
         "downloaded": false
       },
       {
-        "name": "Paul Puppy",
-        "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "title": "Paul Puppy",
+        "content": "",
         "description": "Paul is a Puppy.",
         "author": "Author",
         "length": 10,
@@ -67,7 +67,10 @@ export class Stories {
       }
     ];
 
+    let exampleContent = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.\n\n";
+
     for (let story of stories) {
+      Array(20).fill(0).forEach(() => {story.content += exampleContent});
       this.stories.push(new Story(story));
     }
   }
