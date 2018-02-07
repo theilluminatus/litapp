@@ -9,6 +9,7 @@ import { Story } from '../../models/story';
 })
 export class StoryListPage {
   @Input() stories: Story[];
+  @Input() sliding: boolean = false;
 
   constructor(public navCtrl: NavController) {
   }
@@ -16,6 +17,14 @@ export class StoryListPage {
   openStory(story: Story) {
     this.navCtrl.push('StoryPage', {
       story: story
+    });
+  }
+
+  delete(story: Story) {
+    // TODO: persist to db
+    this.stories.forEach((item,index) => {
+      if (item == story)
+        this.stories.splice(index, 1);
     });
   }
 }
