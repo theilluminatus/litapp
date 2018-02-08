@@ -3,7 +3,6 @@
  - Add popover for adding stories to list (in story-list & story-view)
  - Test app on other platforms
 
- - check for missing translations
  - remove signup page & fix login page
  - Add device notifications for new feed items
  - Split story pages so no vertical scrolling occurs

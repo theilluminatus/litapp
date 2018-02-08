@@ -25,8 +25,8 @@
         <p>{{list.description}}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button (click)="edit(list, $event)">Edit</button>
-        <button ion-button color="danger" (click)="delete(list, $event)">Delete</button>
+        <button ion-button (click)="edit(list, $event)">{{ 'EDIT_BUTTON' | translate }}</button>
+        <button ion-button color="danger" (click)="delete(list, $event)">{{ 'DELETE_BUTTON' | translate }}</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

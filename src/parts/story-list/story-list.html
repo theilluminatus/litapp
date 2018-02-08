@@ -7,8 +7,8 @@
       <p>{{story.description}}</p>
       <p>
         <ion-icon name="star"></ion-icon> {{story.rating}}
-        <em> by <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
-        at {{story.timestamp}}
+        <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
+        {{ 'ATTIMESTAMP' | translate }} {{story.timestamp}}
       </p>
       <p class="tags">
         <strong>{{story.category}}</strong>

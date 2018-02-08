@@ -40,6 +40,7 @@
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
+  "SEARCH_STARREDQUERIES": "Starred Queries",
 
   "FEED_TITLE": "My Feed",
   
@@ -63,5 +64,9 @@
   "LENGTH": "Length",
   "PAGES": "pages",
   "TIMESTAMP": "Timestamp",
-  "COMMENTS": "Comments"
+  "COMMENTS": "Comments",
+  "SUBMISSIONS": "Submissions",
+  "FAVORITES": "Favorites",
+  "BYAUTHOR": "by",
+  "ATTIMESTAMP": "at"
 }
