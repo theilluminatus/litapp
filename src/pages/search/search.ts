@@ -33,16 +33,18 @@ export class SearchPage {
       if (value)
         this.starredQueries = value;
     });
+
   }
 
   ionViewWillEnter() {
     if (this.query) this.search(this.query);
+    this.getStories(null, " ");
   }
 
   getStories(ev, query?) {
     let val = query ? query : ev.target.value;
     if (!val || !val.trim()) {
-      this.currentStories = [];
+      this.currentStories = this.stories.query();
       return;
     }
 
