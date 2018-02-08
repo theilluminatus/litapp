@@ -49,6 +49,6 @@
     [style.color]="settings.color">
     <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
       pin="true" snaps="true" step="1" min="1" [max]="slides.length"></ion-range>
-    <span>{{slidesElement.getActiveIndex()+1}} / {{slides.length}}</span>
+    <span>{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
   </div>
 </ion-content>

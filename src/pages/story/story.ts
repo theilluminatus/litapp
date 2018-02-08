@@ -12,6 +12,9 @@ import { Author } from '../../models/author';
   templateUrl: 'story.html'
 })
 export class StoryPage implements OnInit {
+
+  Math: Math = Math;
+
   slides: any[];
   dir: string = 'ltr';
   slidesPerView: number = 1;
