@@ -50,6 +50,12 @@
 
   "STORY_TOOLTIP_SHOWINFO": "More info",
 
+  "STORYRELATED_TITLE": "Related stories",
+
+  "STORYDETAIL_SERIES": "See other stories in series",
+  "STORYDETAIL_RELATED": "See related stories",
+  "STORYDETAIL_RATE": "Rate",
+  "STORYDETAIL_RATETITLE": "Rate story",
   "STORYDETAIL_TOOLTIP_DOWNLOAD": "Toggle download story",
 
   "FEED_TITLE": "My Feed",

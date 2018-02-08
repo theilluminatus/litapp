@@ -1,6 +1,5 @@
 # TODO
 
- - related stories
  - share story & artist link
 
  - cache stories with timeout + manual download to db (history)

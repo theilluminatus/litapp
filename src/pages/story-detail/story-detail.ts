@@ -29,6 +29,12 @@ export class StoryDetailPage {
     });
   }
 
+  showRelated() {
+    this.navCtrl.push('StoryRelatedPage', {
+      story: this.story
+    });
+  }
+
   download() {
     // TODO: download story
     this.story.downloaded = !this.story.downloaded;

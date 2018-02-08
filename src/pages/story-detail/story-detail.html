@@ -17,7 +17,8 @@
   
   <p>{{story.description}}</p>
 
-  <a (click)="showSeries()">See other stories in series</a>
+  <p><a (click)="showSeries()">{{'STORYDETAIL_SERIES' | translate }}</a></p>
+  <p><a (click)="showRelated()">{{'STORYDETAIL_RELATED' | translate }}</a></p>
 
   <h2>{{'DETAILS' | translate}}</h2>
   <p><strong>{{'AUTHOR' | translate}}: </strong> <a (click)="showAuthor(story.author)">{{story.author.name}}</a></p>
@@ -32,10 +33,10 @@
   <p><strong>{{'LENGTH' | translate}}: </strong> {{story.length}} {{'PAGES' | translate}}</p>
   <p><strong>{{'TIMESTAMP' | translate}}: </strong> {{story.timestamp}}</p>
 
-  <h3>Rate story</h3>
+  <h3>{{'STORYDETAIL_RATETITLE' | translate }}</h3>
   <form (submit)="rate($event)" class="rate">
     <ion-range [(ngModel)]="story.myrating" name="myrating" snaps="true" step="1" min="0" max="5" pin="true"></ion-range>
-    <button ion-button outline>Rate</button>
+    <button ion-button outline>{{'STORYDETAIL_RATE' | translate }}</button>
   </form>
 
   <h2>{{'COMMENTS' | translate}}</h2>
