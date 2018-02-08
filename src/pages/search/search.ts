@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
@@ -10,6 +11,7 @@ import { Stories } from '../../providers/providers';
   templateUrl: 'search.html'
 })
 export class SearchPage {
+  private STARREDQUERIES_KEY: string = '_queries';
 
   @ViewChild("searchbar") searchbar: any;
   @ViewChild("panel") panel: any;
@@ -23,10 +25,14 @@ export class SearchPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public stories: Stories,
+    public storage: Storage,
     private popoverCtrl: PopoverController
   ) {
     this.query = navParams.get('query');
-    // TODO: load starredQueries from db
+    this.storage.get(this.STARREDQUERIES_KEY).then((value) => {
+      if (value)
+        this.starredQueries = value;
+    });
   }
 
   ionViewWillEnter() {
@@ -61,10 +67,10 @@ export class SearchPage {
   }
 
   saveSearch(query: string) {
-    // TODO: persist starredQueries to db
     if (query.trim().length < 2) return;
     if (this.starredQueries.indexOf(query) > -1) return;
     this.starredQueries.push(query);
+    this.storage.set(this.STARREDQUERIES_KEY, this.starredQueries)
   }
 
   search(query: string) {
@@ -74,11 +80,11 @@ export class SearchPage {
   }
 
   delete(query: string) {
-    // TODO: persist starredQueries to db
     this.starredQueries.forEach((item, index) => {
       if (item == query)
         this.starredQueries.splice(index,1);
     });
+    this.storage.set(this.STARREDQUERIES_KEY, this.starredQueries)
   }
 
   openSortPopover(ev: UIEvent) {
@@ -90,11 +96,11 @@ export class SearchPage {
       ev: ev
     });
 
-    popover.onDidDismiss((data) => {
-      if (data) {
+    popover.onDidDismiss((method) => {
+      if (method) {
         // TODO: get new sorted stories
-        console.log(data);
-        this.sortmethod = data;
+        console.log(method);
+        this.sortmethod = method;
       }
     })
   }
