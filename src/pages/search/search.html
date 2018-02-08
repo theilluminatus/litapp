@@ -7,7 +7,7 @@
 		<ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
 		<ion-buttons end>
 			<button end ion-button icon-only (click)="panel.toggle()">
-				<ion-icon name="star-outline"></ion-icon>
+				<ion-icon name="bookmarks"></ion-icon>
 			</button>
 		</ion-buttons>
 	</ion-navbar>
@@ -16,7 +16,7 @@
 		<ion-searchbar (ionInput)="getStories($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" #searchbar></ion-searchbar>
 		<ion-buttons end>
 			<button class="savebutton" color="primary" ion-button icon-only (click)="saveSearch(searchbar.value)">
-				<ion-icon name="star"></ion-icon>
+				<ion-icon name="bookmark"></ion-icon>
 			</button>
 		</ion-buttons>
 	</ion-toolbar>
@@ -29,13 +29,12 @@
 	<ion-menu side="right" [content]="stars" class="starredmenu" #panel>
 		<ion-list>
 			<ion-list-header>
-				Starred Queryies
+				Starred Queries
 			</ion-list-header>
 
 			<ion-item *ngFor="let query of starredQueries">
 				<ion-label (click)="search(query)">{{query}}</ion-label>
 				<ion-icon name="trash" color="danger" item-end (click)="delete(query)"></ion-icon>
-
 			</ion-item>
 		</ion-list>
 	</ion-menu>

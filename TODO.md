@@ -6,7 +6,6 @@
  - Move story extra buttons to popover
  - Disable extra page on story view when bounce
  - Test app on other platforms
- - Improve saves search queries icons
 
  - check for missing translations
  - remove signup page & fix login page
