@@ -50,5 +50,15 @@
   "LISTCREATE_VISIBILITY_PUBLIC": "Public",
   "LISTCREATE_VISIBILITY_PRIVATE": "Private",
 
-  "FOLLOWING_TITLE": "Followed Authors"
+  "FOLLOWING_TITLE": "Followed Authors",
+
+  "DETAILS": "Details",
+  "AUTHOR": "Author",
+  "CATEGORY": "Category",
+  "TAGS": "Tags",
+  "RATING": "Rating",
+  "LENGTH": "Length",
+  "PAGES": "pages",
+  "TIMESTAMP": "Timestamp",
+  "COMMENTS": "Comments"
 }
