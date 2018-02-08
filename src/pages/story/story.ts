@@ -21,12 +21,12 @@ export class StoryPage implements OnInit {
 
   // TODO: persist settings
   settings = {
-    fontsize: 14,
-    lineheight: 21,
+    fontsize: 15,
+    lineheight: 21.5,
     color: "white",
     background: "black",
     font: "sans-serif",
-    textalign: "left"
+    textalign: "justify"
   }
 
   constructor(
