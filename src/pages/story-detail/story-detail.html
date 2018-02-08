@@ -32,6 +32,12 @@
   <p><strong>{{'LENGTH' | translate}}: </strong> {{story.length}} {{'PAGES' | translate}}</p>
   <p><strong>{{'TIMESTAMP' | translate}}: </strong> {{story.timestamp}}</p>
 
+  <h3>Rate story</h3>
+  <form (submit)="rate($event)" class="rate">
+    <ion-range [(ngModel)]="story.myrating" name="myrating" snaps="true" step="1" min="0" max="5" pin="true"></ion-range>
+    <button ion-button outline>Rate</button>
+  </form>
+
   <h2>{{'COMMENTS' | translate}}</h2>
   <ion-list class="comments">
   	<ion-item *ngFor="let comment of story.comments">

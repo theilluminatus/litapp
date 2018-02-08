@@ -4,4 +4,22 @@ page-story-detail {
 		white-space: pre-wrap;
 	}
 
+	.rate {
+	    padding: 0 10px;
+	    display: flex;
+	    flex-flow: row no-wrap;
+	    justify-content: space-around;
+	    align-items: center;
+	    align-content: center;
+
+	    .range {
+	      flex-grow: 1;
+	      padding: 0 20px 0 0;
+	    }
+
+	    .range-md .range-pin {
+	      z-index: 9999;
+		}
+	}
+
 }

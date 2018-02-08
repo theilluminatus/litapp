@@ -34,6 +34,12 @@ export class StoryDetailPage {
     this.story.downloaded = !this.story.downloaded;
   }
 
+  rate(event: UIEvent) {
+    event.preventDefault();
+    console.log(this.story);
+    // TODO send rating to server
+  }
+
   search(query: string) {
     this.navCtrl.push("SearchPage", {
       query: query

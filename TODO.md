@@ -1,6 +1,5 @@
 # TODO
 
- - Rate story
  - related stories
  - share story & artist link
 
