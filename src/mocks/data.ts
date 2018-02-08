@@ -18,7 +18,9 @@ function fillContent(): string {
 function fillComments() {
   let comment = {
     "user": "Bert",
-    "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
+    "text": `Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.`,
     "timestamp": "31/12/2017"
   };
   return [comment,comment,comment];

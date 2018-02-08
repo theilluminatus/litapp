@@ -23,6 +23,10 @@ export class Stories {
         let field = story[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
           return story;
+        } else if (Array.isArray(field) && field.filter((item) =>
+            item.toLowerCase().indexOf(params[key].toLowerCase()) >= 0
+          ).length > 0) {
+          return story;
         } else if (field == params[key]) {
           return story;
         }

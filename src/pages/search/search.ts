@@ -16,9 +16,15 @@ export class SearchPage {
 
   currentStories: Story[] = [];
   starredQueries: string[] = [];
+  query: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public stories: Stories) {
+    this.query = navParams.get('query');
     // TODO: load starredQueries from db
+  }
+
+  ionViewWillEnter() {
+    if (this.query) this.search(this.query);
   }
 
   getStories(ev, query?) {
@@ -29,7 +35,9 @@ export class SearchPage {
     }
 
     this.currentStories = this.stories.query({
-      title: val
+      title: val,
+      tags: val,
+      category: val
     });
   }
 

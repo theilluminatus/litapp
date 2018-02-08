@@ -34,4 +34,10 @@ export class StoryDetailPage {
     this.story.downloaded = !this.story.downloaded;
   }
 
+  search(query: string) {
+    this.navCtrl.push("SearchPage", {
+      query: query
+    });
+  }
+
 }

@@ -21,14 +21,19 @@
 
   <h2>{{'DETAILS' | translate}}</h2>
   <p><strong>{{'AUTHOR' | translate}}: </strong> <a (click)="showAuthor(story.author)">{{story.author.name}}</a></p>
-  <p><strong>{{'CATEGORY' | translate}}: </strong> {{story.category}}</p>
-  <p *ngIf="story.tags.length > 0"><strong>{{'TAGS' | translate}}: </strong> #{{story.tags.join(" #")}}</p>
+  <p><strong>{{'CATEGORY' | translate}}: </strong> <a (click)="search(story.category)">{{story.category}}</a></p>
+
+  <p class="tags" *ngIf="story.tags.length > 0">
+    <strong>{{'TAGS' | translate}}: </strong>
+    <a *ngFor="let tag of story.tags" (click)="search(tag)">#{{tag}} </a>
+  </p>
+
   <p><strong>{{'RATING' | translate}}: </strong> {{story.rating}}</p>
   <p><strong>{{'LENGTH' | translate}}: </strong> {{story.length}} {{'PAGES' | translate}}</p>
   <p><strong>{{'TIMESTAMP' | translate}}: </strong> {{story.timestamp}}</p>
 
   <h2>{{'COMMENTS' | translate}}</h2>
-  <ion-list>
+  <ion-list class="comments">
   	<ion-item *ngFor="let comment of story.comments">
   		<h3>{{comment.user}}</h3>
   		<h6>{{comment.timestamp}}</h6>
