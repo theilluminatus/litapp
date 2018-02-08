@@ -3,21 +3,21 @@ import { IonicPageModule } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
-import { StoryPage } from './story';
+import { StoryViewPage } from './story-view';
 import { StoryPopoverModule } from './popover.module';
 
 @NgModule({
   declarations: [
-    StoryPage,
+    StoryViewPage,
   ],
   imports: [
-    IonicPageModule.forChild(StoryPage),
+    IonicPageModule.forChild(StoryViewPage),
     TranslateModule.forChild(),
     TooltipsModule,
     StoryPopoverModule
   ],
   exports: [
-    StoryPage,
+    StoryViewPage,
   ],
 })
-export class StoryPageModule { }
+export class StoryViewPageModule { }

@@ -38,7 +38,7 @@ export class FeedPage {
   	if (item.subject == "author")
   		this.openAuthor(item.author);
   	else if (item.subject == "story")
-		this.navCtrl.push('StoryPage', {
+		this.navCtrl.push('StoryViewPage', {
 			story: item.story
 		});
   }

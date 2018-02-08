@@ -16,7 +16,7 @@ export class StoryListPage {
   }
 
   openStory(story: Story) {
-    this.navCtrl.push('StoryPage', {
+    this.navCtrl.push('StoryViewPage', {
       story: story
     });
   }

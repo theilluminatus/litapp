@@ -9,4 +9,4 @@
  - Persist all changes to DB (history, story settings, downloaded stories)
  - Get data from and persist changes to server (list, following, feed, story, author)
 
- ## Also check TODOs in files!
+## Also check TODOs in files!

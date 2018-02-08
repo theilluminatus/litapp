@@ -10,8 +10,8 @@ import { Author } from '../../models/author';
 
 @IonicPage()
 @Component({
-  selector: 'page-story',
-  templateUrl: 'story.html',
+  selector: 'page-story-view',
+  templateUrl: 'story-view.html',
   animations: [
     trigger('visibilityChanged', [
       state("false", style({ opacity: 1 })),
@@ -20,7 +20,7 @@ import { Author } from '../../models/author';
     ])
   ]
 })
-export class StoryPage implements OnInit {
+export class StoryViewPage implements OnInit {
 
   Math: Math = Math;
 
