@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
 import { StoryViewPage } from './story-view';
-import { StoryPopoverModule } from './popover.module';
+import { StoryPopoverModule } from './story-popover.module';
 
 @NgModule({
   declarations: [

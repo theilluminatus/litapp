@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { StoryPopover } from './popover';
+import { StoryPopover } from './story-popover';
 
 @NgModule({
   declarations: [

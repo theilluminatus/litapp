@@ -3,7 +3,7 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-api-radio-popover',
+  selector: 'story-popover',
   template: `
 
     <ion-list radio-group [(ngModel)]="fontFamily" (ionChange)="changeFontFamily(fontFamily)">
