@@ -4,7 +4,6 @@
  - Make series page + checkbox for autoloading next story?
  - Hide toolbar and scroller on story touch
  - Move story extra buttons to popover
- - Disable extra page on story view when bounce
  - Test app on other platforms
 
  - check for missing translations
