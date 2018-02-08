@@ -1,8 +1,6 @@
 # TODO
 
  - Add popover for adding stories to list (in story-list & story-view)
- - Add story comments, tags and more info page + change icon
- - Show story rating & category? in story-list
  - Make series page + checkbox for autoloading next story?
  - Hide toolbar and scroller on story touch
  - Move story extra buttons to popover

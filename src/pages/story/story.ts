@@ -3,6 +3,7 @@ import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, 
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 
 @IonicPage()
@@ -14,7 +15,7 @@ export class StoryPage implements OnInit {
   slides: any[];
   dir: string = 'ltr';
   slidesPerView: number = 1;
-  story: any;
+  story: Story;
   @ViewChild("slidesElement") slidesElement: Slides;
   @ViewChild("range") range: any;
 
@@ -71,6 +72,12 @@ export class StoryPage implements OnInit {
   showAuthor(author: Author) {
     this.navCtrl.push('AuthorPage', {
       author: author
+    });
+  }
+
+  showInfo(story: Story) {
+    this.navCtrl.push('StoryDetailPage', {
+      story: story
     });
   }
 

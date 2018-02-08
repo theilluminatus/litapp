@@ -22,7 +22,15 @@ export interface Story {
   content: string;
   description: string;
   rating: number;
+  category: string;
+  tags: string[];
+  timestamp: string;
   author: Author;
   length: number;
   lists: List[];
+  comments: {
+    user: string,
+    text: string,
+    timestamp: string
+  }[];
 }

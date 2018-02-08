@@ -15,6 +15,15 @@ function fillContent(): string {
   return content;
 }
 
+function fillComments() {
+  let comment = {
+    "user": "Bert",
+    "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
+    "timestamp": "31/12/2017"
+  };
+  return [comment,comment,comment];
+}
+
 let defstories: Story[] = [
   new Story({
     "id": 0,
@@ -23,7 +32,11 @@ let defstories: Story[] = [
     "description": "Burt is a Bear.",
     "length": 10,
     "rating": 4.24,
-    "downloaded": true
+    "category": "Animal",
+    "tags": ["Paw","Nose","Ears","Eye","Teeth"],
+    "downloaded": true,
+    "timestamp": "31/12/2017",
+    "comments": fillComments()
   }),
   new Story({
     "id": 1,
@@ -32,7 +45,11 @@ let defstories: Story[] = [
     "description": "Charlie is a Cheetah.",
     "length": 15,
     "rating": 4.14,
-    "downloaded": false
+    "category": "Animal",
+    "tags": ["Paw","Nose","Ears","Teeth"],
+    "downloaded": false,
+    "timestamp": "30/12/2017",
+    "comments": fillComments()
   }),
   new Story({
     "id": 2,
@@ -41,16 +58,24 @@ let defstories: Story[] = [
     "description": "Donald is a Duck.",
     "length": 30,
     "rating": 3.15,
-    "downloaded": true
+    "category": "Bird",
+    "tags": ["Paw","Nose","Teeth"],
+    "downloaded": true,
+    "timestamp": "29/12/2017",
+    "comments": fillComments()
   }),
   new Story({
     "id": 3,
     "title": "Eva Eagle",
     "content": fillContent(),
-    "description": "Eva is an Eagle.",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
     "length": 45,
     "rating": 3.98,
-    "downloaded": false
+    "category": "Bird",
+    "tags": [],
+    "downloaded": false,
+    "timestamp": "27/12/2017",
+    "comments": fillComments()
   }),
   new Story({
     "id": 4,
@@ -59,7 +84,11 @@ let defstories: Story[] = [
     "description": "Ellie is an Elephant.",
     "length": 12,
     "rating": 2.50,
-    "downloaded": true
+    "category": "Vertibrate",
+    "tags": ["Paw","Ears","Eye"],
+    "downloaded": true,
+    "timestamp": "25/12/2017",
+    "comments": fillComments()
   }),
   new Story({
     "id": 5,
@@ -68,7 +97,11 @@ let defstories: Story[] = [
     "description": "Molly is a Mouse.",
     "length": 45,
     "rating": 4.60,
-    "downloaded": false
+    "category": "Animal",
+    "tags": ["Ears","Eye","Teeth"],
+    "downloaded": false,
+    "timestamp": "23/12/2017",
+    "comments": fillComments()
   }),
   new Story({
     "id": 6,
@@ -77,7 +110,11 @@ let defstories: Story[] = [
     "description": "Paul is a Puppy.",
     "length": 18,
     "rating": 4.75,
-    "downloaded": false
+    "category": "Vertibrate",
+    "tags": ["Paw","Teeth"],
+    "downloaded": false,
+    "timestamp": "19/12/2017",
+    "comments": fillComments()
   })
 ];
 

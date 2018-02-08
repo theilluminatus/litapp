@@ -5,8 +5,20 @@
     <ion-item (click)="openStory(story)">
       <h2>{{story.title}}</h2>
       <p>{{story.description}}</p>
-      <p><em>by {{story.author.name}}</em></p>
-      <ion-note item-end>READ?</ion-note>
+      <p>
+        <ion-icon name="star"></ion-icon> {{story.rating}}
+        <em> by <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
+        at {{story.timestamp}}
+      </p>
+      <p class="tags">
+        <strong>{{story.category}}</strong>
+        <span *ngFor="let tag of story.tags">#{{tag}} </span>
+      </p>
+      <ion-note item-end>
+        <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)">
+          <ion-icon [name]="story.lists?.length > 0 ? 'star' : 'star-outline'"></ion-icon>
+        </button>
+      </ion-note>
   	</ion-item>
 	<ion-item-options>
       <button ion-button color="danger" (click)="delete(story)">

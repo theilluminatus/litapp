@@ -8,4 +8,14 @@ story-list {
 		border-color: #666;
 	}
 
+	.tags {
+		overflow-x: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.list .item .label p {
+		white-space: normal;
+	}
+
 }
