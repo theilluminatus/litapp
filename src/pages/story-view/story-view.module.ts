@@ -5,6 +5,7 @@ import { TooltipsModule } from 'ionic-tooltips';
 
 import { StoryViewPage } from './story-view';
 import { StoryPopoverModule } from './story-popover.module';
+import { BookmarkPopoverModule } from '../../parts/bookmark-popover/bookmark-popover.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { StoryPopoverModule } from './story-popover.module';
     IonicPageModule.forChild(StoryViewPage),
     TranslateModule.forChild(),
     TooltipsModule,
-    StoryPopoverModule
+    StoryPopoverModule,
+    BookmarkPopoverModule
   ],
   exports: [
     StoryViewPage,

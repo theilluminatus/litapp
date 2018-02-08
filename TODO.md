@@ -1,6 +1,5 @@
 # TODO
 
- - Add popover for adding stories to list (in story-list & story-view)
  - Test app on other platforms
  - Hide Feed & Lists tab + star icons in story-list when not logged in
 

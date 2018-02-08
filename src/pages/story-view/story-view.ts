@@ -112,6 +112,16 @@ export class StoryViewPage implements OnInit {
     });
   }
 
+  openListPicker(ev: UIEvent) {
+    let popover = this.popoverCtrl.create("BookmarkPopover", {
+      story: this.story
+    });
+
+    popover.present({
+      ev: ev
+    });
+  }
+
   slideChanged() {
     let currentIndex = this.slidesElement.getActiveIndex();
     if (currentIndex == this.slides.length) {

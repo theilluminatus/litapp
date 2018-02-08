@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
@@ -12,7 +12,7 @@ export class StoryListPage {
   @Input() stories: Story[];
   @Input() sliding: boolean = false;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,) {
   }
 
   openStory(story: Story) {
@@ -28,9 +28,15 @@ export class StoryListPage {
     });
   }
 
-  openListPicker(story: Story, event) {
-    event.stopPropagation();
-    console.log(story);
+  openListPicker(story: Story, ev: UIEvent) {
+    ev.stopPropagation();
+    let popover = this.popoverCtrl.create("BookmarkPopover", {
+      story: story
+    });
+
+    popover.present({
+      ev: ev
+    });
   }
 
   delete(story: Story) {

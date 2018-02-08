@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
 import { StoryListPage } from './story-list';
+import { BookmarkPopoverModule } from '../bookmark-popover/bookmark-popover.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { StoryListPage } from './story-list';
   imports: [
     IonicPageModule.forChild(StoryListPage),
     TranslateModule.forChild(),
-    TooltipsModule
+    TooltipsModule,
+    BookmarkPopoverModule
   ],
   exports: [
     StoryListPage
