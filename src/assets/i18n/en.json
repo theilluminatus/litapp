@@ -52,6 +52,9 @@
 
   "FOLLOWING_TITLE": "Followed Authors",
 
+  "SERIES_TITLE": "All stories in this series",
+  "SERIES_ALWAYSAUTOLOAD": "Always autoload next story in the series",
+
   "DETAILS": "Details",
   "AUTHOR": "Author",
   "CATEGORY": "Category",

@@ -118,9 +118,20 @@ export class StoryPage implements OnInit {
     });
   }
 
+  showSeries(story: Story) {
+    this.navCtrl.push('StorySeriesPage', {
+      story: story
+    });
+  }
+
   slideChanged() {
-    // TODO: persist current slide index to db
     let currentIndex = this.slidesElement.getActiveIndex();
+    if (currentIndex == this.slides.length) {
+      // TODO: autoload next story in series?
+      return;
+    }
+
+    // TODO: persist current slide index to db
     this.range.setValue(currentIndex+1);
   }
 
