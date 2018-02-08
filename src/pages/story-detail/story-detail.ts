@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
@@ -13,7 +14,11 @@ export class StoryDetailPage {
 
   story: Story;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private socialSharing: SocialSharing
+  ) {
   	this.story = navParams.get('story');
   }
 
@@ -50,6 +55,10 @@ export class StoryDetailPage {
     this.navCtrl.push("SearchPage", {
       query: query
     });
+  }
+
+  share() {
+    this.socialSharing.share("Literotica story", null, null, "https://www.literotica.com/s/"+this.story.id);
   }
 
 }

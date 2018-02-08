@@ -5,9 +5,15 @@
     <ion-buttons end>
       
       <button ion-button icon-only
+        (click)="share()"
+        [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="share"></ion-icon>
+      </button>
+
+      <button ion-button icon-only
         *ngIf="user.isLoggedIn()" (click)="followToggle()"
         [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate" event="press" navTooltip>
-        <ion-icon [name]="author.following ? 'remove-circle' : 'person-add'" (click)="followToggle()"></ion-icon>
+        <ion-icon [name]="author.following ? 'remove-circle' : 'person-add'"></ion-icon>
       </button>
 
     </ion-buttons>

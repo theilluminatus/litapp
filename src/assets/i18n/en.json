@@ -33,6 +33,7 @@
   "DELETE_BUTTON": "Delete",
   "EDIT_BUTTON": "Edit",
   "BOOKMARK_BUTTON": "Bookmark",
+  "SHARE_BUTTON": "Share",
 
   "HISTORY_TITLE": "History",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
