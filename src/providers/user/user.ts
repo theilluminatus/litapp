@@ -50,23 +50,21 @@ export class User {
   }
 
   /**
-   * Send a POST request to our signup endpoint with the data
-   * the user entered on the form.
+   * Return if user is logged in
    */
-  signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
-
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      }
-    }, err => {
-      console.error('ERROR', err);
-    });
-
-    return seq;
+  isLoggedIn(): boolean {
+    return this._user ? true : false;
   }
+
+  /**
+   * Returns user data
+   */
+  getDetails() {
+    return {
+      username: this._user.username
+    };
+  }
+
 
   /**
    * Log the user out, which forgets the session

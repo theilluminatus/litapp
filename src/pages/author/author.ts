@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { User } from '../../providers/providers';
 import { Author } from '../../models/author';
 
 @IonicPage()
@@ -12,7 +13,11 @@ export class AuthorPage {
 
   author: Author;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public user: User
+  ) {
   	this.author = navParams.get('author');
   }
 

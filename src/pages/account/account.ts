@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
+import { User } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -9,10 +10,15 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class AccountPage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController, public user: User) { }
 
   login() {
     this.navCtrl.push('LoginPage');
+  }
+
+  logout() {
+  	this.user.logout();
+    this.navCtrl.push('TabsPage');
   }
 
 }

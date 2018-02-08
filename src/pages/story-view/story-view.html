@@ -7,7 +7,8 @@
       </ion-title>
     <ion-buttons end>
 
-      <button ion-button icon-only (click)="openListPicker($event)"
+      <button ion-button icon-only
+        *ngIf="user.isLoggedIn()" (click)="openListPicker($event)"
         [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
       </button>

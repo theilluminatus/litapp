@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 
+import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 
@@ -12,8 +13,11 @@ export class StoryListPage {
   @Input() stories: Story[];
   @Input() sliding: boolean = false;
 
-  constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    private popoverCtrl: PopoverController,
+    public user: User
+  ) { }
 
   openStory(story: Story) {
     this.navCtrl.push('StoryViewPage', {

@@ -4,7 +4,8 @@
     <ion-title>{{author.name}}</ion-title>
     <ion-buttons end>
       
-      <button ion-button icon-only (click)="followToggle()"
+      <button ion-button icon-only
+        *ngIf="user.isLoggedIn()" (click)="followToggle()"
         [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate" event="press" navTooltip>
         <ion-icon [name]="author.following ? 'remove-circle' : 'person-add'" (click)="followToggle()"></ion-icon>
       </button>

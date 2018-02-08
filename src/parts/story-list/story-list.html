@@ -14,7 +14,7 @@
         <strong>{{story.category}}</strong>
         <span *ngFor="let tag of story.tags">#{{tag}} </span>
       </p>
-      <ion-note item-end>
+      <ion-note *ngIf="user.isLoggedIn()" item-end>
         <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)"
           [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
           <ion-icon [name]="story.lists?.length > 0 ? 'star' : 'star-outline'"></ion-icon>

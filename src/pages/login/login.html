@@ -9,7 +9,7 @@
 
 <ion-content padding>
 
-  <form (submit)="doLogin()">
+  <form (submit)="login($event)">
     <ion-list>
 
       <ion-item>
@@ -23,14 +23,14 @@
       </ion-item>
 
       <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
+        <button ion-button color="primary" block>{{ 'LOGIN' | translate }}</button>
       </div>
 
     </ion-list>
   </form>
 
   <div padding>
-    <button ion-button outline color="primary" block (click)="signup()">{{ 'SIGNUP_BUTTON' | translate }}</button>
+    <button ion-button outline color="primary" block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
   </div>
 
 </ion-content>

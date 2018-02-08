@@ -12,10 +12,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { Stories } from '../mocks/providers/stories';
-import { Authors } from '../mocks/providers/authors';
-import { Lists } from '../mocks/providers/lists';
-import { Feed } from '../mocks/providers/feed';
+import { Stories } from '../providers/providers';
+import { Authors } from '../providers/providers';
+import { Lists } from '../providers/providers';
+import { Feed } from '../providers/providers';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';

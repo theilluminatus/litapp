@@ -5,6 +5,7 @@ import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, 
 import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
+import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 
@@ -48,8 +49,9 @@ export class StoryViewPage implements OnInit {
     public platform: Platform,
     private popoverCtrl: PopoverController,
     private androidFullScreen: AndroidFullScreen,
+    public user: User,
     translate: TranslateService,
-    navParams: NavParams,
+    navParams: NavParams
   ) {
     this.story = navParams.get('story');
     this.dir = platform.dir();
