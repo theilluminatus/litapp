@@ -8,10 +8,10 @@ import { FeedItem } from '../models/feeditem';
 // > STORIES
 
 function fillContent(): string {
-  let content = "";
-  let exampleContent = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.\n\n";
+  let exampleContent = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.";
+  let content = exampleContent;
 
-  Array(15).fill(0).forEach(() => {content += exampleContent});
+  Array(10).fill(0).forEach(() => {content += "\n\n" + exampleContent});
   return content;
 }
 

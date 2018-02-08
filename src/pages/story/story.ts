@@ -1,7 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
@@ -9,7 +11,14 @@ import { Author } from '../../models/author';
 @IonicPage()
 @Component({
   selector: 'page-story',
-  templateUrl: 'story.html'
+  templateUrl: 'story.html',
+  animations: [
+    trigger('visibilityChanged', [
+      state("false", style({ opacity: 1 })),
+      state("true", style({ opacity: 0 })),
+      transition('* => *', animate('300ms'))
+    ])
+  ]
 })
 export class StoryPage implements OnInit {
 
@@ -18,6 +27,7 @@ export class StoryPage implements OnInit {
   slides: any[];
   dir: string = 'ltr';
   slidesPerView: number = 1;
+  fullscreen = false;
   story: Story;
   @ViewChild("slidesElement") slidesElement: Slides;
   @ViewChild("range") range: any;
@@ -37,6 +47,7 @@ export class StoryPage implements OnInit {
     public menu: MenuController,
     public platform: Platform,
     private popoverCtrl: PopoverController,
+    private androidFullScreen: AndroidFullScreen,
     translate: TranslateService,
     navParams: NavParams,
   ) {
@@ -60,6 +71,29 @@ export class StoryPage implements OnInit {
     this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
 
     // TODO: get current page from db
+  }
+
+  clickSlides(event) {
+
+    // clicking in left most 25%
+    if ( event.clientX < this.platform.width()/4 )
+      this.slidesElement.slidePrev();
+    // clicking in right most 25%
+    else if ( event.clientX > 3*this.platform.width()/4 )
+      this.slidesElement.slideNext();
+    // click center 50%
+    else {
+      this.fullscreen = !this.fullscreen;
+      this.androidFullScreen.isImmersiveModeSupported()
+        .then(() => {
+          if (this.fullscreen)
+            this.androidFullScreen.immersiveMode()
+          else
+            this.androidFullScreen.showSystemUI()
+        })
+        .catch((error: any) => console.log(error));
+    }
+      
   }
 
   showPopover(ev: UIEvent) {
@@ -98,6 +132,9 @@ export class StoryPage implements OnInit {
   ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
+    this.androidFullScreen.isImmersiveModeSupported()
+      .then(() => this.androidFullScreen.showSystemUI())
+      .catch((error: any) => console.log(error));
   }
 
 }

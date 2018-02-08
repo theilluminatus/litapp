@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header [@visibilityChanged]="fullscreen" no-border>
   <ion-navbar [style.background]="settings.background">
     <ion-title>
       <span [style.color]="settings.color">
@@ -30,9 +30,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-bounce>
+<ion-content fullscreen [style.top]="fullscreen ? 0 : '50px'">
 
-  <ion-slides #slidesElement (ionSlideDidChange)="slideChanged()" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color">
+  <ion-slides #slidesElement (ionSlideDidChange)="slideChanged()" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color" (click)="clickSlides($event)">
     <ion-slide *ngFor="let slide of slides"
       [style.fontSize]="settings.fontsize + 'px'"
       [style.lineHeight]="settings.lineheight + 'px'"
@@ -45,6 +45,8 @@
   </ion-slides>
 
   <div class="pagination"
+    [style.bottom]="fullscreen ? 0 : '50px'"
+    [@visibilityChanged]="fullscreen"
     [style.background]="settings.background"
     [style.color]="settings.color">
     <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"

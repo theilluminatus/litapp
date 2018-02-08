@@ -49,7 +49,7 @@ export class SearchPage {
   saveSearch(query: string) {
     // TODO: persist starredQueries to db
     if (query.trim().length < 2) return;
-    if (this.starredQueries.includes(query)) return;
+    if (this.starredQueries.indexOf(query) > -1) return;
     this.starredQueries.push(query);
   }
 

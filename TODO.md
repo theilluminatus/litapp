@@ -2,7 +2,6 @@
 
  - Add popover for adding stories to list (in story-list & story-view)
  - Make series page + checkbox for autoloading next story?
- - Hide toolbar and scroller on story touch
  - Move story extra buttons to popover
  - Test app on other platforms
 
