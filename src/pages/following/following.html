@@ -1,19 +1,21 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ 'FOLLOWING_TITLE' | translate }}</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>{{ 'FOLLOWING_TITLE' | translate }}</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item (click)="showAuthor(author)" *ngFor="let author of authors">
-      <ion-img [src]="author.picture"></ion-img>
-      <h2>{{author.name}}</h2>
-    </ion-item>
-  </ion-list>
+	<ion-list>
+		<ion-item (click)="showAuthor(author)" *ngFor="let author of authors">
+			<ion-avatar>
+				<ion-img [src]="author.picture"></ion-img>
+			</ion-avatar>
+			<h2>{{author.name}}</h2>
+		</ion-item>
+	</ion-list>
 
 </ion-content>
