@@ -5,6 +5,10 @@ page-story-view {
     border-color: transparent;
   }
 
+  .back-button.show-back-button, .toolbar-title {
+    color: inherit;
+  }
+
   .content {
     background: black;
     color: white;

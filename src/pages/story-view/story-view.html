@@ -1,10 +1,8 @@
 <ion-header [@visibilityChanged]="fullscreen" no-border>
-  <ion-navbar [style.background]="settings.background">
+  <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
     <ion-title>
-      <span [style.color]="settings.color">
         {{ story.title }}
-        </span>
-      </ion-title>
+    </ion-title>
     <ion-buttons end>
 
       <button ion-button icon-only

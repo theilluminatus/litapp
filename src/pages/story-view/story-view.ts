@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
@@ -22,7 +22,7 @@ import { Author } from '../../models/author';
     ])
   ]
 })
-export class StoryViewPage implements OnInit {
+export class StoryViewPage {
 
   private STORYSTYLEOPTIONS_KEY: string = '_storystyle';
 
@@ -56,19 +56,15 @@ export class StoryViewPage implements OnInit {
     translate: TranslateService,
     navParams: NavParams
   ) {
-    this.story = navParams.get('story');
+    this.menu.enable(true);
     this.dir = platform.dir();
     this.slidesPerView = platform.isPortrait() ? 1 : 2;
-    this.menu.enable(true);
+    this.story = navParams.get('story');
 
     this.storage.get(this.STORYSTYLEOPTIONS_KEY).then((value) => {
       if (value)
         this.settings = value;
     });
-  }
-
-  ngOnInit() {
-
 
     // for (var i = 0; i < str.length; i++) {
     //   alert(str.charAt(i));
@@ -79,8 +75,11 @@ export class StoryViewPage implements OnInit {
     this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
     this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
     this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
+  }
 
-    // TODO: get current page from db
+  ionViewWillEnter() {
+    if (this.story.currentpage > 0)
+      this.slidesElement.slideTo(this.story.currentpage, 0);
   }
 
   clickSlides(event) {
@@ -144,16 +143,15 @@ export class StoryViewPage implements OnInit {
     }
 
     // TODO: persist current slide index to db
+    this.story.currentpage = currentIndex;
     this.range.setValue(currentIndex+1);
   }
 
   ionViewDidEnter() {
-    // the root left menu should be disabled on the tutorial page
     this.menu.enable(false);
   }
 
   ionViewWillLeave() {
-    // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
     this.androidFullScreen.isImmersiveModeSupported()
       .then(() => this.androidFullScreen.showSystemUI())

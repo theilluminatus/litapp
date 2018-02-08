@@ -38,7 +38,8 @@ let defstories: Story[] = [
     "tags": ["Paw","Nose","Ears","Eye","Teeth"],
     "downloaded": true,
     "timestamp": "31/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 1
   }),
   new Story({
     "id": 1,
@@ -51,7 +52,8 @@ let defstories: Story[] = [
     "tags": ["Paw","Nose","Ears","Teeth"],
     "downloaded": false,
     "timestamp": "30/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 2
   }),
   new Story({
     "id": 2,
@@ -64,7 +66,8 @@ let defstories: Story[] = [
     "tags": ["Paw","Nose","Teeth"],
     "downloaded": true,
     "timestamp": "29/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 0
   }),
   new Story({
     "id": 3,
@@ -77,7 +80,8 @@ let defstories: Story[] = [
     "tags": [],
     "downloaded": false,
     "timestamp": "27/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 0
   }),
   new Story({
     "id": 4,
@@ -90,7 +94,8 @@ let defstories: Story[] = [
     "tags": ["Paw","Ears","Eye"],
     "downloaded": true,
     "timestamp": "25/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 0
   }),
   new Story({
     "id": 5,
@@ -103,7 +108,8 @@ let defstories: Story[] = [
     "tags": ["Ears","Eye","Teeth"],
     "downloaded": false,
     "timestamp": "23/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 0
   }),
   new Story({
     "id": 6,
@@ -116,7 +122,8 @@ let defstories: Story[] = [
     "tags": ["Paw","Teeth"],
     "downloaded": false,
     "timestamp": "19/12/2017",
-    "comments": fillComments()
+    "comments": fillComments(),
+    "currentpage": 0
   })
 ];
 

@@ -27,6 +27,7 @@ export interface Story {
   timestamp: string;
   author: Author;
   length: number;
+  currentpage: number;
   lists: List[];
   comments: {
     user: string,
