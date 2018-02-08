@@ -2,6 +2,13 @@
 
   <ion-navbar>
     <ion-title>{{author.name}}</ion-title>
+    <ion-buttons end>
+      
+      <button ion-button icon-only (click)="followToggle()">
+        <ion-icon [name]="author.following ? 'remove-circle' : 'person-add'" (click)="followToggle()"></ion-icon>
+      </button>
+
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

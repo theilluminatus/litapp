@@ -16,4 +16,9 @@ export class AuthorPage {
   	this.author = navParams.get('author');
   }
 
+  followToggle() {
+  	// TODO: persist to server (& db?)
+  	this.author.following = !this.author.following;
+  }
+
 }
