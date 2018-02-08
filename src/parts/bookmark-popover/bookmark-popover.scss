@@ -1,8 +1,12 @@
 
 .list-md {
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 .list-header-md {
   margin-bottom: -10px;
+}
+
+[item-end] {
+	margin: 0 !important;
 }

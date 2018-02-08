@@ -25,3 +25,7 @@ ion-app.md [padding] .scroll-content {
 .refresher-refreshing .spinner-ios line, .refresher-refreshing .spinner-ios-small line, .refresher-refreshing .spinner-crescent circle, .spinner-md-crescent circle {
 	stroke: #666;
 }
+
+.popover-viewport .list .item-inner {
+	border: none;
+}

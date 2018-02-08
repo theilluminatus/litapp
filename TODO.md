@@ -1,7 +1,6 @@
 # TODO
 
  - Test app on other platforms
- - Remove borders in popover lists
  - Hide Feed & Lists tab + star icons in story-list when not logged in
 
  - Add device notifications for new feed items
