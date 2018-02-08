@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
@@ -17,8 +17,14 @@ export class SearchPage {
   currentStories: Story[] = [];
   starredQueries: string[] = [];
   query: string;
+  sortmethod: string = "relevancy";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public stories: Stories) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public stories: Stories,
+    private popoverCtrl: PopoverController
+  ) {
     this.query = navParams.get('query');
     // TODO: load starredQueries from db
   }
@@ -73,6 +79,24 @@ export class SearchPage {
       if (item == query)
         this.starredQueries.splice(index,1);
     });
+  }
+
+  openSortPopover(ev: UIEvent) {
+    let popover = this.popoverCtrl.create("SearchPopover", {
+      method: this.sortmethod
+    });
+
+    popover.present({
+      ev: ev
+    });
+
+    popover.onDidDismiss((data) => {
+      if (data) {
+        // TODO: get new sorted stories
+        console.log(data);
+        this.sortmethod = data;
+      }
+    })
   }
 
 }

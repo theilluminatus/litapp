@@ -41,6 +41,13 @@
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
   "SEARCH_STARREDQUERIES": "Starred Queries",
+  "SEARCH_SORT": "Sort results",
+
+  "RELEVANCY": "Relevancy",
+  "NEWEST": "Newest",
+  "OLDEST": "Oldest",
+  "RATING": "Rating",
+  "NUMBEROFCOMMENTS": "Number of comments",
 
   "STORY_TOOLTIP_SHOWINFO": "More info",
 

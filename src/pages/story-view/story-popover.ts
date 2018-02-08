@@ -53,8 +53,8 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
   `,
   styles: [`
 
-    page-api-radio-popover ion-row,
-    page-api-radio-popover ion-col {
+    story-popover ion-row,
+    story-popover ion-col {
       padding: 0;
     }
 

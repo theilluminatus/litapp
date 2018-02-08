@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
 import { SearchPage } from './search';
+import { SearchPopoverModule } from './search-popover.module';
 import { StoryListPageModule } from '../../parts/story-list/story-list.module';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { StoryListPageModule } from '../../parts/story-list/story-list.module';
     IonicPageModule.forChild(SearchPage),
     TranslateModule.forChild(),
     TooltipsModule,
+    SearchPopoverModule,
     StoryListPageModule
   ],
   exports: [
