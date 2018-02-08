@@ -2,6 +2,12 @@
 
   <ion-navbar>
     <ion-title>{{story.title}}</ion-title>
+    <ion-buttons end>
+      <button end ion-button icon-only (click)="download()"
+        [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOAD' | translate" event="press" navTooltip>
+       <ion-icon [name]="story.downloaded ? 'remove-circle' : 'download'" (click)="download()"></ion-icon>
+     </button>
+   </ion-buttons>
   </ion-navbar>
 
 </ion-header>

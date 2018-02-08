@@ -29,4 +29,9 @@ export class StoryDetailPage {
     });
   }
 
+  download() {
+    // TODO: download story
+    this.story.downloaded = !this.story.downloaded;
+  }
+
 }
