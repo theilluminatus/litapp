@@ -27,8 +27,7 @@
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
   "LOGIN_BUTTON": "Sign in",
-  "SIGNUP_TITLE": "Sign up",
-  "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
+  "SIGNUP_MESSAGE": "Return to the app and login after you registered on the site",
   "SIGNUP_BUTTON": "Sign up",
 
   "DONE_BUTTON": "Done",

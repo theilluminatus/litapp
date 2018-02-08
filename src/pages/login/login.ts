@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Toast } from '@ionic-native/toast';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
+
 
 @IonicPage()
 @Component({
@@ -16,19 +19,28 @@ export class LoginPage {
   // sure to add it to the type
   account: { email: string, password: string } = {
     email: 'test@example.com',
-    password: 'test'
+    password: ''
   };
 
   // Our translated text strings
   private loginErrorString: string;
+  private signupMessageString: string;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    private browser: InAppBrowser,
+    private toast: Toast
+  ) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
+    })
+
+    this.translateService.get('SIGNUP_MESSAGE').subscribe((value) => {
+      this.signupMessageString = value;
     })
   }
 
@@ -42,9 +54,25 @@ export class LoginPage {
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
-        position: 'top'
+        position: 'bottom'
       });
       toast.present();
     });
+  }
+
+  signup() {
+
+    try {
+      this.toast.show(this.signupMessageString, '5000', 'bottom').subscribe(toast => {
+        console.log(this.signupMessageString);
+      });
+    } catch (e) {
+        console.log(this.signupMessageString);
+    }
+
+    this.browser
+      .create('https://www.literotica.com/stories/signup.php')
+      .show();
+
   }
 }
