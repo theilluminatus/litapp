@@ -41,25 +41,24 @@ page-story {
     bottom: 0;
     left: 0;
     z-index: 1;
-
-    > * {
-      display: inline-block;
-      vertical-align: middle;
-    }
+    padding: 0 10px;
+    display: flex;
+    flex-flow: row no-wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
 
     .range {
-      padding: 0;
-      margin-left: 25px;
-      width: calc( 100% - 100px );
+      flex-grow: 1;
+      padding: 0 10px;
     }
 
     .range-md .range-pin {
       z-index: 9999;
     }
 
-    span {
-      margin-left: 10px;
-      text-align: right;
+    .count {
+      padding: 0 10px;
     }
   }
 

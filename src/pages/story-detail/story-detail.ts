@@ -23,4 +23,10 @@ export class StoryDetailPage {
     });
   }
 
+  showSeries() {
+    this.navCtrl.push('StorySeriesPage', {
+      story: this.story
+    });
+  }
+
 }

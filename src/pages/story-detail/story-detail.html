@@ -11,6 +11,8 @@
   
   <p>{{story.description}}</p>
 
+  <a (click)="showSeries()">See other stories in series</a>
+
   <h2>{{'DETAILS' | translate}}</h2>
   <p><strong>{{'AUTHOR' | translate}}: </strong> <a (click)="showAuthor(story.author)">{{story.author.name}}</a></p>
   <p><strong>{{'CATEGORY' | translate}}: </strong> {{story.category}}</p>

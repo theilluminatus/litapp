@@ -106,20 +106,8 @@ export class StoryPage implements OnInit {
     });
   }
 
-  showAuthor(author: Author) {
-    this.navCtrl.push('AuthorPage', {
-      author: author
-    });
-  }
-
   showInfo(story: Story) {
     this.navCtrl.push('StoryDetailPage', {
-      story: story
-    });
-  }
-
-  showSeries(story: Story) {
-    this.navCtrl.push('StorySeriesPage', {
       story: story
     });
   }

@@ -7,25 +7,14 @@
       </ion-title>
     <ion-buttons end>
 
+      <button ion-button icon-only (click)="bookmark($event)">
+        <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
+      </button>
+      
       <button ion-button icon-only (click)="showInfo(story)">
         <ion-icon name="information-circle" [style.color]="settings.color"></ion-icon>
       </button>
 
-      <button ion-button icon-only (click)="showSeries(story)">
-        <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
-      </button>
-
-      <button ion-button icon-only (click)="bookmark($event)">
-        <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
-      </button>
-
-      <button ion-button icon-only (click)="showAuthor(story.author)">
-        <ion-icon name="person" [style.color]="settings.color"></ion-icon>
-      </button>
-
-      <button ion-button icon-only (click)="showPopover($event)">
-        <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
-      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -49,8 +38,11 @@
     [@visibilityChanged]="fullscreen"
     [style.background]="settings.background"
     [style.color]="settings.color">
+    <button ion-button icon-only clear (click)="showPopover($event)">
+        <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
+      </button>
     <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
       pin="true" snaps="true" step="1" min="1" [max]="slides.length"></ion-range>
-    <span>{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
+    <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
   </div>
 </ion-content>

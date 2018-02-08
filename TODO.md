@@ -1,7 +1,6 @@
 # TODO
 
  - Add popover for adding stories to list (in story-list & story-view)
- - Move story extra buttons to popover
  - Test app on other platforms
 
  - check for missing translations

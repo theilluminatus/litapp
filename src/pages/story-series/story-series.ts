@@ -17,7 +17,6 @@ export class StorySeriesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	let story: Story = navParams.get('story');
   	// TODO: make series relation between stories
-  	console.log(story);
   	this.series = story.author.stories;
   }
 
