@@ -13,15 +13,6 @@ ion-app.md [padding] .scroll-content {
 	padding-bottom: 0;
 }
 
-[padding] h1:first-child,
-[padding] h2:first-child,
-[padding] h3:first-child,
-[padding] h4:first-child,
-[padding] h5:first-child,
-[padding] h6:first-child {
-	margin-top: 1.6rem;
-}
-
 .refresher-refreshing .spinner-ios line, .refresher-refreshing .spinner-ios-small line, .refresher-refreshing .spinner-crescent circle, .spinner-md-crescent circle {
 	stroke: #666;
 }
