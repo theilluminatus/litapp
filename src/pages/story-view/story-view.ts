@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
+import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
@@ -23,6 +24,8 @@ import { Author } from '../../models/author';
 })
 export class StoryViewPage implements OnInit {
 
+  private STORYSTYLEOPTIONS_KEY: string = '_storystyle';
+
   Math: Math = Math;
 
   slides: any[];
@@ -33,7 +36,6 @@ export class StoryViewPage implements OnInit {
   @ViewChild("slidesElement") slidesElement: Slides;
   @ViewChild("range") range: any;
 
-  // TODO: persist settings
   settings = {
     fontsize: 15,
     lineheight: 21.5,
@@ -47,9 +49,10 @@ export class StoryViewPage implements OnInit {
     public navCtrl: NavController,
     public menu: MenuController,
     public platform: Platform,
+    public storage: Storage,
+    public user: User,
     private popoverCtrl: PopoverController,
     private androidFullScreen: AndroidFullScreen,
-    public user: User,
     translate: TranslateService,
     navParams: NavParams
   ) {
@@ -57,6 +60,11 @@ export class StoryViewPage implements OnInit {
     this.dir = platform.dir();
     this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.menu.enable(true);
+
+    this.storage.get(this.STORYSTYLEOPTIONS_KEY).then((value) => {
+      if (value)
+        this.settings = value;
+    });
   }
 
   ngOnInit() {
@@ -105,6 +113,10 @@ export class StoryViewPage implements OnInit {
 
     popover.present({
       ev: ev
+    });
+
+    popover.onDidDismiss(() => {
+      this.storage.set(this.STORYSTYLEOPTIONS_KEY, this.settings)
     });
   }
 

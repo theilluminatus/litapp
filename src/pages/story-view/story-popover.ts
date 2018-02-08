@@ -6,7 +6,7 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
   selector: 'story-popover',
   template: `
 
-    <ion-list radio-group [(ngModel)]="fontFamily" (ionChange)="changeFontFamily(fontFamily)">
+    <ion-list radio-group [(ngModel)]="settings.font">
       <ion-row>
         <ion-col>
           <button (click)="changeFontSize('smaller')" ion-item detail-none class="popover-text-button popover-text-smaller">A</button>
@@ -209,8 +209,8 @@ export class StoryPopover {
 
   changeFontSize(direction: string) {
 
-    if (this.settings.lineheight < 5) return;
-    if (this.settings.lineheight > 30) return;
+    if (this.settings.fontsize < 5) return;
+    if (this.settings.fontsize > 30) return;
 
     if (direction == "larger")
       this.settings.fontsize++;
@@ -229,10 +229,6 @@ export class StoryPopover {
       this.settings.lineheight++;
     else
       this.settings.lineheight--;
-  }
-
-  changeFontFamily(font: string) {
-    this.settings.font = font;
   }
 
   changeAlign(dir: string) {
