@@ -198,12 +198,8 @@ export class StoryPopover {
     },
   };
 
-  constructor(private navParams: NavParams, public platform: Platform,) {}
-
-  ngOnInit() {
-    if (this.navParams.data) {
-      this.settings = this.navParams.data.settings;
-    }
+  constructor(private navParams: NavParams, public platform: Platform) {
+    this.settings = navParams.get('settings');
   }
 
   changeBackground(color: any) {
