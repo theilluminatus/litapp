@@ -15,7 +15,12 @@ export class ListCreatePage {
   list: List;
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, fb: FormBuilder, navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public viewCtrl: ViewController,
+    public navParams: NavParams,
+    fb: FormBuilder
+  ) {
 
     this.list = navParams.get('list');
     this.form = fb.group({
@@ -33,11 +38,23 @@ export class ListCreatePage {
   done() {
     if (!this.form.valid) return;
 
-    // TODO: persist new and edited lists to db
+    let isNewList = !this.list;
+    if (isNewList) {
+      this.list = new List({});
+    }
+
     this.list.name = this.form.value.name;
     this.list.description = this.form.value.description;
     this.list.visibility = this.form.value.visibility;
 
+    if (isNewList) {
+      this.navCtrl.pop().then(() => {
+        this.navParams.get('callback')(this.list);
+      });
+      return;
+    }
+      
+    // TODO: persist new and edited lists to server
     this.viewCtrl.dismiss();
   }
 }

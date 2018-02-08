@@ -9,6 +9,9 @@ export class List {
       // @ts-ignore
       this[f] = fields[f];
     }
+    
+    if (!this.stories)
+      this.stories = [];
   }
 
 }

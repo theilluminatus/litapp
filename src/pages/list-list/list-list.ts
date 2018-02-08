@@ -24,7 +24,12 @@ export class ListListPage {
   }
 
   addList() {
-    this.navCtrl.push('ListCreatePage');
+    this.navCtrl.push('ListCreatePage', {
+      callback: (newlist) => {
+        // TODO: reload lists
+        this.lists.push(newlist);
+      }
+    });
   }
 
   edit(list: List, event) {
@@ -35,7 +40,7 @@ export class ListListPage {
   }
 
   delete(list: List, event) {
-    // TODO: delete list from db
+    // TODO: delete list from server
     event.stopPropagation();
     this.lists.forEach((item,index) => {
       if (item == list)
