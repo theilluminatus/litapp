@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { StoryDetailPage } from './story-detail';
 import { TranslateModule } from '@ngx-translate/core';
+import { TooltipsModule } from 'ionic-tooltips';
+
+import { StoryDetailPage } from './story-detail';
 
 @NgModule({
   declarations: [
@@ -10,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     IonicPageModule.forChild(StoryDetailPage),
     TranslateModule.forChild(),
+    TooltipsModule
   ],
 })
 export class StoryDetailPageModule {}

@@ -6,7 +6,8 @@
     </button>
     <ion-title>{{ 'HISTORY_TITLE' | translate }}</ion-title>
     <ion-buttons end>
-	    <button end ion-button icon-only (click)="toggleDownloadFilter()">
+	    <button end ion-button icon-only (click)="toggleDownloadFilter()"
+        [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate" event="press" navTooltip>
 	      <ion-icon name="download"></ion-icon>
 	    </button>
 	  </ion-buttons>

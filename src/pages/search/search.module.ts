@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { TooltipsModule } from 'ionic-tooltips';
 
 import { SearchPage } from './search';
 import { StoryListPageModule } from '../../parts/story-list/story-list.module';
@@ -12,6 +13,7 @@ import { StoryListPageModule } from '../../parts/story-list/story-list.module';
   imports: [
     IonicPageModule.forChild(SearchPage),
     TranslateModule.forChild(),
+    TooltipsModule,
     StoryListPageModule
   ],
   exports: [

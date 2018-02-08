@@ -42,6 +42,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-toast": "^2.6.0",
     "ionic-angular": "3.9.2",
+    "ionic-tooltips": "^2.0.1",
     "ionicons": "3.0.0",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",

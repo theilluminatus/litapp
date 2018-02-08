@@ -15,7 +15,8 @@
         <span *ngFor="let tag of story.tags">#{{tag}} </span>
       </p>
       <ion-note item-end>
-        <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)">
+        <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)"
+          [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
           <ion-icon [name]="story.lists?.length > 0 ? 'star' : 'star-outline'"></ion-icon>
         </button>
       </ion-note>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { TooltipsModule } from 'ionic-tooltips';
 
 import { ListCreatePage } from './list-create';
 
@@ -10,7 +11,8 @@ import { ListCreatePage } from './list-create';
   ],
   imports: [
     IonicPageModule.forChild(ListCreatePage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    TooltipsModule
   ],
   exports: [
     ListCreatePage

@@ -6,7 +6,8 @@
 		</button>
 		<ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
 		<ion-buttons end>
-			<button end ion-button icon-only (click)="panel.toggle()">
+			<button end ion-button icon-only (click)="panel.toggle()"
+				[tooltip]="'SEARCH_STARREDQUERIES' | translate" event="press" 	navTooltip>
 				<ion-icon name="bookmarks"></ion-icon>
 			</button>
 		</ion-buttons>

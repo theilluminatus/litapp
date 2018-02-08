@@ -6,7 +6,8 @@
     </button>
     <ion-title>{{ 'FEED_TITLE' | translate }}</ion-title>
     <ion-buttons end>
-      <button end ion-button icon-only (click)="openFollowing()">
+      <button end ion-button icon-only (click)="openFollowing()"
+        [tooltip]="'FEED_TOOLTIP_FOLLOWING' | translate" event="press" navTooltip>
        <ion-icon name="people"></ion-icon>
      </button>
    </ion-buttons>

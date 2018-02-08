@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { FeedPage } from './feed';
 import { TranslateModule } from '@ngx-translate/core';
+import { TooltipsModule } from 'ionic-tooltips';
+
+import { FeedPage } from './feed';
 
 @NgModule({
   declarations: [
@@ -9,7 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     IonicPageModule.forChild(FeedPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    TooltipsModule
   ],
 })
 export class FeedPageModule {}

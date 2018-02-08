@@ -19,9 +19,7 @@
   "SETTINGS_OPTION2": "Option 2",
   "SETTINGS_OPTION3": "Option 3",
   "SETTINGS_OPTION4": "Option 4",
-
   "SETTINGS_PROFILE_BUTTON": "Edit Profile",
-
   "SETTINGS_PAGE_PROFILE": "Edit Profile",
 
   "LOGIN_TITLE": "Sign in",
@@ -30,18 +28,24 @@
   "SIGNUP_MESSAGE": "Return to the app and login after you registered on the site",
   "SIGNUP_BUTTON": "Sign up",
 
+  "ADD_BUTTON": "Add new",
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete",
   "EDIT_BUTTON": "Edit",
+  "BOOKMARK_BUTTON": "Bookmark",
 
   "HISTORY_TITLE": "History",
+  "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
   "SEARCH_STARREDQUERIES": "Starred Queries",
 
+  "STORY_TOOLTIP_SHOWINFO": "More info",
+
   "FEED_TITLE": "My Feed",
+  "FEED_TOOLTIP_FOLLOWING": "Following authors",
   
   "LISTLIST_TITLE": "My Lists",
   "LISTCREATE_TITLE": "Create new list",
@@ -51,6 +55,8 @@
   "LISTCREATE_VISIBILITY_PRIVATE": "Private",
 
   "FOLLOWING_TITLE": "Followed Authors",
+
+  "AUTHOR_TOOLTIP_FOLLOW": "Toggle following author",
 
   "SERIES_TITLE": "All stories in this series",
   "SERIES_ALWAYSAUTOLOAD": "Always autoload next story in the series",

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { TooltipsModule } from 'ionic-tooltips';
 
 import { StoryListPage } from './story-list';
 
@@ -10,7 +11,8 @@ import { StoryListPage } from './story-list';
   ],
   imports: [
     IonicPageModule.forChild(StoryListPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    TooltipsModule
   ],
   exports: [
     StoryListPage
