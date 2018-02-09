@@ -19,7 +19,7 @@ export interface Story {
 
   id: any;
   title: string;
-  content: string;
+  content: any;
   description: string;
   rating: number;
   category: string;

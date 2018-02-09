@@ -30,7 +30,8 @@
       [style.textAlign]="settings.textalign"
       [style.background]="settings.background"
       [style.color]="settings.color">
-      <p [innerHTML]="slide.content"></p>
+
+      <p [innerHTML]="slide.content" [style.marginBottom]="fullscreen ? 0 : '90px'"></p>
     </ion-slide>
   </ion-slides>
 
@@ -39,11 +40,14 @@
     [@visibilityChanged]="fullscreen"
     [style.background]="settings.background"
     [style.color]="settings.color">
+
     <button ion-button icon-only clear (click)="showPopover($event)">
-        <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
-      </button>
+      <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
+    </button>
+
     <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
-      pin="true" snaps="true" step="1" min="1" [max]="slides.length"></ion-range>
+      *ngIf="slides.length > 1" pin="true" snaps="true" step="1" min="1" [max]="slides.length"></ion-range>
+
     <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
   </div>
 </ion-content>

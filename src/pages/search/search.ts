@@ -77,7 +77,7 @@ export class SearchPage {
 
   search(query: string) {
     this.searchbar.value = query;
-    this.getStories(null, query);
+    this.getStories(query);
     this.panel.close();
   }
 

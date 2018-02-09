@@ -13,26 +13,26 @@ export class Stories {
   constructor(
   	public api: Api,
   	public loadingCtrl: LoadingController,
-  	private toastCtrl: ToastController
+  	public toastCtrl: ToastController
   ) { }
 
+
+  // Search for a story with a query and sort results
   searchStory(query: string, sort: string, page?: number, limit?: number) {
 
+    let filter = [
+      {"property": "type", "value": "story"},
+      {"property": "q", "value": query}
+    ];
   	let params = { 
   		"limit": limit? limit : 10,
   		"page": page ? page : 1,
-  		"filter": [
-  			{"property": "type", "value": "story"},
-  			{"property": "q", "value": query}
-  		]
+      "filter": JSON.stringify(filter).trim()
   	};
-  	params.filter = JSON.stringify(params.filter).trim();
 
-  	let loading = this.loadingCtrl.create({spinner: "crescent"});
-		loading.present();
-
-    return this.api.get('1/submissions', params).map((data) => {
-    	loading.dismiss();
+		let loader = this.showLoader();
+    return this.api.get('1/submissions', params).map((data: any) => {
+    	loader.dismiss();
     	if (!data.success) {
     		this.showToast();
     		return [];
@@ -46,7 +46,7 @@ export class Stories {
     			category: story.category.name,
     			timestamp: story.timestamp_published,
     			rating: story.rate,
-    			viewcount: story.viewcount,
+    			viewcount: story.view_count,
     			url: story.url,
     			author: new Author({
     				id: story.user.id,
@@ -57,25 +57,66 @@ export class Stories {
     	});
 
     }).catch((error) => {
-    	loading.dismiss();
+    	loader.dismiss();
     	this.showToast();
     	return Observable.of([]);
     });
   }
 
-  getById(id: any, params?: any) {
-    return this.api.get('/s/'+id, params);
+
+  // Get a story by ID
+  getById(id: any) {
+    // TODO: send session id when logged in to get more info
+    let filter = [{"property": "submission_id", "value": id}];
+    let params = { "filter": JSON.stringify(filter).trim() };
+
+    let loader = this.showLoader();
+    return this.api.get('2/submissions/pages', params).map((data: any) => {
+      loader.dismiss();
+      if (!data.success) {
+        this.showToast();
+        return null;
+      }
+
+      let tags = !data.pages[0].tags ? [] : data.pages[0].tags
+        .sort((a,b) => a.submission_count - b.submission_count )
+        .map((el) => el.name);
+
+      return new Story({
+        id: data.pages[0].submission_id,
+        title: data.pages[0].name,
+        url: data.pages[0].url,
+        length: data.total,
+        tags: tags,
+        content: data.pages.map((p) => p.content)        
+      });
+
+    }).catch((error) => {
+      loader.dismiss();
+      this.showToast();
+      return Observable.of(null);
+    });
   }
 
-  private showToast(data) {
-  	// TODO: translate
-		this.toastCtrl.create({
-	    message: 'Error',
-	    showCloseButton: true,
-	    closeButtonText: 'Close',
-	    dismissOnPageChange: true,
-	    duration: 3000
-		}).present();
+
+
+  // HELPERS
+
+  private showLoader() {
+    let loader = this.loadingCtrl.create({spinner: "crescent"});
+    loader.present();
+    return loader;
+  }
+
+  private showToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Error while loading',
+      showCloseButton: true,
+      closeButtonText: 'Close',
+      duration: 3000
+    });
+    toast.present();
+    return toast
   }
 
 }

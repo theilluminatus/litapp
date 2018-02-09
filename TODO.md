@@ -7,6 +7,6 @@
  - Split story pages so no vertical scrolling occurs?
  - Get data from and persist changes to server (list, following, feed, story, author)
 
- - fix search always returns same results + add sorting
+ - fix search always returns same results + add sorting + timestamp format + missing tags
 
 ## Also check TODOs in files!

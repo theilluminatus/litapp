@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
+import { Stories } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
@@ -28,7 +29,7 @@ export class StoryViewPage {
 
   Math: Math = Math;
 
-  slides: any[];
+  slides: any[] = [];
   dir: string = 'ltr';
   slidesPerView: number = 1;
   fullscreen = false;
@@ -51,6 +52,7 @@ export class StoryViewPage {
     public platform: Platform,
     public storage: Storage,
     public user: User,
+    public stories: Stories,
     private popoverCtrl: PopoverController,
     private androidFullScreen: AndroidFullScreen,
     translate: TranslateService,
@@ -66,15 +68,27 @@ export class StoryViewPage {
         this.settings = value;
     });
 
-    // for (var i = 0; i < str.length; i++) {
-    //   alert(str.charAt(i));
-    // }
+    if (!this.story.content && this.story.id) {
 
-    // let linesPerSlide = this.slidesElement.contentHeight / lineheight;
+      this.stories.getById(this.story.id).subscribe((data) => {
+        if (!data) {
+          this.navCtrl.pop(this);
+          return;
+        }
+        
+        data.content.forEach((item, index) => this.slides.push({
+          content: item,
+          page: index,
+          desktoppage: index
+        }));
+      });
 
-    this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
-    this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
-    this.slides.push({content: this.story.content, page: 1, desktoppage: 1});
+    } else {
+      this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
+    }
+
+    // TODO: add to history
+
   }
 
   ionViewWillEnter() {
