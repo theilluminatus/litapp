@@ -1,5 +1,6 @@
 {
   "BACK_BUTTON_TEXT": "Back",
+  "CONFIRM": "Are you sure",
 
   "ACCOUNT_TITLE": "Account",
   "NAME": "Name",
@@ -37,6 +38,7 @@
 
   "HISTORY_TITLE": "History",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
+  "HISTORY_TOOLTIP_CLEAR": "Clear history",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",

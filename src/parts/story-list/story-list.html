@@ -12,7 +12,7 @@
       <p>
         <ion-icon name="star"></ion-icon> {{story.rating}}
         <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
-        {{ 'ATTIMESTAMP' | translate }} {{(story.timestamp*1000) | date:'fullDate' }}
+        {{ 'ATTIMESTAMP' | translate }} {{(story.timestamp*1000) | date }}
       </p>
       <p class="tags">
         <strong>{{story.category}}</strong>

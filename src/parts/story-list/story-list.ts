@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
@@ -10,8 +10,10 @@ import { Author } from '../../models/author';
   templateUrl: 'story-list.html'
 })
 export class StoryListPage {
+  
   @Input() stories: Story[];
   @Input() sliding: boolean = false;
+  @Output() onDeleteBySwiping: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public navCtrl: NavController,
@@ -44,10 +46,6 @@ export class StoryListPage {
   }
 
   delete(story: Story) {
-    // TODO: persist to db + remove download if downloaded
-    this.stories.forEach((item,index) => {
-      if (item == story)
-        this.stories.splice(index, 1);
-    });
+    this.onDeleteBySwiping.emit(story);
   }
 }

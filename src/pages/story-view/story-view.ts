@@ -175,11 +175,9 @@ export class StoryViewPage {
 
   ionViewDidEnter() {
     this.menu.enable(false);
-    console.log(false);
   }
 
   ionViewWillLeave() {
-    console.log(true);
     this.menu.enable(true);
     this.androidFullScreen.isImmersiveModeSupported()
       .then(() => this.androidFullScreen.showSystemUI())
