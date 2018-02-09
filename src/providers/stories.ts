@@ -19,58 +19,60 @@ export class Stories {
 
   // Search for a story with a query and sort results
   searchStory(query: string, sort: string, page?: number, limit?: number) {
-
     let filter = [
       {"property": "type", "value": "story"},
       {"property": "q", "value": query}
     ];
-  	let params = { 
-  		"limit": limit? limit : 10,
-  		"page": page ? page : 1,
-      "filter": JSON.stringify(filter).trim()
-  	};
+    return this.search(filter, page);
+  }
 
-    let loader;
-    if (!page || page < 2)
-		  loader = this.showLoader();
 
-    return this.api.get('1/submissions', params).map((data: any) => {
-    	if (loader) loader.dismiss();
-    	if (!data.success) {
-    		this.showToast();
-    		return [];
-    	}
+  // TODO: add infinitescroll to series page
+  getSeries(seriesid: number, page?: number, limit?: number) {
+    let filter = [
+      {"property": "series_id", "value": seriesid}
+    ];
+    return this.search(filter, page);
+  }
 
-    	return data.submissions.map((story) => {
-    		return this.extractSubmissionData(story);
-    	});
 
-    }).catch((error) => {
-    	if (loader) loader.dismiss();
-    	this.showToast();
-    	return Observable.of([]);
-    });
+  getRelated(id: any) {
+    let filter = [
+      {"property": "related_id", "value": id}
+    ];
+    return this.search(filter);
   }
 
 
   // TODO: add infinitescroll for authors stories
-  getAuthorStories(id: any) {
+  getAuthorStories(id: any, page?: number, limit?: number) {
     let filter = [
       {"property": "user_id", "value": id},
       {"property": "type", "value": "story"}
     ];
-    let params = {
-      limit: 25,
-      page: 1,
+    return this.search(filter, page);
+  }
+
+
+
+
+  // helper for similar requests
+  private search(filter: any, page?: number, limit?: number, sort?: string) {
+    let params = { 
+      "limit": limit? limit : 10,
+      "page": page ? page : 1,
       "filter": JSON.stringify(filter).trim()
     };
 
-    let loader = this.showLoader();
-    return this.api.get('1/user-submissions', params).map((data: any) => {
-      loader.dismiss();
+    let loader;
+    if (!page || page < 2)
+      loader = this.showLoader();
+
+    return this.api.get('1/submissions', params).map((data: any) => {
+      if (loader) loader.dismiss();
       if (!data.success) {
         this.showToast();
-        return null;
+        return [];
       }
 
       return data.submissions.map((story) => {
@@ -78,31 +80,34 @@ export class Stories {
       });
 
     }).catch((error) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       this.showToast();
-      return Observable.of(null);
+      return Observable.of([]);
     });
   }
 
 
   // TODO: add infinitescroll for authors favs
-  getAuthorFavs(id: any) {
+  getAuthorFavs(id: any, page?: number, limit?: number) {
     let filter = [
       {"property": "user_id", "value": id},
       {"property": "type", "value": "story"}
     ];
-    let params = {
-      limit: 25,
-      page: 1,
+    let params = { 
+      "limit": limit? limit : 10,
+      "page": page ? page : 1,
       "filter": JSON.stringify(filter).trim()
     };
 
-    let loader = this.showLoader();
-    return this.api.get('1/user-submissions', params).map((data: any) => {
-      loader.dismiss();
+    let loader;
+    if (!page || page < 2)
+      loader = this.showLoader();
+
+    return this.api.get('1/user-favorites', params).map((data: any) => {
+      if (loader) loader.dismiss();
       if (!data.success) {
         this.showToast();
-        return null;
+        return [];
       }
 
       return data.submissions.map((story) => {
@@ -110,9 +115,9 @@ export class Stories {
       });
 
     }).catch((error) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       this.showToast();
-      return Observable.of(null);
+      return Observable.of([]);
     });
   }
 
@@ -154,12 +159,15 @@ export class Stories {
 
   rate(story: Story, rating: number) {
 
+    let filter = [{"property": "submission_id", "value": story.id}];
     let params = {
       storyid: story.id,
-      vote: rating
+      user_id: 0, // TODO: check if user_id is necessary
+      session_id: 0, // TODO: send session_id to vote
+      "filter": JSON.stringify(filter).trim()
     };
 
-    this.api.post('../stories/votej.php', params).map((data: any) => {
+    this.api.post('2/submissions/vote', params).map((data: any) => {
       if (!data.success) {
         this.showToast();
         return null;

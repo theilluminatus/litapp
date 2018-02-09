@@ -5,6 +5,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 import { Stories } from '../../providers/providers';
+import { User } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -19,6 +20,7 @@ export class StoryDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public stories: Stories,
+    public user: User,
     private socialSharing: SocialSharing
   ) {
   	this.story = navParams.get('story');
