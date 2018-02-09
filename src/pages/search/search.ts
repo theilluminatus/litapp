@@ -50,7 +50,7 @@ export class SearchPage {
     });
   }
 
-  loadMore(event: UIEvent) {
+  loadMore(event) {
     this.currentpage++;
     this.stories.searchStory(this.searchbar.value, this.sortmethod, this.currentpage).subscribe((data) => {
       if (data.length < 0) {

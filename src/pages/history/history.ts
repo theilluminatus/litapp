@@ -20,12 +20,12 @@ export class HistoryPage {
 
 	toggleDownloadFilter() {
 		this.downloadFilterActive = !this.downloadFilterActive;
-		if (this.downloadFilterActive)
-			this.stories = this.s.query({
-				downloaded: true
-			});
-		else
-			this.stories = this.s.query();
+		// if (this.downloadFilterActive)
+		// 	this.stories = this.s.query({
+		// 		downloaded: true
+		// 	});
+		// else
+		// 	this.stories = this.s.query();
 	}
 
 }
