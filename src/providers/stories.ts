@@ -152,6 +152,25 @@ export class Stories {
   }
 
 
+  rate(story: Story, rating: number) {
+
+    let params = {
+      storyid: story.id,
+      vote: rating
+    };
+
+    this.api.post('../stories/votej.php', params).map((data: any) => {
+      if (!data.success) {
+        this.showToast();
+        return null;
+      }
+
+    }).catch((error) => {
+      this.showToast();
+    }). subscribe();
+  }
+
+
 
   // HELPERS
 
@@ -161,6 +180,7 @@ export class Stories {
     return loader;
   }
 
+  // TODO: add translation
   private showToast() {
     let toast = this.toastCtrl.create({
       message: 'Error while loading',

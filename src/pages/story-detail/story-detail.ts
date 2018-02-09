@@ -4,6 +4,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
+import { Stories } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -17,6 +18,7 @@ export class StoryDetailPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public stories: Stories,
     private socialSharing: SocialSharing
   ) {
   	this.story = navParams.get('story');
@@ -40,10 +42,9 @@ export class StoryDetailPage {
     });
   }
 
-  rate(event: UIEvent) {
+  rate(event) {
     event.preventDefault();
-    console.log(this.story);
-    // TODO send rating to server
+    this.stories.rate(this.story, this.story.myrating);
   }
 
   search(query: string) {

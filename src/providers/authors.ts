@@ -82,6 +82,7 @@ export class Authors {
     return loader;
   }
 
+  // TODO: add translation
   private showToast() {
     let toast = this.toastCtrl.create({
       message: 'Error while loading',
