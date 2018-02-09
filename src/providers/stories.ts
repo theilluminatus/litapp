@@ -30,9 +30,12 @@ export class Stories {
       "filter": JSON.stringify(filter).trim()
   	};
 
-		let loader = this.showLoader();
+    let loader;
+    if (!page || page < 2)
+		  loader = this.showLoader();
+
     return this.api.get('1/submissions', params).map((data: any) => {
-    	loader.dismiss();
+    	if (loader) loader.dismiss();
     	if (!data.success) {
     		this.showToast();
     		return [];
@@ -57,7 +60,7 @@ export class Stories {
     	});
 
     }).catch((error) => {
-    	loader.dismiss();
+    	if (loader) loader.dismiss();
     	this.showToast();
     	return Observable.of([]);
     });

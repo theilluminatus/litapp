@@ -26,6 +26,7 @@ import { Author } from '../../models/author';
 export class StoryViewPage {
 
   private STORYSTYLEOPTIONS_KEY: string = '_storystyle';
+  private HISTORY_KEY: string = '_history';
 
   Math: Math = Math;
 
@@ -68,11 +69,12 @@ export class StoryViewPage {
         this.settings = value;
     });
 
+    // get story from server
     if (!this.story.content && this.story.id) {
 
       this.stories.getById(this.story.id).subscribe((data) => {
         if (!data) {
-          this.navCtrl.pop(this);
+          this.navCtrl.pop();
           return;
         }
         
@@ -87,7 +89,17 @@ export class StoryViewPage {
       this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
     }
 
-    // TODO: add to history
+    // add to history
+    this.storage.get(this.HISTORY_KEY).then((history) => {
+      if (!history) history = [];
+
+      if (history.indexOf(this.story.id) > -1)
+        history.splice(history.indexOf(this.story.id),1);
+
+      history.push(this.story.id);
+      this.storage.set(this.HISTORY_KEY, history);
+      this.storage.set(this.HISTORY_KEY+"_"+this.story.id, this.story);
+    });
 
   }
 
@@ -163,9 +175,11 @@ export class StoryViewPage {
 
   ionViewDidEnter() {
     this.menu.enable(false);
+    console.log(false);
   }
 
   ionViewWillLeave() {
+    console.log(true);
     this.menu.enable(true);
     this.androidFullScreen.isImmersiveModeSupported()
       .then(() => this.androidFullScreen.showSystemUI())

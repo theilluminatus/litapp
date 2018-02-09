@@ -1,6 +1,10 @@
 
 <ion-list [sliding]="sliding">
 
+  <ion-list-header *ngIf="!stories.length" class="empty">
+    {{'STORYLIST_EMPTY' | translate}}
+  </ion-list-header>
+
   <ion-item-sliding *ngFor="let story of stories">
     <ion-item (click)="openStory(story)">
       <h2>{{story.title}}</h2>
@@ -8,7 +12,7 @@
       <p>
         <ion-icon name="star"></ion-icon> {{story.rating}}
         <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
-        {{ 'ATTIMESTAMP' | translate }} {{story.timestamp}}
+        {{ 'ATTIMESTAMP' | translate }} {{(story.timestamp*1000) | date:'fullDate' }}
       </p>
       <p class="tags">
         <strong>{{story.category}}</strong>
