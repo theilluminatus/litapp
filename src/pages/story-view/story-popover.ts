@@ -198,7 +198,7 @@ export class StoryPopover {
     },
   };
 
-  constructor(private navParams: NavParams, public platform: Platform) {
+  constructor(navParams: NavParams, public platform: Platform) {
     this.settings = navParams.get('settings');
   }
 

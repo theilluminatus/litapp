@@ -68,7 +68,7 @@ export class SearchPopover {
   method: string;
   firstsinceopen = true;
 
-  constructor(private navParams: NavParams, private viewCtrl: ViewController) {
+  constructor(navParams: NavParams, private viewCtrl: ViewController) {
     this.method = navParams.get('method');
   }
 

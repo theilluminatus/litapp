@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 
 import { HISTORY_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
-import { Stories } from '../../providers/providers';
 
 
 @IonicPage()

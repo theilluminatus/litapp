@@ -15,7 +15,7 @@ export class BookmarkPopover {
   alllists: List[];
   story: Story;
 
-  constructor(private navParams: NavParams, public l: Lists) {
+  constructor(navParams: NavParams, public l: Lists) {
     this.alllists = this.l.query();
     this.story = navParams.get('story');
   }

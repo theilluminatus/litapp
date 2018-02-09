@@ -3,7 +3,6 @@ import { LoadingController, ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Story } from '../models/story';
 import { Author } from '../models/author';
 import { Api } from './api/api';
 
