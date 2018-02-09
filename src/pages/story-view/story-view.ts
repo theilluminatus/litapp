@@ -72,13 +72,20 @@ export class StoryViewPage {
     // get story from server
     if (!this.story.content && this.story.id) {
 
-      this.stories.getById(this.story.id).subscribe((data) => {
-        if (!data) {
+      this.stories.getById(this.story.id).subscribe((story) => {
+        if (!story) {
           this.navCtrl.pop();
           return;
         }
         
-        data.content.forEach((item, index) => this.slides.push({
+        // add details to db
+        if (!this.story.length) {
+          this.story.length = story.length;
+          this.story.tags = story.tags;
+        }
+        this.storage.set(this.HISTORY_KEY+"_"+this.story.id, this.story);
+        
+        story.content.forEach((item, index) => this.slides.push({
           content: item,
           page: index,
           desktoppage: index
@@ -98,7 +105,6 @@ export class StoryViewPage {
 
       history.push(this.story.id);
       this.storage.set(this.HISTORY_KEY, history);
-      this.storage.set(this.HISTORY_KEY+"_"+this.story.id, this.story);
     });
 
   }

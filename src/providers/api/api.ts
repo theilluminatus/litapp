@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://literotica.com/api/';
+  url: string = 'https://literotica.com/api';
   
   // TODO: ask for apikey and appid on first boot and put in storage
   apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';

@@ -46,11 +46,19 @@ export class Stories {
     			id: story.id,
     			title: story.name,
     			description: story.description,
-    			category: story.category.name,
+          category: story.category.name,
+    			lang: story.lang,
     			timestamp: story.timestamp_published,
     			rating: story.rate,
+          series: story.series_id,
     			viewcount: story.view_count,
     			url: story.url,
+          ishot: story.is_hot == "no" ? false : true,
+          isnew: story.is_new == "no" ? false : true,
+          iswriterspick: story.writers_pick == "no" ? false : true,
+          iscontestwinner: story.contest_winner == "no" ? false : true,
+          commentsenabled: story.enabled_comments > 0 ? true : false,
+          ratingenabled: story.allow_vote > 0 ? true : false,
     			author: new Author({
     				id: story.user.id,
     				name: story.user.username,
@@ -82,7 +90,7 @@ export class Stories {
       }
 
       let tags = !data.pages[0].tags ? [] : data.pages[0].tags
-        .sort((a,b) => a.submission_count - b.submission_count )
+        .sort((a,b) => b.submission_count - a.submission_count )
         .map((el) => el.name);
 
       return new Story({

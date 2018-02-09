@@ -1,7 +1,6 @@
 # TODO
 
- - implement story viewcount, url + add ishot, isnew, writers_pick, lang, enable_comments, series_id, contest_winner, allow_vote
- - cache stories with timeout + manual download to db (history)
+ - refresh story data when opening story-detail
  - Add device notifications for new feed items + add feed new items badge
  - Split story pages so no vertical scrolling occurs?
  - Get data from and persist changes to server (list, following, feed, story, author)

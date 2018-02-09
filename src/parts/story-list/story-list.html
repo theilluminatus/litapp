@@ -7,27 +7,38 @@
 
   <ion-item-sliding *ngFor="let story of stories">
     <ion-item (click)="openStory(story)">
-      <h2>{{story.title}}</h2>
+
+      <h2>
+        {{story.title}}
+        <ion-badge *ngIf="story.iswriterspick" color="green">{{'WRITER_TAG' | translate}}'s Pick</ion-badge>
+        <ion-badge *ngIf="story.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
+        <ion-badge *ngIf="story.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>
+        <ion-badge *ngIf="story.isnew" color="yellow">{{'NEW_TAG' | translate}}</ion-badge>
+      </h2>
+
       <p>{{story.description}}</p>
       <p>
-        <ion-icon name="star"></ion-icon> {{story.rating}}
+        <ion-icon name="star"></ion-icon> {{story.rating}} ({{story.viewcount}})
         <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
         {{ 'ATTIMESTAMP' | translate }} {{(story.timestamp*1000) | date }}
       </p>
+
       <p class="tags">
         <strong>{{story.category}}</strong>
         <span *ngFor="let tag of story.tags">#{{tag}} </span>
       </p>
+
       <ion-note *ngIf="user.isLoggedIn()" item-end>
-        <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)"
-          [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
+        <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)" [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
           <ion-icon [name]="story.lists?.length > 0 ? 'star' : 'star-outline'"></ion-icon>
         </button>
       </ion-note>
-  	</ion-item>
-	<ion-item-options>
+
+    </ion-item>
+
+    <ion-item-options>
       <button ion-button color="danger" (click)="delete(story)">
-      	{{ 'DELETE_BUTTON' | translate }}
+        {{ 'DELETE_BUTTON' | translate }}
       </button>
     </ion-item-options>
   </ion-item-sliding>

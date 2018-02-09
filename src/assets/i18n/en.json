@@ -87,10 +87,17 @@
   "RATING": "Rating",
   "LENGTH": "Length",
   "PAGES": "pages",
+  "VIEWCOUNT": "Views",
+  "LANGUAGE": "Language",
   "TIMESTAMP": "Timestamp",
   "COMMENTS": "Comments",
   "SUBMISSIONS": "Submissions",
   "FAVORITES": "Favorites",
   "BYAUTHOR": "by",
-  "ATTIMESTAMP": "at"
+  "ATTIMESTAMP": "at",
+
+  "HOT_TAG": "Hot",
+  "NEW_TAG": "New",
+  "WRITER_TAG": "Writer",
+  "WINNER_TAG": "Winner"
 }

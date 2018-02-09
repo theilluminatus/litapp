@@ -23,13 +23,21 @@ export interface Story {
   description: string;
   rating: number;
   category: string;
+  lang: string;
   tags: string[];
+  series: number;
   timestamp: string;
   author: Author;
   url: string;
   length: number;
   currentpage: number;
   viewcount: number;
+  ishot: boolean;
+  isnew: boolean;
+  iswriterspick: boolean;
+  iscontestwinner: boolean;
+  commentsenabled: boolean;
+  ratingenabled: boolean;
   lists: List[];
   comments: {
     user: string,

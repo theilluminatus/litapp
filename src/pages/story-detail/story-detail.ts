@@ -58,7 +58,7 @@ export class StoryDetailPage {
   }
 
   share() {
-    this.socialSharing.share("Literotica story", null, null, "https://www.literotica.com/s/"+this.story.id);
+    this.socialSharing.share("Literotica story", null, null, this.story.url);
   }
 
 }

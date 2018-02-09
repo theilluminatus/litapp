@@ -29,31 +29,45 @@
   <p><a (click)="showRelated()">{{'STORYDETAIL_RELATED' | translate }}</a></p>
 
   <h2>{{'DETAILS' | translate}}</h2>
+
+  <p>
+    <ion-badge *ngIf="story.iswriterspick" color="green">{{'WRITER_TAG' | translate}}'s Pick</ion-badge>
+    <ion-badge *ngIf="story.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
+    <ion-badge *ngIf="story.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>
+    <ion-badge *ngIf="story.isnew" color="yellow">{{'NEW_TAG' | translate}}</ion-badge>
+  </p>
+
   <p><strong>{{'AUTHOR' | translate}}: </strong> <a (click)="showAuthor(story.author)">{{story.author.name}}</a></p>
   <p><strong>{{'CATEGORY' | translate}}: </strong> <a (click)="search(story.category)">{{story.category}}</a></p>
 
-  <p class="tags" *ngIf="story.tags.length > 0">
+  <p class="tags" *ngIf="story.tags && story.tags.length > 0">
     <strong>{{'TAGS' | translate}}: </strong>
     <a *ngFor="let tag of story.tags" (click)="search(tag)">#{{tag}} </a>
   </p>
 
-  <p><strong>{{'RATING' | translate}}: </strong> {{story.rating}}</p>
+  <p><strong>{{'RATING' | translate}}: </strong> <ion-icon name="star"></ion-icon> {{story.rating}}</p>
+  <p><strong>{{'VIEWCOUNT' | translate}}: </strong> {{story.viewcount}}</p>
   <p><strong>{{'LENGTH' | translate}}: </strong> {{story.length}} {{'PAGES' | translate}}</p>
+  <p><strong>{{'LANGUAGE' | translate}}: </strong> {{story.lang}}</p>
   <p><strong>{{'TIMESTAMP' | translate}}: </strong> {{story.timestamp}}</p>
 
-  <h3>{{'STORYDETAIL_RATETITLE' | translate }}</h3>
-  <form (submit)="rate($event)" class="rate">
-    <ion-range [(ngModel)]="story.myrating" name="myrating" snaps="true" step="1" min="0" max="5" pin="true"></ion-range>
-    <button ion-button outline>{{'STORYDETAIL_RATE' | translate }}</button>
-  </form>
+  <ng-container *ngIf="story.ratingenabled">
+    <h3>{{'STORYDETAIL_RATETITLE' | translate }}</h3>
+    <form (submit)="rate($event)" class="rate">
+      <ion-range [(ngModel)]="story.myrating" name="myrating" snaps="true" step="1" min="0" max="5" pin="true"></ion-range>
+      <button ion-button outline>{{'STORYDETAIL_RATE' | translate }}</button>
+    </form>
+  </ng-container>
 
-  <h2>{{'COMMENTS' | translate}}</h2>
-  <ion-list class="comments">
-  	<ion-item *ngFor="let comment of story.comments">
-  		<h3>{{comment.user}}</h3>
-  		<h6>{{comment.timestamp}}</h6>
-  		<p>{{comment.text}}</p>
-  	</ion-item>
-  </ion-list>
+  <ng-container *ngIf="story.comments && story.commentsenabled">
+    <h2>{{'COMMENTS' | translate}}</h2>
+    <ion-list class="comments">
+    	<ion-item *ngFor="let comment of story.comments">
+    		<h3>{{comment.user}}</h3>
+    		<h6>{{comment.timestamp}}</h6>
+    		<p>{{comment.text}}</p>
+    	</ion-item>
+    </ion-list>
+  </ng-container>
 
 </ion-content>
