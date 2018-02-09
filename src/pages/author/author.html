@@ -24,8 +24,13 @@
 
 <ion-content padding>
 
-	<ion-img [src]="author?.picture"></ion-img>
-	<p class="bio" [innerHTML]="author?.bio"></p>
+  <div class="bio">
+    <ion-img [src]="author?.picture"></ion-img>
+  	<p #biotext [innerHTML]="author?.bio"></p>
+    <div class="arrow" *ngIf="showArrow">
+      <ion-icon name="arrow-down"></ion-icon>
+    </div>
+  </div>
 
 	<h1 (click)="loadSubmissions()">{{ 'SUBMISSIONS' | translate }}</h1>
   <a *ngIf="!showStories" (click)="loadSubmissions()">{{'AUTHOR_SHOWSTORIES' | translate}}</a>

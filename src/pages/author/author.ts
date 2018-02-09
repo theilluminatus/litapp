@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -14,9 +14,11 @@ import { Author } from '../../models/author';
 })
 export class AuthorPage {
 
+  @ViewChild("biotext") biotext;
   author: Author;
   showStories = false;
   showFavs = false;
+  showArrow = false;
 
   constructor(
     private socialSharing: SocialSharing,
@@ -30,6 +32,9 @@ export class AuthorPage {
 
     this.a.getBio(this.author.id).subscribe((bio) => {
       this.author.bio = bio;
+      setTimeout(() => {
+        this.showArrow = this.biotext.nativeElement.scrollHeight > this.biotext.nativeElement.clientHeight;
+      }, 10);
     });
 
   }
