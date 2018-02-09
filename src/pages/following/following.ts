@@ -14,7 +14,10 @@ export class FollowingPage {
   authors: Author[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public a: Authors) {
-  	this.authors = this.a.query({ following: true });
+  	this.a.getFollowing().subscribe((authors) => {
+      console.log(this.authors);
+      this.authors = authors;
+    });
   }
 
   showAuthor(author: Author) {

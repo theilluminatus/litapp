@@ -75,6 +75,8 @@
 
   "FOLLOWING_TITLE": "Followed Authors",
 
+  "AUTHOR_SHOWSTORIES": "Show author's submissions",
+  "AUTHOR_SHOWFAVS": "Show author's favorites",
   "AUTHOR_TOOLTIP_FOLLOW": "Toggle following author",
 
   "SERIES_TITLE": "All stories in this series",

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{author.name}}</ion-title>
+    <ion-title>{{author?.name}}</ion-title>
     <ion-buttons end>
       
       <button ion-button icon-only
@@ -13,7 +13,7 @@
       <button ion-button icon-only
         *ngIf="user.isLoggedIn()" (click)="followToggle()"
         [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate" event="press" navTooltip>
-        <ion-icon [name]="author.following ? 'remove-circle' : 'person-add'"></ion-icon>
+        <ion-icon [name]="author?.following ? 'remove-circle' : 'person-add'"></ion-icon>
       </button>
 
     </ion-buttons>
@@ -24,12 +24,15 @@
 
 <ion-content padding>
 
-	<ion-img [src]="author.picture"></ion-img>
-	<p class="bio">{{author.bio}}</p>
+	<ion-img [src]="author?.picture"></ion-img>
+	<p class="bio" [innerHTML]="author?.bio"></p>
 
-	<h1>{{ 'SUBMISSIONS' | translate }}</h1>
-	<story-list [stories]="author.stories"></story-list>
-	<h1>{{ 'FAVORITES' | translate }}</h1>
-	<story-list [stories]="author.favs"></story-list>
+	<h1 (click)="loadSubmissions()">{{ 'SUBMISSIONS' | translate }}</h1>
+  <a *ngIf="!showStories" (click)="loadSubmissions()">{{'AUTHOR_SHOWSTORIES' | translate}}</a>
+  <story-list *ngIf="showStories" [stories]="author?.stories"></story-list>
+
+  <h1 (click)="loadFavs()">{{ 'FAVORITES' | translate }}</h1>
+  <a *ngIf="!showFavs" (click)="loadFavs()">{{'AUTHOR_SHOWFAVS' | translate}}</a>
+	<story-list *ngIf="showFavs" [stories]="author?.favs"></story-list>
 
 </ion-content>

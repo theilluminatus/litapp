@@ -42,35 +42,77 @@ export class Stories {
     	}
 
     	return data.submissions.map((story) => {
-    		return new Story({
-    			id: story.id,
-    			title: story.name,
-    			description: story.description,
-          category: story.category.name,
-    			lang: story.lang,
-    			timestamp: story.timestamp_published,
-    			rating: story.rate,
-          series: story.series_id,
-    			viewcount: story.view_count,
-    			url: story.url,
-          ishot: story.is_hot == "no" ? false : true,
-          isnew: story.is_new == "no" ? false : true,
-          iswriterspick: story.writers_pick == "no" ? false : true,
-          iscontestwinner: story.contest_winner == "no" ? false : true,
-          commentsenabled: story.enabled_comments > 0 ? true : false,
-          ratingenabled: story.allow_vote > 0 ? true : false,
-    			author: new Author({
-    				id: story.user.id,
-    				name: story.user.username,
-    				picture: story.user.userpic,
-    			})
-    		});
+    		return this.extractSubmissionData(story);
     	});
 
     }).catch((error) => {
     	if (loader) loader.dismiss();
     	this.showToast();
     	return Observable.of([]);
+    });
+  }
+
+
+  // TODO: add infinitescroll for authors stories
+  getAuthorStories(id: any) {
+    let filter = [
+      {"property": "user_id", "value": id},
+      {"property": "type", "value": "story"}
+    ];
+    let params = {
+      limit: 25,
+      page: 1,
+      "filter": JSON.stringify(filter).trim()
+    };
+
+    let loader = this.showLoader();
+    return this.api.get('1/user-submissions', params).map((data: any) => {
+      loader.dismiss();
+      if (!data.success) {
+        this.showToast();
+        return null;
+      }
+
+      return data.submissions.map((story) => {
+        return this.extractSubmissionData(story);
+      });
+
+    }).catch((error) => {
+      loader.dismiss();
+      this.showToast();
+      return Observable.of(null);
+    });
+  }
+
+
+  // TODO: add infinitescroll for authors favs
+  getAuthorFavs(id: any) {
+    let filter = [
+      {"property": "user_id", "value": id},
+      {"property": "type", "value": "story"}
+    ];
+    let params = {
+      limit: 25,
+      page: 1,
+      "filter": JSON.stringify(filter).trim()
+    };
+
+    let loader = this.showLoader();
+    return this.api.get('1/user-submissions', params).map((data: any) => {
+      loader.dismiss();
+      if (!data.success) {
+        this.showToast();
+        return null;
+      }
+
+      return data.submissions.map((story) => {
+        return this.extractSubmissionData(story);
+      });
+
+    }).catch((error) => {
+      loader.dismiss();
+      this.showToast();
+      return Observable.of(null);
     });
   }
 
@@ -128,6 +170,32 @@ export class Stories {
     });
     toast.present();
     return toast
+  }
+
+  private extractSubmissionData(apistory) {
+    return new Story({
+      id: apistory.id,
+      title: apistory.name,
+      description: apistory.description,
+      category: apistory.category.name,
+      lang: apistory.lang,
+      timestamp: apistory.timestamp_published,
+      rating: apistory.rate,
+      series: apistory.series_id,
+      viewcount: apistory.view_count,
+      url: apistory.url,
+      ishot: apistory.is_hot == "no" ? false : true,
+      isnew: apistory.is_new == "no" ? false : true,
+      iswriterspick: apistory.writers_pick == "no" ? false : true,
+      iscontestwinner: apistory.contest_winner == "no" ? false : true,
+      commentsenabled: apistory.enabled_comments > 0 ? true : false,
+      ratingenabled: apistory.allow_vote > 0 ? true : false,
+      author: new Author({
+        id: apistory.user.id,
+        name: apistory.user.username,
+        picture: apistory.user.userpic,
+      })
+    });
   }
 
 }

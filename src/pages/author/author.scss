@@ -4,8 +4,7 @@ page-author {
 		float: left;
 		width: 100px;
 		height: 100px;
-		margin-top: 1.6rem;
-		margin-right: 15px;
+		margin: 1.6rem 1.6rem 1.6rem 0;
 	}
 
 	.bio {
@@ -19,9 +18,8 @@ page-author {
 		max-height: unset;
 	}
 
-	story-list ion-list {
-		max-height: 500px;
-		overflow-y: auto;
+	h1 {
+		clear: both;
 	}
 
 }

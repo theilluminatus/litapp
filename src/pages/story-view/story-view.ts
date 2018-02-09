@@ -169,13 +169,15 @@ export class StoryViewPage {
 
   slideChanged() {
     let currentIndex = this.slidesElement.getActiveIndex();
-    if (currentIndex == this.slides.length) {
+    if (currentIndex >= this.slides.length) {
       // TODO: autoload next story in series?
       return;
     }
 
-    // TODO: persist current slide index to db
-    this.story.currentpage = currentIndex;
+    this.storage.get(this.HISTORY_KEY+"_"+this.story.id).then((value) => {
+      value['currentpage'] = currentIndex;
+      this.storage.set(this.HISTORY_KEY+"_"+this.story.id, value);
+    });
     this.range.setValue(currentIndex+1);
   }
 
