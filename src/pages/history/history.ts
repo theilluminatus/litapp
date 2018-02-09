@@ -25,6 +25,7 @@ export class HistoryPage {
   ) { }
 
   ionViewDidEnter() {
+    this.allStories = [];
     this.storage.get(this.HISTORY_KEY).then((history) => {
       if (history)
         history.forEach((id) => {
