@@ -84,12 +84,18 @@ export class StoryViewPage {
           this.story.tags = story.tags;
         }
         this.storage.set(this.HISTORY_KEY+"_"+this.story.id, this.story);
+
         
         story.content.forEach((item, index) => this.slides.push({
           content: item,
           page: index,
           desktoppage: index
         }));
+
+        setTimeout(() => {
+          if (this.story.currentpage > 0)
+            this.slidesElement.slideTo(this.story.currentpage, 0);
+        }, 150);
       });
 
     } else {
@@ -107,11 +113,6 @@ export class StoryViewPage {
       this.storage.set(this.HISTORY_KEY, history);
     });
 
-  }
-
-  ionViewWillEnter() {
-    if (this.story.currentpage > 0)
-      this.slidesElement.slideTo(this.story.currentpage, 0);
   }
 
   clickSlides(event) {
