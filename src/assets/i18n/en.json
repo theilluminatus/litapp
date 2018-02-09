@@ -1,6 +1,6 @@
 {
   "BACK_BUTTON_TEXT": "Back",
-  "CONFIRM": "Are you sure",
+  "CONFIRM": "Are you sure?",
 
   "ACCOUNT_TITLE": "Account",
   "NAME": "Name",
@@ -30,6 +30,7 @@
 
   "ADD_BUTTON": "Add new",
   "DONE_BUTTON": "Done",
+  "OK_BUTTON": "OK",
   "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete",
   "EDIT_BUTTON": "Edit",

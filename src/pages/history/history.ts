@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
 import { HISTORY_KEY } from '../../providers/db';
@@ -16,11 +17,20 @@ export class HistoryPage {
   allStories: Story[] = [];
   filteredStories: Story[] = [];
 
+  private translations;
+
   constructor(
+    private translate: TranslateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public storage: Storage
-  ) { }
+  ) {
+
+    this.translate.get(['HISTORY_TOOLTIP_CLEAR','CONFIRM','OK_BUTTON','CANCEL_BUTTON']).subscribe(values => {
+      this.translations = values;
+    });
+
+  }
 
   ionViewDidEnter() {
     this.allStories = [];
@@ -41,13 +51,12 @@ export class HistoryPage {
     this.refreshFilteredStories();
   }
 
-  // TODO: translate
   clearAll() {
     this.alertCtrl.create({
-      title: "Clear history",
-      message: "Are you sure?",
+      title: this.translations.HISTORY_TOOLTIP_CLEAR,
+      message: this.translations.CONFIRM,
       buttons: [{
-        text: "OK",
+        text: this.translations.OK_BUTTON,
         handler: () => {
 
           this.storage.forEach((v,k,i) => {
@@ -58,7 +67,7 @@ export class HistoryPage {
           this.refreshFilteredStories();
           
         }},
-        { text: "Cancel" }
+        { text: this.translations.CANCEL_BUTTON }
       ]
     }).present();
   }

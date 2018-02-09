@@ -20,9 +20,7 @@ export class LoginPage {
     password: ''
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
-  private signupMessageString: string;
+  private translations;
 
   constructor(
     public navCtrl: NavController,
@@ -33,13 +31,9 @@ export class LoginPage {
     private toast: Toast
   ) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
-
-    this.translateService.get('SIGNUP_MESSAGE').subscribe((value) => {
-      this.signupMessageString = value;
-    })
+    this.translateService.get(['LOGIN_ERROR','SIGNUP_MESSAGE']).subscribe((values) => {
+      this.translations = values;
+    });
   }
 
   login(event: UIEvent) {
@@ -48,7 +42,7 @@ export class LoginPage {
       this.navCtrl.push(MainPage);
     }, (err) => {
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: this.translations.LOGIN_ERROR,
         duration: 3000,
         position: 'bottom'
       });
@@ -59,11 +53,11 @@ export class LoginPage {
   signup() {
 
     try {
-      this.toast.show(this.signupMessageString, '5000', 'bottom').subscribe(toast => {
-        console.log(this.signupMessageString);
+      this.toast.show(this.translations.SIGNUP_MESSAGE, '5000', 'bottom').subscribe(toast => {
+        console.log(this.translations.SIGNUP_MESSAGE);
       });
     } catch (e) {
-        console.log(this.signupMessageString);
+        console.log(this.translations.SIGNUP_MESSAGE);
     }
 
     this.browser
