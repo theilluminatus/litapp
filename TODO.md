@@ -7,8 +7,9 @@
 
  - Add dropdown icon if user bio is longer than x lines
  - fix menutoggles on search page -> doesnt toggle correct menu after using
- - export database field const from seperate file
 
+ - get correct api route for relevant stories
+ - get correct api route for stories in series with series_id
  - get correct api route for authors favs
  - get correct api route for search (+sorting & tags?)
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import { HISTORY_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
 
@@ -16,8 +17,6 @@ export class HistoryPage {
   allStories: Story[] = [];
   filteredStories: Story[] = [];
 
-  private HISTORY_KEY: string = '_history';
-
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -26,10 +25,10 @@ export class HistoryPage {
 
   ionViewDidEnter() {
     this.allStories = [];
-    this.storage.get(this.HISTORY_KEY).then((history) => {
+    this.storage.get(HISTORY_KEY).then((history) => {
       if (history)
         history.forEach((id) => {
-          this.storage.get(this.HISTORY_KEY+"_"+id).then((story) => {
+          this.storage.get(HISTORY_KEY+"_"+id).then((story) => {
             if (story)
               this.allStories.push(new Story(story));
           });
@@ -53,7 +52,7 @@ export class HistoryPage {
         handler: () => {
 
           this.storage.forEach((v,k,i) => {
-            if (k.indexOf(this.HISTORY_KEY) == 0)
+            if (k.indexOf(HISTORY_KEY) == 0)
               this.storage.remove(k);
           });
           this.allStories = [];
@@ -71,14 +70,14 @@ export class HistoryPage {
         this.allStories.splice(index, 1);
 
         // remove from db
-        this.storage.remove(this.HISTORY_KEY+"_"+story.id);
-        this.storage.get(this.HISTORY_KEY).then((history) => {
+        this.storage.remove(HISTORY_KEY+"_"+story.id);
+        this.storage.get(HISTORY_KEY).then((history) => {
           if (history) {
             history.forEach((id, index) => {
               if (id == story.id)
                 history.splice(index, 1);
             });
-            this.storage.set(this.HISTORY_KEY,history);
+            this.storage.set(HISTORY_KEY,history);
           }
         });
 

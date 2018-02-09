@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import { STARREDQUERIES_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
 
@@ -11,7 +12,6 @@ import { Stories } from '../../providers/providers';
   templateUrl: 'search.html'
 })
 export class SearchPage {
-  private STARREDQUERIES_KEY: string = '_queries';
 
   @ViewChild("searchbar") searchbar: any;
   @ViewChild("panel") panel: any;
@@ -30,7 +30,7 @@ export class SearchPage {
     private popoverCtrl: PopoverController
   ) {
     this.query = navParams.get('query');
-    this.storage.get(this.STARREDQUERIES_KEY).then((value) => {
+    this.storage.get(STARREDQUERIES_KEY).then((value) => {
       if (value)
         this.starredQueries = value;
     });
@@ -72,7 +72,7 @@ export class SearchPage {
     if (query.trim().length < 2) return;
     if (this.starredQueries.indexOf(query) > -1) return;
     this.starredQueries.push(query);
-    this.storage.set(this.STARREDQUERIES_KEY, this.starredQueries)
+    this.storage.set(STARREDQUERIES_KEY, this.starredQueries)
   }
 
   search(query: string) {
@@ -86,7 +86,7 @@ export class SearchPage {
       if (item == query)
         this.starredQueries.splice(index,1);
     });
-    this.storage.set(this.STARREDQUERIES_KEY, this.starredQueries)
+    this.storage.set(STARREDQUERIES_KEY, this.starredQueries)
   }
 
   openSortPopover(ev: UIEvent) {

@@ -6,10 +6,10 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
+import { STORYSTYLEOPTIONS_KEY, HISTORY_KEY } from '../../providers/db';
 import { Stories } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
-import { Author } from '../../models/author';
 
 @IonicPage()
 @Component({
@@ -24,9 +24,6 @@ import { Author } from '../../models/author';
   ]
 })
 export class StoryViewPage {
-
-  private STORYSTYLEOPTIONS_KEY: string = '_storystyle';
-  private HISTORY_KEY: string = '_history';
 
   Math: Math = Math;
 
@@ -64,7 +61,7 @@ export class StoryViewPage {
     this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
 
-    this.storage.get(this.STORYSTYLEOPTIONS_KEY).then((value) => {
+    this.storage.get(STORYSTYLEOPTIONS_KEY).then((value) => {
       if (value)
         this.settings = value;
     });
@@ -83,7 +80,7 @@ export class StoryViewPage {
           this.story.length = story.length;
           this.story.tags = story.tags;
         }
-        this.storage.set(this.HISTORY_KEY+"_"+this.story.id, this.story);
+        this.storage.set(HISTORY_KEY+"_"+this.story.id, this.story);
 
         
         story.content.forEach((item, index) => this.slides.push({
@@ -103,14 +100,14 @@ export class StoryViewPage {
     }
 
     // add to history
-    this.storage.get(this.HISTORY_KEY).then((history) => {
+    this.storage.get(HISTORY_KEY).then((history) => {
       if (!history) history = [];
 
       if (history.indexOf(this.story.id) > -1)
         history.splice(history.indexOf(this.story.id),1);
 
       history.push(this.story.id);
-      this.storage.set(this.HISTORY_KEY, history);
+      this.storage.set(HISTORY_KEY, history);
     });
 
   }
@@ -148,7 +145,7 @@ export class StoryViewPage {
     });
 
     popover.onDidDismiss(() => {
-      this.storage.set(this.STORYSTYLEOPTIONS_KEY, this.settings)
+      this.storage.set(STORYSTYLEOPTIONS_KEY, this.settings)
     });
   }
 
@@ -175,9 +172,9 @@ export class StoryViewPage {
       return;
     }
 
-    this.storage.get(this.HISTORY_KEY+"_"+this.story.id).then((value) => {
+    this.storage.get(HISTORY_KEY+"_"+this.story.id).then((value) => {
       value['currentpage'] = currentIndex;
-      this.storage.set(this.HISTORY_KEY+"_"+this.story.id, value);
+      this.storage.set(HISTORY_KEY+"_"+this.story.id, value);
     });
     this.range.setValue(currentIndex+1);
   }
