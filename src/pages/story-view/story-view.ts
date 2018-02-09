@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { IonicPage, Slides, MenuController, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
+import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -46,7 +46,6 @@ export class StoryViewPage {
 
   constructor(
     public navCtrl: NavController,
-    public menu: MenuController,
     public platform: Platform,
     public storage: Storage,
     public user: User,
@@ -56,7 +55,6 @@ export class StoryViewPage {
     translate: TranslateService,
     navParams: NavParams
   ) {
-    this.menu.enable(true);
     this.dir = platform.dir();
     this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
@@ -179,12 +177,7 @@ export class StoryViewPage {
     this.range.setValue(currentIndex+1);
   }
 
-  ionViewDidEnter() {
-    this.menu.enable(false);
-  }
-
   ionViewWillLeave() {
-    this.menu.enable(true);
     this.androidFullScreen.isImmersiveModeSupported()
       .then(() => this.androidFullScreen.showSystemUI())
       .catch((error: any) => console.log(error));
