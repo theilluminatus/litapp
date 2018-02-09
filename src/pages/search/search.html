@@ -18,7 +18,7 @@
 	</ion-navbar>
 
 	<ion-toolbar no-border-top>
-		<ion-searchbar (ionInput)="getStories($event)" [placeholder]="'SEARCH_PLACEHOLDER' | translate" #searchbar></ion-searchbar>
+		<ion-searchbar debounce="1000" (keyup.enter)="getStories($event.target.value)" (ionInput)="getStories($event.target.value)" [placeholder]="'SEARCH_PLACEHOLDER' | translate" #searchbar></ion-searchbar>
 		<ion-buttons end>
 			<button class="savebutton" color="primary" ion-button icon-only (click)="saveSearch(searchbar.value)">
 				<ion-icon name="bookmark"></ion-icon>

@@ -26,8 +26,10 @@ export interface Story {
   tags: string[];
   timestamp: string;
   author: Author;
+  url: string;
   length: number;
   currentpage: number;
+  viewcount: number;
   lists: List[];
   comments: {
     user: string,

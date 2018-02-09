@@ -1,5 +1,5 @@
 import { Api } from './api/api';
-import { Stories } from '../mocks/providers/stories';
+import { Stories } from './stories';
 import { Authors } from '../mocks/providers/authors';
 import { Lists } from '../mocks/providers/lists';
 import { Feed } from '../mocks/providers/feed';

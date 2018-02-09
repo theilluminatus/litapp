@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class User {
-  _user: any = { username: "test" };
+  _user: any;
 
   constructor() { }
 

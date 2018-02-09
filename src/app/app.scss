@@ -20,3 +20,14 @@ ion-app.md [padding] .scroll-content {
 .popover-viewport .list .item-inner {
 	border: none;
 }
+
+.loading-wrapper{
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+ion-spinner {
+  width: 75px;
+  height: 75px;
+}

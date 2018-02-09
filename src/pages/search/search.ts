@@ -20,6 +20,7 @@ export class SearchPage {
   starredQueries: string[] = [];
   query: string;
   sortmethod: string = "relevancy";
+  currentpage: number = 1;
 
   constructor(
     public navCtrl: NavController,
@@ -38,28 +39,27 @@ export class SearchPage {
 
   ionViewWillEnter() {
     if (this.query) this.search(this.query);
-    this.getStories(null, " ");
   }
 
-  getStories(ev, query?) {
-    let val = query ? query : ev.target.value;
-    if (!val || !val.trim()) {
-      this.currentStories = this.stories.query();
-      return;
-    }
+  getStories(query?: string) {
+    let val = query ? query : this.searchbar.value;
+    if (!val || !val.trim() || val.length < 3) return;
 
-    this.currentStories = this.stories.query({
-      title: val,
-      tags: val,
-      category: val
+    this.stories.searchStory(val, this.sortmethod, 1).subscribe((data) => {
+      this.currentStories = data;
     });
   }
 
-  loadMore(event) {
-    this.currentStories.push(
-      this.currentStories[Math.floor(Math.random()*this.currentStories.length)]
-    );
-    event.complete();
+  loadMore(event: UIEvent) {
+    this.currentpage++;
+    this.stories.searchStory(this.searchbar.value, this.sortmethod, this.currentpage).subscribe((data) => {
+      if (data.length < 0) {
+        event.enable(false);
+        return;
+      }
+      data.forEach((story) => this.currentStories.push(story));
+      event.complete();
+    });
   }
 
   openStory(story: Story) {
@@ -101,8 +101,8 @@ export class SearchPage {
     popover.onDidDismiss((method) => {
       if (method) {
         // TODO: get new sorted stories
-        console.log(method);
         this.sortmethod = method;
+        this.getStories()
       }
     })
   }

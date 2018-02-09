@@ -15,7 +15,7 @@ export class HistoryPage {
 	stories: Story[];
 
 	constructor(public navCtrl: NavController, public s: Stories, public navParams: NavParams) {
-		this.stories = this.s.query();
+
 	}
 
 	toggleDownloadFilter() {
