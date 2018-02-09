@@ -10,10 +10,6 @@
         [tooltip]="'HISTORY_TOOLTIP_CLEAR' | translate" event="press" navTooltip>
         <ion-icon name="trash"></ion-icon>
       </button>
-	    <button end ion-button icon-only (click)="toggleDownloadFilter()"
-        [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate" event="press" navTooltip>
-	      <ion-icon name="cloud-download"></ion-icon>
-	    </button>
 	  </ion-buttons>
   </ion-navbar>
 
@@ -21,5 +17,5 @@
 
 
 <ion-content padding>
-  <story-list [stories]="filteredStories.reverse()" (onDeleteBySwiping)="delete($event)" sliding="true"></story-list>
+  <story-list [stories]="stories.reverse()" (onDeleteBySwiping)="delete($event)" sliding="true"></story-list>
 </ion-content>

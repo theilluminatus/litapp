@@ -13,9 +13,7 @@ import { Story } from '../../models/story';
   templateUrl: 'history.html',
 })
 export class HistoryPage {
-  downloadFilterActive = false;
-  allStories: Story[] = [];
-  filteredStories: Story[] = [];
+  stories: Story[] = [];
 
   private translations;
 
@@ -33,22 +31,16 @@ export class HistoryPage {
   }
 
   ionViewDidEnter() {
-    this.allStories = [];
+    this.stories = [];
     this.storage.get(HISTORY_KEY).then((history) => {
       if (history)
         history.forEach((id) => {
           this.storage.get(HISTORY_KEY+"_"+id).then((story) => {
             if (story)
-              this.allStories.push(new Story(story));
+              this.stories.push(new Story(story));
           });
         });
-      this.refreshFilteredStories();
     });
-  }
-
-  toggleDownloadFilter() {
-    this.downloadFilterActive = !this.downloadFilterActive;
-    this.refreshFilteredStories();
   }
 
   clearAll() {
@@ -63,8 +55,7 @@ export class HistoryPage {
             if (k.indexOf(HISTORY_KEY) == 0)
               this.storage.remove(k);
           });
-          this.allStories = [];
-          this.refreshFilteredStories();
+          this.stories = [];
           
         }},
         { text: this.translations.CANCEL_BUTTON }
@@ -73,9 +64,9 @@ export class HistoryPage {
   }
 
   delete(story: Story) {
-    this.allStories.forEach((item,index) => {
+    this.stories.forEach((item,index) => {
       if (item == story) {
-        this.allStories.splice(index, 1);
+        this.stories.splice(index, 1);
 
         // remove from db
         this.storage.remove(HISTORY_KEY+"_"+story.id);
@@ -91,14 +82,6 @@ export class HistoryPage {
 
       }
     });
-    this.refreshFilteredStories();
-  }
-
-  private refreshFilteredStories() {
-    if (this.downloadFilterActive)
-      this.filteredStories = this.allStories.filter((s) => s.downloaded);
-    else
-      this.filteredStories = this.allStories;
   }
 
 }

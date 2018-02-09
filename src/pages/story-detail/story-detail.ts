@@ -40,11 +40,6 @@ export class StoryDetailPage {
     });
   }
 
-  download() {
-    // TODO: download story
-    this.story.downloaded = !this.story.downloaded;
-  }
-
   rate(event: UIEvent) {
     event.preventDefault();
     console.log(this.story);

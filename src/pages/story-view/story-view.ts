@@ -73,28 +73,17 @@ export class StoryViewPage {
           return;
         }
         
-        // add details to db
-        if (!this.story.length) {
-          this.story.length = story.length;
-          this.story.tags = story.tags;
-        }
+        // add details & content to db
+        this.story.length = story.length;
+        this.story.tags = story.tags;
+        this.story.content = story.content;
         this.storage.set(HISTORY_KEY+"_"+this.story.id, this.story);
-
         
-        story.content.forEach((item, index) => this.slides.push({
-          content: item,
-          page: index,
-          desktoppage: index
-        }));
-
-        setTimeout(() => {
-          if (this.story.currentpage > 0)
-            this.slidesElement.slideTo(this.story.currentpage, 0);
-        }, 150);
+        this.addSlides();      
       });
 
     } else {
-      this.slides = [{content: this.story.content, page: 1, desktoppage: 1}];
+      this.addSlides();      
     }
 
     // add to history
@@ -108,6 +97,19 @@ export class StoryViewPage {
       this.storage.set(HISTORY_KEY, history);
     });
 
+  }
+
+  addSlides() {
+    this.story.content.forEach((item, index) => this.slides.push({
+      content: item,
+      page: index,
+      desktoppage: index
+    }));
+
+    setTimeout(() => {
+      if (this.story.currentpage > 0)
+        this.slidesElement.slideTo(this.story.currentpage, 0);
+    }, 150);
   }
 
   clickSlides(event) {
