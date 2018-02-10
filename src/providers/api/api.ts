@@ -1,12 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
+
 import { LoadingController, ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
 export class Api {
-  url: string = 'https://www.literotica.com/api';
+  urls = ['https://www.literotica.com/api','https://search.literotica.com/api'];
+  url = this.urls[0];
   
   // TODO: ask for apikey and appid on first boot and put in storage
   apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
@@ -22,10 +24,13 @@ export class Api {
   ) {
     translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
       this.translations = values;
-    });    
+    });
+
+    if (isDevMode)
+      this.urls = ['https://localhost:8100/proxy/normal','https://localhost:8100/proxy/search'];
   }
 
-  get(endpoint: string, params?: any, reqOpts?: any, url?: string) {
+  get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number) {
     if (!reqOpts) {
       reqOpts = {
         params: new HttpParams({encoder: new WebHttpUrlEncodingCodec()})
@@ -43,7 +48,7 @@ export class Api {
     reqOpts.params = reqOpts.params.set('apikey', this.apikey);
     reqOpts.params = reqOpts.params.set('appid', this.appid);
 
-    return this.http.get((url ? url : this.url) + '/' + endpoint, reqOpts);
+    return this.http.get(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
   }
 
   post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean) {

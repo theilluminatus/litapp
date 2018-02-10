@@ -20,7 +20,7 @@ export class Stories {
       {"property": "q", "value": query},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page, sort, "https://search.literotica.com/api");
+    return this.search(filter, page, sort, 1);
   }
 
 
@@ -60,7 +60,7 @@ export class Stories {
 
 
   // helper for similar requests
-  private search(filter: any, page?: number, sort?: string, domain?: string, path?: string) {
+  private search(filter: any, page?: number, sort?: string, urlIndex?: number, path?: string) {
     let params = { 
       "page": page ? page : 1,
       "filter": JSON.stringify(filter)
@@ -70,7 +70,7 @@ export class Stories {
     if (!page || page < 2)
       loader = this.api.showLoader();
 
-    return this.api.get(path ? path : '1/submissions', params, null, domain).map((data: any) => {
+    return this.api.get(path ? path : '1/submissions', params, null, urlIndex).map((data: any) => {
       if (loader) loader.dismiss();
 
       if (!data.success && !data.submissions) {
