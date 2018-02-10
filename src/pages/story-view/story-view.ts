@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
+import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController, ToastController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,6 +25,7 @@ export class StoryViewPage {
   fullscreen = false;
   firstTimeNextPage = true;
   story: Story;
+  translations;
   @ViewChild("slidesElement") slidesElement: Slides;
   @ViewChild("range") range: any;
 
@@ -44,6 +45,7 @@ export class StoryViewPage {
     public user: User,
     public stories: Stories,
     private popoverCtrl: PopoverController,
+    private toastCtrl: ToastController,
     private androidFullScreen: AndroidFullScreen,
     translate: TranslateService,
     navParams: NavParams
@@ -51,6 +53,10 @@ export class StoryViewPage {
     this.dir = platform.dir();
     this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
+
+    translate.get(['STORY_ENDOFSERIES', 'CLOSE_BUTTON']).subscribe(values => {
+      this.translations = values;
+    });
 
     this.storage.get(STORYSTYLEOPTIONS_KEY).then((value) => {
       if (value)
@@ -180,8 +186,28 @@ export class StoryViewPage {
 
   slideChanged() {
     let currentIndex = this.slidesElement.getActiveIndex();
-    if (currentIndex >= this.slides.length) {
-      // TODO: autoload next story in series?
+    if (currentIndex >= this.slides.length && this.story.series) {
+      
+      this.stories.getSeries(this.story.series).subscribe((data) => {
+        for (let i=0; i<data[0].length-1; i++) {
+          if (data[0][i].id == this.story.id) {
+            this.navCtrl.push('StoryViewPage', {
+              story: data[0][i+1]
+            });
+            this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()),1);
+            return;
+          }
+        }
+
+        let toast = this.toastCtrl.create({
+          message: this.translations.STORY_ENDOFSERIES,
+          showCloseButton: true,
+          closeButtonText: this.translations.CLOSE_BUTTON,
+          duration: 2000
+        });
+        toast.present();
+      });
+
       return;
     }
 
