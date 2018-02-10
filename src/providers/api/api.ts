@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class Api {
   urls = ['https://www.literotica.com/api','https://search.literotica.com/api'];
-  url = this.urls[0];
   
   // TODO: ask for apikey and appid on first boot and put in storage
   apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
@@ -59,19 +58,19 @@ export class Api {
         endpoint += '?apikey='+this.apikey+'&appid='+this.appid;
     }
 
-    return this.http.post(this.url + '/' + endpoint, body, reqOpts);
+    return this.http.post(this.urls[0] + '/' + endpoint, body, reqOpts);
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+    return this.http.put(this.urls[0] + '/' + endpoint, body, reqOpts);
   }
 
   delete(endpoint: string, reqOpts?: any) {
-    return this.http.delete(this.url + '/' + endpoint, reqOpts);
+    return this.http.delete(this.urls[0] + '/' + endpoint, reqOpts);
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+    return this.http.put(this.urls[0] + '/' + endpoint, body, reqOpts);
   }
 
   
