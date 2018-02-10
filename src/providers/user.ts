@@ -14,25 +14,47 @@ export class User {
 
   constructor(public api: Api, public storage: Storage) {
     this.storage.get(USER_KEY).then((data) => {
-      if (data)
+      if (data) {
         this.user = data;
+        if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
+          // TODO: show message when force logout afte a year
+          this.logout();
+        }
+      }
     });
   }
 
   login(info: any) {
-
-    let data = new FormData()
+    let data = new FormData();
     data.append("username", info.username);
-    data.append("password", Md5.hashStr(info.password));
+    data.append("password", String(Md5.hashStr(info.password)));
 
     return this.api.post('2/auth/login', data, undefined, true).map((res: any) => {
       if (res.success) {
-        this.processResponse(res);
+        this.processAndGetMoreInfo(res, info);
       } else {
-        console.error(res);
         throw Observable.throw(res); 
       }
     });
+  }
+
+  processAndGetMoreInfo(resp: any, info: any) {
+    this.user = {
+      id: resp.login.user.user_id,
+      username: resp.login.user.username,
+      session: resp.login.session_id,
+      date: (new Date()).getTime()
+    };
+    this.storage.set(USER_KEY, this.user);
+
+    // second api to get lists
+    let data = new FormData();
+    data.append("command", "Login");
+    data.append("uname", info.username);
+    data.append("pwd", info.password);
+
+    // getting cookie from second api
+    this.api.post('members/login.php', data, {withCredentials:true}, undefined, 2).subscribe();
   }
 
   isLoggedIn(): boolean {
@@ -58,14 +80,5 @@ export class User {
   logout() {
     this.user = null;
     this.storage.remove(USER_KEY);
-  }
-
-  processResponse(resp) {
-    this.user = {
-      id: resp.login.user.user_id,
-      username: resp.login.user.username,
-      session: resp.login.session_id
-    };
-    this.storage.set(USER_KEY, this.user);
   }
 }

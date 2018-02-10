@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { LoadingController, ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,7 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class Api {
-  urls = ['https://www.literotica.com/api','https://search.literotica.com/api'];
+  urls = [
+    'https://www.literotica.com/api',
+    'https://search.literotica.com/api',
+    'https://www.literotica.com'
+  ];
   
   // TODO: ask for apikey and appid on first boot and put in storage
   apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
@@ -24,9 +28,6 @@ export class Api {
     translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
       this.translations = values;
     });
-
-    if (isDevMode)
-      this.urls = ['http://localhost:8100/proxy/normal','http://localhost:8100/proxy/search'];
   }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number) {
@@ -44,13 +45,14 @@ export class Api {
       }
     }
 
+    reqOpts.withCredentials = true;
     reqOpts.params = reqOpts.params.set('apikey', this.apikey);
     reqOpts.params = reqOpts.params.set('appid', this.appid);
 
     return this.http.get(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
   }
 
-  post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean) {
+  post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean, urlIndex?: number) {
     if (addIDs) {
       if (endpoint.indexOf('?') > -1)
         endpoint += '&apikey='+this.apikey+'&appid='+this.appid;
@@ -58,7 +60,7 @@ export class Api {
         endpoint += '?apikey='+this.apikey+'&appid='+this.appid;
     }
 
-    return this.http.post(this.urls[0] + '/' + endpoint, body, reqOpts);
+    return this.http.post(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, body, reqOpts);
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {

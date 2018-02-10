@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import { List } from '../models/list';
 import { Api } from './api/api';
@@ -6,14 +7,26 @@ import { Api } from './api/api';
 @Injectable()
 export class Lists {
 
-  constructor(public api: Api) { }
+  private lists: List[];
 
-  query(params?: any) {
-    return this.api.get('/lists', params);
+  constructor(public api: Api) {
+
+    // get lists
+
   }
 
-  getById(id: any, params?: any) {
-    return this.api.get('/lists/'+id, params);
+  query(force?: boolean) {
+    if (!force)
+      return Observable.of(this.lists);
+
+    return this.api.get('/lists');
+  }
+
+  getById(id: any, force?: boolean) {
+    if (!force)
+      return Observable.of(this.lists.filter((l) => l.id == id));
+
+    return this.api.get('/lists/'+id);
   }
 
   add(list: List) {
