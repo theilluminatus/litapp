@@ -12,8 +12,6 @@ import { Stories } from '../../providers/providers';
 export class StorySeriesPage {
 
   series: Story[];
-  // TODO: persist & load autoload setting to db
-  autoload: boolean = false;
 
   constructor(
     public navCtrl: NavController,

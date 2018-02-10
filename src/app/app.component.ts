@@ -32,7 +32,7 @@ export class MyApp {
   pages: any[] = [
     { title: 'Home', component: 'TabsPage' },
     { title: 'Account', component: 'AccountPage' },
-    { title: 'Settings', component: 'SettingsPage' }
+    // { title: 'Settings', component: 'SettingsPage' }
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
