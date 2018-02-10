@@ -4,7 +4,7 @@ import { Authors } from './authors';
 import { Lists } from '../mocks/providers/lists';
 import { Feed } from '../mocks/providers/feed';
 import { Settings } from './settings/settings';
-import { User } from '../mocks/providers/user';
+import { User } from './user';
 
 export {
     Api,
