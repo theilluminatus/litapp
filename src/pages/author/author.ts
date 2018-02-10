@@ -50,8 +50,8 @@ export class AuthorPage {
 
   loadSubmissions() {
     if (!this.author.stories) {
-      this.s.getAuthorStories(this.author.id).subscribe((stories) => {
-        this.author.stories = stories;
+      this.s.getAuthorStories(this.author.id).subscribe((data) => {
+        this.author.stories = data[0];
       });      
     }
     this.showStories = !this.showStories;
@@ -60,7 +60,7 @@ export class AuthorPage {
   loadFavs() {
     if (!this.author.favs) {
       this.s.getAuthorFavs(this.author.id).subscribe((favs) => {
-        this.author.favs = favs;
+        this.author.favs = favs[0];
       });      
     }
     this.showFavs = !this.showFavs;

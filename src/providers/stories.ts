@@ -28,47 +28,56 @@ export class Stories {
 
 
   // TODO: add infinitescroll to series page
-  getSeries(seriesid: number, page?: number, limit?: number) {
+  getSeries(id: number, page?: number, limit?: number) {
     let filter = [
-      {"property": "series_id", "value": seriesid}
+      {"property": "series_id", "value": parseInt(id)}
     ];
-    return this.search(filter, page)[0];
+    return this.search(filter, page);
   }
 
 
-  getRelated(id: any) {
+  getRelated(id: number) {
     let filter = [
-      {"property": "related_id", "value": id}
+      {"property": "related_id", "value": parseInt(id)}
     ];
-    return this.search(filter)[0];
+    return this.search(filter);
   }
 
 
   // TODO: add infinitescroll for authors stories
-  getAuthorStories(id: any, page?: number, limit?: number) {
+  getAuthorStories(id: number, page?: number, limit?: number) {
     let filter = [
-      {"property": "user_id", "value": id},
+      {"property": "user_id", "value": parseInt(id)},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page, null, null, "https://search.literotica.com/api")[0];
+    return this.search(filter, page, null, null, null, '1/user-submissions');
+  }
+
+  // TODO: add infinitescroll for authors favs
+  getAuthorFavs(id: number, page?: number, limit?: number) {
+   let filter = [
+      {"property": "user_id", "value": parseInt(id)},
+      {"property": "type", "value": "story"}
+    ];
+    return this.search(filter, page, null, null, null, '1/user-favorites');
   }
 
 
 
 
   // helper for similar requests
-  private search(filter: any, page?: number, limit?: number, sort?: string, url?: string) {
+  private search(filter: any, page?: number, limit?: number, sort?: string, domain?: string, path?: string) {
     let params = { 
       "limit": limit? limit : 10,
       "page": page ? page : 1,
-      "filter": JSON.stringify(filter).trim()
+      "filter": JSON.stringify(filter)
     };
 
     let loader;
     if (!page || page < 2)
       loader = this.showLoader();
 
-    return this.api.get('1/submissions', params, null, url).map((data: any) => {
+    return this.api.get(path ? path : '1/submissions', params, null, domain).map((data: any) => {
       if (loader) loader.dismiss();
 
 
@@ -91,45 +100,11 @@ export class Stories {
   }
 
 
-  // TODO: add infinitescroll for authors favs
-  getAuthorFavs(id: any, page?: number, limit?: number) {
-    let filter = [
-      {"property": "user_id", "value": id},
-      {"property": "type", "value": "story"}
-    ];
-    let params = { 
-      "limit": limit? limit : 10,
-      "page": page ? page : 1,
-      "filter": JSON.stringify(filter).trim()
-    };
-
-    let loader;
-    if (!page || page < 2)
-      loader = this.showLoader();
-
-    return this.api.get('1/user-favorites', params).map((data: any) => {
-      if (loader) loader.dismiss();
-      if (!data.success) {
-        this.showToast();
-        return [];
-      }
-
-      return data.submissions.map((story) => {
-        return this.extractSubmissionData(story);
-      });
-
-    }).catch((error) => {
-      if (loader) loader.dismiss();
-      this.showToast();
-      return Observable.of([]);
-    });
-  }
-
 
   // Get a story by ID
-  getById(id: any) {
+  getById(id: number) {
     // TODO: send session id when logged in to get more info
-    let filter = [{"property": "submission_id", "value": id}];
+    let filter = [{"property": "submission_id", "value": parseInt(id)}];
     let params = { "filter": JSON.stringify(filter).trim() };
 
     let loader = this.showLoader();
@@ -164,7 +139,7 @@ export class Stories {
 
   rate(story: Story, rating: number) {
 
-    let filter = [{"property": "submission_id", "value": story.id}];
+    let filter = [{"property": "submission_id", "value": parseInt(story.id)}];
     let params = {
       storyid: story.id,
       user_id: 0, // TODO: check if user_id is necessary

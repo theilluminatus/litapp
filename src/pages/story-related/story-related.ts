@@ -20,7 +20,7 @@ export class StoryRelatedPage {
   ) {
   	let story: Story = navParams.get('story');
     this.stories.getRelated(story.id).subscribe((data) => {
-  	  this.related = data;
+  	  this.related = data[0];
     });
   }
 

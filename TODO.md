@@ -14,7 +14,6 @@
  - check if apikey & appid are always the same
 
  - rebrand
- - Authors stories fail to load
  - hide tabs and search bar when scrolling on search page?
 
 

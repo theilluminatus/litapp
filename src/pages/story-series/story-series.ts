@@ -22,7 +22,7 @@ export class StorySeriesPage {
   ) {
   	let story: Story = navParams.get('story');
     this.stories.getSeries(story.series).subscribe((data) => {
-      this.series = data;
+      this.series = data[0];
     });
   }
 
