@@ -2,7 +2,7 @@ import { Api } from './api/api';
 import { Stories } from './stories';
 import { Authors } from './authors';
 import { Lists } from './lists';
-import { Feed } from '../mocks/providers/feed';
+import { Feed } from './feed';
 import { Settings } from './settings/settings';
 import { User } from './user';
 

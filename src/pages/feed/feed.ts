@@ -14,33 +14,79 @@ export class FeedPage {
 
   feed: FeedItem[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public f: Feed ) {
-    this.feed = this.f.query();
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public f: Feed
+  ) {
+    this.refresh();
   }
 
-  refresh(event) {
-  	this.feed = this.f.query();
-    event.complete();
+  refresh(event?) {
+    this.f.query(undefined, true).subscribe((data) => {
+      if (data)
+        this.feed = data;
+      if (event) event.complete();
+    });
   }
 
   loadMore(event) {
-    this.feed.push(
-      this.feed[Math.floor(Math.random()*this.feed.length)]
-    );
-    event.complete();
+    if (!this.feed) {
+      event.complete()
+      return;
+    }
+
+    this.f.query(this.feed[this.feed.length-1].id, true).subscribe((data) => {
+      if (data) {
+        if (!data.length) {
+          event.enable(false);
+          return;
+        }
+        data.forEach(i => this.feed.push(i));
+      }
+      event.complete();
+    });
   }
 
   openFollowing() {
   	this.navCtrl.push('FollowingPage');
   }
 
-  openItem(item: FeedItem) {
-  	if (item.subject == "author")
-  		this.openAuthor(item.author);
-  	else if (item.subject == "story")
-		this.navCtrl.push('StoryViewPage', {
-			story: item.story
-		});
+  pressTimer;
+  handlePress(item: FeedItem, event) {
+
+    if (!item.story) {
+      this.openAuthor(item.author);
+      return;
+    }
+
+    clearTimeout(this.pressTimer);
+    this.pressTimer = setTimeout(() => {
+      this.openStoryDetail(item.story);
+    }, 500)
+  }
+
+  handleClick(item: FeedItem, event) {
+
+    if (!item.story) {
+      this.openAuthor(item.author);
+      return;
+    }
+
+    clearTimeout(this.pressTimer);
+    this.openStory(item.story);
+  }
+
+  openStory(story: Story) {
+    this.navCtrl.push('StoryViewPage', {
+      story: story
+    });
+  }
+
+  openStoryDetail(story: Story) {
+    this.navCtrl.push('StoryDetailPage', {
+      story: story
+    });
   }
 
   openAuthor(author: Author, event?) {

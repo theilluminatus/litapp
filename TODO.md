@@ -5,13 +5,19 @@
  - hide tabs and search bar when scrolling on search page?
  - rebrand
  - check if api v1 returns 'enabled_comments' as in stories.ts
+ - list-view gets all stories -> performance? -> infintescroll on storylist?
+ - add error handling on feed & lists providers
+ - reenable infinity scroller on search & feed after refreshing
+ - extract story-list-item from story-list so it can be used in feed
 
+ - check if apikey & appid are always the same + ask on first start if not
  - find correct api route for story comments
  - find correct api route for search sorting & tags
- - check if apikey & appid are always the same + ask on first start if not
+ - better search method for tags: https://www.literotica.com/my/api/lists/submission_search?q=query&items_per_page=10&page=1&type=story
 
  - Get data from and persist changes to server (list, following, feed)
  - Fill updatetimestamp and jointimestamp from following list
  - Add device notifications for new feed items + add feed new items badge
+
 
 ## Also check TODOs in files!

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 
-import { LISTS_KEY } from '../../providers/db';
+import { LISTS_KEY } from './db';
 import { List } from '../models/list';
 import { Story } from '../models/story';
 import { Author } from '../models/author';
@@ -43,7 +43,7 @@ export class Lists {
     });
   }
 
-  // TODO: Fix and add missing story prop (on story detail load)
+  // TODO: Fix and add missing story prop (on story detail load) + also in feed
   getById(urlname: string, force?: boolean) {
     let list = this.lists.find((l) => l.urlname == urlname);
 
@@ -55,9 +55,6 @@ export class Lists {
     return this.api.get('my/api/lists/'+urlname,undefined,undefined,2).map((d: any) => {
       list.stories = d.submissions.map(s => {
 
-        let tags = !s.tags ? [] : s.tags
-          .map((t) => t.tag);
-
         return new Story({
           id: s.id,
           title: s.name,
@@ -68,7 +65,7 @@ export class Lists {
           rating: s.rate,
           viewcount: s.view_count,
           url: s.url,
-          tags: tags,
+          tags: !s.tags ? [] : s.tags.map((t) => t.tag),
           ishot: s.is_hot == "no" ? false : true,
           isnew: s.is_new == "no" ? false : true,
           iswriterspick: s.writers_pick == "no" ? false : true,

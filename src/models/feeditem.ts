@@ -17,9 +17,9 @@ export class FeedItem {
 export interface FeedItem {
   [prop: string]: any;
 
+  id: number;
   author: Author;
   story: Story;
-  subject: string;
-  text: string;
+  text: string[];
   timestamp: string;
 }
