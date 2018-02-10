@@ -80,21 +80,20 @@ export class Stories {
     return this.api.get(path ? path : '1/submissions', params, null, domain).map((data: any) => {
       if (loader) loader.dismiss();
 
-
       if (!data.success && !data.submissions) {
         if (!data.hasOwnProperty('total'))
           this.showToast();
-        return [];
+        return [[],0];
       }
 
-      return [data.submissions.map((story) => {
+      return [!data.submissions ? [] : data.submissions.map((story) => {
         return this.extractSubmissionData(story);
       }), data.total];
 
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.showToast();
-      return Observable.of([]);
+      return Observable.of([[],0]);
     });
   }
 
