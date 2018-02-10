@@ -100,7 +100,7 @@ export class Stories {
 
     let loader = this.api.showLoader();
     return this.api.get('2/submissions/pages', params).map((data: any) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       if (!data.success) {
         this.api.showToast();
         return null;
@@ -121,7 +121,7 @@ export class Stories {
       });
 
     }).catch((error) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       this.api.showToast();
       return Observable.of(null);
     });

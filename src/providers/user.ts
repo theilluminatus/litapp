@@ -25,6 +25,9 @@ export class User {
   }
 
   login(info: any) {
+
+    let loader = this.api.showLoader();
+
     let data = new FormData();
     data.append("username", info.username);
     data.append("password", String(Md5.hashStr(info.password)));
@@ -32,6 +35,7 @@ export class User {
     return this.api.post('2/auth/login', data, undefined, true).map((res: any) => {
       if (res.success) {
         this.processAndGetMoreInfo(res, info);
+        if (loader) loader.dismiss();
       } else {
         throw Observable.throw(res); 
       }
@@ -54,6 +58,7 @@ export class User {
     data.append("pwd", info.password);
 
     // getting cookie from second api
+    // TODO: check if cookie set correctly? -> message on fail
     this.api.post('members/login.php', data, {withCredentials:true}, undefined, 2).subscribe();
   }
 

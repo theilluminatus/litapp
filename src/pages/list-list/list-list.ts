@@ -14,7 +14,9 @@ export class ListListPage {
   lists: List[];
 
   constructor(public navCtrl: NavController, public l: Lists) {
-  	this.lists = this.l.query();
+  	this.l.query().subscribe(data => {
+      this.lists = data;
+    });
   }
 
   openList(list: List) {

@@ -9,9 +9,6 @@ export class List {
       // @ts-ignore
       this[f] = fields[f];
     }
-    
-    if (!this.stories)
-      this.stories = [];
   }
 
 }
@@ -20,8 +17,14 @@ export interface List {
   [prop: string]: any;
 
   id: any;
+  urlname: string;
   name: string;
   description: string;
-  visibility: string;
+  visibility: boolean;
+  size: number;
+  isdeletable: boolean;
+  createtimestamp: string;
+  updatetimestamp: string;
+
   stories: Story[];
 }

@@ -18,6 +18,7 @@ export class Api {
   appid: string = '24b7c3f9d904ebd679299b1ce5506bc305a5ab40';
 
   translations;
+  loader;
 
   constructor(
     public http: HttpClient,
@@ -78,9 +79,13 @@ export class Api {
   
 
   showLoader() {
-    let loader = this.loadingCtrl.create({spinner: "crescent"});
-    loader.present();
-    return loader;
+    if (this.loader) return undefined;
+    this.loader = this.loadingCtrl.create({spinner: "crescent"});
+    this.loader.present();
+    this.loader.onDidDismiss(() => {
+      this.loader = undefined;
+    });
+    return this.loader;
   }
 
   showToast() {

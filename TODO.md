@@ -4,6 +4,7 @@
  - Add way to see all top stories and per cat top stories
  - hide tabs and search bar when scrolling on search page?
  - rebrand
+ - check if api v1 returns 'enabled_comments' as in stories.ts
 
  - find correct api route for story comments
  - find correct api route for search sorting & tags

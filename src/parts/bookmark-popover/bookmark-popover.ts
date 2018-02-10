@@ -5,6 +5,7 @@ import { Story } from '../../models/story';
 import { List } from '../../models/list';
 import { Lists } from '../../providers/providers';
 
+
 @IonicPage()
 @Component({
   selector: 'bookmark-popover',
@@ -16,21 +17,26 @@ export class BookmarkPopover {
   story: Story;
 
   constructor(navParams: NavParams, public l: Lists) {
-    this.alllists = this.l.query();
+    this.l.query().subscribe(data => {
+      this.alllists = data;
+    });
+
     this.story = navParams.get('story');
   }
 
   toggleFromList(list: List) {
 
+    console.log(this.story, list);
+
     // TODO: persist to db & server
 
-    if (this.story.lists.indexOf(list) > -1) {
-      list.stories.splice(list.stories.indexOf(this.story), 1);
-      this.story.lists.splice(this.story.lists.indexOf(list), 1);
-    } else {
-      list.stories.push(this.story);
-      this.story.lists.push(list);
-    }
+    // if (this.story.lists.indexOf(list) > -1) {
+    //   list.stories.splice(list.stories.indexOf(this.story), 1);
+    //   this.story.lists.splice(this.story.lists.indexOf(list), 1);
+    // } else {
+    //   list.stories.push(this.story);
+    //   this.story.lists.push(list);
+    // }
 
   }
   

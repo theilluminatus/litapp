@@ -24,7 +24,7 @@ export class Authors {
 
     let loader = this.api.showLoader();
     return this.api.get('1/user-bio', params).map((data: any) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       if (!data.success) {
         this.api.showToast();
         return null;
@@ -36,7 +36,7 @@ export class Authors {
       });
 
     }).catch((error) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       this.api.showToast();
       return Observable.of(null);
     });
@@ -54,7 +54,7 @@ export class Authors {
 
     let loader = this.api.showLoader();
     return this.api.get('2/favorites/author-list', params).map((data: any) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       if (!data.success) {
         this.api.showToast();
         return null;
@@ -70,7 +70,7 @@ export class Authors {
 
 
     }).catch((error) => {
-      loader.dismiss();
+      if (loader) loader.dismiss();
       this.api.showToast();
       return Observable.of(null);
     });
