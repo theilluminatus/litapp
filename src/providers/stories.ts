@@ -32,7 +32,7 @@ export class Stories {
     let filter = [
       {"property": "series_id", "value": seriesid}
     ];
-    return this.search(filter, page);
+    return this.search(filter, page)[0];
   }
 
 
@@ -40,7 +40,7 @@ export class Stories {
     let filter = [
       {"property": "related_id", "value": id}
     ];
-    return this.search(filter);
+    return this.search(filter)[0];
   }
 
 
@@ -50,7 +50,7 @@ export class Stories {
       {"property": "user_id", "value": id},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page);
+    return this.search(filter, page, null, null, "https://search.literotica.com/api")[0];
   }
 
 
@@ -71,7 +71,6 @@ export class Stories {
     return this.api.get('1/submissions', params, null, url).map((data: any) => {
       if (loader) loader.dismiss();
 
-      console.log(data);
 
       if (!data.success && !data.submissions) {
         if (!data.hasOwnProperty('total'))
@@ -79,9 +78,10 @@ export class Stories {
         return [];
       }
 
-      return data.submissions.map((story) => {
+      // TODO: get data from history if downloaded
+      return [data.submissions.map((story) => {
         return this.extractSubmissionData(story);
-      });
+      }), data.total];
 
     }).catch((error) => {
       if (loader) loader.dismiss();

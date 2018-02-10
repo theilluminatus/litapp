@@ -79,6 +79,8 @@
   "AUTHOR_SHOWSTORIES": "Show author's submissions",
   "AUTHOR_SHOWFAVS": "Show author's favorites",
   "AUTHOR_TOOLTIP_FOLLOW": "Toggle following author",
+  "AUTHOR_JOINDATE": "Join date",
+  "AUTHOR_UPDATEDATE": "Last updated",
 
   "SERIES_TITLE": "All stories in this series",
   "SERIES_ALWAYSAUTOLOAD": "Always autoload next story in the series",

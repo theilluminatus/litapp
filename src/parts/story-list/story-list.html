@@ -1,5 +1,5 @@
 
-<ion-list [sliding]="sliding">
+<ion-list [sliding]="ishistory">
 
   <ion-list-header *ngIf="!stories?.length" class="empty">
     {{'STORYLIST_EMPTY' | translate}}
@@ -9,6 +9,7 @@
     <ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
 
       <h2>
+        <ion-icon name="checkmark" *ngIf="story?.downloaded && !ishistory"></ion-icon>
         {{story?.title}}
         <ion-badge *ngIf="story?.iswriterspick" color="green">{{'WRITER_TAG' | translate}}'s Pick</ion-badge>
         <ion-badge *ngIf="story?.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>

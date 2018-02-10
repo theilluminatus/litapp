@@ -19,6 +19,7 @@ export class AuthorPage {
   showStories = false;
   showFavs = false;
   showArrow = false;
+  loaded = false;
 
   constructor(
     private socialSharing: SocialSharing,
@@ -30,13 +31,21 @@ export class AuthorPage {
   ) {
   	this.author = navParams.get('author');
 
-    this.a.getBio(this.author.id).subscribe((bio) => {
-      this.author.bio = bio;
-      setTimeout(() => {
-        this.showArrow = this.biotext.nativeElement.scrollHeight > this.biotext.nativeElement.clientHeight;
-      }, 10);
+    this.a.getDetails(this.author.id).subscribe((author) => {
+      this.author.bio = author.bio;
+      this.author.storycount = author.storycount;
+      this.loaded = true;
     });
 
+  }
+
+  ionViewDidEnter() {
+    let loop = setInterval(()=>{
+      if (this.loaded) {
+        this.showArrow = this.biotext.nativeElement.scrollHeight > this.biotext.nativeElement.clientHeight;
+        clearInterval(loop);
+      }
+    }, 50);
   }
 
   loadSubmissions() {
@@ -63,7 +72,7 @@ export class AuthorPage {
   }
 
   share() {
-    this.socialSharing.share("Literotica story", null, null, "https://www.literotica.com/stories/memberpage.php?uid="+this.author.id);
+    this.socialSharing.share(null, null, null, "https://www.literotica.com/stories/memberpage.php?uid="+this.author.id);
   }
 
 }

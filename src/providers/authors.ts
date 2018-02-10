@@ -17,7 +17,7 @@ export class Authors {
 
 
   // Get an authors bio
-  getBio(id: any) {
+  getDetails(id: any) {
     let filter = [{"property":"user_id","value": id}];
     let params = { "filter": JSON.stringify(filter).trim() };
 
@@ -29,7 +29,10 @@ export class Authors {
         return null;
       }
 
-      return data.user.profile.description;
+      return new Author({
+        storycount: data.user.profile.submissions_count,
+        bio: data.user.profile.description
+      });
 
     }).catch((error) => {
       loader.dismiss();

@@ -1,14 +1,14 @@
 page-author {
 
 	ion-img {
-		
-		width: 100px;
-		height: 100px;
-		margin: 1.6rem 1.6rem 1.6rem 0;
+		float: left;
+		width: 75px;
+		height: 75px;
+		margin: 20px 10px 20px 0;
 	}
 
 	.bio {
-		text-align: center;
+		clear: both;
 	}
 
 	.bio p {
@@ -17,7 +17,7 @@ page-author {
 		text-align: left;
 	}
 
-	.bio p:hover {
+	.bio:hover p {
 		max-height: unset;
 	}
 
@@ -29,9 +29,10 @@ page-author {
 		padding-top: 25px;
 		box-shadow: inset 0 -50px 50px -20px $background-color;
 		text-shadow: 0 0 10px color($colors, lighter);
+		text-align: center;
 	}
 
-	.bio p:hover + .arrow {
+	.bio:hover p + .arrow {
 		display: none;
 	}
 

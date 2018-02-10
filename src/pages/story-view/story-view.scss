@@ -1,5 +1,9 @@
 page-story-view {
 
+  .header {
+    transition: opacity 0.3s;
+  }
+
   .toolbar-background {
     background: transparent;
     border-color: transparent;
@@ -17,6 +21,7 @@ page-story-view {
   .content {
     background: black;
     color: white;
+    transition: top 0.3s;
   }
 
   .scroll-content {
@@ -51,6 +56,7 @@ page-story-view {
     left: 0;
     z-index: 1;
     padding: 0 10px;
+    transition: opacity 0.3s;
     display: flex;
     flex-flow: row no-wrap;
     justify-content: space-around;

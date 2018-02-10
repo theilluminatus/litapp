@@ -38,6 +38,7 @@ export interface Story {
   iscontestwinner: boolean;
   commentsenabled: boolean;
   ratingenabled: boolean;
+  downloaded: boolean;
   lists: List[];
   comments: {
     user: string,

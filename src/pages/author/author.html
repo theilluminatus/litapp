@@ -24,15 +24,21 @@
 
 <ion-content padding>
 
+  <ion-img [src]="author?.picture + '_default.jpg'"></ion-img>
+  <p *ngIf="author?.jointimestamp">{{'AUTHOR_JOINDATE' | translate}}: {{author?.jointimestamp*1000 | date}}</p>
+  <p *ngIf="author?.updatetimestamp">{{'AUTHOR_UPDATEDATE' | translate}}: {{author?.updatetimestamp*1000 | date}}</p>
+
   <div class="bio">
-    <ion-img [src]="author?.picture"></ion-img>
-  	<p #biotext [innerHTML]="author?.bio"></p>
+    <p #biotext [innerHTML]="author?.bio"></p>
     <div class="arrow" *ngIf="showArrow">
       <ion-icon name="arrow-down"></ion-icon>
     </div>
   </div>
 
-	<h1 (click)="loadSubmissions()">{{ 'SUBMISSIONS' | translate }}</h1>
+	<h1 (click)="loadSubmissions()">
+    {{ 'SUBMISSIONS' | translate }}
+    <small>({{author?.storycount}})</small>
+  </h1>
   <a *ngIf="!showStories" (click)="loadSubmissions()">{{'AUTHOR_SHOWSTORIES' | translate}}</a>
   <story-list *ngIf="showStories" [stories]="author?.stories"></story-list>
 

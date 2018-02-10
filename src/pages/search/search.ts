@@ -4,7 +4,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { Storage } from '@ionic/storage';
 
-import { STARREDQUERIES_KEY } from '../../providers/db';
+import { STARREDQUERIES_KEY, HISTORY_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
 
@@ -22,6 +22,7 @@ export class SearchPage {
   starredQueries: string[] = [];
   query: string;
   sortmethod: string = "relevancy";
+  totalResults: number;
   currentpage: number = 1;
 
   constructor(
@@ -51,6 +52,9 @@ export class SearchPage {
 
   ionViewWillEnter() {
     if (this.query) this.search(this.query);
+    else if (this.searchbar.value == "")
+      setTimeout(() => { this.searchbar.setFocus(); }, 100);
+
   }
 
   getStories(query?: string) {
@@ -59,18 +63,19 @@ export class SearchPage {
 
     this.currentStories = [];
     this.stories.searchStory(val.trim(), this.sortmethod, 1).subscribe((data) => {
-      this.currentStories = data;
+      this.currentStories = data[0];
+      this.totalResults = data[1];
     });
   }
 
   loadMore(event) {
     this.currentpage++;
     this.stories.searchStory(this.searchbar.value, this.sortmethod, this.currentpage).subscribe((data) => {
-      if (data.length < 0) {
+      if (!data[0].length) {
         event.enable(false);
         return;
       }
-      data.forEach((story) => this.currentStories.push(story));
+      data[0].forEach((story) => this.currentStories.push(story));
       event.complete();
     });
   }

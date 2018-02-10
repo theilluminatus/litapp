@@ -20,6 +20,9 @@ export interface Author {
   name: string;
   picture: string;
   bio: string;
+  updatetimestamp: number;
+  jointimestamp: number;
+  storycount: number;
   following: boolean;
   stories: Story[];
   favs: Story[];

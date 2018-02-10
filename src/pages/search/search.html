@@ -4,7 +4,10 @@
 		<button ion-button icon-only menuToggle="left">
 			<ion-icon name="menu"></ion-icon>
 		</button>
-		<ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+		<ion-title>
+			{{ 'SEARCH_TITLE' | translate }}
+			<small *ngIf="totalResults">({{totalResults}})</small>
+		</ion-title>
 		<ion-buttons end>
 			<button end ion-button icon-only (click)="openSortPopover($event)"
 				[tooltip]="'SEARCH_SORT' | translate" event="press" navTooltip>

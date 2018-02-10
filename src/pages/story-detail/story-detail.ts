@@ -26,7 +26,7 @@ export class StoryDetailPage {
   	this.story = navParams.get('story');
 
     // load data when directly view details
-    if (!this.story.length) {
+    if (!this.story.downloaded) {
       this.stories.getById(this.story.id).subscribe((story) => {
         if (!story) {
           this.navCtrl.pop();
@@ -71,7 +71,7 @@ export class StoryDetailPage {
   }
 
   share() {
-    this.socialSharing.share("Literotica story", null, null, this.story.url);
+    this.socialSharing.share(null, null, null, this.story.url);
   }
 
 }

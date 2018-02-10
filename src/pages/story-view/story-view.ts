@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
@@ -14,14 +13,7 @@ import { Story } from '../../models/story';
 @IonicPage()
 @Component({
   selector: 'page-story-view',
-  templateUrl: 'story-view.html',
-  animations: [
-    trigger('visibilityChanged', [
-      state("false", style({ opacity: 1 })),
-      state("true", style({ opacity: 0 })),
-      transition('* => *', animate('300ms'))
-    ])
-  ]
+  templateUrl: 'story-view.html'
 })
 export class StoryViewPage {
 
@@ -31,6 +23,7 @@ export class StoryViewPage {
   dir: string = 'ltr';
   slidesPerView: number = 1;
   fullscreen = false;
+  firstTimeNextPage = true;
   story: Story;
   @ViewChild("slidesElement") slidesElement: Slides;
   @ViewChild("range") range: any;
@@ -65,7 +58,7 @@ export class StoryViewPage {
     });
 
     // get story from server
-    if (!this.story.content && this.story.id) {
+    if (!this.story.downloaded) {
 
       this.stories.getById(this.story.id).subscribe((story) => {
         if (!story) {
@@ -78,6 +71,7 @@ export class StoryViewPage {
         this.story.length = story.length;
         this.story.tags = story.tags;
         this.story.content = story.content;
+        this.story.downloaded = true;
         this.storage.set(HISTORY_KEY+"_"+this.story.id, this.story);
         
         this.addSlides();      
@@ -115,25 +109,33 @@ export class StoryViewPage {
 
   clickSlides(event) {
 
-    // clicking in left most 25%
-    if ( event.clientX < this.platform.width()/4 )
+    if ( event.clientX < this.platform.width()/4 ) {
+      // clicking in left most 25%
       this.slidesElement.slidePrev();
-    // clicking in right most 25%
-    else if ( event.clientX > 3*this.platform.width()/4 )
+
+    } else if ( event.clientX > 3*this.platform.width()/4 ) {
+      // clicking in right most 25%
+      if (this.firstTimeNextPage)
+        this.immersive();
       this.slidesElement.slideNext();
-    // click center 50%
-    else {
-      this.fullscreen = !this.fullscreen;
-      this.androidFullScreen.isImmersiveModeSupported()
-        .then(() => {
-          if (this.fullscreen)
-            this.androidFullScreen.immersiveMode()
-          else
-            this.androidFullScreen.showSystemUI()
-        })
-        .catch((error: any) => console.log(error));
+      this.firstTimeNextPage = false;
+
+    } else {
+      this.immersive();
     }
       
+  }
+
+  private immersive() {
+    this.androidFullScreen.isImmersiveModeSupported()
+      .then(() => {
+        if (this.fullscreen)
+          this.androidFullScreen.immersiveMode()
+        else
+          this.androidFullScreen.showSystemUI()
+      })
+      .catch((error: any) => console.log(error));
+    this.fullscreen = !this.fullscreen;
   }
 
   showPopover(ev: UIEvent) {

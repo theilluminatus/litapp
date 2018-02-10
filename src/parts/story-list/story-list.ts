@@ -14,7 +14,7 @@ export class StoryListPage {
   Math: Math = Math;
   
   @Input() stories: Story[];
-  @Input() sliding: boolean = false;
+  @Input() ishistory: boolean = false;
   @Output() onDeleteBySwiping: EventEmitter<any> = new EventEmitter();
 
   constructor(
