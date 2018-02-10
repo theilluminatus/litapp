@@ -28,7 +28,7 @@ export class Stories {
 
 
   // TODO: add infinitescroll to series page
-  getSeries(id: number, page?: number, limit?: number) {
+  getSeries(id: any, page?: number, limit?: number) {
     let filter = [
       {"property": "series_id", "value": parseInt(id)}
     ];
@@ -36,7 +36,7 @@ export class Stories {
   }
 
 
-  getRelated(id: number) {
+  getRelated(id: any) {
     let filter = [
       {"property": "related_id", "value": parseInt(id)}
     ];
@@ -45,7 +45,7 @@ export class Stories {
 
 
   // TODO: add infinitescroll for authors stories
-  getAuthorStories(id: number, page?: number, limit?: number) {
+  getAuthorStories(id: any, page?: number, limit?: number) {
     let filter = [
       {"property": "user_id", "value": parseInt(id)},
       {"property": "type", "value": "story"}
@@ -54,7 +54,7 @@ export class Stories {
   }
 
   // TODO: add infinitescroll for authors favs
-  getAuthorFavs(id: number, page?: number, limit?: number) {
+  getAuthorFavs(id: any, page?: number, limit?: number) {
    let filter = [
       {"property": "user_id", "value": parseInt(id)},
       {"property": "type", "value": "story"}
@@ -87,7 +87,6 @@ export class Stories {
         return [];
       }
 
-      // TODO: get data from history if downloaded
       return [data.submissions.map((story) => {
         return this.extractSubmissionData(story);
       }), data.total];
@@ -102,7 +101,7 @@ export class Stories {
 
 
   // Get a story by ID
-  getById(id: number) {
+  getById(id: any) {
     // TODO: send session id when logged in to get more info
     let filter = [{"property": "submission_id", "value": parseInt(id)}];
     let params = { "filter": JSON.stringify(filter).trim() };

@@ -78,6 +78,16 @@ export class StoryViewPage {
       });
 
     } else {
+
+
+      if (!this.story.currentpage) {
+        this.storage.get(HISTORY_KEY+"_"+this.story.id).then((data) => {
+          if (data) {
+            this.story.currentpage = data.currentpage;
+          }
+        });
+      }
+
       this.addSlides();      
     }
 
