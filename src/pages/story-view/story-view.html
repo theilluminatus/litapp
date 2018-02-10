@@ -46,7 +46,7 @@
     </button>
 
     <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
-      *ngIf="slides.length > 1" pin="true" snaps="true" step="1" min="1" [max]="slides.length"></ion-range>
+      *ngIf="slides.length > 1" pin="true" [snaps]="slides.length < 15" step="1" min="1" [max]="slides.length"></ion-range>
 
     <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
   </div>

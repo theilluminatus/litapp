@@ -17,21 +17,14 @@
  - check if apikey & appid are always the same
 
  - remove top padding storyview when in immersive but still show status bar with same bg color
- - long press in story-list loads tags & shows story-detail
  - soft keyboard over tabs in phone
- - only show first line of tags in story-list
- - fix not remember story current page
  - fix error while loading on no more results
  - rebrand
- - make description smaller in story-list
  - change padding before immersive mode so it looks smoother
  - author profile pic not loading? -> hide?
  - Authors fabs and stories fail to load
- - change viewcount to 0k in story list
  - hide tabs and search bar when scrolling on search page?
- - hide steps on story view is more than 20 pages
- - remove title from share story
- - author
- - remove right margin on back button on storyview
+ - remove title from share story & author
+
 
 ## Also check TODOs in files!

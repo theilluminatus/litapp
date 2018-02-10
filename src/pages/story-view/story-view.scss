@@ -7,6 +7,11 @@ page-story-view {
 
   .back-button.show-back-button, .toolbar-title {
     color: inherit;
+    padding: 0;
+  }
+
+  .toolbar-title {
+    margin: 0;
   }
 
   .content {

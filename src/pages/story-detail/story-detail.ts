@@ -24,6 +24,21 @@ export class StoryDetailPage {
     private socialSharing: SocialSharing
   ) {
   	this.story = navParams.get('story');
+
+    // load data when directly view details
+    if (!this.story.length) {
+      this.stories.getById(this.story.id).subscribe((story) => {
+        if (!story) {
+          this.navCtrl.pop();
+          return;
+        }
+
+        // add details & content to db
+        this.story.series = story.series;
+        this.story.length = story.length;
+        this.story.tags = story.tags;
+      });
+    }
   }
 
   showAuthor(author: Author) {

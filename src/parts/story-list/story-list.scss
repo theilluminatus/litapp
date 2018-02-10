@@ -9,6 +9,10 @@ story-list {
 		border: none;
 	}
 
+	.item h2 + p {
+		font-size: 0.8em;
+	}
+
 	.badge {
 		margin-left: 5px;
 	}
@@ -21,10 +25,6 @@ story-list {
 		overflow-x: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-	}
-
-	.list .item .label p {
-		white-space: normal;
 	}
 
 }

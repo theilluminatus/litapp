@@ -6,31 +6,32 @@
   </ion-list-header>
 
   <ion-item-sliding *ngFor="let story of stories">
-    <ion-item (click)="openStory(story)">
+    <ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
 
       <h2>
-        {{story.title}}
-        <ion-badge *ngIf="story.iswriterspick" color="green">{{'WRITER_TAG' | translate}}'s Pick</ion-badge>
-        <ion-badge *ngIf="story.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
-        <ion-badge *ngIf="story.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>
-        <ion-badge *ngIf="story.isnew" color="yellow">{{'NEW_TAG' | translate}}</ion-badge>
+        {{story?.title}}
+        <ion-badge *ngIf="story?.iswriterspick" color="green">{{'WRITER_TAG' | translate}}'s Pick</ion-badge>
+        <ion-badge *ngIf="story?.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
+        <ion-badge *ngIf="story?.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>
+        <ion-badge *ngIf="story?.isnew" color="yellow">{{'NEW_TAG' | translate}}</ion-badge>
       </h2>
 
-      <p>{{story.description}}</p>
+      <p>{{story?.description}}</p>
       <p>
-        <ion-icon name="star"></ion-icon> {{story.rating}} ({{story.viewcount}})
-        <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story.author, $event)">{{story.author.name}}</a> </em>
-        {{ 'ATTIMESTAMP' | translate }} {{(story.timestamp*1000) | date }}
+        <ion-icon name="star"></ion-icon> {{story?.rating}}
+        ({{story?.viewcount > 1000 ? Math.round(story?.viewcount/1000)+'k' : story?.viewcount}})
+        <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story?.author, $event)">{{story?.author.name}}</a> </em>
+        {{ 'ATTIMESTAMP' | translate }} {{(story?.timestamp*1000) | date }}
       </p>
 
       <p class="tags">
-        <strong>{{story.category}}</strong>
-        <span *ngFor="let tag of story.tags">#{{tag}} </span>
+        <strong>{{story?.category}}</strong>
+        <span *ngFor="let tag of story?.tags">#{{tag}} </span>
       </p>
 
       <ion-note *ngIf="user.isLoggedIn()" item-end>
         <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)" [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
-          <ion-icon [name]="story.lists?.length > 0 ? 'star' : 'star-outline'"></ion-icon>
+          <ion-icon [name]="story?.lists?.length > 0 ? 'star' : 'star-outline'"></ion-icon>
         </button>
       </ion-note>
 

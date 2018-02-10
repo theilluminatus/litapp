@@ -10,6 +10,8 @@ import { Author } from '../../models/author';
   templateUrl: 'story-list.html'
 })
 export class StoryListPage {
+
+  Math: Math = Math;
   
   @Input() stories: Story[];
   @Input() sliding: boolean = false;
@@ -21,8 +23,27 @@ export class StoryListPage {
     public user: User
   ) { }
 
+  pressTimer;
+  handlePress(story: Story, event) {
+    clearTimeout(this.pressTimer);
+    this.pressTimer = setTimeout(() => {
+      this.openStoryDetail(story);
+    }, 500)
+  }
+
+  handleClick(story: Story, event) {
+    clearTimeout(this.pressTimer);
+    this.openStory(story);
+  }
+
   openStory(story: Story) {
     this.navCtrl.push('StoryViewPage', {
+      story: story
+    });
+  }
+
+  openStoryDetail(story: Story) {
+    this.navCtrl.push('StoryDetailPage', {
       story: story
     });
   }

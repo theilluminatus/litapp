@@ -31,15 +31,17 @@ export class HistoryPage {
   }
 
   
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.stories = [];
     this.storage.get(HISTORY_KEY).then((history) => {
+      let loadedIndex = 0;
       if (history)
         history.forEach((id, index) => {
           this.storage.get(HISTORY_KEY+"_"+id).then((story) => {
             if (story)
-              this.stories.push(new Story(story));
-            if (index+1 == history.length)
+              this.stories[index] = new Story(story);
+            loadedIndex++;
+            if (loadedIndex == history.length)
               this.loadingFinished();
           });
         });

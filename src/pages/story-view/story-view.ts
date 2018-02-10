@@ -100,17 +100,17 @@ export class StoryViewPage {
 
   }
 
-  addSlides() {
+  private addSlides() {
     this.story.content.forEach((item, index) => this.slides.push({
       content: item,
       page: index,
       desktoppage: index
     }));
+  }
 
-    setTimeout(() => {
-      if (this.story.currentpage > 0)
-        this.slidesElement.slideTo(this.story.currentpage, 0);
-    }, 150);
+  ionViewWillEnter() {
+    if (this.story.currentpage > 0 && this.slidesElement )
+      this.slidesElement.slideTo(this.story.currentpage, 0);
   }
 
   clickSlides(event) {
