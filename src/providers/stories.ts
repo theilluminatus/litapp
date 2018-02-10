@@ -28,11 +28,11 @@ export class Stories {
 
 
   // TODO: add infinitescroll to series page
-  getSeries(id: any, page?: number, limit?: number) {
+  getSeries(id: any) {
     let filter = [
       {"property": "series_id", "value": parseInt(id)}
     ];
-    return this.search(filter, page);
+    return this.search(filter);
   }
 
 

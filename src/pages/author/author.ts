@@ -20,6 +20,8 @@ export class AuthorPage {
   showFavs = false;
   showArrow = false;
   loaded = false;
+  currentSubmissionsPage = 1;
+  currentFavsPage = 1;
 
   constructor(
     private socialSharing: SocialSharing,
@@ -64,6 +66,30 @@ export class AuthorPage {
       });      
     }
     this.showFavs = !this.showFavs;
+  }
+
+  loadMoreSubmissions(event) {
+    this.currentSubmissionsPage++;
+    this.s.getAuthorStories(this.author.id, this.currentSubmissionsPage).subscribe((data) => {
+      if (!data[0].length) {
+        event.enable(false);
+        return;
+      }
+      data[0].forEach((s) => this.author.stories.push(s));
+      event.complete();
+    });
+  }
+
+  loadMoreFavs(event) {
+    this.currentFavsPage++;
+    this.s.getAuthorFavs(this.author.id, this.currentFavsPage).subscribe((data) => {
+      if (!data[0].length) {
+        event.enable(false);
+        return;
+      }
+      data[0].forEach((s) => this.author.favs.push(s));
+      event.complete();
+    });
   }
 
   followToggle() {

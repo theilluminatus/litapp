@@ -8,7 +8,6 @@
  - limit on getstories doesnt always work?
 
  - Move provider helpers (showToast & showSpinner) to seperate file
- - Add infinitescroll to authors favs & stories
  - hide tabs and search bar when scrolling on search page?
  - rebrand
 

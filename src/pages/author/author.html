@@ -35,15 +35,30 @@
     </div>
   </div>
 
+
 	<h1 (click)="loadSubmissions()">
     {{ 'SUBMISSIONS' | translate }}
     <small>({{author?.storycount}})</small>
   </h1>
+
   <a *ngIf="!showStories" (click)="loadSubmissions()">{{'AUTHOR_SHOWSTORIES' | translate}}</a>
+
   <story-list *ngIf="showStories" [stories]="author?.stories"></story-list>
 
+  <ion-infinite-scroll *ngIf="showStories && author?.storycount > 10" (ionInfinite)="loadMoreSubmissions($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+
   <h1 (click)="loadFavs()">{{ 'FAVORITES' | translate }}</h1>
+
   <a *ngIf="!showFavs" (click)="loadFavs()">{{'AUTHOR_SHOWFAVS' | translate}}</a>
 	<story-list *ngIf="showFavs" [stories]="author?.favs"></story-list>
+
+  <ion-infinite-scroll *ngIf="showFavs" (ionInfinite)="loadMoreFavs($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 
 </ion-content>
