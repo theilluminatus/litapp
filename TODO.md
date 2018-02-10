@@ -33,6 +33,5 @@
  - remove title from share story
  - author
  - remove right margin on back button on storyview
- - remove oldest history stories
 
 ## Also check TODOs in files!

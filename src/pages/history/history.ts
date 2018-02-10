@@ -30,17 +30,27 @@ export class HistoryPage {
 
   }
 
-  ionViewDidEnter() {
+  
+  ionViewWillEnter() {
     this.stories = [];
     this.storage.get(HISTORY_KEY).then((history) => {
       if (history)
-        history.forEach((id) => {
+        history.forEach((id, index) => {
           this.storage.get(HISTORY_KEY+"_"+id).then((story) => {
             if (story)
               this.stories.push(new Story(story));
+            if (index+1 == history.length)
+              this.loadingFinished();
           });
         });
     });
+  }
+
+  private loadingFinished() {
+    let maxNumberOfStories = 35;
+
+    for (let i=0; i<(this.stories.length - maxNumberOfStories); i++)
+      this.delete(this.stories[i]);
   }
 
   clearAll() {
