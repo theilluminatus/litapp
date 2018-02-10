@@ -45,7 +45,8 @@ export class SearchPage {
     let val = query ? query : this.searchbar.value;
     if (!val || !val.trim() || val.length < 3) return;
 
-    this.stories.searchStory(val, this.sortmethod, 1).subscribe((data) => {
+    this.currentStories = [];
+    this.stories.searchStory(val.trim(), this.sortmethod, 1).subscribe((data) => {
       this.currentStories = data;
     });
   }
@@ -69,7 +70,8 @@ export class SearchPage {
   }
 
   saveSearch(query: string) {
-    if (query.trim().length < 2) return;
+    query = query.trim();
+    if (query.length < 2) return;
     if (this.starredQueries.indexOf(query) > -1) return;
     this.starredQueries.push(query);
     this.storage.set(STARREDQUERIES_KEY, this.starredQueries)

@@ -8,8 +8,12 @@
 	padding-left: 0;
 }
 
-.ion-page .list .item-inner {
-	padding-right: 0;
+.menu-inner .list .item-inner {
+	border-bottom: none;
+}
+
+.menu-inner .icon[item-end] {
+	margin-right: 10px !important;
 }
 
 ion-app.md [padding] .scroll-content {
