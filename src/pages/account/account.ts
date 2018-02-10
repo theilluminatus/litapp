@@ -10,7 +10,20 @@ import { User } from '../../providers/providers';
 })
 export class AccountPage {
 
-  constructor(public navCtrl: NavController, public user: User) { }
+  firstload = true;
+
+  constructor(
+    public navCtrl: NavController,
+    public user: User
+  ) { }
+
+  ionViewDidEnter() {
+    if (!this.user.isLoggedIn() && this.firstload) {
+      this.firstload = false;
+      this.navCtrl.push('LoginPage');
+      return;
+    }
+  }
 
   login() {
     this.navCtrl.push('LoginPage');
