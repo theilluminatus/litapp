@@ -24,7 +24,6 @@ export class Feed {
       last_id: lastid ? lastid : undefined
     };
 
-    console.log(params);
     return this.api.get('my/api/activity/wall',params,undefined,2).map((d: any) => {
       
       if (loader) loader.dismiss();

@@ -5,13 +5,15 @@ import { Observable } from 'rxjs/Rx';
 
 
 import { Author } from '../models/author';
+import { User } from './user';
 import { Api } from './api/api';
 
 @Injectable()
 export class Authors {
 
   constructor(
-  	public api: Api,
+    public api: Api,
+  	public user: User,
   	public loadingCtrl: LoadingController,
   	public toastCtrl: ToastController
   ) { }
@@ -43,11 +45,13 @@ export class Authors {
   }
   
 
+  // TODO: add unfollow buttons next to followed + add infinity scroll
   // get authors you are following
   getFollowing() {
+
     let params = {
-      user_id: 0,
-      session_id: 0,
+      user_id: this.user.getId(),
+      session_id: this.user.getSession(),
       limit: 100,
       page: 1
     };
@@ -60,14 +64,13 @@ export class Authors {
         return null;
       }
 
-      return data.users.map((author) => {
-        return new Author({
+      return data.users.map((author) =>
+        new Author({
           id: author.id,
           name: author.username,
           picture: author.userpic
-        });
-      });
-
+        })
+      );
 
     }).catch((error) => {
       if (loader) loader.dismiss();

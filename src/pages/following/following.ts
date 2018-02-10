@@ -13,11 +13,18 @@ export class FollowingPage {
 
   authors: Author[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public a: Authors) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public a: Authors
+  ) {
+
   	this.a.getFollowing().subscribe((authors) => {
-      console.log(this.authors);
+      // TODO: fix following returns undefined
+      console.log(authors);
       this.authors = authors;
     });
+
   }
 
   showAuthor(author: Author) {
