@@ -24,6 +24,8 @@
   "SETTINGS_PROFILE_BUTTON": "Edit Profile",
   "SETTINGS_PAGE_PROFILE": "Edit Profile",
 
+  "LOAD_ERROR": "Error while loading",
+
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
   "SIGNUP_MESSAGE": "Return to the app and login after you registered on the site",
@@ -36,6 +38,7 @@
   "EDIT_BUTTON": "Edit",
   "BOOKMARK_BUTTON": "Bookmark",
   "SHARE_BUTTON": "Share",
+  "CLOSE_BUTTON": "Close",
 
   "HISTORY_TITLE": "History",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",

@@ -21,11 +21,11 @@ export class Authors {
     let filter = [{"property":"user_id","value": id}];
     let params = { "filter": JSON.stringify(filter).trim() };
 
-    let loader = this.showLoader();
+    let loader = this.api.showLoader();
     return this.api.get('1/user-bio', params).map((data: any) => {
       loader.dismiss();
       if (!data.success) {
-        this.showToast();
+        this.api.showToast();
         return null;
       }
 
@@ -36,7 +36,7 @@ export class Authors {
 
     }).catch((error) => {
       loader.dismiss();
-      this.showToast();
+      this.api.showToast();
       return Observable.of(null);
     });
   }
@@ -51,11 +51,11 @@ export class Authors {
       page: 1
     };
 
-    let loader = this.showLoader();
+    let loader = this.api.showLoader();
     return this.api.get('2/favorites/author-list', params).map((data: any) => {
       loader.dismiss();
       if (!data.success) {
-        this.showToast();
+        this.api.showToast();
         return null;
       }
 
@@ -70,31 +70,9 @@ export class Authors {
 
     }).catch((error) => {
       loader.dismiss();
-      this.showToast();
+      this.api.showToast();
       return Observable.of(null);
     });
-  }
-
-
-
-  // HELPERS
-
-  private showLoader() {
-    let loader = this.loadingCtrl.create({spinner: "crescent"});
-    loader.present();
-    return loader;
-  }
-
-  // TODO: add translation
-  private showToast() {
-    let toast = this.toastCtrl.create({
-      message: 'Error while loading',
-      showCloseButton: true,
-      closeButtonText: 'Close',
-      duration: 3000
-    });
-    toast.present();
-    return toast
   }
 
 }

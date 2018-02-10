@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from 'ionic-angular';
-
 import { Observable } from 'rxjs/Observable';
 
 import { Story } from '../models/story';
@@ -12,8 +10,7 @@ export class Stories {
 
   constructor(
   	public api: Api,
-  	public loadingCtrl: LoadingController,
-  	public toastCtrl: ToastController
+  	
   ) { }
 
 
@@ -23,11 +20,10 @@ export class Stories {
       {"property": "q", "value": query},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page, null, sort, "https://search.literotica.com/api");
+    return this.search(filter, page, sort, "https://search.literotica.com/api");
   }
 
 
-  // TODO: add infinitescroll to series page
   getSeries(id: any) {
     let filter = [
       {"property": "series_id", "value": parseInt(id)}
@@ -44,45 +40,42 @@ export class Stories {
   }
 
 
-  // TODO: add infinitescroll for authors stories
-  getAuthorStories(id: any, page?: number, limit?: number) {
+  getAuthorStories(id: any, page?: number) {
     let filter = [
       {"property": "user_id", "value": parseInt(id)},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page, null, null, null, '1/user-submissions');
+    return this.search(filter, page, null, null, '1/user-submissions');
   }
 
-  // TODO: add infinitescroll for authors favs
-  getAuthorFavs(id: any, page?: number, limit?: number) {
+  getAuthorFavs(id: any, page?: number) {
    let filter = [
       {"property": "user_id", "value": parseInt(id)},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page, null, null, null, '1/user-favorites');
+    return this.search(filter, page, null, null, '1/user-favorites');
   }
 
 
 
 
   // helper for similar requests
-  private search(filter: any, page?: number, limit?: number, sort?: string, domain?: string, path?: string) {
+  private search(filter: any, page?: number, sort?: string, domain?: string, path?: string) {
     let params = { 
-      "limit": limit? limit : 10,
       "page": page ? page : 1,
       "filter": JSON.stringify(filter)
     };
 
     let loader;
     if (!page || page < 2)
-      loader = this.showLoader();
+      loader = this.api.showLoader();
 
     return this.api.get(path ? path : '1/submissions', params, null, domain).map((data: any) => {
       if (loader) loader.dismiss();
 
       if (!data.success && !data.submissions) {
         if (!data.hasOwnProperty('total'))
-          this.showToast();
+          this.api.showToast();
         return [[],0];
       }
 
@@ -92,7 +85,7 @@ export class Stories {
 
     }).catch((error) => {
       if (loader) loader.dismiss();
-      this.showToast();
+      this.api.showToast();
       return Observable.of([[],0]);
     });
   }
@@ -105,11 +98,11 @@ export class Stories {
     let filter = [{"property": "submission_id", "value": parseInt(id)}];
     let params = { "filter": JSON.stringify(filter).trim() };
 
-    let loader = this.showLoader();
+    let loader = this.api.showLoader();
     return this.api.get('2/submissions/pages', params).map((data: any) => {
       loader.dismiss();
       if (!data.success) {
-        this.showToast();
+        this.api.showToast();
         return null;
       }
 
@@ -129,7 +122,7 @@ export class Stories {
 
     }).catch((error) => {
       loader.dismiss();
-      this.showToast();
+      this.api.showToast();
       return Observable.of(null);
     });
   }
@@ -147,35 +140,15 @@ export class Stories {
 
     this.api.post('2/submissions/vote', params).map((data: any) => {
       if (!data.success)
-        this.showToast();
+        this.api.showToast();
       return null;
     }).catch(() => {
-      this.showToast();
+      this.api.showToast();
       return Observable.of(null);
     }).subscribe();
   }
 
 
-
-  // HELPERS
-
-  private showLoader() {
-    let loader = this.loadingCtrl.create({spinner: "crescent"});
-    loader.present();
-    return loader;
-  }
-
-  // TODO: add translation
-  private showToast() {
-    let toast = this.toastCtrl.create({
-      message: 'Error while loading',
-      showCloseButton: true,
-      closeButtonText: 'Close',
-      duration: 3000
-    });
-    toast.present();
-    return toast
-  }
 
   private extractSubmissionData(apistory) {
     return new Story({
