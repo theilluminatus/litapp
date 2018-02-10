@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://literotica.com/api';
+  url: string = 'https://www.literotica.com/api';
   
   // TODO: ask for apikey and appid on first boot and put in storage
   apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
@@ -15,7 +15,7 @@ export class Api {
   constructor(public http: HttpClient) {
   }
 
-  get(endpoint: string, params?: any, reqOpts?: any) {
+  get(endpoint: string, params?: any, reqOpts?: any, url?: string) {
     if (!reqOpts) {
       reqOpts = {
         params: new HttpParams({encoder: new WebHttpUrlEncodingCodec()})
@@ -33,7 +33,7 @@ export class Api {
     reqOpts.params = reqOpts.params.set('apikey', this.apikey);
     reqOpts.params = reqOpts.params.set('appid', this.appid);
 
-    return this.http.get(this.url + '/' + endpoint, reqOpts);
+    return this.http.get((url ? url : this.url) + '/' + endpoint, reqOpts);
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {

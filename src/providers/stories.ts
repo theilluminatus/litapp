@@ -20,8 +20,8 @@ export class Stories {
   // Search for a story with a query and sort results
   searchStory(query: string, sort: string, page?: number, limit?: number) {
     let filter = [
-      {"property": "type", "value": "story"},
-      {"property": "q", "value": query}
+      {"property": "q", "value": query},
+      {"property": "type", "value": "story"}
     ];
     return this.search(filter, page);
   }
@@ -68,9 +68,10 @@ export class Stories {
     if (!page || page < 2)
       loader = this.showLoader();
 
-    return this.api.get('1/submissions', params).map((data: any) => {
+    return this.api.get('1/submissions', params, null, "https://search.literotica.com/api").map((data: any) => {
       if (loader) loader.dismiss();
-      if (!data.success) {
+
+      if (!data.success && !data.submissions) {
         this.showToast();
         return [];
       }
@@ -168,14 +169,13 @@ export class Stories {
     };
 
     this.api.post('2/submissions/vote', params).map((data: any) => {
-      if (!data.success) {
+      if (!data.success)
         this.showToast();
-        return null;
-      }
-
-    }).catch((error) => {
+      return null;
+    }).catch(() => {
       this.showToast();
-    }). subscribe();
+      return Observable.of(null);
+    }).subscribe();
   }
 
 

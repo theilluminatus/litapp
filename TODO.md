@@ -9,14 +9,11 @@
  - Show total search results (data.total)
  - Add indicator on search page if story is in history
  - Remove search auto search
+ - Add infinitescroll to authors favs & stories
  - fix: arrow not showing on author page
 
- - use correct api route for relevant stories
- - use correct api route for stories in series with series_id
- - use correct api route for authors favs
- - use correct api route for rating stories
-
  - find correct api route for story comments
- - find correct api route for search (+sorting & tags?)
+ - find correct api route for search sorting & tags
+ - check if apikey & appid are always the same
 
 ## Also check TODOs in files!
