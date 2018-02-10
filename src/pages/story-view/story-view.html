@@ -1,4 +1,4 @@
-<ion-header [style.opacity]="fullscreen ? 0 : 1" no-border>
+<ion-header [style.top]="fullscreen ? '-50px' : 0" no-border>
   <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
     <ion-title>
         {{ story.title }}
@@ -35,9 +35,7 @@
     </ion-slide>
   </ion-slides>
 
-  <div class="pagination"
-    [style.bottom]="fullscreen ? 0 : '50px'"
-    [style.opacity]="fullscreen ? 0 : 1"
+  <div class="pagination {{fullscreen ? 'hidden': ''}}"
     [style.background]="settings.background"
     [style.color]="settings.color">
 

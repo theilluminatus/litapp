@@ -115,7 +115,7 @@ export class StoryViewPage {
 
     } else if ( event.clientX > 3*this.platform.width()/4 ) {
       // clicking in right most 25%
-      if (this.firstTimeNextPage)
+      if (this.firstTimeNextPage && !this.fullscreen)
         this.immersive();
       this.slidesElement.slideNext();
       this.firstTimeNextPage = false;

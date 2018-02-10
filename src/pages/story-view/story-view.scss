@@ -1,7 +1,7 @@
 page-story-view {
 
   .header {
-    transition: opacity 0.3s;
+    transition: top 0.5s;
   }
 
   .toolbar-background {
@@ -21,7 +21,7 @@ page-story-view {
   .content {
     background: black;
     color: white;
-    transition: top 0.3s;
+    transition: top 0.5s;
   }
 
   .scroll-content {
@@ -52,16 +52,17 @@ page-story-view {
   .pagination {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     z-index: 1;
     padding: 0 10px;
-    transition: opacity 0.3s;
+    animation: slideUpShow 0.5s;
     display: flex;
     flex-flow: row no-wrap;
     justify-content: space-around;
     align-items: center;
     align-content: center;
+
 
     .range {
       flex-grow: 1;
@@ -75,6 +76,22 @@ page-story-view {
     .count {
       padding: 0 10px;
     }
+  }
+
+  .pagination.hidden {
+    animation: slideDownRemove 0.5s;
+    bottom: 0;
+    visibility: hidden;
+  }
+
+  @keyframes slideUpShow { 
+    0% { bottom: -40px; }
+    100% { bottom: 50px; }
+  }
+
+  @keyframes slideDownRemove { 
+    0% { visibility: visible; bottom: 50px; }
+    100% { bottom: -40px; visibility: hidden; }
   }
 
 }
