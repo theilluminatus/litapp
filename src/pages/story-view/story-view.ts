@@ -74,6 +74,7 @@ export class StoryViewPage {
         }
         
         // add details & content to db
+        this.story.series = story.series;
         this.story.length = story.length;
         this.story.tags = story.tags;
         this.story.content = story.content;

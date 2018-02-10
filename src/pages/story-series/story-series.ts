@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Story } from '../../models/story';
+import { Stories } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -14,10 +15,15 @@ export class StorySeriesPage {
   // TODO: persist & load autoload setting to db
   autoload: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public stories: Stories
+  ) {
   	let story: Story = navParams.get('story');
-  	// TODO: make series relation between stories
-  	this.series = story.author.stories;
+    this.stories.getSeries(story.series).subscribe((data) => {
+      this.series = data;
+    });
   }
 
 }

@@ -23,7 +23,7 @@ export class Stories {
       {"property": "q", "value": query},
       {"property": "type", "value": "story"}
     ];
-    return this.search(filter, page);
+    return this.search(filter, page, null, sort, "https://search.literotica.com/api");
   }
 
 
@@ -57,7 +57,7 @@ export class Stories {
 
 
   // helper for similar requests
-  private search(filter: any, page?: number, limit?: number, sort?: string) {
+  private search(filter: any, page?: number, limit?: number, sort?: string, url?: string) {
     let params = { 
       "limit": limit? limit : 10,
       "page": page ? page : 1,
@@ -68,7 +68,7 @@ export class Stories {
     if (!page || page < 2)
       loader = this.showLoader();
 
-    return this.api.get('1/submissions', params, null, "https://search.literotica.com/api").map((data: any) => {
+    return this.api.get('1/submissions', params, null, url).map((data: any) => {
       if (loader) loader.dismiss();
 
       if (!data.success && !data.submissions) {
@@ -145,6 +145,7 @@ export class Stories {
         id: data.pages[0].submission_id,
         title: data.pages[0].name,
         url: data.pages[0].url,
+        series: data.pages[0].series_id,
         length: data.total,
         tags: tags,
         content: data.pages.map((p) => p.content)        
@@ -209,7 +210,6 @@ export class Stories {
       lang: apistory.lang,
       timestamp: apistory.timestamp_published,
       rating: apistory.rate,
-      series: apistory.series_id,
       viewcount: apistory.view_count,
       url: apistory.url,
       ishot: apistory.is_hot == "no" ? false : true,

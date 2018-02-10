@@ -17,11 +17,15 @@
 
 
 <ion-content padding>
-  
+
   <p>{{story.description}}</p>
 
-  <p><a (click)="showSeries()">{{'STORYDETAIL_SERIES' | translate }}</a></p>
-  <p><a (click)="showRelated()">{{'STORYDETAIL_RELATED' | translate }}</a></p>
+  <p *ngIf="story.series > 0">
+    <a (click)="showSeries()">{{'STORYDETAIL_SERIES' | translate }}</a>
+  </p>
+  <p>
+    <a (click)="showRelated()">{{'STORYDETAIL_RELATED' | translate }}</a>
+  </p>
 
   <h2>{{'DETAILS' | translate}}</h2>
 

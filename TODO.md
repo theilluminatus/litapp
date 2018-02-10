@@ -26,7 +26,6 @@
  - fix not remember story current page
  - fix error while loading on no more results
  - trim search query at start and end
- - hide series button if not in series (ID is 0)
  - rebrand
  - make description smaller in story-list
  - change padding before immersive mode so it looks smoother
