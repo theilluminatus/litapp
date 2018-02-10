@@ -16,8 +16,6 @@
  - find correct api route for search sorting & tags
  - check if apikey & appid are always the same
 
- - remove top padding storyview when in immersive but still show status bar with same bg color
- - soft keyboard over tabs in phone
  - fix error while loading on no more results
  - rebrand
  - change padding before immersive mode so it looks smoother

@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular'
+import { Keyboard } from '@ionic-native/keyboard';
+
 import { Storage } from '@ionic/storage';
 
 import { STARREDQUERIES_KEY } from '../../providers/db';
@@ -27,14 +29,24 @@ export class SearchPage {
     public navParams: NavParams,
     public stories: Stories,
     public storage: Storage,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private keyboard: Keyboard
   ) {
+
     this.query = navParams.get('query');
     this.storage.get(STARREDQUERIES_KEY).then((value) => {
       if (value)
         this.starredQueries = value;
     });
+    
+  }
 
+  ionViewDidEnter() {
+    this.keyboard.disableScroll(true);
+  }
+
+  ionViewWillLeave() {
+    this.keyboard.disableScroll(false);
   }
 
   ionViewWillEnter() {

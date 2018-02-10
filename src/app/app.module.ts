@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Keyboard } from '@ionic-native/keyboard';
 import { Toast } from '@ionic-native/toast';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -75,6 +76,7 @@ export function provideSettings(storage: Storage) {
     AndroidFullScreen,
     InAppBrowser,
     SocialSharing,
+    Keyboard,
     Toast,
     SplashScreen,
     StatusBar,

@@ -71,8 +71,11 @@ export class Stories {
     return this.api.get('1/submissions', params, null, url).map((data: any) => {
       if (loader) loader.dismiss();
 
+      console.log(data);
+
       if (!data.success && !data.submissions) {
-        this.showToast();
+        if (!data.hasOwnProperty('total'))
+          this.showToast();
         return [];
       }
 
