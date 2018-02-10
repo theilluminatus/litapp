@@ -133,9 +133,8 @@ export class SearchPage {
 
     popover.onDidDismiss((method) => {
       if (method) {
-        // TODO: get new sorted stories
         this.sortmethod = method;
-        this.getStories()
+        this.getStories();
       }
     })
   }

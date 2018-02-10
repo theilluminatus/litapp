@@ -64,13 +64,14 @@ export class Api {
     return this.http.put(this.url + '/' + endpoint, body, reqOpts);
   }
 
+  
+
   showLoader() {
     let loader = this.loadingCtrl.create({spinner: "crescent"});
     loader.present();
     return loader;
   }
 
-  // TODO: add translation
   showToast() {
     let toast = this.toastCtrl.create({
       message: this.translations.LOAD_ERROR,
