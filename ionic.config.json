@@ -2,6 +2,16 @@
   "name": "litapp",
   "app_id": "",
   "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/proxy/normal",
+      "proxyUrl": "https://www.literotica.com/api"
+    },
+    {
+      "path": "/proxy/search",
+      "proxyUrl": "https://search.literotica.com/api"
+    }
+  ],
   "integrations": {
     "cordova": {}
   }

@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
-/**
- * Api is a generic REST Api handler. Set your API url first.
- */
+
 @Injectable()
 export class Api {
   url: string = 'https://www.literotica.com/api';
@@ -48,7 +46,14 @@ export class Api {
     return this.http.get((url ? url : this.url) + '/' + endpoint, reqOpts);
   }
 
-  post(endpoint: string, body: any, reqOpts?: any) {
+  post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean) {
+    if (addIDs) {
+      if (endpoint.indexOf('?') > -1)
+        endpoint += '&apikey='+this.apikey+'&appid='+this.appid;
+      else
+        endpoint += '?apikey='+this.apikey+'&appid='+this.appid;
+    }
+
     return this.http.post(this.url + '/' + endpoint, body, reqOpts);
   }
 
