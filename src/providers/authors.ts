@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from 'ionic-angular';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
+
 
 import { Author } from '../models/author';
 import { Api } from './api/api';

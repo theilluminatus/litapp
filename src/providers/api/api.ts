@@ -27,7 +27,7 @@ export class Api {
     });
 
     if (isDevMode)
-      this.urls = ['https://localhost:8100/proxy/normal','https://localhost:8100/proxy/search'];
+      this.urls = ['http://localhost:8100/proxy/normal','http://localhost:8100/proxy/search'];
   }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number) {
