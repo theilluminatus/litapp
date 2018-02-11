@@ -50,10 +50,10 @@
   <p><strong>{{'LANGUAGE' | translate}}: </strong> {{story.lang}}</p>
   <p><strong>{{'TIMESTAMP' | translate}}: </strong> {{(story.timestamp*1000) | date:'yyyy-MM-dd HH:mm' }}</p>
 
-  <ng-container *ngIf="user.isLoggedIn() && story.ratingenabled">
+  <ng-container *ngIf="user.isLoggedIn() && story.ratingenabled && !story.myrating">
     <h3>{{'STORYDETAIL_RATETITLE' | translate }}</h3>
     <form (submit)="rate($event)" class="rate">
-      <ion-range [(ngModel)]="story.myrating" name="myrating" snaps="true" step="1" min="0" max="5" pin="true"></ion-range>
+      <ion-range [(ngModel)]="myrating" name="myrating" snaps="true" step="1" min="0" max="5" pin="true"></ion-range>
       <button ion-button outline>{{'STORYDETAIL_RATE' | translate }}</button>
     </form>
   </ng-container>

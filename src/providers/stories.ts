@@ -6,6 +6,7 @@ import { Story } from '../models/story';
 import { Author } from '../models/author';
 import { STORY_KEY } from './db';
 import { Authors } from './authors';
+import { User } from './user';
 import { Api } from './api/api';
 
 @Injectable()
@@ -17,6 +18,7 @@ export class Stories {
   constructor(
     public api: Api,
     public a: Authors,
+    public user: User,
     public storage: Storage
   ) {
 
@@ -135,19 +137,24 @@ export class Stories {
   rate(story: Story, rating: number) {
 
     let filter = [{"property": "submission_id", "value": parseInt(story.id)}];
-    let params = {
-      storyid: story.id,
-      user_id: 0, // TODO: check if user_id is necessary
-      session_id: 0, // TODO: send session_id to vote
-      "filter": JSON.stringify(filter).trim()
-    };
+    let data = new FormData();
+    data.append("user_id", this.user.getId());
+    data.append("session_id", this.user.getSession());
+    data.append("vote", rating);
+    data.append("filter", JSON.stringify(filter));
 
-    this.api.post('2/submissions/vote', params, )
+    this.api.post('2/submissions/vote', data, undefined, true)
       .catch((error) => {
         return Observable.throw(error);
       }).subscribe((data) => {
-        if (!data.success)
+        
+        if (data.success)
+          story.myrating = rating;
+        else if (data.error)
+          this.api.showToast(data.error);
+        else
           this.api.showToast();
+
       });
   }
 

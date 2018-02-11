@@ -22,6 +22,7 @@ export interface Story {
   content: any;
   description: string;
   rating: number;
+  myrating: number;
   category: string;
   lang: string;
   tags: string[];

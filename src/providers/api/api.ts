@@ -90,7 +90,7 @@ export class Api {
 
   showToast(text?: string) {
     let toast = this.toastCtrl.create({
-      message: this.translations.LOAD_ERROR + (text ? ": "+text : ""),
+      message: (text ? "Error: "+text : this.translations.LOAD_ERROR),
       showCloseButton: true,
       closeButtonText: this.translations.CLOSE_BUTTON,
       duration: 3000

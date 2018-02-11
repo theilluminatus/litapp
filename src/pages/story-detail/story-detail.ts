@@ -15,6 +15,7 @@ import { User } from '../../providers/providers';
 export class StoryDetailPage {
 
   story: Story;
+  myrating: number;
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +33,8 @@ export class StoryDetailPage {
           this.navCtrl.pop();
           return;
         }
+
+        this.myrating = story.myrating;
 
         // add details & content to db
         this.story.series = story.series;
@@ -61,7 +64,7 @@ export class StoryDetailPage {
 
   rate(event) {
     event.preventDefault();
-    this.stories.rate(this.story, this.story.myrating);
+    this.stories.rate(this.story, this.myrating);
   }
 
   search(query: string) {
