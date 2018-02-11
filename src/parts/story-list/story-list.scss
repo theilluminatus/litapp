@@ -1,8 +1,17 @@
 story-list {
 
-	ion-list-header.empty {
+	.empty {
 		text-align: center;
 		border-top: none;
+		opacity: 0.7;
+	}
+
+	.item-divider {
+		background: none;
+    	text-align: center;
+    	border: none;
+    	margin-top: 7px;
+    	font-weigth: bold;
 	}
 
 	.item-inner {

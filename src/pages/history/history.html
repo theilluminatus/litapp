@@ -17,5 +17,6 @@
 
 
 <ion-content padding>
-  <story-list [stories]="stories.reverse()" (onDeleteBySwiping)="delete($event)" ishistory="true"></story-list>
+  <story-list [stories]="stories" (onDeleteBySwiping)="delete($event)" ishistory="true">
+  </story-list>
 </ion-content>

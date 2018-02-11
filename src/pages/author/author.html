@@ -43,22 +43,15 @@
 
   <a *ngIf="!showStories" (click)="loadSubmissions()">{{'AUTHOR_SHOWSTORIES' | translate}}</a>
 
-  <story-list *ngIf="showStories" [stories]="author?.stories"></story-list>
-
-  <ion-infinite-scroll *ngIf="showStories && author?.storycount > 10" (ionInfinite)="loadMoreSubmissions($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-
+  <story-list *ngIf="showStories" [stories]="author?.stories"
+    infinite="true" (ionInfinite)="loadMoreSubmissions($event)"></story-list>
 
 
   <h1 (click)="loadFavs()">{{ 'FAVORITES' | translate }}</h1>
 
   <a *ngIf="!showFavs" (click)="loadFavs()">{{'AUTHOR_SHOWFAVS' | translate}}</a>
-	<story-list *ngIf="showFavs" [stories]="author?.favs"></story-list>
-
-  <ion-infinite-scroll *ngIf="showFavs" (ionInfinite)="loadMoreFavs($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+	<story-list *ngIf="showFavs" [stories]="author?.favs"
+    infinite="true" (ionInfinite)="loadMoreFavs($event)"></story-list>
 
 
 </ion-content>

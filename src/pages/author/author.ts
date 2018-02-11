@@ -69,6 +69,7 @@ export class AuthorPage {
   }
 
   loadMoreSubmissions(event) {
+    if (!this.author.storycount || this.author.storycount < 11) event.enable(false);
     this.currentSubmissionsPage++;
     this.s.getAuthorStories(this.author.id, this.currentSubmissionsPage).subscribe((data) => {
       if (!data[0].length) {

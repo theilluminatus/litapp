@@ -54,7 +54,6 @@ export class SearchPage {
     if (this.query) this.search(this.query);
     else if (this.searchbar.value == "")
       setTimeout(() => { this.searchbar.setFocus(); }, 100);
-
   }
 
   getStories(query?: string) {

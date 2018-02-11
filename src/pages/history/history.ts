@@ -39,7 +39,8 @@ export class HistoryPage {
         history.forEach((id, index) => {
           this.storage.get(HISTORY_KEY+"_"+id).then((story) => {
             if (story)
-              this.stories[index] = new Story(story);
+              this.stories[history.length-index-1] = new Story(story);
+
             loadedIndex++;
             if (loadedIndex == history.length)
               this.loadingFinished();

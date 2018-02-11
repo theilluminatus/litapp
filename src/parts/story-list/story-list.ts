@@ -15,13 +15,25 @@ export class StoryListPage {
   
   @Input() stories: Story[];
   @Input() ishistory: boolean = false;
+  @Input() infinite: boolean = false;
   @Output() onDeleteBySwiping: EventEmitter<any> = new EventEmitter();
+  @Output() ionInfinite: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public navCtrl: NavController,
     private popoverCtrl: PopoverController,
     public user: User
   ) { }
+
+  showHeaders(record, recordIndex, records) {
+    if (this.ishistory) return null;
+    let pagesize = 10;
+    if (recordIndex % pagesize === 0 && recordIndex > 0) {
+      let page = Math.round(recordIndex / pagesize);
+      return (page+1) +" ("+ (page*pagesize+1) + " - "+ ((page+1)*pagesize) +")";
+    }
+    return null;
+  }
 
   pressTimer;
   handlePress(story: Story, event) {
@@ -34,6 +46,11 @@ export class StoryListPage {
   handleClick(story: Story, event) {
     clearTimeout(this.pressTimer);
     this.openStory(story);
+  }
+
+  loadMore($event) {
+    if (this.infinite)
+      this.ionInfinite.emit($event);
   }
 
   openStory(story: Story) {
@@ -68,7 +85,8 @@ export class StoryListPage {
     });
   }
 
-  delete(story: Story) {
+  delete(story: Story, slidingItem: any) {
+    slidingItem.close();
     this.onDeleteBySwiping.emit(story);
   }
 }

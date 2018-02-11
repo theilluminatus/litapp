@@ -5,7 +5,6 @@
  - hide tabs and search bar when scrolling on search page?
  - rebrand
  - check if api v1 returns 'enabled_comments' as in stories.ts
- - list-view gets all stories -> performance? -> infintescroll on storylist?
  - add error handling on feed & lists providers
  - reenable infinity scroller on search & feed after refreshing
  - extract story-list-item from story-list so it can be used in feed
@@ -19,7 +18,7 @@
  - fix history load effect wait for or improve speed
  - app is quickly killed? -> high ram usage?
  - Put all in memory stories in provider list and return these instead of thing on search page
- - no scroll bar visible on phone
+ - fix viewing author submissions & favs
 
  - Get data from and persist changes to server (list, following, feed)
  - Fill updatetimestamp and jointimestamp from following list
