@@ -27,6 +27,10 @@ export class Feed {
     return this.api.get('my/api/activity/wall',params,undefined,2).map((d: any) => {
       
       if (loader) loader.dismiss();
+      if (!d.data) {
+        this.api.showToast();
+        return [];
+      }
 
       return d.data.map(item => {
         return new FeedItem({
@@ -67,6 +71,10 @@ export class Feed {
 
       });
 
+    }).catch((error) => {
+      if (loader) loader.dismiss();
+      this.api.showToast();
+      return Observable.of([]);
     });
   }
 

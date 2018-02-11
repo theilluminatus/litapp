@@ -5,7 +5,6 @@
  - hide tabs and search bar when scrolling on search page?
  - rebrand
  - check if api v1 returns 'enabled_comments' as in stories.ts
- - add error handling on feed & lists providers
 
  - check if apikey & appid are always the same + ask on first start if not
  - find correct api route for story comments
