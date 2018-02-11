@@ -27,18 +27,18 @@ export class BookmarkPopover {
 
   toggleFromList(list: List) {
 
-    console.log(this.story, list);
+    if (!list.stories) {
+      // load list before adding
+      this.l.getById(list.urlname).subscribe();
+    } else {
 
-    // TODO: persist to db & server
-
-    // if (this.story.lists.indexOf(list) > -1) {
-    //   list.stories.splice(list.stories.indexOf(this.story), 1);
-    //   this.story.lists.splice(this.story.lists.indexOf(list), 1);
-    // } else {
-    //   list.stories.push(this.story);
-    //   this.story.lists.push(list);
-    // }
-
+      if (list.stories.indexOf(this.story) > -1) {
+        this.l.removeStory(list, this.story);
+      } else {
+        this.l.addStory(list, this.story);
+      }
+        
+    }
   }
   
 }

@@ -70,6 +70,7 @@
   "LISTCREATE_TITLE": "Create new list",
   "LISTCREATE_NAME": "Name",
   "LISTCREATE_DESCRIPTION": "Description",
+  "LISTCREATE_VISIBILITY": "Visibility",
   "LISTCREATE_VISIBILITY_PUBLIC": "Public",
   "LISTCREATE_VISIBILITY_PRIVATE": "Private",
 

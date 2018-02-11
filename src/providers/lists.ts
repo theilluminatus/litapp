@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Rx';
 
 import { List } from '../models/list';
 import { Story } from '../models/story';
-import { Author } from '../models/author';
 import { Stories } from './stories';
+import { User } from './user';
 import { Api } from './api/api';
 
 @Injectable()
@@ -12,14 +12,21 @@ export class Lists {
 
   private lists: List[];
 
-  constructor(public api: Api, public s: Stories) { }
+  constructor(
+    public api: Api,
+    public s: Stories,
+    public user: User
+  ) { }
 
 
-  query(force?: boolean) {
+  query(force?: boolean, hideLoader?: boolean) {
     if (!force && this.lists)
       return Observable.of(this.lists);
 
-    let loader = this.api.showLoader();
+    let loader;
+    if (!hideLoader)
+      loader = this.api.showLoader();
+
     return this.api.get('my/api/lists',undefined,undefined,2).map((d: any) => {
 
       if (loader) loader.dismiss();
@@ -91,13 +98,45 @@ export class Lists {
   }
 
 
+  // TODO: send add & remove story from list to server
+  addStory(list: List, story: Story) {
+    if (!list.stories) list['stories'] = [];
+    list.stories.push(story);
+  }
+
+  removeStory(list: List, story: Story) {
+    if (!list.stories) return;
+    list.stories.forEach((s,i) => {
+      if (s.id == story.id)
+        list.stories.splice(i,1);
+    })
+    
+  }
+
+
+
+  // TODO: send list CRUD to server
   add(list: List) {
+    this.lists.push(list);
+    return Observable.of(true);
   }
 
   edit(list: List) {
+    this.lists.forEach((l) => {
+      if (l.id == list.id) {
+        l.name = list.name;
+        l.description = list.description;
+        l.visibility = list.visibility;
+      }
+    });
+    return Observable.of(true);
   }
 
   delete(list: List) {
+    this.lists.forEach((l,i) => {
+      if (l.id == list.id)
+        this.lists.splice(i,1);
+    });
   }
 
 }

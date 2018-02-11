@@ -1,12 +1,14 @@
 
 <ion-list>
   <ion-list-header>{{'LISTLIST_TITLE' | translate}}</ion-list-header>
-  <ion-item *ngFor="let list of alllists">
+  <ion-item *ngFor="let list of alllists" (click)="toggleFromList(list)">
     <h2><ion-icon *ngIf="!list?.visibility" name="lock"></ion-icon> {{list?.name}}</h2>
     <ion-note item-end>
-      <button ion-button icon-only clear="true" (click)="toggleFromList(list)"
+      <button ion-button icon-only clear="true"
         [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
-        <ion-icon [name]="list?.stories?.indexOf(story) > -1 ? 'star' : 'star-outline'"></ion-icon>
+        <ng-container *ngIf="list?.stories">
+          <ion-icon [name]="list?.stories?.indexOf(story) > -1 ? 'star' : 'star-outline'"></ion-icon>
+        </ng-container>
       </button>
     </ion-note>
   </ion-item>

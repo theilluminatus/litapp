@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 
 import { List } from '../../models/list';
+import { Lists } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -12,22 +13,26 @@ import { List } from '../../models/list';
 export class ListCreatePage {
 
   isReadyToSave: boolean;
-  list: List;
   form: FormGroup;
+  isNew: boolean = true;
 
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
     public navParams: NavParams,
+    public l: Lists,
     fb: FormBuilder
   ) {
 
-    this.list = navParams.get('list');
+    let list = navParams.get('list');
+    if (list)
+      this.isNew = false;
+
     this.form = fb.group({
-      id: [this.list ? this.list.id : -1 , Validators.required],
-      name: [this.list ? this.list.name : '', Validators.required],
-      description: [this.list ? this.list.description : ''],
-      visibility: [this.list ? this.list.visibility : null],
+      id: [list ? list.id : -1 , Validators.required],
+      name: [list ? list.name : '', Validators.required],
+      description: [list ? list.description : ''],
+      visibility: [list ? list.visibility : null],
     });
   }
 
@@ -36,25 +41,28 @@ export class ListCreatePage {
   }
 
   done() {
+    
     if (!this.form.valid) return;
 
-    let isNewList = !this.list;
-    if (isNewList) {
-      this.list = new List({});
-    }
+    let templist = new List({
+      id: this.form.value.id,
+      name: this.form.value.name,
+      description: this.form.value.description,
+      visibility: this.form.value.visibility
+    });
 
-    this.list.name = this.form.value.name;
-    this.list.description = this.form.value.description;
-    this.list.visibility = this.form.value.visibility;
-
-    if (isNewList) {
-      this.navCtrl.pop().then(() => {
-        this.navParams.get('callback')(this.list);
+    if (this.isNew) {
+      this.l.add(templist).subscribe((d) => {
+        if (d)
+          this.viewCtrl.dismiss();
       });
-      return;
+
+    } else {
+      this.l.edit(templist).subscribe((d) => {
+        if (d)
+          this.viewCtrl.dismiss();
+      });
     }
       
-    // TODO: persist new and edited lists to server
-    this.viewCtrl.dismiss();
   }
 }

@@ -19,15 +19,15 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item-sliding (click)="openList(list)" *ngFor="let list of lists">
+    <ion-item-sliding (click)="openList(list)" *ngFor="let list of lists" #slidingItem>
       <ion-item>
         <ion-icon [name]="!list.visibility ? 'lock' : ''"></ion-icon>
         <h2>{{list.name}}</h2>
         <p>{{list.description}}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button (click)="edit(list, $event)">{{ 'EDIT_BUTTON' | translate }}</button>
-        <button ion-button color="danger" (click)="delete(list, $event)">{{ 'DELETE_BUTTON' | translate }}</button>
+        <button ion-button (click)="edit(list, slidingItem, $event)">{{ 'EDIT_BUTTON' | translate }}</button>
+        <button ion-button color="danger" (click)="delete(list, slidingItem, $event)">{{ 'DELETE_BUTTON' | translate }}</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

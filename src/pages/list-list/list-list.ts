@@ -27,28 +27,21 @@ export class ListListPage {
   }
 
   addList() {
-    this.navCtrl.push('ListCreatePage', {
-      callback: (newlist) => {
-        // TODO: reload lists
-        this.lists.push(newlist);
-      }
-    });
+    this.navCtrl.push('ListCreatePage');
   }
 
-  edit(list: List, event) {
+  edit(list: List, item, event) {
     event.stopPropagation();
+    item.close();
     this.navCtrl.push('ListCreatePage', {
       list: list
     });
   }
 
-  delete(list: List, event) {
-    // TODO: delete list from server
+  delete(list: List, item, event) {
     event.stopPropagation();
-    this.lists.forEach((item,index) => {
-      if (item == list)
-        this.lists.splice(index, 1);
-    });
+    item.close();
+    this.l.delete(list);
   }
 
 }

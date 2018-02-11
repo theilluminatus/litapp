@@ -27,13 +27,16 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'LISTCREATE_NAME' | translate }}" formControlName="name"></ion-input>
+        <ion-label floating>{{ 'LISTCREATE_NAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'LISTCREATE_DESCRIPTION' | translate }}" formControlName="description"></ion-input>
+        <ion-label floating>{{ 'LISTCREATE_DESCRIPTION' | translate }}</ion-label>
+        <ion-input type="text" formControlName="description"></ion-input>
       </ion-item>
     </ion-list>
 
+    <h4>{{ 'LISTCREATE_VISIBILITY' | translate }}</h4>
     <ion-list radio-group formControlName="visibility">
       <ion-item>
         <ion-label>{{ 'LISTCREATE_VISIBILITY_PUBLIC' | translate }}</ion-label>

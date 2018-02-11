@@ -140,7 +140,7 @@ export class Stories {
     let data = new FormData();
     data.append("user_id", this.user.getId());
     data.append("session_id", this.user.getSession());
-    data.append("vote", rating);
+    data.append("vote", String(rating));
     data.append("filter", JSON.stringify(filter));
 
     this.api.post('2/submissions/vote', data, undefined, true)
