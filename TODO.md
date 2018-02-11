@@ -11,8 +11,6 @@
  - better search method for tags: https://www.literotica.com/my/api/lists/submission_search?q=query&items_per_page=10&page=1&type=story
 
  - return goes back to history on other tabs
- - app is quickly killed? -> high ram usage?
- - fix viewing author submissions & favs
  - ensure stories are loaded from db before history page shows
 
  - Get data from and persist changes to server (list, following, feed)

@@ -36,22 +36,19 @@
   </div>
 
 
-	<h1 (click)="loadSubmissions()">
-    {{ 'SUBMISSIONS' | translate }}
-    <small>({{author?.storycount}})</small>
-  </h1>
+  <ion-segment [(ngModel)]="openSegment">
+    <ion-segment-button value="stories" (click)="loadSubmissions()">
+      {{ 'SUBMISSIONS' | translate }} ({{author?.storycount}})
+    </ion-segment-button>
+    <ion-segment-button value="favs" (click)="loadFavs()">
+      {{ 'FAVORITES' | translate }} <ng-container *ngIf="author?.favs">({{author?.favs.length}})</ng-container>
+    </ion-segment-button>
+  </ion-segment>
 
-  <a *ngIf="!showStories" (click)="loadSubmissions()">{{'AUTHOR_SHOWSTORIES' | translate}}</a>
+  <story-list-normal *ngIf="openSegment=='stories'" [stories]="author?.stories"
+    infinite="true" (ionInfinite)="loadMoreSubmissions($event)"></story-list-normal>
 
-  <story-list *ngIf="showStories" [stories]="author?.stories"
-    infinite="true" (ionInfinite)="loadMoreSubmissions($event)"></story-list>
-
-
-  <h1 (click)="loadFavs()">{{ 'FAVORITES' | translate }}</h1>
-
-  <a *ngIf="!showFavs" (click)="loadFavs()">{{'AUTHOR_SHOWFAVS' | translate}}</a>
-	<story-list *ngIf="showFavs" [stories]="author?.favs"
-    infinite="true" (ionInfinite)="loadMoreFavs($event)"></story-list>
-
+	<story-list-normal *ngIf="openSegment=='favs'" [stories]="author?.favs" 
+    infinite="true" (ionInfinite)="loadMoreFavs($event)"></story-list-normal>
 
 </ion-content>

@@ -29,7 +29,7 @@
         <ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
 
             <ion-avatar large>
-              <ion-img [src]="item.author.picture + '_default.jpg'"></ion-img>
+              <ion-img cache="true" [src]="item.author.picture + '_default.jpg'"></ion-img>
             </ion-avatar>
             <p>
               <a>{{item.author.name}}</a>

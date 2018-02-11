@@ -12,7 +12,7 @@
 	<ion-list>
 		<ion-item (click)="showAuthor(author)" *ngFor="let author of authors">
 			<ion-avatar>
-				<ion-img [src]="author.picture + '_default.jpg'"></ion-img>
+				<ion-img [src]="author?.picture + '_default.jpg'"></ion-img>
 			</ion-avatar>
 			<h2>{{author.name}}</h2>
 		</ion-item>

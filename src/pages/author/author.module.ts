@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
 import { AuthorPage } from './author';
-import { StoryListPageModule } from '../../parts/story-list/story-list.module';
+import { StoryListNormalPageModule } from '../../parts/story-list-normal/story-list-normal.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { StoryListPageModule } from '../../parts/story-list/story-list.module';
     IonicPageModule.forChild(AuthorPage),
     TranslateModule.forChild(),
     TooltipsModule,
-    StoryListPageModule
+    StoryListNormalPageModule
   ],
 })
 export class AuthorPageModule {}

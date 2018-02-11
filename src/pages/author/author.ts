@@ -6,6 +6,7 @@ import { User } from '../../providers/providers';
 import { Stories } from '../../providers/providers';
 import { Authors } from '../../providers/providers';
 import { Author } from '../../models/author';
+import { Story } from '../../models/story';
 
 @IonicPage()
 @Component({
@@ -16,10 +17,9 @@ export class AuthorPage {
 
   @ViewChild("biotext") biotext;
   author: Author;
-  showStories = false;
-  showFavs = false;
   showArrow = false;
   loaded = false;
+  openSegment = "";
   currentSubmissionsPage = 1;
   currentFavsPage = 1;
 
@@ -31,11 +31,10 @@ export class AuthorPage {
     public a: Authors,
     public user: User
   ) {
-  	this.author = navParams.get('author');
+  	let author = navParams.get('author');
 
-    this.a.getDetails(this.author.id).subscribe((author) => {
-      this.author.bio = author.bio;
-      this.author.storycount = author.storycount;
+    this.a.getDetails(author.id).subscribe((author) => {
+      this.author = author;
       this.loaded = true;
     });
 
@@ -56,7 +55,6 @@ export class AuthorPage {
         this.author.stories = data[0];
       });      
     }
-    this.showStories = !this.showStories;
   }
 
   loadFavs() {
@@ -65,7 +63,6 @@ export class AuthorPage {
         this.author.favs = favs[0];
       });      
     }
-    this.showFavs = !this.showFavs;
   }
 
   loadMoreSubmissions(event) {
@@ -95,7 +92,7 @@ export class AuthorPage {
 
   followToggle() {
   	// TODO: persist to server
-  	// this.author.following = !this.author.following;
+  	this.author.following = !this.author.following;
   }
 
   share() {
