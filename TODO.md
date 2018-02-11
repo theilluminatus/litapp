@@ -4,6 +4,7 @@
  - Add way to see all top stories and per cat top stories
  - hide tabs and search bar when scrolling on search page?
  - rebrand
+ - re-add download stories: add toggle in history & storydetail, dont allow downloaded stories to be removed
 
  - check if apikey & appid are always the same + ask on first start if not
  - find correct api route for story comments
@@ -11,7 +12,6 @@
  - better search method for tags: https://www.literotica.com/my/api/lists/submission_search?q=query&items_per_page=10&page=1&type=story
 
  - return goes back to history on other tabs
- - ensure stories are loaded from db before history page shows
 
  - Get data from and persist changes to server (list, following, feed)
  - Fill updatetimestamp and jointimestamp from following list

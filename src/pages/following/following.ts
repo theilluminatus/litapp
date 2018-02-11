@@ -20,8 +20,6 @@ export class FollowingPage {
   ) {
 
   	this.a.getFollowing().subscribe((authors) => {
-      // TODO: fix following returns undefined
-      console.log(authors);
       this.authors = authors;
     });
 

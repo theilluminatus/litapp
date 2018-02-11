@@ -11,12 +11,32 @@ import { Api } from './api/api';
 export class Stories {
   
   private stories: Map<number,Story> = new Map<number,Story>();
+  private toLoadStories = [];
+  private ready;
 
   constructor(public api: Api, public storage: Storage) {
-    this.storage.forEach((value, key, index) => {
-      if (key.indexOf(STORY_KEY) == 0)
-        this.stories.set(value.id, value)
-    })
+
+    this.ready = new Promise((resolve, reject) => {
+      this.storage.keys().then((keys) => {
+        if (keys.length < 1) {
+          resolve();
+          return;
+        }
+
+        let total = keys.length -1;
+        this.storage.forEach((value, key, index) => {
+          if (key.indexOf(STORY_KEY) == 0)
+            this.stories.set(value.id, value);
+          if (index == total)
+            resolve();
+        });
+
+      });
+    });
+  }
+
+  onReady() {
+    return this.ready;
   }
 
 
@@ -66,10 +86,6 @@ export class Stories {
     if (cached) {
       if (cached.length)
         return Observable.of(cached);
-    } else {
-      // TODO: remove when all downloaded stories are retrieve from db before history page is loaded
-      console.error("asking for story detail without having default cached at providers/stories getById");
-      return Observable.of(null);
     }
 
     let filter = [{"property": "submission_id", "value": parseInt(id)}];

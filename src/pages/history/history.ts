@@ -3,7 +3,7 @@ import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
-import { HISTORY_KEY, DOWNLOADED_KEY } from '../../providers/db';
+import { HISTORY_KEY } from '../../providers/db';
 import { Stories } from '../../providers/providers';
 import { Story } from '../../models/story';
 
@@ -34,22 +34,25 @@ export class HistoryPage {
 
   
   ionViewWillEnter() {
-    this.stories = [];
-    this.storage.get(HISTORY_KEY).then((history) => {
-      let loadedIndex = 0;
-      if (history)
-        history.forEach((id, index) => {
+    this.s.onReady().then(() => {
 
-          this.s.getById(id).subscribe((story) => {
-            if (story)
-              this.stories[history.length-index-1] = story;
+      this.storage.get(HISTORY_KEY).then((history) => {
+        let loadedIndex = 0;
+        if (history)
+          history.forEach((id, index) => {
 
-            loadedIndex++;
-            if (loadedIndex == history.length)
-              this.loadingFinished();
+            this.s.getById(id).subscribe((story) => {
+              if (story)
+                this.stories[history.length-index-1] = story;
+
+              loadedIndex++;
+              if (loadedIndex == history.length)
+                this.loadingFinished();
+            });
+
           });
-
-        });
+      });
+      
     });
   }
 
