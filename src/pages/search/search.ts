@@ -4,7 +4,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { Storage } from '@ionic/storage';
 
-import { STARREDQUERIES_KEY, HISTORY_KEY } from '../../providers/db';
+import { STARREDQUERIES_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
 
@@ -65,7 +65,7 @@ export class SearchPage {
     this.list.enableInfinity();
     this.stories.searchStory(val.trim(), this.sortmethod, 1).subscribe((data) => {
       this.totalResults = data[1];
-      this.lookForDownloadedAndPush(data[0]);
+      this.currentStories = data[0];
     });
   }
 
@@ -76,28 +76,8 @@ export class SearchPage {
         event.enable(false);
         return;
       }
-      this.lookForDownloadedAndPush(data[0]);
+      data[0].forEach((s) => this.currentStories.push(s));
       event.complete();
-    });
-  }
-
-  private lookForDownloadedAndPush(stories: Story[]) {
-
-    let mergedCount = 0;
-    let mergedStories = Array(stories.length);
-    stories.forEach((story, index) => {
-
-      this.storage.get(HISTORY_KEY + "_" + story.id).then((data) => {
-        if (data)
-          mergedStories[index] = new Story(data);
-        else
-          mergedStories[index] = story
-
-        mergedCount++;
-        if (mergedCount == stories.length-1)
-          mergedStories.forEach((s) => this.currentStories.push(s));
-      });
-
     });
   }
 

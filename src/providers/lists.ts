@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Storage } from '@ionic/storage';
 
-import { LISTS_KEY } from './db';
 import { List } from '../models/list';
 import { Story } from '../models/story';
 import { Author } from '../models/author';
+import { Stories } from './stories';
 import { Api } from './api/api';
 
 @Injectable()
 export class Lists {
 
   private lists: List[];
-  private nextupdate;
 
-  constructor(public api: Api, public storage: Storage) {
-    this.refreshTimeout();
-    // TODO: get cached lists from db
-  }
+  constructor(public api: Api, public s: Stories) { }
+
 
   query(force?: boolean) {
-    if (!force && this.lists && (new Date).getTime()<this.nextupdate)
+    if (!force && this.lists)
       return Observable.of(this.lists);
 
     let loader = this.api.showLoader();
-    this.refreshTimeout();
     return this.api.get('my/api/lists',undefined,undefined,2).map((d: any) => {
 
       if (loader) loader.dismiss();
@@ -45,7 +40,6 @@ export class Lists {
         updatetimestamp: l.updated_at
       }));
 
-      this.persistLists(this.lists);
       return this.lists;
 
     }).catch((error) => {
@@ -58,43 +52,35 @@ export class Lists {
   getById(urlname: string, force?: boolean) {
     let list = this.lists.find((l) => l.urlname == urlname);
 
-    if (!force && list.stories && (new Date).getTime()<this.nextupdate)
+    if (!force && list.stories)
       return Observable.of(list);
 
     let loader = this.api.showLoader();
-    this.refreshTimeout();
     return this.api.get('my/api/lists/'+urlname,undefined,undefined,2).map((d: any) => {
 
       if (loader) loader.dismiss();
         if (!d.submissions) {
         this.api.showToast();
-        return [];
+        return null;
       }
 
-      list.stories = d.submissions.map(s => {
-        return new Story({
-          id: s.id,
-          title: s.name,
-          timestamp: s.timestamp_published,
-          rating: s.rate,
-          viewcount: s.view_count,
-          url: s.url,
-          tags: !s.tags ? [] : s.tags.map((t) => t.tag),
-          ishot: s.is_hot == "no" ? false : true,
-          isnew: s.is_new == "no" ? false : true,
-          iswriterspick: s.writers_pick == "no" ? false : true,
-          iscontestwinner: s.contest_winner == "no" ? false : true,
-          commentsenabled: s.enable_comments,
-          ratingenabled: s.allow_vote,
-          author: new Author({
-            id: s.author.userid,
-            name: s.author.username,
-            picture: s.author.userpic.currentUserpic,
-          })
-        })
-      });
+      if (!list)
+        list = new List({
+          id: d.list.id,
+          urlname: d.list.urlname,
+          name: d.list.title,
+          description: d.list.description,
+          visibility: !d.list.is_private,
+          size: d.list.items_count,
+          isdeletable: d.list.is_deleteable,
+          createtimestamp: d.list.created_at,
+          updatetimestamp: d.list.updated_at
+        });
 
-      this.persistList(list);
+      list.stories = d.submissions.map(story =>
+        this.s.extactFromList(story)
+      );
+
       return list;
 
     }).catch((error) => {
@@ -104,17 +90,6 @@ export class Lists {
     });
   }
 
-  private persistLists(lists: List[]) {
-    // TODO: cache lists to db
-  }
-
-  private persistList(list: List) {
-    // TODO: cache list to db
-  }
-
-  private refreshTimeout() {
-    this.nextupdate = (new Date).getTime() + 1000*60*60;
-  }
 
   add(list: List) {
   }

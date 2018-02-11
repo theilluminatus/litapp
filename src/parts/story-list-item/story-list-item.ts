@@ -37,8 +37,6 @@ export class StoryListItem {
   }
 
   openStory(story: Story) {
-    if (story.downloaded && !this.ishistory)
-      story.currentpage = null;
     this.navCtrl.push('StoryViewPage', {
       story: story
     });

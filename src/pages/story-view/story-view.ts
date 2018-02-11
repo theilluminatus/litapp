@@ -50,6 +50,7 @@ export class StoryViewPage {
     translate: TranslateService,
     navParams: NavParams
   ) {
+
     this.dir = platform.dir();
     this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
@@ -78,22 +79,12 @@ export class StoryViewPage {
         this.story.tags = story.tags;
         this.story.content = story.content;
         this.story.downloaded = true;
-        this.storage.set(HISTORY_KEY+"_"+this.story.id, this.story);
-        
+
+        this.stories.download(this.story);
         this.addSlides();      
       });
 
     } else {
-
-
-      if (!this.story.currentpage) {
-        this.storage.get(HISTORY_KEY+"_"+this.story.id).then((data) => {
-          if (data) {
-            this.story.currentpage = data.currentpage;
-          }
-        });
-      }
-
       this.addSlides();      
     }
 
@@ -102,7 +93,7 @@ export class StoryViewPage {
       if (!history) history = [];
 
       if (history.indexOf(this.story.id) > -1)
-        history.splice(history.indexOf(this.story.id),1);
+        history.splice(history.indexOf(this.story.id), 1);
 
       history.push(this.story.id);
       this.storage.set(HISTORY_KEY, history);
@@ -211,10 +202,8 @@ export class StoryViewPage {
       return;
     }
 
-    this.storage.get(HISTORY_KEY+"_"+this.story.id).then((value) => {
-      value['currentpage'] = currentIndex;
-      this.storage.set(HISTORY_KEY+"_"+this.story.id, value);
-    });
+    this.story.currentpage = currentIndex;
+    this.stories.download(this.story);
     this.range.setValue(currentIndex+1);
   }
 

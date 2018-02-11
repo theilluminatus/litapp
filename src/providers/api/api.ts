@@ -88,9 +88,9 @@ export class Api {
     return this.loader;
   }
 
-  showToast() {
+  showToast(text?: string) {
     let toast = this.toastCtrl.create({
-      message: this.translations.LOAD_ERROR,
+      message: this.translations.LOAD_ERROR + (text ? ": "+text : ""),
       showCloseButton: true,
       closeButtonText: this.translations.CLOSE_BUTTON,
       duration: 3000

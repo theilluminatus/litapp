@@ -4,7 +4,6 @@
  - Add way to see all top stories and per cat top stories
  - hide tabs and search bar when scrolling on search page?
  - rebrand
- - check if api v1 returns 'enabled_comments' as in stories.ts
 
  - check if apikey & appid are always the same + ask on first start if not
  - find correct api route for story comments
@@ -12,10 +11,9 @@
  - better search method for tags: https://www.literotica.com/my/api/lists/submission_search?q=query&items_per_page=10&page=1&type=story
 
  - return goes back to history on other tabs
- - fix history load effect wait for or improve speed
  - app is quickly killed? -> high ram usage?
- - Put all in memory stories in provider list and return these instead of thing on search page
  - fix viewing author submissions & favs
+ - ensure stories are loaded from db before history page shows
 
  - Get data from and persist changes to server (list, following, feed)
  - Fill updatetimestamp and jointimestamp from following list
