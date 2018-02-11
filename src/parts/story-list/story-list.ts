@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
@@ -19,6 +19,8 @@ export class StoryListPage {
   @Output() onDeleteBySwiping: EventEmitter<any> = new EventEmitter();
   @Output() ionInfinite: EventEmitter<any> = new EventEmitter();
 
+  enableInfinite = true;
+
   constructor(
     public navCtrl: NavController,
     private popoverCtrl: PopoverController,
@@ -33,6 +35,10 @@ export class StoryListPage {
       return (page+1) +" ("+ (page*pagesize+1) + " - "+ ((page+1)*pagesize) +")";
     }
     return null;
+  }
+
+  public enableInfinity() {
+    this.enableInfinite = true;
   }
 
   pressTimer;

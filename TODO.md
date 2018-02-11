@@ -6,7 +6,6 @@
  - rebrand
  - check if api v1 returns 'enabled_comments' as in stories.ts
  - add error handling on feed & lists providers
- - reenable infinity scroller on search & feed after refreshing
  - extract story-list-item from story-list so it can be used in feed
 
  - check if apikey & appid are always the same + ask on first start if not

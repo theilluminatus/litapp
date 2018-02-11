@@ -47,5 +47,5 @@
 		</ion-list>
 	</ion-menu>
 
-	<story-list [stories]="currentStories" infinite="true" (ionInfinite)="loadMore($event)"></story-list>
+	<story-list #list [stories]="currentStories" infinite="true" (ionInfinite)="loadMore($event)"></story-list>
 </ion-content>

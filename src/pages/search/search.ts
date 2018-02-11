@@ -17,6 +17,7 @@ export class SearchPage {
 
   @ViewChild("searchbar") searchbar: any;
   @ViewChild("panel") panel: any;
+  @ViewChild("list") list: any;
 
   currentStories: Story[] = [];
   starredQueries: string[] = [];
@@ -61,6 +62,7 @@ export class SearchPage {
     if (!val || !val.trim() || val.length < 3) return;
 
     this.currentStories = [];
+    this.list.enableInfinity();
     this.stories.searchStory(val.trim(), this.sortmethod, 1).subscribe((data) => {
       this.totalResults = data[1];
       this.lookForDownloadedAndPush(data[0]);

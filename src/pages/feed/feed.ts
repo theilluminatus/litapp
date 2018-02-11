@@ -14,6 +14,7 @@ import { Feed } from '../../providers/providers';
 export class FeedPage {
 
   feed: FeedItem[] = [];
+  enableInfinite = true;
 
   constructor(
     public navCtrl: NavController,
@@ -24,7 +25,7 @@ export class FeedPage {
   }
 
   refresh(event?, showloader?: boolean) {
-
+    this.enableInfinite = true;
     this.f.query(undefined, showloader).subscribe((data) => {
       if (data)
         this.feed = data;
@@ -46,7 +47,7 @@ export class FeedPage {
         }
         data.forEach(i => this.feed.push(i));
       }
-      event.complete();
+      this.enableInfinite = false;
     });
   }
 
