@@ -18,7 +18,7 @@
 
   "SETTINGS_TITLE": "Settings",
 
-  "LOAD_ERROR": "Error while loading",
+  "LOAD_ERROR": "Error while communicating with server",
 
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",

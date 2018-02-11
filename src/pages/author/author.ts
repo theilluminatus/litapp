@@ -91,8 +91,12 @@ export class AuthorPage {
   }
 
   followToggle() {
-  	// TODO: persist to server
-  	this.author.following = !this.author.following;
+  	if (this.author.following) {
+      this.a.unfollow(this.author);
+
+    } else {
+      this.a.follow(this.author);
+    }
   }
 
   share() {

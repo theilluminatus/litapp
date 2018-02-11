@@ -12,6 +12,7 @@ import { Authors } from '../../providers/providers';
 export class FollowingPage {
 
   authors: Author[];
+  currentpage = 1;
 
   constructor(
     public navCtrl: NavController,
@@ -22,6 +23,31 @@ export class FollowingPage {
   	this.a.getFollowing().subscribe((authors) => {
       this.authors = authors;
     });
+
+  }
+
+  loadMore(event) {
+    this.currentpage++;
+    this.a.getFollowing(this.currentpage).subscribe((data) => {
+      if (!data.length) {
+        event.enable(false);
+        return;
+      }
+      data.forEach((a) => this.authors.push(a));
+      event.complete();
+    });
+  }
+
+  followToggle(author: Author, $event) {
+
+    $event.stopPropagation();
+
+    if (author.following) {
+      this.a.unfollow(author);
+
+    } else {
+      this.a.follow(author);
+    }
 
   }
 

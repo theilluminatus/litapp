@@ -5,16 +5,20 @@ import { Storage } from '@ionic/storage';
 import { Story } from '../models/story';
 import { Author } from '../models/author';
 import { STORY_KEY } from './db';
+import { Authors } from './authors';
 import { Api } from './api/api';
 
 @Injectable()
 export class Stories {
   
   private stories: Map<number,Story> = new Map<number,Story>();
-  private toLoadStories = [];
   private ready;
 
-  constructor(public api: Api, public storage: Storage) {
+  constructor(
+    public api: Api,
+    public a: Authors,
+    public storage: Storage
+  ) {
 
     this.ready = new Promise((resolve, reject) => {
       this.storage.keys().then((keys) => {
@@ -138,7 +142,7 @@ export class Stories {
       "filter": JSON.stringify(filter).trim()
     };
 
-    this.api.post('2/submissions/vote', params)
+    this.api.post('2/submissions/vote', params, )
       .catch((error) => {
         return Observable.throw(error);
       }).subscribe((data) => {
@@ -169,16 +173,9 @@ export class Stories {
         return [[],0];
       }
 
-      return [!data.submissions ? [] : data.submissions.map((story) => {
-        if (this.stories.get(story.id)) {
-          return this.stories.get(story.id);
-        }
-
-        let newStory = this.extractFromSearch(story);
-        this.stories.set(newStory.id, newStory);
-        return newStory;
-
-      }), data.total];
+      return [!data.submissions ? [] : data.submissions.map((story) => 
+        this.extractFromSearch(story)
+      ), data.total];
 
     }).catch((error) => {
       if (loader) loader.dismiss();
@@ -205,6 +202,7 @@ export class Stories {
     if (cached)
       return cached;
 
+    let author = this.a.extractFromFeed(item.who);
     let story = new Story({
       id: item.what.id,
       title: item.what.name,
@@ -220,11 +218,7 @@ export class Stories {
       iscontestwinner: item.what.contest_winner == "no" ? false : true,
       commentsenabled: item.what.enable_comments,
       ratingenabled: item.what.allow_vote,
-      author: new Author({
-        id: item.who.userid,
-        name: item.who.username,
-        picture: item.who.userpic.currentUserpic,
-      })
+      author: author
     });
 
     this.stories.set(story.id, story);
@@ -236,6 +230,7 @@ export class Stories {
     if (cached)
       return cached;
 
+    let author = this.a.extractFromFeed(item.author);
     let story = new Story({
       id: item.id,
       title: item.name,
@@ -250,40 +245,40 @@ export class Stories {
       iscontestwinner: item.contest_winner == "no" ? false : true,
       commentsenabled: item.enable_comments,
       ratingenabled: item.allow_vote,
-      author: new Author({
-        id: item.author.userid,
-        name: item.author.username,
-        picture: item.author.userpic.currentUserpic,
-      })
+      author: author
     });
 
     this.stories.set(story.id, story);
     return story;
   }
 
-  extractFromSearch(story) {
-    return new Story({
-      id: story.id,
-      title: story.name,
-      description: story.description,
-      category: story.category.name,
-      lang: story.lang,
-      timestamp: story.timestamp_published,
-      rating: story.rate,
-      viewcount: story.view_count,
-      url: story.url,
-      ishot: story.is_hot == "no" ? false : true,
-      isnew: story.is_new == "no" ? false : true,
-      iswriterspick: story.writers_pick == "no" ? false : true,
-      iscontestwinner: story.contest_winner == "no" ? false : true,
-      commentsenabled: story.enable_comments > 0 ? true : false,
-      ratingenabled: story.allow_vote > 0 ? true : false,
-      author: new Author({
-        id: story.user.id,
-        name: story.user.username,
-        picture: story.user.userpic,
-      })
+  extractFromSearch(item) {
+    let cached = this.stories.get(item.id);
+    if (cached)
+      return cached;
+
+    let author = this.a.extractFromSearch(item.user);
+    let story = new Story({
+      id: item.id,
+      title: item.name,
+      description: item.description,
+      category: item.category.name,
+      lang: item.lang,
+      timestamp: item.timestamp_published,
+      rating: item.rate,
+      viewcount: item.view_count,
+      url: item.url,
+      ishot: item.is_hot == "no" ? false : true,
+      isnew: item.is_new == "no" ? false : true,
+      iswriterspick: item.writers_pick == "no" ? false : true,
+      iscontestwinner: item.contest_winner == "no" ? false : true,
+      commentsenabled: item.enable_comments > 0 ? true : false,
+      ratingenabled: item.allow_vote > 0 ? true : false,
+      author: author
     });
+
+    this.stories.set(story.id, story);
+    return story;
   }
 
 }

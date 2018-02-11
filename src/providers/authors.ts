@@ -3,7 +3,6 @@ import { LoadingController, ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Rx';
 
-
 import { Author } from '../models/author';
 import { User } from './user';
 import { Api } from './api/api';
@@ -26,8 +25,9 @@ export class Authors {
     let filter = [{"property":"user_id","value": id}];
     let params = { "filter": JSON.stringify(filter).trim() };
 
-    if (this.authors.get(id))
-      return Observable.of(this.authors.get(id));
+    let cached = this.authors.get(id);
+    if (cached && cached.bio)
+      return Observable.of(cached);
     
     let loader = this.api.showLoader();
     return this.api.get('1/user-bio', params).map((data: any) => {
@@ -37,16 +37,18 @@ export class Authors {
         return null;
       }
 
-      let author = new Author({
-        id: data.user.profile.id,
-        picture: data.user.profile.userpic,
-        name: data.user.profile.username,
-        storycount: data.user.profile.submissions_count,
-        bio: data.user.profile.description
-      });
+      if (!cached)
+        cached = new Author({
+          id: data.user.profile.id,
+          picture: data.user.profile.userpic,
+          name: data.user.profile.username,
+        });
+      
+      cached.storycount = data.user.profile.submissions_count;
+      cached.bio = data.user.profile.description;
 
-      this.authors.set(author.id, author);
-      return author;
+      this.authors.set(cached.id, cached);
+      return cached;
 
     }).catch((error) => {
       if (loader) loader.dismiss();
@@ -56,18 +58,20 @@ export class Authors {
   }
   
 
-  // TODO: add unfollow buttons next to followed + add infinity scroll
   // get authors you are following
-  getFollowing() {
+  getFollowing(page?: number) {
 
     let params = {
       user_id: this.user.getId(),
       session_id: this.user.getSession(),
-      limit: 100,
-      page: 1
+      limit: 20,
+      page: page ? page:1
     };
 
-    let loader = this.api.showLoader();
+    let loader;
+    if (page && page < 2)
+      loader = this.api.showLoader();
+
     return this.api.get('2/favorites/author-list', params).map((data: any) => {
       if (loader) loader.dismiss();
       if (!data.success) {
@@ -75,19 +79,22 @@ export class Authors {
         return [];
       }
 
-      return data.users.map((author) => {
-
-        if (this.authors.get(author.id)) {
-          let a = this.authors.get(author.id);
-          a.following = true;
-          return a;
+      return data.users.map((item) => {
+        let cached = this.authors.get(item.id);
+        if (cached && cached.storycount) {
+          cached.following = true;
+          return cached;
         }
 
-        return new Author({
-          id: author.id,
-          name: author.username,
-          picture: author.userpic,
+        let author = new Author({
+          id: item.id,
+          name: item.username,
+          picture: item.userpic,
+          storycount: item.submissions_count,
+          following: true
         });
+        this.authors.set(author.id, author);
+        return author;
 
       });
 
@@ -97,5 +104,80 @@ export class Authors {
       return Observable.of([]);
     });
   }
+
+  follow(author: Author) {
+    
+    let data = new FormData();
+    data.append("user_id", this.user.getId());
+    data.append("author_id", author.id);
+    data.append("session_id", this.user.getSession());
+
+    return this.api.post('2/favorites/author-add', data, undefined, true).map((res: any) => {
+      if (!res.success) this.api.showToast();
+      return res.success;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
+    }).subscribe(d => {
+      if (d)
+        author.following = true;
+    });
+  }
+
+  unfollow(author: Author) {
+
+    let data = new FormData();
+    data.append("user_id", this.user.getId());
+    data.append("author_id", author.id);
+    data.append("session_id", this.user.getSession());
+
+    return this.api.post('2/favorites/author-remove', data, undefined, true).map((res: any) => {
+      if (!res.success) this.api.showToast();
+      return res.success;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
+    }).subscribe(d => {
+      if (d)
+        author.following = false;
+    });
+  }
+
+
+
+
+
+  extractFromFeed(item) {
+    let cached = this.authors.get(item.id);
+    if (cached)
+      return cached;
+
+    let author = new Author({
+      id: item.userid,
+      name: item.username,
+      picture: item.userpic.currentUserpic,
+      updatetimestamp: item.lastactivity,
+      jointimestamp: item.joindate,
+    });
+
+    this.authors.set(author.id, author);
+    return author;
+  }
+
+  extractFromSearch(item) {
+    let cached = this.authors.get(item.id);
+    if (cached)
+      return cached;
+
+    let author = new Author({
+      id: item.id,
+      name: item.username,
+      picture: item.userpic,
+    });
+
+    this.authors.set(author.id, author);
+    return author;
+  }
+
 
 }

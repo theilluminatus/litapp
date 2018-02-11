@@ -9,13 +9,25 @@
 
 <ion-content padding>
 
-	<ion-list>
-		<ion-item (click)="showAuthor(author)" *ngFor="let author of authors">
+	<ion-list [virtualScroll]="authors">
+		<ion-item (click)="showAuthor(author)" *virtualItem="let author">
 			<ion-avatar>
 				<ion-img [src]="author?.picture + '_default.jpg'"></ion-img>
 			</ion-avatar>
 			<h2>{{author.name}}</h2>
+
+			<ion-note item-end>
+		    <button ion-button icon-only clear (click)="followToggle(author, $event)"
+	        [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate" event="press" navTooltip>
+	        <ion-icon [name]="author.following?'remove-circle':'person-add'"></ion-icon>
+	      </button>
+		  </ion-note>
+
 		</ion-item>
 	</ion-list>
+
+	<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="authors?.length > 9">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
