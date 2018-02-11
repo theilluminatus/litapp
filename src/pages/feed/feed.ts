@@ -55,43 +55,6 @@ export class FeedPage {
   	this.navCtrl.push('FollowingPage');
   }
 
-  pressTimer;
-  handlePress(item: FeedItem, event) {
-
-    if (!item.story) {
-      this.openAuthor(item.author);
-      return;
-    }
-
-    clearTimeout(this.pressTimer);
-    this.pressTimer = setTimeout(() => {
-      this.openStoryDetail(item.story);
-    }, 500)
-  }
-
-  handleClick(item: FeedItem, event) {
-
-    if (!item.story) {
-      this.openAuthor(item.author);
-      return;
-    }
-
-    clearTimeout(this.pressTimer);
-    this.openStory(item.story);
-  }
-
-  openStory(story: Story) {
-    this.navCtrl.push('StoryViewPage', {
-      story: story
-    });
-  }
-
-  openStoryDetail(story: Story) {
-    this.navCtrl.push('StoryDetailPage', {
-      story: story
-    });
-  }
-
   openAuthor(author: Author, event?) {
     if (event)
       event.stopPropagation();

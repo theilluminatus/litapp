@@ -22,21 +22,28 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
-    <ion-item *ngFor="let item of feed" (press)="handlePress(item,$event)" (click)="handleClick(item,$event)">
+  <ion-list [virtualScroll]="feed">
+    <div *virtualItem="let item">
 
-      <ion-avatar large *ngIf="!item.story">
-        <ion-img [src]="item.author.picture + '_default.jpg'"></ion-img>
-      </ion-avatar>
-      <p>
-        <a (click)="openAuthor(item.author, $event)">{{item.author.name}}</a>
-        <ng-container *ngIf="!item.story">{{ 'FEED_EDITED' | translate }} {{item.text.join(', ')}}</ng-container>
-      </p>
+      <ng-container *ngIf="!item.story; else s">
+        <ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
 
-      <h2 *ngIf="item.story">{{item.story.title}}</h2>
-      <p>{{item.timestamp*1000 | date}}</p>
+            <ion-avatar large>
+              <ion-img [src]="item.author.picture + '_default.jpg'"></ion-img>
+            </ion-avatar>
+            <p>
+              <a>{{item.author.name}}</a>
+              {{ 'FEED_EDITED' | translate }} {{item.text.join(', ')}}
+            </p>
+            
+        </ion-item>
+      </ng-container>
+        
+      <ng-template #s>
+        <story-list-item [story]="item.story"></story-list-item>
+      </ng-template>
       
-    </ion-item>
+    </div>
   </ion-list>
 
   <ion-infinite-scroll [enabled]="enableInfinite" (ionInfinite)="loadMore($event)">

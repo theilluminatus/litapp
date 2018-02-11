@@ -14,34 +14,12 @@ story-list {
     	font-weigth: bold;
 	}
 
-	.item-inner {
-		border: none;
-	}
-
-	.item h2 + p {
-		font-size: 0.8em;
-	}
-
-	.item h2 .icon {
-		font-size: 0.8em;
-		vertical-align: middle;
-		margin: -2px 3px 0 0;
-	}
-
-	.badge {
-		margin-left: 5px;
-		font-size: 0.7em;
-		vertical-align: bottom;
-	}
-
 	.list-md .item-block .item-inner {
 		border-color: #666;
 	}
-
-	.tags {
-		overflow-x: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+	
+	.virtual-position {
+		width: 100%;
 	}
 
 }

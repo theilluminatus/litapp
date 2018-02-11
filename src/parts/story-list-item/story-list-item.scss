@@ -1,0 +1,30 @@
+story-list-item {
+
+	.item-inner {
+		width: 100%;
+		border-color: #666 !important;
+	}
+
+	.item h2 + p {
+		font-size: 0.8em;
+	}
+
+	.item h2 .icon {
+		font-size: 0.8em;
+		vertical-align: middle;
+		margin: -2px 3px 0 0;
+	}
+
+	.badge {
+		margin-left: 5px;
+		font-size: 0.7em;
+		vertical-align: bottom;
+	}
+
+	.tags {
+		overflow-x: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+}

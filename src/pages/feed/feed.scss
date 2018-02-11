@@ -1,12 +1,24 @@
 page-feed {
 
+	.author .item-inner {
+		padding: 10px 0;
+	}
+
+	.author p {
+		white-space: initial;
+	}
+
 	ion-avatar {
 		float: left;
 		margin-right: 10px;
 	}
 
-	.list-md .item-block .item-inner {
-		border-color: #666;
+	.item-inner {
+		border-color: #666 !important;
+	}
+
+	.virtual-position {
+		width: 100%;
 	}
 
 }

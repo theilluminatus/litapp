@@ -3,23 +3,21 @@ import { IonicPageModule } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
-import { StoryListPage } from './story-list';
-import { StoryListItemModule } from '../story-list-item/story-list-item.module';
+import { StoryListItem } from './story-list-item';
 import { BookmarkPopoverModule } from '../bookmark-popover/bookmark-popover.module';
 
 @NgModule({
   declarations: [
-    StoryListPage,
+    StoryListItem,
   ],
   imports: [
-    IonicPageModule.forChild(StoryListPage),
+    IonicPageModule.forChild(StoryListItem),
     TranslateModule.forChild(),
     TooltipsModule,
-    StoryListItemModule,
     BookmarkPopoverModule
   ],
   exports: [
-    StoryListPage
+    StoryListItem
   ]
 })
-export class StoryListPageModule { }
+export class StoryListItemModule { }
