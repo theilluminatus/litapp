@@ -20,11 +20,12 @@ export class FeedPage {
     public navParams: NavParams,
     public f: Feed
   ) {
-    this.refresh();
+    this.refresh(null, true);
   }
 
-  refresh(event?) {
-    this.f.query(undefined, true).subscribe((data) => {
+  refresh(event?, showloader?: boolean) {
+
+    this.f.query(undefined, showloader).subscribe((data) => {
       if (data)
         this.feed = data;
       if (event) event.complete();
@@ -37,7 +38,7 @@ export class FeedPage {
       return;
     }
 
-    this.f.query(this.feed[this.feed.length-1].id, true).subscribe((data) => {
+    this.f.query(this.feed[this.feed.length-1].id, false).subscribe((data) => {
       if (data) {
         if (!data.length) {
           event.enable(false);

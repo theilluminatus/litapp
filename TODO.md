@@ -15,18 +15,11 @@
  - find correct api route for search sorting & tags
  - better search method for tags: https://www.literotica.com/my/api/lists/submission_search?q=query&items_per_page=10&page=1&type=story
 
- - Litapp writers pick? Shorter or remove is it important?
- - Labels in storylist smaller
- - longer hold timeout
- - show lock on lists in list list
- - no loader on first feed load
  - return goes back to history on other tabs
  - fix history load effect wait for or improve speed
  - app is quickly killed? -> high ram usage?
  - Put all in memory stories in provider list and return these instead of thing on search page
  - no scroll bar visible on phone
- - search total is 1 too much?
- - Improve styling of refresher on feed page
 
  - Get data from and persist changes to server (list, following, feed)
  - Fill updatetimestamp and jointimestamp from following list

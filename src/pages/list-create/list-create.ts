@@ -27,7 +27,7 @@ export class ListCreatePage {
       id: [this.list ? this.list.id : -1 , Validators.required],
       name: [this.list ? this.list.name : '', Validators.required],
       description: [this.list ? this.list.description : ''],
-      visibility: [this.list ? this.list.visibility : 'public'],
+      visibility: [this.list ? this.list.visibility : null],
     });
   }
 

@@ -30,9 +30,9 @@
   <h2>{{'DETAILS' | translate}}</h2>
 
   <p>
-    <ion-badge *ngIf="story.iswriterspick" color="green">{{'WRITER_TAG' | translate}}'s Pick</ion-badge>
     <ion-badge *ngIf="story.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
     <ion-badge *ngIf="story.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>
+    <ion-badge *ngIf="story.iswriterspick" color="green">{{'WRITER_TAG' | translate}}</ion-badge>
     <ion-badge *ngIf="story.isnew" color="yellow">{{'NEW_TAG' | translate}}</ion-badge>
   </p>
 

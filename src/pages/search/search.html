@@ -6,7 +6,7 @@
 		</button>
 		<ion-title>
 			{{ 'SEARCH_TITLE' | translate }}
-			<small *ngIf="totalResults">({{totalResults}})</small>
+			<small *ngIf="totalResults && currentStories.length">({{totalResults}})</small>
 		</ion-title>
 		<ion-buttons end>
 			<!-- <button end ion-button icon-only (click)="openSortPopover($event)"

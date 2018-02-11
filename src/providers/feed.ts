@@ -12,10 +12,10 @@ export class Feed {
 
   constructor(public api: Api, public storage: Storage) { }
 
-  query(lastid?: number, hide?: boolean) {
+  query(lastid?: number, showloader?: boolean) {
 
     let loader;
-    if (!hide)
+    if (showloader)
       loader = this.api.showLoader();
 
     let params = {

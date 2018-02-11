@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>
-    	<ion-icon [name]="list?.visibility=='private' ? 'lock' : ''"></ion-icon>
+    	<ion-icon [name]="!list?.visibility ? 'lock' : ''"></ion-icon>
     	{{ list?.name }}
     </ion-title>
   </ion-navbar>

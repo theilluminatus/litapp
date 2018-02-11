@@ -21,7 +21,7 @@
   <ion-list>
     <ion-item-sliding (click)="openList(list)" *ngFor="let list of lists">
       <ion-item>
-        <ion-icon [name]="list.visibility=='private' ? 'lock' : ''"></ion-icon>
+        <ion-icon [name]="!list.visibility ? 'lock' : ''"></ion-icon>
         <h2>{{list.name}}</h2>
         <p>{{list.description}}</p>
       </ion-item>
