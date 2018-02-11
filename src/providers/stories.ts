@@ -115,6 +115,7 @@ export class Stories {
         title: data.pages[0].name,
         url: data.pages[0].url,
         series: data.pages[0].series_id,
+        lang: data.pages[0].lang,
         length: data.total,
         tags: tags,
         content: data.pages.map((p) => p.content)        

@@ -55,7 +55,6 @@ export class Lists {
     });
   }
 
-  // TODO: Fix and add missing story prop (on story detail load) + also in feed
   getById(urlname: string, force?: boolean) {
     let list = this.lists.find((l) => l.urlname == urlname);
 
@@ -76,9 +75,6 @@ export class Lists {
         return new Story({
           id: s.id,
           title: s.name,
-          description: s.description,
-          // category: s.category.name, // only cat id
-          // lang: s.language, // is int instead of string
           timestamp: s.timestamp_published,
           rating: s.rate,
           viewcount: s.view_count,
