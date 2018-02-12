@@ -22,7 +22,6 @@
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/android-full-screen": "^4.5.3",
-    "@ionic-native/app-minimize": "^4.5.3",
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "4.4.0",
     "@ionic-native/in-app-browser": "^4.5.3",
@@ -36,7 +35,6 @@
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "cordova-android": "7.0.0",
-    "cordova-plugin-appminimize": "^1.0.0",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-fullscreen": "^1.2.0",
     "cordova-plugin-inappbrowser": "^2.0.2",
@@ -72,8 +70,7 @@
       "cordova-plugin-fullscreen": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-x-toast": {},
-      "cordova-plugin-x-socialsharing": {},
-      "cordova-plugin-appminimize": {}
+      "cordova-plugin-x-socialsharing": {}
     },
     "platforms": [
       "android"
