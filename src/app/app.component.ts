@@ -21,14 +21,24 @@ import { Settings } from '../providers/providers';
 
       <ion-content>
         <ion-list>
-          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-            {{p.title}}
+
+          <button menuClose ion-item (click)="openPage('TabsPage')">
+            {{'MENU_HOME' | translate}}
           </button>
+
+          <button menuClose ion-item (click)="openPage('AccountPage')">
+            {{'MENU_ACCOUNT' | translate}}
+          </button>
+
+          <button menuClose ion-item (click)="openPage('SettingsPage')">
+            {{'MENU_SETTINGS' | translate}}
+          </button>          
+
         </ion-list>
       </ion-content>
 
     </ion-menu>
-    <ion-nav #content [root]="pages[0].component"></ion-nav>
+    <ion-nav #content root="TabsPage"></ion-nav>
 
 
   `
@@ -36,12 +46,6 @@ import { Settings } from '../providers/providers';
 export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
-
-  pages: any[] = [
-    { title: 'Home', component: 'TabsPage' },
-    { title: 'Account', component: 'AccountPage' },
-    { title: 'Settings', component: 'SettingsPage' }
-  ]
 
   constructor(
     private translate: TranslateService,
@@ -86,9 +90,9 @@ export class MyApp {
   }
 
   openPage(page) {
-    if (this.pages.indexOf(page) == 0)
-      this.nav.setRoot(page.component);
+    if (page.title == 'TabsPage')
+      this.nav.setRoot(page);
     else
-      this.nav.push(page.component);
+      this.nav.push(page);
   }
 }

@@ -2,6 +2,10 @@
   "BACK_BUTTON_TEXT": "Back",
   "CONFIRM": "Are you sure?",
 
+  "MENU_HOME": "Home",
+  "MENU_ACCOUNT": "Account",
+  "MENU_SETTINGS": "Settings",
+
   "ACCOUNT_TITLE": "Account",
   "NAME": "Name",
   "EMAIL": "Email",
