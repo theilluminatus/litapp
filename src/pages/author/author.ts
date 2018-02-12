@@ -6,7 +6,6 @@ import { User } from '../../providers/providers';
 import { Stories } from '../../providers/providers';
 import { Authors } from '../../providers/providers';
 import { Author } from '../../models/author';
-import { Story } from '../../models/story';
 
 @IonicPage()
 @Component({

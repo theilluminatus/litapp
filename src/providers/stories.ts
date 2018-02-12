@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 
 import { Story } from '../models/story';
-import { Author } from '../models/author';
 import { STORY_KEY } from './db';
 import { Authors } from './authors';
 import { User } from './user';

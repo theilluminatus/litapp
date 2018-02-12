@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FeedItem } from '../../models/feeditem';
-import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 import { Feed } from '../../providers/providers';
 

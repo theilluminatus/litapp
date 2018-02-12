@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 
 @Component({
