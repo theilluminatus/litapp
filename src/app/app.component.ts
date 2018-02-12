@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
+import { Globals } from '../providers/providers';
 import { Stories } from '../providers/providers';
 import { Feed } from '../providers/providers';
 import { Settings } from '../providers/providers';
@@ -50,10 +51,12 @@ export class MyApp {
     platform: Platform,
     settings: Settings,
     private config: Config,
+    public g: Globals,
     public s: Stories,
     public f: Feed
   ) {
     this.initTranslate();
+    this.g.checkForUpdates();
   }
 
   initTranslate() {

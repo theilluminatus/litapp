@@ -10,12 +10,13 @@ export class Api {
   urls = [
     'https://www.literotica.com/api',
     'https://search.literotica.com/api',
-    'https://www.literotica.com'
+    'https://www.literotica.com',
+    'https://raw.githubusercontent.com/theilluminatus/litapp/master/'
   ];
   
-  // TODO: ask for apikey and appid on first boot and put in storage
-  apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
-  appid: string = '24b7c3f9d904ebd679299b1ce5506bc305a5ab40';
+  // apikeys and appid are always the same
+  public apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
+  public appid: string = '24b7c3f9d904ebd679299b1ce5506bc305a5ab40';
 
   translations;
   loader;
@@ -84,14 +85,14 @@ export class Api {
     return this.loader;
   }
 
-  showToast(text?: string) {
+  showToast(text?: string, timeout?: number) {
     this.translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
       this.translations = values;
       let toast = this.toastCtrl.create({
-        message: (text ? "Error: "+text : this.translations.LOAD_ERROR),
+        message: (text ? text : this.translations.LOAD_ERROR),
         showCloseButton: true,
         closeButtonText: this.translations.CLOSE_BUTTON,
-        duration: 3000
+        duration: timeout ? timeout : 3000
       });
       toast.present();
     });
