@@ -1,6 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
@@ -15,7 +13,7 @@ import { Settings } from '../providers/providers';
     <ion-menu [content]="content">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Litero</ion-title>
+          <ion-title>Literotica <small>(unofficial)</small></ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -52,15 +50,9 @@ export class MyApp {
     platform: Platform,
     settings: Settings,
     private config: Config,
-    private statusBar: StatusBar,
-    private splashScreen: SplashScreen,
     public s: Stories,
     public f: Feed
   ) {
-    platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
     this.initTranslate();
   }
 

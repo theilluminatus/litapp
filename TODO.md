@@ -1,6 +1,5 @@
 # TODO
 
- - rebrand
  - Split story pages so no vertical scrolling occurs?
  - hide tabs and search bar when scrolling on search page?
 

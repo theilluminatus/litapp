@@ -98,7 +98,6 @@ export class Lists {
   }
 
 
-  // TODO: send add & remove story from list to server
   addStory(list: List, story: Story) {
 
     let path = list.urlname + "/" + story.id;
