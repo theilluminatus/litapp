@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { BookmarkPopover } from './bookmark-popover';
 
@@ -12,7 +13,8 @@ import { BookmarkPopover } from './bookmark-popover';
   imports: [
     IonicPageModule.forChild(BookmarkPopover),
     TranslateModule.forChild(),
-    TooltipsModule
+    TooltipsModule,
+    NgPipesModule
   ],
   entryComponents: [
     BookmarkPopover,

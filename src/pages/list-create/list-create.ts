@@ -29,10 +29,10 @@ export class ListCreatePage {
       this.isNew = false;
 
     this.form = fb.group({
-      id: [list ? list.id : -1 , Validators.required],
+      urlname: [list ? list.urlname : ""],
       name: [list ? list.name : '', Validators.required],
-      description: [list ? list.description : ''],
-      visibility: [list ? list.visibility : null],
+      description: [list ? list.description : '', Validators.required],
+      visibility: [list ? "'"+list.visibility+"'" : "'true'"]
     });
   }
 
@@ -41,14 +41,13 @@ export class ListCreatePage {
   }
 
   done() {
-    
     if (!this.form.valid) return;
 
     let templist = new List({
-      id: this.form.value.id,
+      urlname: this.form.value.urlname,
       name: this.form.value.name,
       description: this.form.value.description,
-      visibility: this.form.value.visibility
+      visibility: this.form.value.visibility == "'true'" ? true:false
     });
 
     if (this.isNew) {

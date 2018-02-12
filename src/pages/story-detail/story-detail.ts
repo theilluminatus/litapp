@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { Story } from '../../models/story';
@@ -20,6 +20,7 @@ export class StoryDetailPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private popoverCtrl: PopoverController,
     public stories: Stories,
     public user: User,
     private socialSharing: SocialSharing
@@ -70,6 +71,16 @@ export class StoryDetailPage {
   search(query: string) {
     this.navCtrl.push("SearchPage", {
       query: query
+    });
+  }
+
+  openListPicker(ev: UIEvent) {
+    let popover = this.popoverCtrl.create("BookmarkPopover", {
+      story: this.story
+    });
+
+    popover.present({
+      ev: ev
     });
   }
 

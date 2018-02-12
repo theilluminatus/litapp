@@ -68,8 +68,8 @@ export class Api {
     return this.http.put(this.urls[0] + '/' + endpoint, body, reqOpts);
   }
 
-  delete(endpoint: string, reqOpts?: any) {
-    return this.http.delete(this.urls[0] + '/' + endpoint, reqOpts);
+  delete(endpoint: string, reqOpts?: any, urlIndex?: number) {
+    return this.http.delete(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {

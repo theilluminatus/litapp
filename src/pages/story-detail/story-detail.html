@@ -5,6 +5,12 @@
     <ion-buttons end>
 
       <button ion-button icon-only
+        *ngIf="user.isLoggedIn()" (click)="openListPicker($event)"
+        [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="bookmark"></ion-icon>
+      </button>
+
+      <button ion-button icon-only
         (click)="share()"
         [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="share"></ion-icon>

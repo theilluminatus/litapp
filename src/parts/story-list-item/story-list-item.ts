@@ -28,7 +28,7 @@ export class StoryListItem {
     clearTimeout(this.pressTimer);
     this.pressTimer = setTimeout(() => {
       this.openStoryDetail(story);
-    }, 1000)
+    }, 750)
   }
 
   handleClick(story: Story, event) {

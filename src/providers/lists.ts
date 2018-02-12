@@ -42,7 +42,7 @@ export class Lists {
         description: l.description,
         visibility: !l.is_private,
         size: l.items_count,
-        isdeletable: l.is_deleteable,
+        isdeletable: l.is_deletable,
         createtimestamp: l.created_at,
         updatetimestamp: l.updated_at
       }));
@@ -79,7 +79,7 @@ export class Lists {
           description: d.list.description,
           visibility: !d.list.is_private,
           size: d.list.items_count,
-          isdeletable: d.list.is_deleteable,
+          isdeletable: d.list.is_deletable,
           createtimestamp: d.list.created_at,
           updatetimestamp: d.list.updated_at
         });
@@ -100,42 +100,135 @@ export class Lists {
 
   // TODO: send add & remove story from list to server
   addStory(list: List, story: Story) {
-    if (!list.stories) list['stories'] = [];
-    list.stories.push(story);
+
+    let path = list.urlname + "/" + story.id;
+
+    return this.api.post('my/api/lists/'+path, undefined, undefined, false, 2).map((res: any) => {
+      if (!res.success) this.api.showToast();
+      return res.success;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
+    }).subscribe(d => {
+      if (d) {
+        
+        if (!list.stories) list['stories'] = [];
+        list.stories.push(story);
+        list.size++;
+
+      }
+    });
+
   }
 
   removeStory(list: List, story: Story) {
-    if (!list.stories) return;
-    list.stories.forEach((s,i) => {
-      if (s.id == story.id)
-        list.stories.splice(i,1);
-    })
-    
-  }
 
+    let path = list.urlname + "/" + story.id;
+       
+    return this.api.delete('my/api/lists/'+path, undefined, 2).map((res: any) => {
+      if (!res.success) this.api.showToast();
+      return res.success;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
+    }).subscribe(d => {
+      if (d) {
+        
+        if (!list.stories) return;
+        list.stories.forEach((s,i) => {
+          if (s.id == story.id)
+            list.stories.splice(i,1);
+        })
+        list.size--;
 
-
-  // TODO: send list CRUD to server
-  add(list: List) {
-    this.lists.push(list);
-    return Observable.of(true);
-  }
-
-  edit(list: List) {
-    this.lists.forEach((l) => {
-      if (l.id == list.id) {
-        l.name = list.name;
-        l.description = list.description;
-        l.visibility = list.visibility;
       }
     });
-    return Observable.of(true);
   }
 
+
+
+  add(list: List) {
+
+    let data = {
+      title: list.name,
+      description: list.description,
+      is_private: !list.visibility
+    };
+
+    return this.api.post('my/api/lists', data, undefined, false, 2).map((res: any) => {
+
+      if (!res.success) {
+        this.api.showToast();
+        return false;
+      }
+
+      this.lists.push(new List({
+        id: res.list.id,
+        urlname: res.list.urlname,
+        name: res.list.title,
+        description: res.list.description,
+        visibility: !res.list.is_private,
+        size: res.list.items_count,
+        isdeletable: res.list.is_deletable,
+        createtimestamp: res.list.created_at
+      }));
+
+      return true;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
+    });
+  }
+
+
+  edit(list: List) {
+
+    let data = {
+      title: list.name,
+      description: list.description,
+      is_private: !list.visibility
+    };
+
+    return this.api.post('my/api/lists/'+list.urlname, data, undefined, false, 2).map((res: any) => {
+
+      if (!res.success) {
+        this.api.showToast(res.error);
+        return false;
+      }
+
+      this.lists.forEach((l) => {
+        if (l.urlname == list.urlname) {
+          l.name = res.list.title;
+          l.description = res.list.description;
+          l.visibility = !res.list.is_private;
+        }
+      });
+
+      return true;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
+    });
+  }
+
+
   delete(list: List) {
-    this.lists.forEach((l,i) => {
-      if (l.id == list.id)
-        this.lists.splice(i,1);
+
+    return this.api.delete('my/api/lists/'+list.urlname, {}, 2).map((res: any) => {
+      if (!res.success) {
+        this.api.showToast(res.error);
+        return false;
+      }
+
+      this.lists.forEach((l,i) => {
+        if (l.urlname == list.urlname)
+          this.lists.splice(i,1);
+      });
+
+      return true;
+    }).catch((err) => {
+      this.api.showToast();
+      return Observable.of(false);
     });
   }
 

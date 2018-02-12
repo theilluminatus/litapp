@@ -40,8 +40,10 @@ export class ListListPage {
 
   delete(list: List, item, event) {
     event.stopPropagation();
-    item.close();
-    this.l.delete(list);
+    this.l.delete(list).subscribe((d) => {
+      if (d)
+        item.close();
+    });
   }
 
 }
