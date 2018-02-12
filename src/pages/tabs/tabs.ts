@@ -5,23 +5,18 @@ import { AppMinimize } from '@ionic-native/app-minimize';
 import { Feed } from '../../providers/providers';
 import { User } from '../../providers/providers';
 
-import { Tab1Root } from '../pages';
-import { Tab2Root } from '../pages';
-import { Tab3Root } from '../pages';
-import { Tab4Root } from '../pages';
-import { Tab5Root } from '../pages';
-
 @IonicPage({priority: 'high'})
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab1Root: any = Tab1Root;
-  tab2Root: any = Tab2Root;
-  tab3Root: any = Tab3Root;
-  tab4Root: any = Tab4Root;
-  tab5Root: any = Tab5Root;
+
+  tab1Root = 'HistoryPage';
+  tab2Root = 'TopCatPage';
+  tab3Root = 'SearchPage';
+  tab4Root = 'FeedPage';
+  tab5Root = 'ListListPage';
 
   tab1Title = " ";
   tab2Title = " ";

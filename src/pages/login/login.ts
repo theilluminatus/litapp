@@ -5,7 +5,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Toast } from '@ionic-native/toast';
 
 import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
 
 
 @IonicPage()
@@ -39,7 +38,7 @@ export class LoginPage {
   login(event: UIEvent) {
     event.preventDefault();
     this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.goToRoot(null);
     }, (err) => {
       let toast = this.toastCtrl.create({
         message: this.translations.LOGIN_ERROR,
