@@ -6,7 +6,7 @@ import { List } from '../../models/list';
 import { Lists } from '../../providers/providers';
 
 
-@IonicPage()
+@IonicPage({priority: 'low'})
 @Component({
   selector: 'bookmark-popover',
   templateUrl: 'bookmark-popover.html'

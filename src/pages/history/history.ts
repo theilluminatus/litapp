@@ -8,7 +8,7 @@ import { Stories } from '../../providers/providers';
 import { Story } from '../../models/story';
 
 
-@IonicPage()
+@IonicPage({priority: 'high'})
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html',

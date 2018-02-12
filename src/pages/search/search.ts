@@ -8,7 +8,7 @@ import { STARREDQUERIES_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
 
-@IonicPage()
+@IonicPage({priority: 'high'})
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html'

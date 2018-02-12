@@ -7,7 +7,7 @@ import { Stories } from '../../providers/providers';
 import { Authors } from '../../providers/providers';
 import { Author } from '../../models/author';
 
-@IonicPage()
+@IonicPage({priority: 'low'})
 @Component({
   selector: 'page-author',
   templateUrl: 'author.html',

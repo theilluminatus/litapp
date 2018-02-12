@@ -10,7 +10,7 @@ import { Stories } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 
-@IonicPage()
+@IonicPage({priority: 'low'})
 @Component({
   selector: 'page-story-view',
   templateUrl: 'story-view.html'

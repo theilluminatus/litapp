@@ -5,7 +5,7 @@ import { FeedItem } from '../../models/feeditem';
 import { Author } from '../../models/author';
 import { Feed } from '../../providers/providers';
 
-@IonicPage()
+@IonicPage({priority: 'high'})
 @Component({
   selector: 'page-feed',
   templateUrl: 'feed.html',

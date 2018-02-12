@@ -9,7 +9,7 @@ import { Tab2Root } from '../pages';
 import { Tab3Root } from '../pages';
 import { Tab4Root } from '../pages';
 
-@IonicPage()
+@IonicPage({priority: 'high'})
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
