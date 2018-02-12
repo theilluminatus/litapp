@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Storage } from '@ionic/storage';
+import { ToastController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { USER_KEY } from './db';
 import { Api } from './api/api';
@@ -13,15 +15,33 @@ export class User {
   private user: any;
   private ready;
 
-  constructor(public api: Api, public storage: Storage) {
+  translations;
+
+  constructor(
+    public api: Api,
+    public storage: Storage,
+    public translate: TranslateService,
+    public toastCtrl: ToastController
+  ) {
 
     this.ready = new Promise((resolve, reject) => {
       this.storage.get(USER_KEY).then((data) => {
         if (data) {
           this.user = data;
           if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
-            // TODO: show message when force logout afte a year
+
             this.logout();
+            this.translate.get(['SESSIONTIMEOUT_MSG', 'CLOSE_BUTTON']).subscribe(values => {
+              this.translations = values;
+              let toast = this.toastCtrl.create({
+                message: this.translations.SESSIONTIMEOUT_MSG,
+                showCloseButton: true,
+                closeButtonText: this.translations.CLOSE_BUTTON,
+                duration: 10000
+              });
+              toast.present();
+            });
+
           }
           resolve();
         }

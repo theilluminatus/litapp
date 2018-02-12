@@ -29,6 +29,7 @@
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
   "SIGNUP_MESSAGE": "Return to the app and login after you registered on the site",
+  "SESSIONTIMEOUT_MSG": "Your login session has expired. Please log in again.",
 
   "ADD_BUTTON": "Add new",
   "DONE_BUTTON": "Done",
