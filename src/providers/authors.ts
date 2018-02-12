@@ -59,44 +59,19 @@ export class Authors {
   
 
   // get authors you are following
-  getFollowing(page?: number) {
+  getFollowing() {
 
-    let params = {
-      user_id: this.user.getId(),
-      session_id: this.user.getSession(),
-      limit: 20,
-      page: page ? page:1
-    };
-
-    let loader;
-    if (page && page < 2)
-      loader = this.api.showLoader();
-
-    return this.api.get('2/favorites/author-list', params).map((data: any) => {
+    let loader = this.api.showLoader();
+    return this.api.get('my/api/user/following', undefined, undefined, 2).map((data: any) => {
       if (loader) loader.dismiss();
-      if (!data.success) {
+      if (!data.length) {
         this.api.showToast();
         return [];
       }
 
-      return data.users.map((item) => {
-        let cached = this.authors.get(item.id);
-        if (cached && cached.storycount) {
-          cached.following = true;
-          return cached;
-        }
-
-        let author = new Author({
-          id: item.id,
-          name: item.username,
-          picture: item.userpic,
-          storycount: item.submissions_count,
-          following: true
-        });
-        this.authors.set(author.id, author);
-        return author;
-
-      });
+      return data.map((item) =>
+        this.extractFromFeed(item)
+      );
 
     }).catch((error) => {
       if (loader) loader.dismiss();
@@ -149,19 +124,22 @@ export class Authors {
 
   extractFromFeed(item) {
     let cached = this.authors.get(item.id);
-    if (cached)
+    if (cached && cached.updatetimestamp)
       return cached;
 
-    let author = new Author({
-      id: item.userid,
-      name: item.username,
-      picture: item.userpic.currentUserpic,
-      updatetimestamp: item.lastactivity,
-      jointimestamp: item.joindate,
-    });
+    if (!cached)
+      cached = new Author({
+        id: item.userid,
+        name: item.username,
+        picture: item.userpic.currentUserpic,
+      });
 
-    this.authors.set(author.id, author);
-    return author;
+    cached.updatetimestamp = item.lastactivity;
+    cached.jointimestamp = item.joindate;
+    cached.following = true;
+
+    this.authors.set(cached.id, cached);
+    return cached;
   }
 
   extractFromSearch(item) {
