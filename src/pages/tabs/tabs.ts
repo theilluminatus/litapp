@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, Platform, Tabs } from 'ionic-angular';
+import { User } from '../../providers/providers';
 import { Feed } from '../../providers/providers';
 
 @IonicPage({priority: 'high'})
@@ -28,6 +29,7 @@ export class TabsPage {
     public navCtrl: NavController,
     public translateService: TranslateService,
     public platform: Platform,
+    public user: User,
     public f: Feed
   ) {
 
