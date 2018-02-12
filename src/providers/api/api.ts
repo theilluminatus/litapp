@@ -25,11 +25,7 @@ export class Api {
     public translate: TranslateService,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController
-  ) {
-    translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
-      this.translations = values;
-    });
-  }
+  ) { }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number) {
     if (!reqOpts) {
@@ -89,14 +85,16 @@ export class Api {
   }
 
   showToast(text?: string) {
-    let toast = this.toastCtrl.create({
-      message: (text ? "Error: "+text : this.translations.LOAD_ERROR),
-      showCloseButton: true,
-      closeButtonText: this.translations.CLOSE_BUTTON,
-      duration: 3000
+    this.translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
+      this.translations = values;
+      let toast = this.toastCtrl.create({
+        message: (text ? "Error: "+text : this.translations.LOAD_ERROR),
+        showCloseButton: true,
+        closeButtonText: this.translations.CLOSE_BUTTON,
+        duration: 3000
+      });
+      toast.present();
     });
-    toast.present();
-    return toast
   }
 
 }
