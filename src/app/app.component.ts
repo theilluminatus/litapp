@@ -9,23 +9,29 @@ import { Feed } from '../providers/providers';
 import { Settings } from '../providers/providers';
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Litero</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  template: `
 
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
 
-  </ion-menu>
-  <ion-nav #content [root]="pages[0].component"></ion-nav>`
+    <ion-menu [content]="content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Litero</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            {{p.title}}
+          </button>
+        </ion-list>
+      </ion-content>
+
+    </ion-menu>
+    <ion-nav #content [root]="pages[0].component"></ion-nav>
+
+
+  `
 })
 export class MyApp {
 
@@ -48,8 +54,6 @@ export class MyApp {
     public f: Feed
   ) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -57,7 +61,6 @@ export class MyApp {
   }
 
   initTranslate() {
-    // Set the default language for translation strings, and the current language.
     this.translate.setDefaultLang('en');
     const browserLang = this.translate.getBrowserLang();
 
@@ -74,7 +77,7 @@ export class MyApp {
         this.translate.use(this.translate.getBrowserLang());
       }
     } else {
-      this.translate.use('en'); // Set your language here
+      this.translate.use('en');
     }
 
     this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
@@ -83,8 +86,9 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (this.pages.indexOf(page) == 0)
+      this.nav.setRoot(page.component);
+    else
+      this.nav.push(page.component);
   }
 }
