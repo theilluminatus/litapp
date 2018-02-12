@@ -4,7 +4,7 @@
   	<button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ 'HISTORY_TITLE' | translate }}</ion-title>
+    <ion-title>{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }}</ion-title>
     <ion-buttons end>
 
       <button end ion-button icon-only (click)="toggleDownloaded()"

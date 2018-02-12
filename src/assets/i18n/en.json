@@ -36,6 +36,7 @@
   "CLOSE_BUTTON": "Close",
 
   "HISTORY_TITLE": "History",
+  "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",
 
