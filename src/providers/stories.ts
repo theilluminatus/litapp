@@ -192,12 +192,27 @@ export class Stories {
   }
 
 
-
   download(story: Story) {
+    story.downloaded = true;
+    story.cached = true;
     this.storage.set(STORY_KEY+"_"+story.id, story);
   }
 
-  removeDownload(story: Story) {
+  undownload(story: Story) {
+    story.downloaded = false;
+    if (story.cached)
+      this.storage.set(STORY_KEY+"_"+story.id, story);
+    else
+      this.storage.remove(STORY_KEY+"_"+story.id);
+  }
+
+  cache(story: Story) {
+    story.cached = true;
+    this.storage.set(STORY_KEY+"_"+story.id, story);
+  }
+
+  uncache(story: Story) {
+    story.cached = false;
     story.downloaded = false;
     this.storage.remove(STORY_KEY+"_"+story.id);
   }

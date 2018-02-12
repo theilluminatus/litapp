@@ -65,7 +65,7 @@ export class StoryViewPage {
     });
 
     // get story from server
-    if (!this.story.downloaded) {
+    if (!this.story.cached) {
 
       this.stories.getById(this.story.id).subscribe((story) => {
         if (!story) {
@@ -78,9 +78,9 @@ export class StoryViewPage {
         this.story.length = story.length;
         this.story.tags = story.tags;
         this.story.content = story.content;
-        this.story.downloaded = true;
+        this.story.cached = true;
 
-        this.stories.download(this.story);
+        this.stories.cache(this.story);
         this.addSlides();      
       });
 
@@ -203,7 +203,7 @@ export class StoryViewPage {
     }
 
     this.story.currentpage = currentIndex;
-    this.stories.download(this.story);
+    this.stories.cache(this.story);
     this.range.setValue(currentIndex+1);
   }
 

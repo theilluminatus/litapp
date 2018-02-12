@@ -6,7 +6,13 @@
     </button>
     <ion-title>{{ 'HISTORY_TITLE' | translate }}</ion-title>
     <ion-buttons end>
-      <button *ngIf="stories.length > 0" end ion-button icon-only (click)="clearAll()"
+
+      <button end ion-button icon-only (click)="toggleDownloaded()"
+        [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate" event="press" navTooltip>
+        <ion-icon [name]="onlyDownloaded ? 'cloud' : 'cloud-download'"></ion-icon>
+      </button>
+
+      <button *ngIf="!onlyDownloaded && stories.length > 0" end ion-button icon-only (click)="clearAll()"
         [tooltip]="'HISTORY_TOOLTIP_CLEAR' | translate" event="press" navTooltip>
         <ion-icon name="trash"></ion-icon>
       </button>
@@ -17,6 +23,6 @@
 
 
 <ion-content padding>
-  <story-list [stories]="stories" (onDeleteBySwiping)="delete($event)" ishistory="true">
+  <story-list [stories]="filteredStories" (onDeleteBySwiping)="delete($event)" ishistory="true">
   </story-list>
 </ion-content>

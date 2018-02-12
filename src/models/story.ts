@@ -5,6 +5,7 @@ import { List } from './list';
 export class Story {
 
   constructor(fields: any) {
+
     // Quick and dirty extend/assign fields to this model
     for (const f in fields) {
       // @ts-ignore
@@ -39,6 +40,7 @@ export interface Story {
   iscontestwinner: boolean;
   commentsenabled: boolean;
   ratingenabled: boolean;
+  cached: boolean;
   downloaded: boolean;
   lists: List[];
   comments: {

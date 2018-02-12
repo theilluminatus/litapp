@@ -4,8 +4,6 @@
  - Split story pages so no vertical scrolling occurs?
  - Add way to see all top stories and per cat top stories
  - hide tabs and search bar when scrolling on search page?
- - re-add download stories: add toggle in history & storydetail, dont allow downloaded stories to be removed
- - save downloaded stories when adding more information
  - return goes back to history on other tabs
  - Add device notifications for new feed items + add feed new items badge
 

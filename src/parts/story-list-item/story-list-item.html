@@ -3,7 +3,8 @@
   <ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
 
     <h2>
-      <ion-icon name="checkmark" *ngIf="story?.downloaded && !ishistory"></ion-icon>
+      <ion-icon name="eye" *ngIf="story?.cached && !story?.downloaded && !ishistory"></ion-icon>
+      <ion-icon name="download" *ngIf="story?.downloaded"></ion-icon>
       {{story?.title}}
       <ion-badge *ngIf="story?.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
       <ion-badge *ngIf="story?.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>

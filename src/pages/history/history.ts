@@ -3,7 +3,7 @@ import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
-import { HISTORY_KEY } from '../../providers/db';
+import { HISTORY_KEY, STORY_KEY } from '../../providers/db';
 import { Stories } from '../../providers/providers';
 import { Story } from '../../models/story';
 
@@ -15,7 +15,9 @@ import { Story } from '../../models/story';
 })
 export class HistoryPage {
   stories: Story[] = [];
+  filteredStories: Story[] = [];
 
+  onlyDownloaded = false;
   private translations;
 
   constructor(
@@ -56,14 +58,42 @@ export class HistoryPage {
     });
   }
 
+  toggleDownloaded() {
+    this.onlyDownloaded = !this.onlyDownloaded;
+    this.updateFilter();
+  }
+
   private loadingFinished() {
     let maxNumberOfStories = 35;
+    let length = this.stories.length;
 
-    for (let i=0; i<(this.stories.length - maxNumberOfStories); i++)
-      this.delete(this.stories[i]);
+    for (let i=0; i<(length - maxNumberOfStories); i++)
+      if (!this.stories[i].downloaded)
+        this.delete(this.stories[i]);
+
+
+    this.updateFilter();
+  }
+
+  private updateFilter() {
+    
+    if (!this.onlyDownloaded) {
+      this.filteredStories = this.stories;
+      return;
+    }
+
+    this.filteredStories = [];
+    this.storage.forEach((value, key, index) => {
+      if (key.indexOf(STORY_KEY) == 0)
+        if (value.downloaded)
+          this.s.getById(value.id).subscribe((story) => {
+            this.filteredStories.push(story);
+          });
+    });
   }
 
   clearAll() {
+
     this.alertCtrl.create({
       title: this.translations.HISTORY_TOOLTIP_CLEAR,
       message: this.translations.CONFIRM,
@@ -71,22 +101,26 @@ export class HistoryPage {
         text: this.translations.OK_BUTTON,
         handler: () => {
 
+          this.onlyDownloaded = false;
           this.stories.forEach((story) => {
-            this.s.removeDownload(story);
+            if (!story.downloaded)
+              this.s.uncache(story);
           });
-          this.storage.remove(HISTORY_KEY);
           this.stories = [];
-          
+          this.storage.remove(HISTORY_KEY);
+          this.updateFilter();
+
         }},
         { text: this.translations.CANCEL_BUTTON }
       ]
     }).present();
+
   }
 
   delete(story: Story) {
 
     // remove from db
-    this.s.removeDownload(story);
+    this.s.uncache(story);
     this.storage.get(HISTORY_KEY).then((history) => {
       if (history) {
         history.forEach((id, index) => {
@@ -101,6 +135,7 @@ export class HistoryPage {
     this.stories.forEach((item,index) => {
       if (item == story) {
         this.stories.splice(index, 1);
+        this.updateFilter();
       }
     });
   }

@@ -6,7 +6,7 @@
 
   <ion-list [sliding]="ishistory">
 
-    <story-list-item *ngFor="let story of stories" [story]="story" (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"></story-list-item>
+    <story-list-item [ishistory]="ishistory" *ngFor="let story of stories" [story]="story" (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"></story-list-item>
 
   </ion-list>
 
