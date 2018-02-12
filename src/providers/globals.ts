@@ -22,7 +22,6 @@ export class Globals {
           this.globals = d;
           resolve();
         } else {
-          this.api.showToast();
           resolve();
         }
       });
