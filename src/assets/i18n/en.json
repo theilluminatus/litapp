@@ -12,9 +12,10 @@
   "SIGNUP": "Sign up",
 
   "TAB1_TITLE": "History",
-  "TAB2_TITLE": "Search",
-  "TAB3_TITLE": "Feed",
-  "TAB4_TITLE": "Lists",
+  "TAB2_TITLE": "Top",
+  "TAB3_TITLE": "Search",
+  "TAB4_TITLE": "Feed",
+  "TAB5_TITLE": "Lists",
 
   "SETTINGS_TITLE": "Settings",
 
@@ -86,9 +87,12 @@
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
 
+  "TOPLIST_TITLE_PART": "Top stories of",
+
   "DETAILS": "Details",
   "AUTHOR": "Author",
   "CATEGORY": "Category",
+  "CATEGORIES": "Categories",
   "TAGS": "Tags",
   "RATING": "Rating",
   "LENGTH": "Length",

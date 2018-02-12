@@ -5,3 +5,4 @@ export const HISTORY_KEY: string = '_history';
 export const STORY_KEY: string = '_story';
 export const USER_KEY: string = '_user';
 export const FEED_KEY: string = '_feed';
+export const GLOBALS_KEY: string = '_globals';

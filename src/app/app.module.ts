@@ -19,6 +19,7 @@ import { Stories } from '../providers/providers';
 import { Authors } from '../providers/providers';
 import { Lists } from '../providers/providers';
 import { Feed } from '../providers/providers';
+import { Globals } from '../providers/providers';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
@@ -72,6 +73,7 @@ export function provideSettings(storage: Storage) {
     Authors,
     Lists,
     Feed,
+    Globals,
     User,
     AndroidFullScreen,
     InAppBrowser,

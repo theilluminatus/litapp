@@ -3,6 +3,7 @@ import { Stories } from './stories';
 import { Authors } from './authors';
 import { Lists } from './lists';
 import { Feed } from './feed';
+import { Globals } from './globals';
 import { Settings } from './settings/settings';
 import { User } from './user';
 
@@ -12,6 +13,7 @@ export {
     Authors,
     Lists,
     Feed,
+    Globals,
     Settings,
     User
 };

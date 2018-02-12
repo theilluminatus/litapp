@@ -1,0 +1,14 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      {{'TOPLIST_TITLE_PART' | translate}} {{ cat.name }}
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<story-list [stories]="stories" infinite="true" (ionInfinite)="loadMore($event)"></story-list>
+</ion-content>

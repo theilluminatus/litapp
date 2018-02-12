@@ -1,9 +1,10 @@
 <ion-tabs #tabs>
   <ion-tab tabsHideOnSubPages="true" [root]="tab1Root" [tabTitle]="tab1Title" tabIcon="book"></ion-tab>
-  <ion-tab tabsHideOnSubPages="true" [root]="tab2Root" [tabTitle]="tab2Title" tabIcon="search"></ion-tab>
+  <ion-tab tabsHideOnSubPages="true" [root]="tab2Root" [tabTitle]="tab2Title" tabIcon="stats"></ion-tab>
+  <ion-tab tabsHideOnSubPages="true" [root]="tab3Root" [tabTitle]="tab3Title" tabIcon="search"></ion-tab>
   
   <ng-container *ngIf="user.isLoggedIn()">
-  	<ion-tab tabsHideOnSubPages="true"[root]="tab3Root" [tabTitle]="tab3Title" tabIcon="filing"></ion-tab>
-  	<ion-tab tabsHideOnSubPages="true"[root]="tab4Root" [tabTitle]="tab4Title" tabIcon="list"></ion-tab>
+  	<ion-tab tabsHideOnSubPages="true"[root]="tab4Root" [tabTitle]="tab4Title" tabIcon="filing"></ion-tab>
+  	<ion-tab tabsHideOnSubPages="true"[root]="tab5Root" [tabTitle]="tab5Title" tabIcon="list"></ion-tab>
   </ng-container>
 </ion-tabs>
