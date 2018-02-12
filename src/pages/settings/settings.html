@@ -14,8 +14,8 @@
   <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list>
       <ion-item>
-        <ion-label>Setting 1</ion-label>
-        <ion-toggle formControlName="autoloadnextinseries"></ion-toggle>
+        <ion-label>{{'SETTINGS_CHECKFORFEEDUPDATES' | translate}}</ion-label>
+        <ion-toggle formControlName="checkforfeedupdates"></ion-toggle>
       </ion-item>
     </ion-list>
   </form>

@@ -4,7 +4,7 @@
   <ion-tab tabsHideOnSubPages="true" [root]="tab3Root" [tabTitle]="tab3Title" tabIcon="search"></ion-tab>
   
   <ng-container *ngIf="user.isLoggedIn()">
-  	<ion-tab tabsHideOnSubPages="true"[root]="tab4Root" [tabTitle]="tab4Title" tabIcon="filing"></ion-tab>
+  	<ion-tab tabsHideOnSubPages="true"[root]="tab4Root" [tabTitle]="tab4Title" tabIcon="filing" [tabBadge]="f.feedbadge!='' && f.feedbadge!=0 ? f.feedbadge : ''"></ion-tab>
   	<ion-tab tabsHideOnSubPages="true"[root]="tab5Root" [tabTitle]="tab5Title" tabIcon="list"></ion-tab>
   </ng-container>
 </ion-tabs>

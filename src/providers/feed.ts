@@ -3,23 +3,77 @@ import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 
 import { FeedItem } from '../models/feeditem';
-import { Author } from '../models/author';
 import { Stories } from './stories';
 import { Authors } from './authors';
+import { User } from './user';
+import { Settings } from './settings/settings';
 import { FEED_KEY } from './db';
 import { Api } from './api/api';
 
 @Injectable()
 export class Feed {
 
+  private ready;
+  private timeout = 1000*60*10;
+  private feed;
+  private feedtimeout = (new Date()).getTime() + this.timeout;
+
+  feedbadge = "";
+
   constructor(
     public api: Api,
     public s: Stories,
     public a: Authors,
+    public user: User,
+    public settings: Settings,
     public storage: Storage
-  ) { }
+  ) {
+
+    this.ready = new Promise((resolve, reject) => {
+
+      Promise.all([
+        this.settings.load(),
+        this.user.onReady()
+      ]).then(() => {
+
+        if (!this.settings.allSettings.checkforfeedupdates) {
+          resolve();
+          return;
+        }
+
+        this.query().subscribe((d) => {
+
+          if (d && this.user.isLoggedIn())
+            this.storage.get(FEED_KEY).then((id) => {
+              for (let i=0; i<d.length; i++) {
+                if (id == d[i].id) {
+                  this.feedbadge = String(i);
+                  break;
+                }
+              }
+              if (this.feedbadge == "") this.feedbadge = "15+";
+              resolve();
+            });
+
+          else resolve();
+        });
+
+      });
+    });
+
+  }
+
+  onReady() {
+    return this.ready;
+  }
 
   query(lastid?: number, showloader?: boolean) {
+
+    if ( !lastid && this.feed && (new Date).getTime() < this.feedtimeout)
+      return Observable.of(this.feed);
+
+    if (!lastid || !this.feed)
+      this.feed = [];
 
     let loader;
     if (showloader)
@@ -48,7 +102,8 @@ export class Feed {
         });
       });
 
-      this.storage.set(FEED_KEY, items[0].id);
+      items.forEach(i => this.feed.push(i));
+      this.feedtimeout = (new Date).getTime() + this.timeout;
       return items;
 
     }).catch((error) => {

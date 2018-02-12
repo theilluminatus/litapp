@@ -39,7 +39,7 @@ export function provideSettings(storage: Storage) {
    * these values will not overwrite the saved values (this can be done manually if desired).
    */
   return new Settings(storage, {
-    autoloadnextinseries: true
+    checkforfeedupdates: false
   });
 }
 

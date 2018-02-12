@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
+import { Stories } from '../providers/providers';
+import { Feed } from '../providers/providers';
 import { Settings } from '../providers/providers';
 
 @Component({
@@ -32,10 +34,19 @@ export class MyApp {
   pages: any[] = [
     { title: 'Home', component: 'TabsPage' },
     { title: 'Account', component: 'AccountPage' },
-    // { title: 'Settings', component: 'SettingsPage' }
+    { title: 'Settings', component: 'SettingsPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(
+    private translate: TranslateService,
+    platform: Platform,
+    settings: Settings,
+    private config: Config,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    public s: Stories,
+    public f: Feed
+  ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

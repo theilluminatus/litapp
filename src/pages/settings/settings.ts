@@ -33,7 +33,7 @@ export class SettingsPage {
 
       // add settings here & in html
       this.form = this.formBuilder.group({
-        autoloadnextinseries: [this.options.autoloadnextinseries]
+        checkforfeedupdates: [this.options.checkforfeedupdates]
       });
 
       this.form.valueChanges.subscribe((v) => {

@@ -18,6 +18,7 @@
   "TAB5_TITLE": "Lists",
 
   "SETTINGS_TITLE": "Settings",
+  "SETTINGS_CHECKFORFEEDUPDATES": "Automatically check for feed updates",
 
   "LOAD_ERROR": "Error while communicating with server",
 

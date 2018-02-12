@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, Platform, Tabs } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
+import { Feed } from '../../providers/providers';
 import { User } from '../../providers/providers';
 
 import { Tab1Root } from '../pages';
@@ -34,6 +35,7 @@ export class TabsPage {
     public navCtrl: NavController,
     public translateService: TranslateService,
     public platform: Platform,
+    public f: Feed,
     public user: User,
     private appMinimize: AppMinimize
   ) {

@@ -35,6 +35,7 @@
               <a>{{item.author.name}}</a>
               {{ 'FEED_EDITED' | translate }} {{item.text.join(', ')}}
             </p>
+            <p>{{item.timestamp*1000 | date}}</p>
             
         </ion-item>
       </ng-container>

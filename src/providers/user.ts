@@ -11,17 +11,27 @@ import { Api } from './api/api';
 export class User {
 
   private user: any;
+  private ready;
 
   constructor(public api: Api, public storage: Storage) {
-    this.storage.get(USER_KEY).then((data) => {
-      if (data) {
-        this.user = data;
-        if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
-          // TODO: show message when force logout afte a year
-          this.logout();
+
+    this.ready = new Promise((resolve, reject) => {
+      this.storage.get(USER_KEY).then((data) => {
+        if (data) {
+          this.user = data;
+          if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
+            // TODO: show message when force logout afte a year
+            this.logout();
+          }
+          resolve();
         }
-      }
+      });
     });
+
+  }
+
+  onReady() {
+    return this.ready;
   }
 
   login(info: any) {

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { FeedItem } from '../../models/feeditem';
 import { Author } from '../../models/author';
 import { Feed } from '../../providers/providers';
+import { FEED_KEY } from '../../providers/db';
 
 @IonicPage({priority: 'high'})
 @Component({
@@ -18,16 +20,20 @@ export class FeedPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public f: Feed
+    public storage: Storage,
+    public f: Feed,
   ) {
-    this.refresh(null, true);
+    this.f.onReady().then(() => this.refresh(null, true));
   }
 
   refresh(event?, showloader?: boolean) {
     this.enableInfinite = true;
     this.f.query(undefined, showloader).subscribe((data) => {
-      if (data)
+      if (data && data.length) {
         this.feed = data;
+        this.storage.set(FEED_KEY, data[0].id);
+        this.f.feedbadge = "";
+      }
       if (event) event.complete();
     });
   }
