@@ -3,7 +3,7 @@
  - rebrand
  - Split story pages so no vertical scrolling occurs?
  - hide tabs and search bar when scrolling on search page?
- - fix cannot load top on android
+ - fix error translations dont work
 
  - check if apikey & appid are always the same + ask on first start if not
  - find correct api route for story comments

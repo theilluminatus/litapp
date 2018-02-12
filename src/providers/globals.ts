@@ -23,7 +23,7 @@ export class Globals {
           resolve();
         } else {
           this.api.showToast();
-          reject();
+          resolve();
         }
       });
     });
