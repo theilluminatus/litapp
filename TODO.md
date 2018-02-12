@@ -4,7 +4,6 @@
  - Split story pages so no vertical scrolling occurs?
  - Add way to see all top stories and per cat top stories
  - hide tabs and search bar when scrolling on search page?
- - return goes back to history on other tabs
  - Add device notifications for new feed items + add feed new items badge
 
  - check if apikey & appid are always the same + ask on first start if not
