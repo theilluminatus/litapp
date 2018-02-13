@@ -38,7 +38,7 @@ export class LoginPage {
   login(event: UIEvent) {
     event.preventDefault();
     this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.goToRoot(null);
+      setTimeout(() => this.navCtrl.goToRoot(null) , 500);
     }, (err) => {
       let toast = this.toastCtrl.create({
         message: this.translations.LOGIN_ERROR,

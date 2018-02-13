@@ -43,8 +43,8 @@ export class User {
             });
 
           }
-          resolve();
         }
+        resolve();
       });
     });
 
