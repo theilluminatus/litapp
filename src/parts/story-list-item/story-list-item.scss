@@ -3,10 +3,19 @@ story-list-item {
 	.item-inner {
 		width: 100%;
 		border-color: #666 !important;
+		font-size: 0.9em;
+	}
+
+	.item h2 {
+		font-size: 1em;
+	}
+
+	.item p {
+		font-size: 0.9em;
 	}
 
 	.item h2 + p {
-		font-size: 0.8em;
+		font-style: italic;
 	}
 
 	.item h2 .icon {
@@ -25,6 +34,15 @@ story-list-item {
 		overflow-x: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+	}
+
+	.note .button {
+		font-size: 0.9em;
+		margin: 0;
+	}
+
+	.note .button .icon {
+		padding: 0 0.1em;
 	}
 
 }
