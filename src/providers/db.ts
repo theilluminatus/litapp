@@ -6,3 +6,4 @@ export const STORY_KEY: string = '_story';
 export const USER_KEY: string = '_user';
 export const FEED_KEY: string = '_feed';
 export const GLOBALS_KEY: string = '_globals';
+export const VERSION_KEY: string = '_version';

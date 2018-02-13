@@ -4,7 +4,8 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Api } from './api/api';
-import { GLOBALS_KEY } from './db';
+import { User } from './user';
+import { GLOBALS_KEY, VERSION_KEY } from './db';
 
 @Injectable()
 export class Globals {
@@ -15,9 +16,19 @@ export class Globals {
 
   constructor(
     public api: Api,
+    public user: User,
     public storage: Storage,
     public translate: TranslateService,
-    ) {
+  ) {
+
+    this.storage.get(VERSION_KEY).then((v) => {
+      if (v)
+        if (v != this.version)
+          this.user.logout();
+
+      this.storage.set(VERSION_KEY, this.version);
+    });
+
 
     this.ready = new Promise((resolve, reject) => {
       this.storage.get(GLOBALS_KEY).then((d) => {
