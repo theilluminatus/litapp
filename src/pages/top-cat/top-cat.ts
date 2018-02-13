@@ -14,10 +14,8 @@ export class TopCatPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public g: Globals) {
     this.g.onReady().then(() => {
-      this.g.getCategories().subscribe((cats) => {
-        this.categories = cats;
-        this.categories.unshift({ id: 0, name: "All", description: "All categories" });
-      })
+      this.categories = this.g.getCategories();
+      this.categories.unshift({ id: 0, name: "All", description: "All categories" });
     });
   }
 

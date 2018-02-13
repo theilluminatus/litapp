@@ -6,6 +6,7 @@ import { Story } from '../models/story';
 import { STORY_KEY } from './db';
 import { Authors } from './authors';
 import { User } from './user';
+import { Globals } from './globals';
 import { Api } from './api/api';
 
 @Injectable()
@@ -18,6 +19,7 @@ export class Stories {
     public api: Api,
     public a: Authors,
     public user: User,
+    public g: Globals,
     public storage: Storage
   ) {
 
@@ -239,6 +241,8 @@ export class Stories {
       id: item.what.id,
       title: item.what.name,
       description: item.what.description,
+      category: this.g.getCategory(item.what.category_id),
+      lang: this.g.getLanguage(item.what.language),
       timestamp: item.what.timestamp_published,
       rating: item.what.rate,
       viewcount: item.what.view_count,
@@ -266,6 +270,9 @@ export class Stories {
     let story = new Story({
       id: item.id,
       title: item.name,
+      description: item.description,
+      category: this.g.getCategory(item.category_id),
+      lang: this.g.getLanguage(item.language),
       timestamp: item.timestamp_published,
       rating: item.rate,
       viewcount: item.view_count,

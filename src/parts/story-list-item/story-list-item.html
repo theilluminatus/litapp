@@ -12,12 +12,12 @@
       <ion-badge *ngIf="story?.isnew" color="yellow">{{'NEW_TAG' | translate}}</ion-badge>
     </h2>
 
-    <p>{{story?.description}}</p>
+    <p>{{story?.description}} ({{story?.lang}})</p>
     <p>
       <ion-icon name="star"></ion-icon> {{story?.rating}}
       ({{story?.viewcount > 1000 ? Math.round(story?.viewcount/1000)+'k' : story?.viewcount}})
-      <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story?.author, $event)">{{story?.author.name}}</a> </em>
-      {{ 'ATTIMESTAMP' | translate }} {{(story?.timestamp*1000) | date }}
+      <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story?.author, $event)">{{story?.author.name}}</a></em>
+      {{ 'ONTIMESTAMP' | translate }} {{(story?.timestamp*1000) | date:'yyyy-MM-dd' }}
     </p>
 
     <p class="tags">

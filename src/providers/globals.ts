@@ -25,7 +25,9 @@ export class Globals {
           this.globals = d;
           resolve();
         } else {
-          resolve();
+          this.query().subscribe(() => {
+            resolve();
+          });
         }
       });
     });
@@ -36,15 +38,31 @@ export class Globals {
     return this.ready;
   }
 
+  // these getters assume globals has already been cached and loaded
   getCategories() {
-    return this.query().map((d) => {
-      let array = [];
-      for (let i in d.categories)
-        array.push(d.categories[i]);
-
-      return array;
-    });
+    if (this.globals.categories)
+      return Object.keys(this.globals.categories).map((i) => {
+          return this.globals.categories[i];
+      });
+    return [];
   }
+
+  getCategory(id: number) {
+    if (this.globals.categories)
+      return this.globals.categories[id].name;
+    return null;
+  }
+
+  getLanguage(id: number) {
+    if (this.globals.languages)
+      return Object.keys(this.globals.languages).filter((i) => {
+        let lang = this.globals.languages[i];
+        if (parseInt(lang.id) == id)
+          return lang.shortname;
+      })[0];
+    return null;
+  }
+
 
   checkForUpdates() {
 
