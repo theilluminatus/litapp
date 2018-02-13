@@ -52,7 +52,7 @@ export class StoryViewPage {
   ) {
 
     this.dir = platform.dir();
-    this.slidesPerView = platform.isPortrait() ? 1 : 2;
+    // this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
 
     translate.get(['STORY_ENDOFSERIES', 'CLOSE_BUTTON']).subscribe(values => {
