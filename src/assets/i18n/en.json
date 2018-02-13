@@ -69,8 +69,8 @@
 
   "STORYLIST_EMPTY": "There are no stories here",
 
-  "STORYDETAIL_SERIES": "See other stories in series",
-  "STORYDETAIL_RELATED": "See related stories",
+  "STORYDETAIL_SERIES": "Complete series",
+  "STORYDETAIL_RELATED": "Related stories",
   "STORYDETAIL_RATE": "Rate",
   "STORYDETAIL_RATETITLE": "Rate story",
   "STORYDETAIL_TOOLTIP_DOWNLOAD": "Toggle download story",

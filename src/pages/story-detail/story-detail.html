@@ -33,10 +33,14 @@
   <p>{{story.description}}</p>
 
   <p *ngIf="story.series > 0">
-    <a (click)="showSeries()">{{'STORYDETAIL_SERIES' | translate }}</a>
-  </p>
-  <p>
-    <a (click)="showRelated()">{{'STORYDETAIL_RELATED' | translate }}</a>
+    <button ion-button (click)="showSeries()">
+      <ion-icon name="albums"></ion-icon>&nbsp;
+      {{'STORYDETAIL_SERIES' | translate }}
+    </button>
+    <button ion-button (click)="showRelated()">
+      <ion-icon name="pricetags"></ion-icon>&nbsp;
+      {{'STORYDETAIL_RELATED' | translate }}
+    </button>
   </p>
 
   <h2>{{'DETAILS' | translate}}</h2>
