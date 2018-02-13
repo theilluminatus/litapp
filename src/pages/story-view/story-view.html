@@ -1,4 +1,4 @@
-<ion-header [style.top]="fullscreen ? '-50px' : 0" no-border>
+<ion-header [class]="fullscreen ? 'fullscreen': ''" no-border>
   <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
     <ion-title>
         {{ story.title }}
@@ -20,7 +20,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content fullscreen [style.top]="fullscreen ? 0 : '50px'">
+<ion-content fullscreen="true">
 
   <ion-slides #slidesElement (ionSlideDidChange)="slideChanged()" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color" (click)="clickSlides($event)">
     <ion-slide *ngFor="let slide of slides"
@@ -31,21 +31,22 @@
       [style.background]="settings.background"
       [style.color]="settings.color">
 
-      <p [innerHTML]="slide.content" [style.marginBottom]="fullscreen ? 0 : '90px'"></p>
+      <p [innerHTML]="slide.content"></p>
     </ion-slide>
   </ion-slides>
 
-  <div class="pagination {{fullscreen ? 'hidden': ''}}"
-    [style.background]="settings.background"
-    [style.color]="settings.color">
-
-    <button ion-button icon-only clear (click)="showPopover($event)">
-      <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
-    </button>
-
-    <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
-      *ngIf="slides.length > 1" pin="true" [snaps]="slides.length < 15" step="1" min="1" [max]="slides.length"></ion-range>
-
-    <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
-  </div>
 </ion-content>
+
+<div class="pagination {{fullscreen ? 'fullscreen': ''}}"
+  [style.background]="settings.background"
+  [style.color]="settings.color">
+
+  <button ion-button icon-only clear (click)="showPopover($event)">
+    <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
+  </button>
+
+  <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
+    *ngIf="slides.length > 1" pin="true" [snaps]="slides.length < 15" step="1" min="1" [max]="slides.length"></ion-range>
+
+  <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
+</div>

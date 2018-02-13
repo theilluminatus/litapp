@@ -1,7 +1,14 @@
 page-story-view {
 
-  .header {
-    transition: top 0.5s;
+  ion-header {
+    opacity: 1;
+    top: 0;
+    transition: opacity 0.5s, top 0.5s;
+  }
+
+  ion-header.fullscreen {
+    top: -50px;
+    opacity: 0;
   }
 
   .toolbar-background {
@@ -45,18 +52,23 @@ page-story-view {
 
   p {
     margin: 0;
+    padding: 55px 20px 45px 20px;
+    transition: padding 0.5s;
+  }
+
+  p.fullscreen {
     padding: 20px;
-    // white-space: pre-wrap;
   }
 
   .pagination {
     position: absolute;
     right: 0;
-    bottom: 50px;
+    bottom: 0;
     left: 0;
     z-index: 1;
     padding: 0 10px;
-    animation: slideUpShow 0.5s;
+    opacity: 1;
+    transition: opacity 0.5s, bottom 0.5s;
     display: flex;
     flex-flow: row no-wrap;
     justify-content: space-around;
@@ -78,20 +90,9 @@ page-story-view {
     }
   }
 
-  .pagination.hidden {
-    animation: slideDownRemove 0.5s;
-    bottom: 0;
-    visibility: hidden;
-  }
-
-  @keyframes slideUpShow { 
-    0% { bottom: -40px; }
-    100% { bottom: 50px; }
-  }
-
-  @keyframes slideDownRemove { 
-    0% { visibility: visible; bottom: 50px; }
-    100% { bottom: -40px; visibility: hidden; }
+  .pagination.fullscreen {
+    opacity: 0;
+    bottom: -50px;
   }
 
 }

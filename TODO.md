@@ -7,7 +7,6 @@
  - find correct api route for story comments
  - find better api route for getting author following status together with bio
  - find api route for search sorting
- - Toggle fullscreen slow on many pages
 
 
 ## Also check TODOs in files!
