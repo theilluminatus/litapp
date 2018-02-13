@@ -64,13 +64,16 @@ export class HistoryPage {
   }
 
   private loadingFinished() {
-    let maxNumberOfStories = 35;
-    let length = this.stories.length;
+    let maxNumberOfStories = 30;
+    let toRemove = this.stories.filter((story, i) => {
+      if (i > maxNumberOfStories-1)
+        return story;
+    });
 
-    for (let i=0; i<(length - maxNumberOfStories); i++)
-      if (!this.stories[i].downloaded)
-        this.delete(this.stories[i]);
-
+    toRemove.forEach((story) => {
+      if (!story.downloaded)
+        this.delete(story);
+    });
 
     this.updateFilter();
   }
