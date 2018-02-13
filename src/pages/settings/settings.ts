@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Globals } from '../../providers/providers';
 import { Settings } from '../../providers/providers';
 
 
@@ -18,6 +19,7 @@ export class SettingsPage {
   form: FormGroup;
 
   constructor(public navCtrl: NavController,
+    public g: Globals,
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
@@ -33,7 +35,8 @@ export class SettingsPage {
 
       // add settings here & in html
       this.form = this.formBuilder.group({
-        checkforfeedupdates: [this.options.checkforfeedupdates]
+        checkforfeedupdates: [this.options.checkforfeedupdates],
+        checkforappupdates: [this.options.checkforappupdates]
       });
 
       this.form.valueChanges.subscribe((v) => {

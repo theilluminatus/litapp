@@ -10,7 +10,6 @@
  - better search method for tags: https://www.literotica.com/my/api/lists/submission_search?q=query&items_per_page=10&page=1&type=story
  - loading details from list API call necessary?
  - Toggle fullscreen slow on many pages
- - setting for check update
 
 
 ## Also check TODOs in files!

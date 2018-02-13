@@ -23,6 +23,8 @@
 
   "SETTINGS_TITLE": "Settings",
   "SETTINGS_CHECKFORFEEDUPDATES": "Automatically check for feed updates",
+  "SETTINGS_CHECKFORAPPUPDATES": "Automatically check for app updates",
+  "SETTINGS_CHECKFORUPDATES": "Check for app updates",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",

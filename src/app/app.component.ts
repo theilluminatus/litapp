@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform } from 'ionic-angular';
+import { Config, Nav } from 'ionic-angular';
 
 import { Globals } from '../providers/providers';
 import { Stories } from '../providers/providers';
@@ -48,15 +48,17 @@ export class MyApp {
 
   constructor(
     private translate: TranslateService,
-    platform: Platform,
-    settings: Settings,
     private config: Config,
+    public settings: Settings,
     public g: Globals,
     public s: Stories,
     public f: Feed
   ) {
     this.initTranslate();
-    this.g.checkForUpdates();
+    this.settings.load().then(() => {
+      if (this.settings.allSettings.checkforappupdates)
+        this.g.checkForUpdates();
+    });
   }
 
   initTranslate() {
