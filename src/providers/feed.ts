@@ -36,14 +36,14 @@ export class Feed {
         this.user.onReady()
       ]).then(() => {
 
-        if (!this.settings.allSettings.checkforfeedupdates) {
+        if (!this.settings.allSettings.checkforfeedupdates || !this.user.isLoggedIn()) {
           resolve();
           return;
         }
 
         this.query().subscribe((d) => {
 
-          if (d && this.user.isLoggedIn())
+          if (d) {
             this.storage.get(FEED_KEY).then((id) => {
               for (let i=0; i<d.length; i++) {
                 if (id == d[i].id) {
@@ -54,8 +54,7 @@ export class Feed {
               if (this.feedbadge == "") this.feedbadge = "15+";
               resolve();
             });
-
-          else resolve();
+          } else resolve();
         });
 
       });
