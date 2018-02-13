@@ -67,6 +67,7 @@ export class User {
         this.processAndGetMoreInfo(res, info);
         if (loader) loader.dismiss();
       } else {
+        if (loader) loader.dismiss();
         throw Observable.throw(res); 
       }
     });
