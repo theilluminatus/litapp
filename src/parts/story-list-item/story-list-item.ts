@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
+import { NavController, PopoverController, LoadingController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
@@ -20,6 +20,7 @@ export class StoryListItem {
   constructor(
     public navCtrl: NavController,
     private popoverCtrl: PopoverController,
+    private loadingCtrl: LoadingController,
     public user: User
   ) { }
 
@@ -37,9 +38,20 @@ export class StoryListItem {
   }
 
   openStory(story: Story) {
-    this.navCtrl.push('StoryViewPage', {
-      story: story
-    });
+    let minSizeForLoader = 75;
+
+    let loader;
+    if (story.length > minSizeForLoader) {
+      loader = this.loadingCtrl.create({spinner: "crescent"});
+      loader.present();
+    }
+
+    setTimeout(() => {
+      this.navCtrl.push('StoryViewPage', {
+        story: story,
+        loader: loader
+      });
+    }, (story.length > minSizeForLoader ? 100 : 0));
   }
 
   openStoryDetail(story: Story) {
