@@ -165,6 +165,12 @@ export class StoryViewPage {
     });
   }
 
+  showSeries(story: Story) {
+    this.navCtrl.push('StorySeriesPage', {
+      story: story
+    });
+  }
+
   openListPicker(ev: UIEvent) {
     let popover = this.popoverCtrl.create("BookmarkPopover", {
       story: this.story

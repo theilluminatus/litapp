@@ -11,6 +11,12 @@
         <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
       </button>
       
+      <button ion-button icon-only
+        *ngIf="story?.series" (click)="showSeries(story)"
+        [tooltip]="'STORYDETAIL_SERIES' | translate" event="press" navTooltip>
+        <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
+      </button>
+
       <button ion-button icon-only (click)="showInfo(story)"
         [tooltip]="'STORY_TOOLTIP_SHOWINFO' | translate" event="press" navTooltip>
         <ion-icon name="information-circle" [style.color]="settings.color"></ion-icon>
