@@ -4,6 +4,7 @@ import { Config, Nav } from 'ionic-angular';
 
 import { Globals } from '../providers/providers';
 import { Stories } from '../providers/providers';
+import { Lists } from '../providers/providers';
 import { Feed } from '../providers/providers';
 import { Settings } from '../providers/providers';
 
@@ -52,6 +53,7 @@ export class MyApp {
     public settings: Settings,
     public g: Globals,
     public s: Stories,
+    public l: Lists,
     public f: Feed
   ) {
     this.initTranslate();

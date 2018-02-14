@@ -17,12 +17,16 @@ export class BookmarkPopover {
   story: Story;
 
   constructor(navParams: NavParams, public l: Lists) {
-    this.l.query().subscribe(data => {
-      if (data)
-        this.alllists = data;
-    });
 
     this.story = navParams.get('story');
+    
+    this.l.onReady().then(() => {
+      this.l.query().subscribe(data => {
+        if (data)
+          this.alllists = data;
+      });
+    });
+
   }
 
   toggleFromList(list: List) {

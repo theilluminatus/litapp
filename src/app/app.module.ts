@@ -39,7 +39,8 @@ export function provideSettings(storage: Storage) {
    */
   return new Settings(storage, {
     checkforfeedupdates: true,
-    checkforappupdates: true
+    checkforappupdates: true,
+    loadalllistsonstart: true
   });
 }
 

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { List } from '../models/list';
 import { Story } from '../models/story';
+import { Settings } from './settings/settings';
 import { Stories } from './stories';
 import { User } from './user';
 import { Api } from './api/api';
@@ -11,16 +12,51 @@ import { Api } from './api/api';
 export class Lists {
 
   private lists: List[];
+  private ready;
 
   constructor(
     public api: Api,
     public s: Stories,
+    public settings: Settings,
     public user: User
-  ) { }
+  ) {
+
+    this.ready = new Promise((resolve, reject) => {
+
+      Promise.all([
+        this.settings.load(),
+        this.user.onReady(),
+        this.s.onReady()
+      ]).then(() => {
+
+        if (!this.settings.allSettings.loadalllistsonstart || !this.user.isLoggedIn()) {
+          resolve();
+          return;
+        }
+
+        this.query(true).subscribe((lists) => {
+          let done = 0;
+          lists.forEach((l, i) => {
+            this.getById(l.urlname, true).subscribe((d) => {
+              done++;
+              if (done == lists.length)
+                resolve();
+            });
+          });
+        });
+
+      });
+    });
+
+  }
+
+  onReady() {
+    return this.ready;
+  }
 
 
-  query(force?: boolean, hideLoader?: boolean) {
-    if (!force && this.lists)
+  query(hideLoader?: boolean) {
+    if (this.lists)
       return Observable.of(this.lists);
 
     let loader;
@@ -56,13 +92,16 @@ export class Lists {
     });
   }
 
-  getById(urlname: string, force?: boolean) {
+  getById(urlname: string, hideLoader?: boolean) {
     let list = this.lists.find((l) => l.urlname == urlname);
 
-    if (!force && list.stories)
+    if (list.stories)
       return Observable.of(list);
 
-    let loader = this.api.showLoader();
+    let loader;
+    if (!hideLoader)
+      loader = this.api.showLoader();
+
     return this.api.get('my/api/lists/'+urlname,undefined,undefined,2).map((d: any) => {
 
       if (loader) loader.dismiss();

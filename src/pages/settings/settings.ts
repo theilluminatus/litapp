@@ -36,7 +36,8 @@ export class SettingsPage {
       // add settings here & in html
       this.form = this.formBuilder.group({
         checkforfeedupdates: [this.options.checkforfeedupdates],
-        checkforappupdates: [this.options.checkforappupdates]
+        checkforappupdates: [this.options.checkforappupdates],
+        loadalllistsonstart: [this.options.loadalllistsonstart]
       });
 
       this.form.valueChanges.subscribe((v) => {

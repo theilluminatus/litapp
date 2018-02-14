@@ -14,9 +14,11 @@ export class ListListPage {
   lists: List[];
 
   constructor(public navCtrl: NavController, public l: Lists) {
-  	this.l.query().subscribe(data => {
-      if (data)
-        this.lists = data;
+    this.l.onReady().then(() => {
+    	this.l.query().subscribe(data => {
+        if (data)
+          this.lists = data;
+      });
     });
   }
 

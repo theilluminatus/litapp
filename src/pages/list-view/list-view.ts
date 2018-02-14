@@ -15,8 +15,10 @@ export class ListViewPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public l: Lists) {
   	let list = navParams.get('list');
-  	this.l.getById(list.urlname).subscribe(data => {
-      this.list = data;
+  	this.l.onReady().then(() => {
+	  	this.l.getById(list.urlname).subscribe(data => {
+	      this.list = data;
+	    });
     });
   }
 
