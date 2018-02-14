@@ -32,8 +32,8 @@
 
   <p>{{story.description}}</p>
 
-  <p *ngIf="story.series > 0">
-    <button ion-button (click)="showSeries()">
+  <p>
+    <button ion-button *ngIf="story.series > 0" (click)="showSeries()">
       <ion-icon name="albums"></ion-icon>&nbsp;
       {{'STORYDETAIL_SERIES' | translate }}
     </button>
