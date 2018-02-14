@@ -34,7 +34,7 @@ export class Lists {
           return;
         }
 
-        this.query(true).subscribe((lists) => {
+        this.query(true).subscribe((lists: any) => {
           let done = 0;
           lists.forEach((l, i) => {
             this.getById(l.urlname, true).subscribe((d) => {
