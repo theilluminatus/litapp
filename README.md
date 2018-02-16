@@ -1,11 +1,13 @@
-# Unofficial Literotica app
+# ![Logo](https://theilluminatus.github.io/litapp/images/icon.png "Logo") Litapp
+> An unofficial Literotica app
 
-Don't ask.
+You can find more info and all releases here: https://theilluminatus.github.io/litapp
 
-## Building
+
+### Building
 
 `ionic cordova build android --prod --release -- -- --keystore=platforms/android/litapp-key.jks --storePassword="password" --alias=litapp --password="password"`
 
-## Releasing
+### Releasing
 
 When releasing a new version you should update the version number in /providers/globals.ts and update the .json file on the remote server accordingly.
