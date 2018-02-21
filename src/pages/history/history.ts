@@ -143,4 +143,8 @@ export class HistoryPage {
     });
   }
 
+  download(story: Story) {
+    this.s.download(story);
+  }
+
 }

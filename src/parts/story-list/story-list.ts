@@ -15,6 +15,7 @@ export class StoryListPage {
   @Input() ishistory: boolean = false;
   @Input() infinite: boolean = false;
   @Output() onDeleteBySwiping: EventEmitter<any> = new EventEmitter();
+  @Output() onDownloadBySwiping: EventEmitter<any> = new EventEmitter();
   @Output() ionInfinite: EventEmitter<any> = new EventEmitter();
 
   enableInfinite = true;

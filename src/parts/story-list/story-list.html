@@ -11,7 +11,7 @@
     </ion-item-divider>
 
     <div *virtualItem="let story">
-      <story-list-item [ishistory]="ishistory" [story]="story" (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"></story-list-item>
+      <story-list-item [ishistory]="ishistory" [story]="story" (onDeleteBySwiping)="onDeleteBySwiping.emit($event)" (onDownloadBySwiping)="onDownloadBySwiping.emit($event)"></story-list-item>
     </div>
 
   </ion-list>

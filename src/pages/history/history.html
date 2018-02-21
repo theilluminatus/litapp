@@ -22,6 +22,6 @@
 
 
 <ion-content padding>
-  <story-list [stories]="filteredStories" (onDeleteBySwiping)="delete($event)" ishistory="true">
+  <story-list [stories]="filteredStories" (onDeleteBySwiping)="delete($event)" (onDownloadBySwiping)="download($event)" ishistory="true">
   </story-list>
 </ion-content>

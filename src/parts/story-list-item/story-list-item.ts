@@ -16,6 +16,7 @@ export class StoryListItem {
   @Input() story: Story;
   @Input() ishistory: boolean = false;
   @Output() onDeleteBySwiping: EventEmitter<any> = new EventEmitter();
+  @Output() onDownloadBySwiping: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public navCtrl: NavController,
@@ -81,5 +82,10 @@ export class StoryListItem {
   delete(story: Story, slidingItem: any) {
     slidingItem.close();
     this.onDeleteBySwiping.emit(story);
+  }
+
+  download(story: Story, slidingItem: any) {
+    slidingItem.close();
+    this.onDownloadBySwiping.emit(story);
   }
 }

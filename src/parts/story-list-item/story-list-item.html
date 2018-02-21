@@ -34,6 +34,9 @@
   </button>
 
   <ion-item-options>
+    <button ion-button *ngIf="!story.downloaded" (click)="download(story, slidingItem)">
+      {{ 'DOWNLOAD_BUTTON' | translate }}
+    </button>
     <button ion-button color="danger" (click)="delete(story, slidingItem)">
       {{ 'DELETE_BUTTON' | translate }}
     </button>
