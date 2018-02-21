@@ -15,10 +15,7 @@ export class ListListPage {
 
   constructor(public navCtrl: NavController, public l: Lists) {
     this.l.onReady().then(() => {
-    	this.l.query().subscribe(data => {
-        if (data)
-          this.lists = data;
-      });
+    	this.refreshLists();
     });
   }
 
@@ -29,7 +26,9 @@ export class ListListPage {
   }
 
   addList() {
-    this.navCtrl.push('ListCreatePage');
+    this.navCtrl.push('ListCreatePage', {
+      callback: () => this.refreshLists()
+    });
   }
 
   edit(list: List, item, event) {
@@ -43,8 +42,19 @@ export class ListListPage {
   delete(list: List, item, event) {
     event.stopPropagation();
     this.l.delete(list).subscribe((d) => {
-      if (d)
+      if (d) {
         item.close();
+        this.refreshLists()
+      }
+    });
+  }
+
+  private refreshLists() {
+    this.l.query().subscribe((data: any) => {
+      if (data) {
+        this.lists = [];
+        data.forEach((d: any) => this.lists.push(d));
+      }
     });
   }
 

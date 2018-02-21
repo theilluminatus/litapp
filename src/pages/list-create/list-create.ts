@@ -15,6 +15,7 @@ export class ListCreatePage {
   isReadyToSave: boolean;
   form: FormGroup;
   isNew: boolean = true;
+  callback;
 
   constructor(
     public navCtrl: NavController,
@@ -23,6 +24,8 @@ export class ListCreatePage {
     public l: Lists,
     fb: FormBuilder
   ) {
+
+    this.callback = navParams.get('callback');
 
     let list = navParams.get('list');
     if (list)
@@ -52,8 +55,10 @@ export class ListCreatePage {
 
     if (this.isNew) {
       this.l.add(templist).subscribe((d) => {
-        if (d)
+        if (d) {
+          if (this.callback) this.callback();
           this.viewCtrl.dismiss();
+        }
       });
 
     } else {
