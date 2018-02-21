@@ -35,10 +35,12 @@
 
   <ion-item-options>
     <button ion-button *ngIf="!story.downloaded" (click)="download(story, slidingItem)">
-      {{ 'DOWNLOAD_BUTTON' | translate }}
+      <ion-icon name="download"></ion-icon>
+      {{ "&nbsp;" | repeat: 15 }}
     </button>
     <button ion-button color="danger" (click)="delete(story, slidingItem)">
-      {{ 'DELETE_BUTTON' | translate }}
+      <ion-icon name="trash"></ion-icon>
+      {{ "&nbsp;" | repeat: 15 }}
     </button>
   </ion-item-options>
 </ion-item-sliding>
