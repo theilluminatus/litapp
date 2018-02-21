@@ -35,3 +35,7 @@ ion-spinner {
   width: 75px;
   height: 75px;
 }
+
+.item-md.activated {
+  background-color: rgba(0,0,0,0.15) !important;
+}

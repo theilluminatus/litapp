@@ -10,7 +10,7 @@
 <ion-content padding>
 
 	<ion-list [virtualScroll]="authors">
-		<ion-item (click)="showAuthor(author)" *virtualItem="let author">
+		<button ion-item (click)="showAuthor(author)" *virtualItem="let author">
 			<ion-avatar>
 				<ion-img [src]="author?.picture + '_default.jpg'"></ion-img>
 			</ion-avatar>
@@ -23,7 +23,7 @@
 	      </button>
 		  </ion-note>
 
-		</ion-item>
+		</button>
 	</ion-list>
 
 </ion-content>

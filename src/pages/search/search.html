@@ -40,10 +40,10 @@
 				{{ 'SEARCH_STARREDQUERIES' | translate }}
 			</ion-list-header>
 
-			<ion-item *ngFor="let query of starredQueries">
+			<button ion-item *ngFor="let query of starredQueries">
 				<ion-label (click)="search(query)">{{query}}</ion-label>
 				<ion-icon name="trash" color="danger" item-end (click)="delete(query)"></ion-icon>
-			</ion-item>
+			</button>
 		</ion-list>
 	</ion-menu>
 

@@ -20,11 +20,11 @@
 
   <ion-list>
     <ion-item-sliding (click)="openList(list)" *ngFor="let list of (lists | orderBy:'id')" #slidingItem>
-      <ion-item>
+      <button ion-item>
         <ion-icon [name]="!list.visibility ? 'lock' : ''"></ion-icon>
         <h2>{{list.name}} <small>({{list.size}})</small></h2>
         <p>{{list.description}}</p>
-      </ion-item>
+      </button>
       <ion-item-options side="right" *ngIf="list.isdeletable">
         <button ion-button (click)="edit(list, slidingItem, $event)">{{ 'EDIT_BUTTON' | translate }}</button>
         <button ion-button color="danger" (click)="delete(list, slidingItem, $event)">{{ 'DELETE_BUTTON' | translate }}</button>

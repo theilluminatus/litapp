@@ -26,7 +26,7 @@
     <div *virtualItem="let item">
 
       <ng-container *ngIf="!item.story; else s">
-        <ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
+        <button ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
 
             <ion-avatar large>
               <ion-img cache="true" [src]="item.author.picture + '_default.jpg'"></ion-img>
@@ -37,7 +37,7 @@
             </p>
             <p>{{item.timestamp*1000 | date}}</p>
             
-        </ion-item>
+        </button>
       </ng-container>
         
       <ng-template #s>

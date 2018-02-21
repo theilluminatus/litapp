@@ -1,6 +1,6 @@
 
 <ion-item-sliding approxItemHeight="105px" #slidingItem>
-  <ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
+  <button ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
 
     <h2>
       <ion-icon name="eye" *ngIf="story?.cached && !story?.downloaded && !ishistory"></ion-icon>
@@ -31,7 +31,7 @@
       </button>
     </ion-note>
 
-  </ion-item>
+  </button>
 
   <ion-item-options>
     <button ion-button color="danger" (click)="delete(story, slidingItem)">
