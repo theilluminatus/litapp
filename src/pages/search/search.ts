@@ -58,6 +58,7 @@ export class SearchPage {
   }
 
   getStories(query?: string) {
+    this.panel.close();
     let val = query ? query : this.searchbar.value;
     if (!val || !val.trim() || val.length < 3) return;
 
@@ -90,9 +91,9 @@ export class SearchPage {
   }
 
   search(query: string) {
+    console.log(query);
     this.searchbar.value = query;
     this.getStories(query);
-    this.panel.close();
   }
 
   delete(query: string) {
