@@ -6,15 +6,14 @@
     </button>
     <ion-title>{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }}</ion-title>
     <ion-buttons end>
+      <button *ngIf="!onlyDownloaded && stories.length > 0" end ion-button icon-only (click)="clearAll()"
+        [tooltip]="'HISTORY_TOOLTIP_CLEAR' | translate" event="press" navTooltip>
+        <ion-icon name="trash"></ion-icon>
+      </button>
 
       <button end ion-button icon-only (click)="toggleDownloaded()"
         [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate" event="press" navTooltip>
         <ion-icon [name]="onlyDownloaded ? 'cloud' : 'cloud-download'"></ion-icon>
-      </button>
-
-      <button *ngIf="!onlyDownloaded && stories.length > 0" end ion-button icon-only (click)="clearAll()"
-        [tooltip]="'HISTORY_TOOLTIP_CLEAR' | translate" event="press" navTooltip>
-        <ion-icon name="trash"></ion-icon>
       </button>
 	  </ion-buttons>
   </ion-navbar>
