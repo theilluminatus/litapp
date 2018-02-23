@@ -25,7 +25,7 @@ export class ListViewPage {
     });
   }
 
-  filter(event: string) {
+  filter(event: any) {
     if (!event.data || event.data == null) {
       this.stories = this.list.stories;
       return;
