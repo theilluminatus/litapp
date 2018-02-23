@@ -12,7 +12,7 @@ export class Globals {
 
   private globals;
   private ready;
-  private version = 1.0;
+  private version = 1.1;
 
   constructor(
     public api: Api,

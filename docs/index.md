@@ -1,6 +1,7 @@
 
 ## Releases
 
+- [v1.1](https://theilluminatus.github.io/litapp/releases/litapp-1.1.apk) (2018-02-23)
 - [v1.0](https://theilluminatus.github.io/litapp/releases/litapp-1.0.apk) (2018-02-16)
 
 ## Features
@@ -11,6 +12,7 @@
 - View author profiles and their submissions & favorities
 - Search for tags
 - View top stories of all categories
+- Search in lists
 - and more...
 
 ##### After logging in with a literotica accout you can:
