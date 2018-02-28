@@ -9,7 +9,6 @@
  - find api route for search sorting
 
  - Add toast forced logout after updating
- - Add full title to story detail page instead of in toolbar
  - Fix list filtering not working (only on large lists?)
  - Fix extra tabs don't dissapear after forced logout
 
