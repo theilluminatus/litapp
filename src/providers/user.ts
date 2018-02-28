@@ -30,16 +30,18 @@ export class User {
           this.user = data;
           if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
 
-            this.logout();
             this.translate.get(['SESSIONTIMEOUT_MSG', 'CLOSE_BUTTON']).subscribe(values => {
               this.translations = values;
               let toast = this.toastCtrl.create({
                 message: this.translations.SESSIONTIMEOUT_MSG,
                 showCloseButton: true,
                 closeButtonText: this.translations.CLOSE_BUTTON,
-                duration: 10000
+                duration: 30000
               });
-              toast.present();
+              setTimeout(() => {
+                this.logout();
+                toast.present();
+              }, 2000)
             });
 
           }
