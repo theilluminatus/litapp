@@ -9,6 +9,10 @@
  - find api route for search sorting
 
  - Fix list filtering not working (only on large lists?)
+ - use secure storage to save credentials -> auto renew cookie
+ - use app update package
+ - use Header Color package
+ - use Cordova Backlight package
 
 
 ## Also check TODOs in files!
