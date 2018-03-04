@@ -47,8 +47,26 @@ page-story-view {
   .slide-zoom {
     height: 100%;
     text-align: inherit;
-    overflow-y: auto;
   }
+
+  .ng-scrollbar-thumb.grey,
+  .ng-scrollbar-thumb.black {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .ng-scrollbar-autohide > .ng-scrollbar {
+    transition: opacity 5s cubic-bezier(1.000, 0.000, 1.000, 0.000) !important;
+  }
+
+  .ng-scrollbar-autohide:hover > .ng-scrollbar {
+    opacity: 0;
+  }
+
+  .ng-scrollbar-autohide:active > .ng-scrollbar, .ng-scrollbar-autohide:focus > .ng-scrollbar {
+    opacity: 1;
+    transition: opacity 0.3s ease-out !important;
+  }
+
 
   p {
     margin: 0;

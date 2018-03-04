@@ -41,7 +41,9 @@
     [style.color]="settings.color">
 
     <ion-slide *ngFor="let slide of slides; let i=index">
-      <p *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5" [innerHTML]="slide.content"></p>
+      <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
+        <p *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5" [innerHTML]="slide.content"></p>
+      </ng-scrollbar>
     </ion-slide>
   </ion-slides>
 

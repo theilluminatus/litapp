@@ -203,6 +203,7 @@ export class StoryPopover {
   }
 
   changeBackground(color: any) {
+    this.settings.theme = color;
     this.settings.color = this.colors[color].fg;
     this.settings.background = this.colors[color].bg;
   }
