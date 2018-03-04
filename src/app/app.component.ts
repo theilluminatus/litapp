@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { HeaderColor } from '@ionic-native/header-color';
 import { Config, Nav } from 'ionic-angular';
 
 import { Globals } from '../providers/providers';
@@ -49,7 +48,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   constructor(
-    private headerColor: HeaderColor,
     private translate: TranslateService,
     private config: Config,
     public settings: Settings,
@@ -58,7 +56,6 @@ export class MyApp {
     public l: Lists,
     public f: Feed
   ) {
-    this.headerColor.tint('#1565C0');
     this.initTranslate();
     this.settings.load().then(() => {
       if (this.settings.allSettings.checkforappupdates)

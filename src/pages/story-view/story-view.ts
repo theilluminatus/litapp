@@ -118,6 +118,14 @@ export class StoryViewPage {
       this.slidesElement.slideTo(this.story.currentpage, 0);
   }
 
+  ionViewDidEnter() {
+    this.androidFullScreen.showUnderSystemUI();
+  }
+
+  ionViewWillLeave() {
+    this.androidFullScreen.showSystemUI();
+  }
+
   clickSlides(event) {
 
     if ( event.clientX < this.platform.width()/4 ) {
@@ -138,14 +146,13 @@ export class StoryViewPage {
   }
 
   private immersive() {
-    this.androidFullScreen.isImmersiveModeSupported()
-      .then(() => {
-        if (this.fullscreen)
-          this.androidFullScreen.immersiveMode()
-        else
-          this.androidFullScreen.showSystemUI()
-      })
-      .catch((error: any) => console.log(error));
+    if (this.fullscreen) {
+      // TODO: find a way to show statusbar under system ui immediatly
+      this.androidFullScreen.showSystemUI();
+      this.androidFullScreen.showUnderSystemUI();
+    } else {
+      this.androidFullScreen.immersiveMode();
+    }
     this.fullscreen = !this.fullscreen;
   }
 
@@ -215,12 +222,6 @@ export class StoryViewPage {
     this.story.currentpage = currentIndex;
     this.stories.cache(this.story);
     this.range.setValue(currentIndex+1);
-  }
-
-  ionViewWillLeave() {
-    this.androidFullScreen.isImmersiveModeSupported()
-      .then(() => this.androidFullScreen.showSystemUI())
-      .catch((error: any) => console.log(error));
   }
 
 }

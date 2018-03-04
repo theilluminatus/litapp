@@ -28,7 +28,7 @@
 
 <ion-content fullscreen="true">
 
-  <ion-slides #slidesElement
+  <ion-slides ion-fixed #slidesElement
     (ionSlideDidChange)="slideChanged()"
     [slidesPerView]="slidesPerView"
     [dir]="dir"
@@ -41,9 +41,11 @@
     [style.color]="settings.color">
 
     <ion-slide *ngFor="let slide of slides; let i=index">
-      <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
-        <p *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5" [innerHTML]="slide.content"></p>
-      </ng-scrollbar>
+      <ng-container *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5">
+        <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
+          <p [innerHTML]="slide.content"></p>
+        </ng-scrollbar>
+      </ng-container>
     </ion-slide>
   </ion-slides>
 
