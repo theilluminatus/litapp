@@ -28,6 +28,8 @@ When releasing a new version you should update the version number in:
 - `/config.xml`
 - `/docs/index.md`
 
+Also don't forget to add a tag after committing and pushing with `git tag -a x.x` and `git push origin --tags`.
+
 #### Building
 
 `ionic cordova build android --prod --release -- -- --keystore=platforms/litapp-key.jks --storePassword="abc123" --alias=litapp --password="abc123"`
