@@ -7,8 +7,6 @@
  - find better api route for getting author following status together with bio
  - find api route for search sorting
 
- - Fix list filtering not working (only on large lists?)
- - Fix search api error
  - Fix pressing artists name in story list item
 
 

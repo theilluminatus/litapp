@@ -12,7 +12,7 @@
 
 <ion-content padding>
 
-	<ion-searchbar [placeholder]="'LISTVIEW_FILTER' | translate" (ionInput)="filter($event)"></ion-searchbar>
+	<ion-searchbar debounce="350" [placeholder]="'LISTVIEW_FILTER' | translate" (ionInput)="filter($event)"></ion-searchbar>
 
 	<story-list [stories]="stories"></story-list>
 </ion-content>
