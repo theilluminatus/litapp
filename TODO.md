@@ -13,7 +13,6 @@
  - use app update package
  - use Header Color package
  - use Cordova Backlight package
- - Add 18:9 support
 
 
 ## Also check TODOs in files!

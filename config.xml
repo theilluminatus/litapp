@@ -24,6 +24,9 @@
     <preference name="SplashScreenSpinnerColor" value="#2196F3" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <meta-data android:name="android.max_aspect" android:value="2.1" />
+        </config-file>
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
             <activity android:windowSoftInputMode="adjustPan" />
         </edit-config>
