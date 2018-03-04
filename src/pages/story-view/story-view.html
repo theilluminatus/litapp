@@ -28,16 +28,20 @@
 
 <ion-content fullscreen="true">
 
-  <ion-slides #slidesElement (ionSlideDidChange)="slideChanged()" [slidesPerView]="slidesPerView" [dir]="dir" [style.color]="settings.color" (click)="clickSlides($event)">
-    <ion-slide *ngFor="let slide of slides"
-      [style.fontSize]="settings.fontsize + 'px'"
-      [style.lineHeight]="settings.lineheight + 'px'"
-      [style.fontFamily]="settings.font + ', sans-serif'"
-      [style.textAlign]="settings.textalign"
-      [style.background]="settings.background"
-      [style.color]="settings.color">
+  <ion-slides #slidesElement
+    (ionSlideDidChange)="slideChanged()"
+    [slidesPerView]="slidesPerView"
+    [dir]="dir"
+    (click)="clickSlides($event)"
+    [style.fontSize]="settings.fontsize + 'px'"
+    [style.lineHeight]="settings.lineheight + 'px'"
+    [style.fontFamily]="settings.font + ', sans-serif'"
+    [style.textAlign]="settings.textalign"
+    [style.background]="settings.background"
+    [style.color]="settings.color">
 
-      <p [innerHTML]="slide.content"></p>
+    <ion-slide *ngFor="let slide of slides; let i=index">
+      <p *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5" [innerHTML]="slide.content"></p>
     </ion-slide>
   </ion-slides>
 
