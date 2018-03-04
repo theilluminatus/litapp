@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BrowserTab } from '@ionic-native/browser-tab';
 import { Toast } from '@ionic-native/toast';
 
 import { User } from '../../providers/providers';
@@ -26,7 +26,7 @@ export class LoginPage {
     public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
-    private browser: InAppBrowser,
+    private browser: BrowserTab,
     private toast: Toast
   ) {
 
@@ -59,9 +59,7 @@ export class LoginPage {
         console.log(this.translations.SIGNUP_MESSAGE);
     }
 
-    this.browser
-      .create('https://www.literotica.com/stories/signup.php')
-      .show();
+    this.browser.openUrl('https://www.literotica.com/stories/signup.php');
 
   }
 }

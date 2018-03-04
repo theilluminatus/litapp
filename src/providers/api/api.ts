@@ -85,16 +85,21 @@ export class Api {
     return this.loader;
   }
 
-  showToast(text?: string, timeout?: number) {
-    this.translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
-      this.translations = values;
-      let toast = this.toastCtrl.create({
-        message: (text ? text : this.translations.LOAD_ERROR),
-        showCloseButton: true,
-        closeButtonText: this.translations.CLOSE_BUTTON,
-        duration: timeout ? timeout : 3000
+  showToast(text?: string, timeout?: number, button?: string) {
+    return new Promise((resolve) => {
+
+      this.translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
+        this.translations = values;
+        let toast = this.toastCtrl.create({
+          message: (text ? text : this.translations.LOAD_ERROR),
+          showCloseButton: true,
+          closeButtonText: button ? button : this.translations.CLOSE_BUTTON,
+          duration: timeout ? timeout : 3000
+        });
+        toast.present();
+        resolve(toast);
       });
-      toast.present();
+      
     });
   }
 

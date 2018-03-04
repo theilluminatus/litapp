@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
+import { BrowserTab } from '@ionic-native/browser-tab';
 
 import { Api } from './api/api';
 import { User } from './user';
@@ -19,6 +20,7 @@ export class Globals {
     public user: User,
     public storage: Storage,
     public translate: TranslateService,
+    private browser: BrowserTab
   ) {
 
     this.storage.get(VERSION_KEY).then((v) => {
@@ -81,16 +83,23 @@ export class Globals {
       .catch((e) => {
         return Observable.of(false);
       }).subscribe((d: any) => {
-        this.translate.get(['UPDATE_FAILEDMSG', 'UPDATE_MSG']).subscribe(values => {
+
+        this.translate.get(['UPDATE_FAILEDMSG', 'UPDATE_MSG', 'DOWNLOAD_BUTTON']).subscribe(values => {
 
           if (d) {
-            if (d.version > this.version) {
-              this.api.showToast(values.UPDATE_MSG+" "+d.updatelink, 15000);
-            }
             if (d.appid != this.api.appid)
               this.api.appid = d.appid;
             if (d.apikey != this.api.apikey)
               this.api.apikey = d.apikey;
+
+            if (d.version > this.version) {
+              this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON).then((toast: any) => {
+                toast.onDidDismiss(() => {
+                  this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
+                });
+                
+              });
+            }
           } else {
             this.api.showToast(values.UPDATE_FAILEDMSG);
           }

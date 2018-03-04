@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BrowserTab } from '@ionic-native/browser-tab';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Toast } from '@ionic-native/toast';
@@ -78,7 +78,7 @@ export function provideSettings(storage: Storage) {
     Globals,
     User,
     AndroidFullScreen,
-    InAppBrowser,
+    BrowserTab,
     SocialSharing,
     Keyboard,
     Toast,
