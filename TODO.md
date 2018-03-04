@@ -8,6 +8,8 @@
  - find api route for search sorting
 
  - Fix list filtering not working (only on large lists?)
+ - Fix search api error
+ - Fix pressing artists name in story list item
 
 
 ## Also check TODOs in files!
