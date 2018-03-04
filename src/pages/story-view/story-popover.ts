@@ -46,7 +46,7 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
       </ion-item>
       <ion-item class="popover-text-serif">
         <ion-label>Serif</ion-label>
-        <ion-radio value="serif"></ion-radio>
+        <ion-radio value="'Times New Roman', serif"></ion-radio>
       </ion-item>
     </ion-list>
 
@@ -125,7 +125,7 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
     }
 
     .popover-text-serif {
-      font-family: serif;
+      font-family: 'Times New Roman', serif;
     }
 
     /*
