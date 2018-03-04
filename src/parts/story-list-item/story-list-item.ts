@@ -39,7 +39,7 @@ export class StoryListItem {
   }
 
   openStory(story: Story) {
-    let minSizeForLoader = 75;
+    let minSizeForLoader = 35;
 
     let loader;
     if (story.length > minSizeForLoader) {
