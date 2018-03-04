@@ -7,6 +7,7 @@ import { BrowserTab } from '@ionic-native/browser-tab';
 import { Api } from './api/api';
 import { User } from './user';
 import { GLOBALS_KEY, VERSION_KEY } from './db';
+import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class Globals {
@@ -20,13 +21,25 @@ export class Globals {
     public user: User,
     public storage: Storage,
     public translate: TranslateService,
-    private browser: BrowserTab
+    private browser: BrowserTab,
+    public toastCtrl: ToastController
   ) {
 
     this.storage.get(VERSION_KEY).then((v) => {
-      if (v)
-        if (v != this.version)
-          this.user.logout();
+      if (v && v != this.version) {
+        setTimeout(() => {
+          this.translate.get(['UPDATED_MSG', 'CLOSE_BUTTON']).subscribe(values => {
+            let toast = this.toastCtrl.create({
+              message: values.UPDATED_MSG,
+              showCloseButton: true,
+              closeButtonText: values.CLOSE_BUTTON,
+              duration: 15000
+            });
+            toast.present();
+            this.user.removeStoredUser();
+          });
+        }, 2000);
+      }
 
       this.storage.set(VERSION_KEY, this.version);
     });

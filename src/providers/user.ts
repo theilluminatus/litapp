@@ -15,8 +15,6 @@ export class User {
   private user: any;
   private ready;
 
-  translations;
-
   constructor(
     public api: Api,
     public storage: Storage,
@@ -30,19 +28,18 @@ export class User {
           this.user = data;
           if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
 
-            this.translate.get(['SESSIONTIMEOUT_MSG', 'CLOSE_BUTTON']).subscribe(values => {
-              this.translations = values;
-              let toast = this.toastCtrl.create({
-                message: this.translations.SESSIONTIMEOUT_MSG,
-                showCloseButton: true,
-                closeButtonText: this.translations.CLOSE_BUTTON,
-                duration: 30000
-              });
-              setTimeout(() => {
-                this.logout();
+            setTimeout(() => {
+              this.translate.get(['SESSIONTIMEOUT_MSG', 'CLOSE_BUTTON']).subscribe(values => {
+                let toast = this.toastCtrl.create({
+                  message: values.SESSIONTIMEOUT_MSG,
+                  showCloseButton: true,
+                  closeButtonText: values.CLOSE_BUTTON,
+                  duration: 15000
+                });
                 toast.present();
-              }, 2000)
-            });
+                this.removeStoredUser();
+              });
+            }, 2000);
 
           }
         }
@@ -115,8 +112,23 @@ export class User {
     return this.user;
   }
 
+  checkIfEverythingIsFucked() {
+    return new Promise((resolve) => {
+      this.storage.get(USER_KEY).then((user) => {
+        if (user != this.user)
+          resolve(true);
+        else
+          resolve(false);
+      });
+    });
+  }
+
+  removeStoredUser() {
+    this.storage.remove(USER_KEY);
+  }
+
   logout() {
     this.user = null;
-    this.storage.remove(USER_KEY);
+    this.removeStoredUser();
   }
 }

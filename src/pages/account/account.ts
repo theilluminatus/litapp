@@ -23,6 +23,13 @@ export class AccountPage {
       this.navCtrl.push('LoginPage');
       return;
     }
+
+    this.user.checkIfEverythingIsFucked().then((answer) => {
+      if (answer) {
+        this.user.logout();
+        this.login();
+      }
+    })
   }
 
   login() {
