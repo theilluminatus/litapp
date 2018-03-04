@@ -7,7 +7,5 @@
  - find better api route for getting author following status together with bio
  - find api route for search sorting
 
- - Fix pressing artists name in story list item
-
 
 ## Also check TODOs in files!

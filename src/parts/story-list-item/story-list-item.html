@@ -16,7 +16,7 @@
     <p>
       <ion-icon name="star"></ion-icon> {{story?.rating}}
       ({{story?.viewcount > 1000 ? Math.round(story?.viewcount/1000)+'k' : story?.viewcount}})
-      <em> {{ 'BYAUTHOR' | translate }} <a (click)="showAuthor(story?.author, $event)">{{story?.author?.name}}</a></em>
+      <em> {{ 'BYAUTHOR' | translate }} {{story?.author?.name}}</em>
       {{ 'ONTIMESTAMP' | translate }} {{(story?.timestamp*1000) | date:'yyyy-MM-dd' }}
     </p>
 
