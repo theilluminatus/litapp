@@ -22,7 +22,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list [virtualScroll]="feed">
+  <ion-list [virtualScroll]="feed" sliding="false">
     <div *virtualItem="let item">
 
       <ng-container *ngIf="!item.story; else s">
