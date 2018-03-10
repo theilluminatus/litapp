@@ -211,7 +211,8 @@ export class StoryViewPage {
           message: this.translations.STORY_ENDOFSERIES,
           showCloseButton: true,
           closeButtonText: this.translations.CLOSE_BUTTON,
-          duration: 2000
+          duration: 2000,
+          cssClass: "overui"
         });
         toast.present();
       });
