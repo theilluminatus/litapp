@@ -1,4 +1,6 @@
 
+# ![Logo](https://theilluminatus.github.io/litapp/images/icon.png "Logo") Litapp
+
 ## Releases
 
 - [v1.2](https://theilluminatus.github.io/litapp/releases/litapp-1.2.apk) (2018-03-05)

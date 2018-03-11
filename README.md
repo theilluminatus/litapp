@@ -27,6 +27,7 @@ When releasing a new version you should update the version number in:
 - `/package-lock.json`
 - `/config.xml`
 - `/docs/index.md`
+- `/docs/_config.yml`
 
 Also don't forget to add a tag after committing and pushing with `git tag -a x.x` and `git push origin --tags`.
 
