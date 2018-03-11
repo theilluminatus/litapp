@@ -4,14 +4,23 @@
 // Headers
 $header-heading-color: #fff !default;
 $header-bg-color: #2196F3 !default;
-$header-bg-color-secondary: #3F51B5 !default;
+$header-bg-color-secondary: #673AB7 !default;
 
 // Text
-$section-headings-color: #2196F3 !default;
-$body-link-color: #3F51B5 !default;
+$section-headings-color: #3F51B5 !default;
+$body-link-color: #2196F3 !default;
 
 @import "{{ site.theme }}";
 
-.page-header > a:nth-of-type(1) {
+.page-header > a:nth-of-type(2)::after {
+	content: "Download APK";
+	font-size: 16px;
+}
+
+.page-header > a:nth-of-type(3) {
 	display: none;
+}
+
+h1 img {
+	vertical-align: bottom;
 }

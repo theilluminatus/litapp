@@ -30,4 +30,4 @@
 
 ## Contact
 
-theilluminatus@outlook.com
+[theilluminatus@outlook.com](mailto:theilluminatus@outlook.com)
