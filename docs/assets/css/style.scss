@@ -12,8 +12,22 @@ $body-link-color: #2196F3 !default;
 
 @import "{{ site.theme }}";
 
+
+.project-name::before {
+	content: " ";
+	position: relative;
+	top: 5px;
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	vertical-align: baseline;
+	background: url("images/icon.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
 .page-header > a:nth-of-type(2)::after {
-	content: "Download APK";
+	content: "Download";
 	font-size: 16px;
 }
 
@@ -21,6 +35,6 @@ $body-link-color: #2196F3 !default;
 	display: none;
 }
 
-h1 img {
-	vertical-align: bottom;
+h1#-litapp {
+	display: none;
 }

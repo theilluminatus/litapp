@@ -1,6 +1,6 @@
 theme: jekyll-theme-cayman
 title: Litapp
 description: An unofficial Literotica app
-show_downloads: false
+show_downloads: true
 github:
   zip_url: https://theilluminatus.github.io/litapp/releases/litapp-1.2.apk
