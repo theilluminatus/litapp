@@ -3,7 +3,7 @@
 
 // Headers
 $header-heading-color: #fff !default;
-$header-bg-color: #2196F3 !default;
+$header-bg-color: #03A9F4 !default;
 $header-bg-color-secondary: #673AB7 !default;
 
 // Text
@@ -15,19 +15,22 @@ $body-link-color: #2196F3 !default;
 
 .project-name::before {
 	content: " ";
-	position: relative;
-	top: 5px;
 	display: inline-block;
-	width: 48px;
-	height: 48px;
-	vertical-align: baseline;
-	background: url("images/icon.png");
+	width: 0.9em;
+	height: 0.9em;
+	padding-right: 5px;
+	vertical-align: middle;
+	background: url("../../images/icon.png");
 	background-size: contain;
 	background-repeat: no-repeat;
 }
 
+.page-header > a:nth-of-type(2) {
+	font-size: 0;
+}
+
 .page-header > a:nth-of-type(2)::after {
-	content: "Download";
+	content: "Download App";
 	font-size: 16px;
 }
 
@@ -37,4 +40,8 @@ $body-link-color: #2196F3 !default;
 
 h1#-litapp {
 	display: none;
+}
+
+#screenshots + p {
+	text-align: center;
 }

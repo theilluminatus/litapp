@@ -18,7 +18,7 @@
 - Search in lists
 - and more...
 
-##### After logging in with a literotica accout you can:
+#### After logging in with a literotica accout you can:
 
 - View and add stories to your lists
 - View your feed and get notified when there's something new
