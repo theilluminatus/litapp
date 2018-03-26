@@ -55,6 +55,8 @@ export class StoryViewPage {
     this.dir = platform.dir();
     // this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
+    this.fullscreen = navParams.get('fullscreen') || this.fullscreen;
+
     let loader = navParams.get('loader');
     if (loader)
       loader.dismiss();
@@ -119,7 +121,12 @@ export class StoryViewPage {
   }
 
   ionViewDidEnter() {
-    this.androidFullScreen.showUnderSystemUI();
+    setTimeout(() => {
+      if (this.fullscreen)
+        this.androidFullScreen.immersiveMode();
+      else
+        this.androidFullScreen.showUnderSystemUI();
+    }, 10);
   }
 
   ionViewWillLeave() {
@@ -200,7 +207,8 @@ export class StoryViewPage {
         for (let i=0; i<data[0].length-1; i++) {
           if (data[0][i].id == this.story.id) {
             this.navCtrl.push('StoryViewPage', {
-              story: data[0][i+1]
+              story: data[0][i+1],
+              fullscreen: this.fullscreen
             });
             this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()),1);
             return;
