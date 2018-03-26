@@ -3,7 +3,6 @@
  - Split story pages so no vertical scrolling occurs?
  - Hide tabs and search bar when scrolling on search page?
 
- - Add ability to sort followed authors
  - Fix statusbar is not over UI when loading next story in series
 
  - find correct api route for story comments

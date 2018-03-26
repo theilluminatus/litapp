@@ -12,6 +12,7 @@ import { Authors } from '../../providers/providers';
 export class FollowingPage {
 
   authors: Author[];
+  sortingProp: string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -42,6 +43,23 @@ export class FollowingPage {
     this.navCtrl.push('AuthorPage', {
       author: author
     });
+  }
+
+  toggleSorting() {
+    if (this.sortingProp == "")
+      this.sortingProp = "name";
+
+    else if (this.sortingProp == "name")
+      this.sortingProp = "jointimestamp";
+
+    else if (this.sortingProp == "jointimestamp")
+      this.sortingProp = "-updatetimestamp";
+
+    else if (this.sortingProp == "-updatetimestamp")
+      this.sortingProp = "";
+      
+    else
+      this.sortingProp = "";
   }
 
 }

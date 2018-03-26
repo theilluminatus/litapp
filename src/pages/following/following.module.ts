@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { FollowingPage } from './following';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { TooltipsModule } from 'ionic-tooltips';
   imports: [
     IonicPageModule.forChild(FollowingPage),
     TranslateModule.forChild(),
-    TooltipsModule
+    TooltipsModule,
+    NgPipesModule
   ],
 })
 export class FollowingPageModule {}

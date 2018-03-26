@@ -90,6 +90,11 @@
   "LISTCREATE_VISIBILITY_PRIVATE": "Private",
 
   "FOLLOWING_TITLE": "Followed Authors",
+  "FOLLOWING_TOOLTIP_SORT": "Sort authors",
+  "FOLLOWING_SORT_": "Follow date",
+  "FOLLOWING_SORT_NAME": "Name",
+  "FOLLOWING_SORT_JOINTIMESTAMP": "Join date",
+  "FOLLOWING_SORT_-UPDATETIMESTAMP": "Last activity",
 
   "AUTHOR_TOOLTIP_FOLLOW": "Toggle following author",
   "AUTHOR_JOINDATE": "Join date",
