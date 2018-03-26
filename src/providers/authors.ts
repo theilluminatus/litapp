@@ -88,7 +88,10 @@ export class Authors {
     data.append("session_id", this.user.getSession());
 
     return this.api.post('2/favorites/author-add', data, undefined, true).map((res: any) => {
-      if (!res.success) this.api.showToast();
+      if (res.error && res.error == "Author already in favorites list")
+        author.following = true;
+      else if (!res.success)
+        this.api.showToast();
       return res.success;
     }).catch((err) => {
       this.api.showToast();
