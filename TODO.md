@@ -4,6 +4,7 @@
  - Hide tabs and search bar when scrolling on search page?
 
  - Order downloaded by download time
+ - Fix back button doesn't close bookmark popover
 
  - find correct api route for story comments
  - find better api route for getting author following status together with bio
