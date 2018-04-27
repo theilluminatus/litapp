@@ -5,6 +5,7 @@
 
  - Order downloaded by download time
  - Fix back button doesn't close bookmark popover
+ - Add loading indicator in badge when refreshing feed in background
 
  - find correct api route for story comments
  - find better api route for getting author following status together with bio
