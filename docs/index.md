@@ -3,6 +3,7 @@
 
 ## Releases
 
+- [v1.4](https://theilluminatus.github.io/litapp/releases/litapp-1.4.apk) (2018-05-28)
 - [v1.3](https://theilluminatus.github.io/litapp/releases/litapp-1.3.apk) (2018-03-26)
 - [v1.2](https://theilluminatus.github.io/litapp/releases/litapp-1.2.apk) (2018-03-05)
 - [v1.1](https://theilluminatus.github.io/litapp/releases/litapp-1.1.apk) (2018-02-23)
@@ -13,13 +14,13 @@
 - Read stories
 - Automatically open the next story in a series
 - See story details, related stories, rate stories...
-- View author profiles and their submissions & favorities
+- View author profiles and their submissions & favorites
 - Search for tags
 - View top stories of all categories
 - Search in lists
 - and more...
 
-#### After logging in with a literotica accout you can:
+#### After logging in with a literotica account you can:
 
 - View and add stories to your lists
 - View your feed and get notified when there's something new
