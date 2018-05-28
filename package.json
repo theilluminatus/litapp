@@ -1,9 +1,10 @@
 {
   "name": "litapp",
-  "version": "1.3",
+  "version": "1.3.0",
   "author": "Illuminatus",
   "private": true,
   "scripts": {
+    "start": "ionic serve --no-open",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
