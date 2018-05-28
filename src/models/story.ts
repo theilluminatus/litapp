@@ -42,6 +42,7 @@ export interface Story {
   ratingenabled: boolean;
   cached: boolean;
   downloaded: boolean;
+  downloadedtimestamp: Date;
   lists: List[];
   comments: {
     user: string,

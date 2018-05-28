@@ -206,12 +206,14 @@ export class Stories {
 
   download(story: Story) {
     story.downloaded = true;
+    story.downloadedtimestamp = new Date();
     story.cached = true;
     this.storage.set(STORY_KEY+"_"+story.id, story);
   }
 
   undownload(story: Story) {
     story.downloaded = false;
+    story.downloadedtimestamp = null;
     if (story.cached)
       this.storage.set(STORY_KEY+"_"+story.id, story);
     else

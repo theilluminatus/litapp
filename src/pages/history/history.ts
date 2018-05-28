@@ -86,13 +86,17 @@ export class HistoryPage {
     }
 
     this.filteredStories = [];
+    let tmp = [];
     this.storage.forEach((value, key, index) => {
       if (key.indexOf(STORY_KEY) == 0)
         if (value.downloaded)
           this.s.getById(value.id).subscribe((story) => {
-            this.filteredStories.push(story);
+            tmp.push(story);
           });
     });
+
+    tmp.sort(s => s.downloadtimestamp);
+    this.filteredStories = tmp;
   }
 
   clearAll() {
