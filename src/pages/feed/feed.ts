@@ -16,6 +16,7 @@ export class FeedPage {
 
   feed: FeedItem[] = [];
   enableInfinite = true;
+  lastviewedid = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -23,7 +24,10 @@ export class FeedPage {
     public storage: Storage,
     public f: Feed,
   ) {
-    this.f.onReady().then(() => this.refresh(null, true));
+    Promise.all([this.f.onReady(), this.storage.get(FEED_KEY)]).then((values) => {
+      this.lastviewedid = values[1];
+      this.refresh(null, true)
+    });
   }
 
   refresh(event?, showloader?: boolean) {

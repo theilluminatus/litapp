@@ -22,8 +22,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list [virtualScroll]="feed" sliding="false">
-    <div *virtualItem="let item">
+  <ion-list [virtualScroll]="feed" sliding="false" [headerFn]="showNewLine">
+    <div *virtualItem="let item; let i=index">
 
       <ng-container *ngIf="!item.story; else s">
         <button ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
@@ -43,8 +43,13 @@
       <ng-template #s>
         <story-list-item [story]="item.story"></story-list-item>
       </ng-template>
+
+      <p *ngIf="item.id==lastviewedid && i > 0" class="oldline">
+        Older items
+      </p>
       
     </div>
+
   </ion-list>
 
   <ion-infinite-scroll [enabled]="enableInfinite" (ionInfinite)="loadMore($event)">
