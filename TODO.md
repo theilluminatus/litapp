@@ -5,7 +5,6 @@
 
  - Order downloaded by download time
  - Fix back button doesn't close bookmark popover
- - Add loading indicator in badge when refreshing feed in background
  - fix constant retries when no connection to api
 
  - find correct api route for story comments

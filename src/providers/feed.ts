@@ -41,6 +41,8 @@ export class Feed {
           return;
         }
 
+        this.feedbadge = "·";
+
         this.query().subscribe((d) => {
 
           if (d) {
