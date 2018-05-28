@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams } from 'ionic-angular';
+import { Platform, IonicPage, NavParams, ViewController } from 'ionic-angular';
 
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
@@ -16,7 +16,12 @@ export class BookmarkPopover {
   alllists: List[];
   story: Story;
 
-  constructor(navParams: NavParams, public l: Lists) {
+  constructor(
+    navParams: NavParams,
+    platform: Platform,
+    public viewCtrl: ViewController,
+    public l: Lists
+  ) {
 
     this.story = navParams.get('story');
     
@@ -26,7 +31,11 @@ export class BookmarkPopover {
           this.alllists = data;
       });
     });
-
+    
+    let unregister = platform.registerBackButtonAction(() => {
+      this.viewCtrl.dismiss();
+      unregister();
+    });
   }
 
   toggleFromList(list: List) {

@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "start": "ionic serve --no-open",
+    "android": "ionic cordova run android",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
