@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>
     	<ion-icon [name]="!list?.visibility ? 'lock' : ''"></ion-icon>
-    	{{ list?.name }}
+    	{{ list?.name }} <small>({{ stories?.length }})</small>
     </ion-title>
   </ion-navbar>
 

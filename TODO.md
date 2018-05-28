@@ -7,8 +7,6 @@
  - Fix back button doesn't close bookmark popover
  - Add loading indicator in badge when refreshing feed in background
  - Mark new feed items with line
- - Show (filtered) story count in list detail title
- - Fix started queries panel doesn't open after searching
 
  - find correct api route for story comments
  - find better api route for getting author following status together with bio
