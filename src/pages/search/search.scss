@@ -14,4 +14,15 @@ page-search {
 	     display: inline;
 	}
 
+	.starredmenu {
+		position: fixed;
+		top: 110px;
+
+		.scroll-content {
+			top: 40px;
+			bottom: 60px;
+		}
+
+	}
+
 }
