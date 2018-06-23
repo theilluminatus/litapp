@@ -3,6 +3,7 @@
 
 ## Releases
 
+- [v1.5](https://theilluminatus.github.io/litapp/releases/litapp-1.5.apk) (2018-06-23)
 - [v1.4](https://theilluminatus.github.io/litapp/releases/litapp-1.4.apk) (2018-05-28)
 - [v1.3](https://theilluminatus.github.io/litapp/releases/litapp-1.3.apk) (2018-03-26)
 - [v1.2](https://theilluminatus.github.io/litapp/releases/litapp-1.2.apk) (2018-03-05)
@@ -16,7 +17,7 @@
 - See story details, related stories, rate stories...
 - View author profiles and their submissions & favorites
 - Search for tags
-- View top stories of all categories
+- View top & new stories of all categories
 - Search in lists
 - and more...
 
