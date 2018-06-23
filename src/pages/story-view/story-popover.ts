@@ -40,6 +40,10 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
           <button (click)="changeBackground('black')" ion-button="popover-dot" class="popover-dot-black"></button>
         </ion-col>
       </ion-row>
+      <ion-item class="popover-contrast-toggle">
+        <ion-label>Low contrast: </ion-label>
+        <ion-toggle [checked]="settings.lowcontrast" (ionChange)="toggleLowContrast($event)"></ion-toggle>
+      </ion-item>
       <ion-item class="popover-text-sans-serif">
         <ion-label>Sans-serif</ion-label>
         <ion-radio value="sans-serif"></ion-radio>
@@ -182,19 +186,23 @@ export class StoryPopover {
   colors: any = {
     'white': {
       'bg': 'rgb(255, 255, 255)',
-      'fg': 'rgb(0, 0, 0)'
+      'fg': 'rgb(0, 0, 0)',
+      'fglow': 'rgb(128, 128, 128)'
     },
     'tan': {
       'bg': 'rgb(249, 241, 228)',
-      'fg': 'rgb(0, 0, 0)'
+      'fg': 'rgb(0, 0, 0)',
+      'fglow': 'rgb(92, 92, 92)'
     },
     'grey': {
       'bg': 'rgb(76, 75, 80)',
-      'fg': 'rgb(255, 255, 255)'
+      'fg': 'rgb(255, 255, 255)',
+      'fglow': 'rgb(160, 160, 160)'
     },
     'black': {
       'bg': 'rgb(0, 0, 0)',
-      'fg': 'rgb(255, 255, 255)'
+      'fg': 'rgb(255, 255, 255)',
+      'fglow': 'rgb(128, 128, 128)'
     },
   };
 
@@ -204,8 +212,12 @@ export class StoryPopover {
 
   changeBackground(color: any) {
     this.settings.theme = color;
-    this.settings.color = this.colors[color].fg;
     this.settings.background = this.colors[color].bg;
+
+    if (this.settings.lowcontrast)
+      this.settings.color = this.colors[color].fglow;
+    else  
+      this.settings.color = this.colors[color].fg;
   }
 
   changeFontSize(direction: string) {
@@ -240,5 +252,14 @@ export class StoryPopover {
         dir = "left";
     }
     this.settings.textalign = dir;
+  }
+
+  toggleLowContrast(event) {
+    this.settings.lowcontrast = event.checked;
+
+    if (event.checked)
+      this.settings.color = this.colors[this.settings.theme].fglow;
+    else  
+      this.settings.color = this.colors[this.settings.theme].fg;
   }
 }

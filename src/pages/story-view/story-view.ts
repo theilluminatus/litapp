@@ -36,7 +36,8 @@ export class StoryViewPage {
     color: "rgb(255,255,255)",
     background: "rgb(0,0,0)",
     font: "sans-serif",
-    textalign: "justify"
+    textalign: "justify",
+    lowcontrast: false,
   }
 
   constructor(
