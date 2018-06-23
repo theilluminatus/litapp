@@ -10,9 +10,13 @@
 
 <ion-content padding>
 		<ion-list>
-			<button ion-item *ngFor="let cat of (categories | orderBy: 'name')" (click)="openCategory(cat)">
+			<button ion-item *ngFor="let cat of (categories | orderBy: 'name')">
+				<button ion-button outline item-end (click)="openCategory(cat, 'top')">Top</button>
+				<button ion-button outline item-end (click)="openCategory(cat, 'new')">New</button>
+
 				<h2>{{ cat.name }}</h2>
 				<p>{{ cat.description }}</p>
+
 			</button>
 		</ion-list>
 </ion-content>

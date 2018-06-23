@@ -16,7 +16,7 @@
   "SIGNUP": "Sign up",
 
   "TAB1_TITLE": "History",
-  "TAB2_TITLE": "Top",
+  "TAB2_TITLE": "Categories",
   "TAB3_TITLE": "Search",
   "TAB4_TITLE": "Feed",
   "TAB5_TITLE": "Lists",
@@ -107,6 +107,7 @@
   "LISTVIEW_FILTER": "Filter stories",
 
   "TOPLIST_TITLE_PART": "Top stories of",
+  "NEWLIST_TITLE_PART": "New stories of",
 
   "DETAILS": "Details",
   "AUTHOR": "Author",

@@ -96,6 +96,18 @@ export class Stories {
     return this.search(filter, page, null, null, '1/top');
   }
 
+  getNew(id?: any, page?: number) {
+    let filter: any[] = [
+      {"property": "type", "value": "story"},
+      {"property": "newonly", "value": "yes"}
+    ];
+
+    if (id)
+      filter.push({"property": "category_id", "value": parseInt(id)});
+
+    return this.search(filter, page);
+  }
+
 
   // Get a story by ID
   getById(id: any) {

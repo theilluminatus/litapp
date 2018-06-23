@@ -15,13 +15,14 @@ export class TopCatPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public g: Globals) {
     this.g.onReady().then(() => {
       this.categories = this.g.getCategories();
-      this.categories.unshift({ id: 0, name: "All", description: "All categories" });
+      this.categories.unshift({ id: 0, name: " All", description: "All categories" });
     });
   }
 
-  openCategory(cat) {
+  openCategory(cat, order="top") {
     this.navCtrl.push('TopListPage', {
-      category: cat
+      category: cat,
+      order: order
     })
   }
 
