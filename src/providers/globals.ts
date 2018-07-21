@@ -75,7 +75,7 @@ export class Globals {
 
   getCategory(id: number) {
     if (this.globals.categories)
-      return this.globals.categories[id].name;
+      return this.globals.categories[id] ? this.globals.categories[id].name : "Unknown";
     return null;
   }
 

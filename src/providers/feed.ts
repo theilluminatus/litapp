@@ -68,9 +68,9 @@ export class Feed {
     return this.ready;
   }
 
-  query(lastid?: number, showloader?: boolean) {
+  query(lastid?: number, showloader?: boolean, force = false) {
 
-    if ( !lastid && this.feed && (new Date).getTime() < this.feedtimeout)
+    if ( !force && !lastid && this.feed && (new Date).getTime() < this.feedtimeout)
       return Observable.of(this.feed);
 
     if (!lastid || !this.feed)

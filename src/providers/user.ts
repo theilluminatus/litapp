@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { USER_KEY } from './db';
+import { USER_KEY, FEED_KEY } from './db';
 import { Api } from './api/api';
 
 @Injectable()
@@ -115,11 +115,11 @@ export class User {
   checkIfEverythingIsFucked() {
     return new Promise((resolve) => {
       this.storage.get(USER_KEY).then((user) => {
-        if (JSON.stringify(this.user) === JSON.stringify(user)) {
+        if (JSON.stringify(this.user) !== JSON.stringify(user)) {
           resolve(true);
+          console.log("different user objects", JSON.stringify(this.user), JSON.stringify(user));
         } else {
           resolve(false);
-          console.log("different user objects", JSON.stringify(this.user), JSON.stringify(user));
         }
       });
     });
@@ -127,10 +127,12 @@ export class User {
 
   removeStoredUser() {
     this.storage.remove(USER_KEY);
+    this.storage.remove(FEED_KEY);
   }
 
   logout() {
     this.user = null;
     this.removeStoredUser();
+    window.location.reload();
   }
 }

@@ -26,13 +26,13 @@ export class FeedPage {
   ) {
     Promise.all([this.f.onReady(), this.storage.get(FEED_KEY)]).then((values) => {
       this.lastviewedid = values[1];
-      this.refresh(null, true)
+      this.refresh(null, true);
     });
   }
 
-  refresh(event?, showloader?: boolean) {
+  refresh(event?, showloader?: boolean, force = false) {
     this.enableInfinite = true;
-    this.f.query(undefined, showloader).subscribe((data) => {
+    this.f.query(undefined, showloader, force).subscribe((data) => {
       if (data && data.length) {
         this.feed = data;
         this.storage.set(FEED_KEY, data[0].id);
