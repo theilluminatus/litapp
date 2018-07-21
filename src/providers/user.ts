@@ -115,7 +115,7 @@ export class User {
   checkIfEverythingIsFucked() {
     return new Promise((resolve) => {
       this.storage.get(USER_KEY).then((user) => {
-        if (user != this.user)
+        if (JSON.stringify(this.user) === JSON.stringify(user))
           resolve(true);
         else
           resolve(false);

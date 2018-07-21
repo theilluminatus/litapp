@@ -29,7 +29,7 @@ export class AccountPage {
         this.user.logout();
         this.login();
       }
-    })
+    });
   }
 
   login() {

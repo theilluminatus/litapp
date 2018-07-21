@@ -76,7 +76,7 @@ export class Api {
   
 
   showLoader() {
-    if (this.loader) return undefined;
+    if (this.loader) return this.loader;
     this.loader = this.loadingCtrl.create({spinner: "crescent"});
     this.loader.present();
     this.loader.onDidDismiss(() => {
