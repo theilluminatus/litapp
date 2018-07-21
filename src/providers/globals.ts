@@ -93,7 +93,8 @@ export class Globals {
   checkForUpdates() {
 
     this.api.get('app.json',undefined,undefined,3)
-      .catch((e) => {
+      .catch((error) => {
+        console.error(error);
         return Observable.of(false);
       }).subscribe((d: any) => {
 
@@ -142,6 +143,7 @@ export class Globals {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of(null);
     });
   }

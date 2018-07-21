@@ -88,6 +88,7 @@ export class Lists {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of([]);
     });
   }
@@ -132,6 +133,7 @@ export class Lists {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of(null);
     });
   }
@@ -144,8 +146,9 @@ export class Lists {
     return this.api.post('my/api/lists/'+path, undefined, undefined, false, 2).map((res: any) => {
       if (!res.success) this.api.showToast();
       return res.success;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d) {
@@ -166,8 +169,9 @@ export class Lists {
     return this.api.delete('my/api/lists/'+path, undefined, 2).map((res: any) => {
       if (!res.success) this.api.showToast();
       return res.success;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d) {
@@ -212,8 +216,9 @@ export class Lists {
       }));
 
       return true;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     });
   }
@@ -243,8 +248,9 @@ export class Lists {
       });
 
       return true;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     });
   }
@@ -264,8 +270,9 @@ export class Lists {
       });
 
       return true;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     });
   }

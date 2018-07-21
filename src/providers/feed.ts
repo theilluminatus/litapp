@@ -110,6 +110,7 @@ export class Feed {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of([]);
     });
   }

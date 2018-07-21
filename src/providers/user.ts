@@ -115,10 +115,12 @@ export class User {
   checkIfEverythingIsFucked() {
     return new Promise((resolve) => {
       this.storage.get(USER_KEY).then((user) => {
-        if (JSON.stringify(this.user) === JSON.stringify(user))
+        if (JSON.stringify(this.user) === JSON.stringify(user)) {
           resolve(true);
-        else
+        } else {
           resolve(false);
+          console.log("different user objects", JSON.stringify(this.user), JSON.stringify(user));
+        }
       });
     });
   }

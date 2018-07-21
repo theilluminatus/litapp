@@ -13,6 +13,11 @@ buildTypes {
 }
 ```
 
+If you want to debug an android production build, add the following line to the `onCreate` method in `platforms/android/app/src/main/java/com/illuminatus/litapp/MainActivity.java`:
+```
+WebView.setWebContentsDebuggingEnabled(true);
+```
+
 ## Releasing
 
 When releasing a new version you should update the version number in:

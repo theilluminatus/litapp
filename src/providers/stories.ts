@@ -153,6 +153,7 @@ export class Stories {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of(null);
     });
   }
@@ -169,6 +170,7 @@ export class Stories {
 
     this.api.post('2/submissions/vote', data, undefined, true)
       .catch((error) => {
+        console.error(error);
         return Observable.throw(error);
       }).subscribe((data) => {
         
@@ -211,6 +213,7 @@ export class Stories {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of([[],0]);
     });
   }

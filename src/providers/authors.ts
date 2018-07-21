@@ -53,6 +53,7 @@ export class Authors {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of(null);
     });
   }
@@ -76,6 +77,7 @@ export class Authors {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
+      console.error(error);
       return Observable.of([]);
     });
   }
@@ -93,8 +95,9 @@ export class Authors {
       else if (!res.success)
         this.api.showToast();
       return res.success;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d)
@@ -112,8 +115,9 @@ export class Authors {
     return this.api.post('2/favorites/author-remove', data, undefined, true).map((res: any) => {
       if (!res.success) this.api.showToast();
       return res.success;
-    }).catch((err) => {
+    }).catch((error) => {
       this.api.showToast();
+      console.error(error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d)
