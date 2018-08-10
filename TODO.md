@@ -1,12 +1,20 @@
 # TODO
 
+ - Add import export settings / history and downloads function
+ - Use new search api (sorting, tags...)
+ - Hide loading indicator when back pressed
+ - Remember last searches
+
+
+# IDEAS
+
  - Split story pages so no vertical scrolling occurs?
  - Hide tabs and search bar when scrolling on search page?
- - Fix rating isn't saved when downloading (shows as x.xx)
- - Add import export settings / history and downloads function
- - find correct api route for story comments
- - find better api route for getting author following status together with bio
- - find api route for search sorting
+ - Find api route for story comments
+ - Find better api route for getting author following status together with bio
 
+# BUGS
+
+ - Fix rating sometimes shows as x.xx
 
 ## Also check TODOs in files!
