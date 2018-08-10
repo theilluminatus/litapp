@@ -6,10 +6,6 @@ page-search {
 		right: 10px;
 	}
 
-	.starredmenu .item-inner {
-		padding: 0 16px;
-	}
-
 	.bar-button-menutoggle {
 	     display: inline;
 	}
@@ -18,9 +14,20 @@ page-search {
 		position: fixed;
 		top: 110px;
 
+		.item-inner {
+			padding: 0 16px;
+		}
+
+		[item-end] .icon {
+			margin: 0 3px;
+		}
+
 		.scroll-content {
-			top: 40px;
 			bottom: 60px;
+		}
+
+		.item-divider {
+			opacity: 0.33;
 		}
 
 	}

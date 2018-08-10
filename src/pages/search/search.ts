@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular'
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Storage } from '@ionic/storage';
 
-import { STARREDQUERIES_KEY } from '../../providers/db';
+import { STARREDQUERIES_KEY, RECENTQUERIES_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
 import { Stories } from '../../providers/providers';
 
@@ -20,6 +20,7 @@ export class SearchPage {
   @ViewChild("list") list: any;
 
   currentStories: Story[] = [];
+  recentQueries: string[] = [];
   starredQueries: string[] = [];
   query: string;
   sortmethod: string = "relevancy";
@@ -27,6 +28,7 @@ export class SearchPage {
   currentpage: number = 1;
 
   constructor(
+    private ref: ChangeDetectorRef,
     public navCtrl: NavController,
     public navParams: NavParams,
     public stories: Stories,
@@ -36,6 +38,10 @@ export class SearchPage {
   ) {
 
     this.query = navParams.get('query');
+    this.storage.get(RECENTQUERIES_KEY).then((value) => {
+      if (value)
+        this.recentQueries = value;
+    });
     this.storage.get(STARREDQUERIES_KEY).then((value) => {
       if (value)
         this.starredQueries = value;
@@ -68,6 +74,7 @@ export class SearchPage {
       this.totalResults = data[1];
       this.currentStories = data[0];
     });
+    this.saveSearch(query);
   }
 
   loadMore(event) {
@@ -85,23 +92,45 @@ export class SearchPage {
   saveSearch(query: string) {
     query = query.trim();
     if (query.length < 2) return;
+    if (this.recentQueries.indexOf(query) > -1) return;
+    if (this.starredQueries.indexOf(query) > -1) return;
+    this.recentQueries.push(query);
+    this.storage.set(RECENTQUERIES_KEY, this.recentQueries);
+    this.ref.detectChanges(); // Detects changes but doesn't update view.
+    this.ref.markForCheck();  // Marks view for check but doesn't detect changes.
+  }
+
+  pinSearch(event, query: string) {
+    console.log( event );
+    event.stopPropagation();
     if (this.starredQueries.indexOf(query) > -1) return;
     this.starredQueries.push(query);
-    this.storage.set(STARREDQUERIES_KEY, this.starredQueries)
+    this.recentQueries.splice(this.recentQueries.indexOf(query), 1);
+    this.storage.set(STARREDQUERIES_KEY, this.starredQueries);
+    this.storage.set(RECENTQUERIES_KEY, this.recentQueries);
   }
 
   search(query: string) {
-    console.log(query);
     this.searchbar.value = query;
     this.getStories(query);
   }
 
-  delete(query: string) {
-    this.starredQueries.forEach((item, index) => {
-      if (item == query)
-        this.starredQueries.splice(index,1);
-    });
-    this.storage.set(STARREDQUERIES_KEY, this.starredQueries)
+  delete(event, query: string) {
+    event.stopPropagation();
+    if (this.recentQueries.indexOf(query) > -1) {
+      this.recentQueries.forEach((item, index) => {
+        if (item == query)
+          this.recentQueries.splice(index,1);
+      });
+      this.storage.set(RECENTQUERIES_KEY, this.recentQueries)
+
+    } else if (this.starredQueries.indexOf(query) > -1) {
+      this.starredQueries.forEach((item, index) => {
+        if (item == query)
+          this.starredQueries.splice(index,1);
+      });
+      this.storage.set(STARREDQUERIES_KEY, this.starredQueries)
+    }
   }
 
   openSortPopover(ev: UIEvent) {

@@ -14,19 +14,14 @@
 				<ion-icon name="funnel"></ion-icon>
 			</button> -->
 			<button end ion-button icon-only menuToggle="right"
-				[tooltip]="'SEARCH_STARREDQUERIES' | translate" event="press" navTooltip>
-				<ion-icon name="bookmarks"></ion-icon>
+				[tooltip]="'SEARCH_HISTORY' | translate" event="press" navTooltip>
+				<ion-icon name="archive"></ion-icon>
 			</button>
 		</ion-buttons>
 	</ion-navbar>
 
 	<ion-toolbar no-border-top>
-		<ion-searchbar animated="true" (keyup.enter)="getStories($event.target.value)" [placeholder]="'SEARCH_PLACEHOLDER' | translate" #searchbar></ion-searchbar>
-		<ion-buttons end>
-			<button class="savebutton" color="primary" ion-button icon-only (click)="saveSearch(searchbar.value)">
-				<ion-icon name="bookmark"></ion-icon>
-			</button>
-		</ion-buttons>
+		<ion-searchbar animated="true" autocomplete="on" (keyup.enter)="getStories($event.target.value)" [placeholder]="'SEARCH_PLACEHOLDER' | translate" #searchbar></ion-searchbar>
 	</ion-toolbar>
 
 </ion-header>
@@ -35,15 +30,27 @@
 <ion-content padding>
 	<ion-nav #stars></ion-nav>
 	<ion-menu side="right" [content]="stars" class="starredmenu" #panel>
-		<ion-list>
-			<ion-list-header>
-				{{ 'SEARCH_STARREDQUERIES' | translate }}
-			</ion-list-header>
 
+		<ion-list>
 			<div class="scroll-content">
+
+				<ion-item-divider color="light">{{ 'SEARCH_STARREDQUERIES' | translate }}</ion-item-divider>
+
 				<button ion-item *ngFor="let query of starredQueries" (click)="search(query)">
 					<ion-label>{{query}}</ion-label>
-					<ion-icon name="trash" color="danger" item-end (click)="delete(query)"></ion-icon>
+					<div item-end>
+						<ion-icon name="close" color="danger" (click)="delete($event, query)"></ion-icon>
+					</div>
+				</button>
+
+				<ion-item-divider color="light">{{ 'SEARCH_HISTORY' | translate }}</ion-item-divider>
+
+				<button ion-item *ngFor="let query of (recentQueries | reverse)" (click)="search(query)">
+					<ion-label>{{query}}</ion-label>
+					<div item-end>
+						<ion-icon name="star" color="secondary" (click)="pinSearch($event, query)"></ion-icon>
+						<ion-icon name="close" color="danger" (click)="delete($event, query)"></ion-icon>
+					</div>
 				</button>
 			</div>
 		</ion-list>

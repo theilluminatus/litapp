@@ -3,7 +3,6 @@
  - Add import export settings / history and downloads function
  - Use new search api (sorting, tags...)
  - Hide loading indicator when back pressed
- - Remember last searches
 
 
 # IDEAS
