@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav } from 'ionic-angular';
+import { Config, Nav, Platform, App } from 'ionic-angular';
 
-import { Globals } from '../providers/providers';
+import { Globals, Api } from '../providers/providers';
 import { Stories } from '../providers/providers';
 import { Lists } from '../providers/providers';
 import { Feed } from '../providers/providers';
@@ -32,7 +32,7 @@ import { Settings } from '../providers/providers';
 
           <button menuClose ion-item (click)="openPage('SettingsPage')">
             {{'MENU_SETTINGS' | translate}}
-          </button>          
+          </button>
 
         </ion-list>
       </ion-content>
@@ -48,14 +48,27 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   constructor(
+    public platform: Platform,
+    public app: App,
     private translate: TranslateService,
     private config: Config,
     public settings: Settings,
+    public api: Api,
     public g: Globals,
     public s: Stories,
     public l: Lists,
     public f: Feed
   ) {
+
+    this.platform.registerBackButtonAction(() => {
+      this.api.hideLoader();
+      if (this.nav.getActive().index != 0)
+        this.nav.popToRoot();
+      else if (this.app.getActiveNav().canGoBack())
+        this.app.navPop();
+      else
+        this.platform.exitApp()
+    });
     this.initTranslate();
     this.settings.load().then(() => {
       if (this.settings.allSettings.checkforappupdates)

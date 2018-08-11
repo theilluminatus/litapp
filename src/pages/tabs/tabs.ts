@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, Platform, Tabs } from 'ionic-angular';
-import { User } from '../../providers/providers';
+import { IonicPage, Platform, Tabs, Tab, App, NavController } from 'ionic-angular';
+import { User, Api } from '../../providers/providers';
 import { Feed } from '../../providers/providers';
 
 @IonicPage({priority: 'high'})
@@ -23,12 +23,17 @@ export class TabsPage {
   tab4Title = " ";
   tab5Title = " ";
 
+  backButtonListener;
+  tabsub;
+
   @ViewChild('tabs') tabs: Tabs;
 
   constructor(
+    public platform: Platform,
+    public app: App,
     public navCtrl: NavController,
     public translateService: TranslateService,
-    public platform: Platform,
+    public api: Api,
     public user: User,
     public f: Feed
   ) {
@@ -41,5 +46,25 @@ export class TabsPage {
       this.tab5Title = values['TAB5_TITLE'];
     });
 
+  }
+
+  ionViewDidEnter() {
+    this.tabsub = this.tabs.ionChange.subscribe((tab: Tab) => {
+      if (this.backButtonListener) this.backButtonListener();
+      if (tab.index > 0) {
+        this.backButtonListener = this.platform.registerBackButtonAction(() => {
+          let currentPageName = this.app.getActiveNav().getActive().name;
+          if ([this.tab2Root,this.tab3Root,this.tab4Root,this.tab5Root].indexOf(currentPageName) > -1)
+            this.tabs.select(0);
+          else
+            this.app.navPop();
+        });
+      }
+    });
+  }
+
+  ionViewWillLeave() {
+    if (this.backButtonListener) this.backButtonListener();
+    if (this.tabsub) this.tabsub.unsubscribe();
   }
 }

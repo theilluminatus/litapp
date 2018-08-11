@@ -85,6 +85,10 @@ export class Api {
     return this.loader;
   }
 
+  hideLoader() {
+    if (this.loader) this.loader.dismiss();
+  }
+
   showToast(text?: string, timeout?: number, button?: string) {
     return new Promise((resolve) => {
 
