@@ -58,11 +58,11 @@
   "SEARCH_STARREDQUERIES": "Starred Queries",
   "SEARCH_HISTORY": "History",
   "SEARCH_SORT": "Sort results",
+  "SEARCH_ONLYTAG": "Only show stories that are:",
 
   "RELEVANCY": "Relevancy",
   "NEWEST": "Newest",
   "OLDEST": "Oldest",
-  "RATING": "Rating",
   "NUMBEROFCOMMENTS": "Number of comments",
 
   "STORY_TOOLTIP_SHOWINFO": "More info",
@@ -77,6 +77,7 @@
   "STORYDETAIL_RATE": "Rate",
   "STORYDETAIL_RATETITLE": "Rate story",
   "STORYDETAIL_TOOLTIP_DOWNLOAD": "Toggle download story",
+  "STORYDETAIL_VIEWCAT": "View category",
 
   "FEED_TITLE": "My Feed",
   "FEED_EDITED": "edited",
@@ -126,6 +127,8 @@
   "FAVORITES": "Favorites",
   "BYAUTHOR": "by",
   "ONTIMESTAMP": "on",
+  "TOP": "Top",
+  "NEW": "New",
 
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",

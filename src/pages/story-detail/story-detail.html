@@ -54,7 +54,7 @@
   </p>
 
   <p><strong>{{'AUTHOR' | translate}}: </strong> <a (click)="showAuthor(story.author)">{{story.author.name}}</a></p>
-  <p *ngIf="story.category"><strong>{{'CATEGORY' | translate}}: </strong> <a (click)="search(story.category)">{{story.category}}</a></p>
+  <p *ngIf="story.category"><strong>{{'CATEGORY' | translate}}: </strong> <a (click)="category(story.category)">{{story.category}}</a></p>
 
   <p class="tags" *ngIf="story.tags && story.tags.length > 0">
     <strong>{{'TAGS' | translate}}: </strong>

@@ -47,12 +47,12 @@ export class Stories {
   }
 
 
-  searchStory(query: string, sort: string, page?: number, limit?: number) {
-    let filter = [
-      {"property": "q", "value": query},
-      {"property": "type", "value": "story"}
-    ];
-    return this.search(filter, page, sort, 1);
+  searchStory(query: string, options: any, page?: number, limit?: number) {
+    let filter = {
+      "q": query,
+      ...options
+    };
+    return this.newsearch(filter, page);
   }
 
   getSeries(id: any) {
@@ -219,6 +219,40 @@ export class Stories {
   }
 
 
+  private newsearch(filter: any, page?: number, urlIndex?: number, path?: string) {
+    let params = {
+      params: JSON.stringify({
+        "page": page ? page : 1,
+        ...filter
+      })
+    };
+
+    let loader;
+    if (!page || page < 2)
+      loader = this.api.showLoader();
+
+    return this.api.get(path ? path : '3/search/stories', params, null, urlIndex).map((data: any) => {
+      if (loader) loader.dismiss();
+
+      if (!data.data) {
+        if (!data.meta.hasOwnProperty('total'))
+          this.api.showToast();
+        return [[],0];
+      }
+
+      return [data.data.map((story) => 
+        this.extractFromNewSearch(story)
+      ), data.meta.total];
+
+    }).catch((error) => {
+      if (loader) loader.dismiss();
+      this.api.showToast();
+      console.error(error);
+      return Observable.of([[],0]);
+    });
+  }
+
+
   download(story: Story) {
     story.downloaded = true;
     story.downloadedtimestamp = new Date();
@@ -328,6 +362,38 @@ export class Stories {
       isnew: item.is_new == "no" ? false : true,
       iswriterspick: item.writers_pick == "no" ? false : true,
       iscontestwinner: item.contest_winner == "no" ? false : true,
+      commentsenabled: item.enable_comments > 0 ? true : false,
+      ratingenabled: item.allow_vote > 0 ? true : false,
+      author: author
+    });
+
+    this.stories.set(story.id, story);
+    return story;
+  }
+
+
+  extractFromNewSearch(item) {
+    let cached = this.stories.get(item.id);
+    if (cached)
+      return cached;
+
+    let timestampParts = item.date_approve.split("/");
+
+    let author = this.a.extractFromSearch(item.author);
+    let story = new Story({
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      category: item.category_info.name,
+      lang: this.g.getLanguage(item.language),
+      timestamp: Math.round(Date.parse(timestampParts[2] + '-' + timestampParts[0] + '-' + timestampParts[1]+"T00:00:00")/1000),
+      rating: item.rate_all,
+      viewcount: item.view_count,
+      url: item.url,
+      ishot: item.is_hot,
+      isnew: item.is_new,
+      iswriterspick: item.writers_pick,
+      iscontestwinner: item.contest_winner > 0 ? true : false,
       commentsenabled: item.enable_comments > 0 ? true : false,
       ratingenabled: item.allow_vote > 0 ? true : false,
       author: author

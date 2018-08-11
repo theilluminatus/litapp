@@ -1,7 +1,7 @@
 # TODO
 
  - Add import export settings / history and downloads function
- - Use new search api (sorting, tags...)
+ - Add way to search for tags
 
 
 # IDEAS

@@ -9,10 +9,10 @@
 			<small *ngIf="totalResults && currentStories.length">({{totalResults}})</small>
 		</ion-title>
 		<ion-buttons end>
-			<!-- <button end ion-button icon-only (click)="openSortPopover($event)"
+			<button end ion-button icon-only (click)="openOptionsPopover($event)"
 				[tooltip]="'SEARCH_SORT' | translate" event="press" navTooltip>
 				<ion-icon name="funnel"></ion-icon>
-			</button> -->
+			</button>
 			<button end ion-button icon-only menuToggle="right"
 				[tooltip]="'SEARCH_HISTORY' | translate" event="press" navTooltip>
 				<ion-icon name="archive"></ion-icon>

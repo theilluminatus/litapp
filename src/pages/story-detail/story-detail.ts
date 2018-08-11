@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories } from '../../providers/providers';
+import { Stories, Globals } from '../../providers/providers';
 import { User } from '../../providers/providers';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage({priority: 'low'})
 @Component({
@@ -20,7 +21,10 @@ export class StoryDetailPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
+    public translate: TranslateService,
+    public g: Globals,
     public stories: Stories,
     public user: User,
     private socialSharing: SocialSharing
@@ -71,6 +75,41 @@ export class StoryDetailPage {
   search(query: string) {
     this.navCtrl.push("SearchPage", {
       query: query
+    });
+  }
+
+  category(query: string) {
+
+
+    this.translate.get(['STORYDETAIL_VIEWCAT','TOP', 'NEW']).subscribe(values => {
+
+      let alert = this.alertCtrl.create({
+        title: values.STORYDETAIL_VIEWCAT,
+        buttons: [{
+          text: values.TOP,
+          handler: (d) => {
+            this.openCategoryListPage("top", query);
+          }
+        }, {
+          text: values.NEW,
+          handler: (d) => {
+            this.openCategoryListPage("new", query);
+          }
+        }]
+      });
+      alert.present();
+
+    });
+
+  }
+
+  openCategoryListPage(order: string, categoryName: string) {
+    this.g.onReady().then(() => {
+      let category = this.g.getCategories().find(c => c.name == categoryName);
+      this.navCtrl.push('TopListPage', {
+        category: category,
+        order: order
+      });
     });
   }
 

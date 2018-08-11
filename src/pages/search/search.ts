@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular'
 import { Keyboard } from '@ionic-native/keyboard';
 
@@ -23,12 +23,17 @@ export class SearchPage {
   recentQueries: string[] = [];
   starredQueries: string[] = [];
   query: string;
-  sortmethod: string = "relevancy";
   totalResults: number;
   currentpage: number = 1;
 
+  options = {
+    sort: "",
+    popular: false,
+    editorsChoice: false,
+    winner: false,
+  };
+
   constructor(
-    private ref: ChangeDetectorRef,
     public navCtrl: NavController,
     public navParams: NavParams,
     public stories: Stories,
@@ -70,7 +75,7 @@ export class SearchPage {
 
     this.currentStories = [];
     this.list.enableInfinity();
-    this.stories.searchStory(val.trim(), this.sortmethod, 1).subscribe((data) => {
+    this.stories.searchStory(val.trim(), this.options, 1).subscribe((data) => {
       this.totalResults = data[1];
       this.currentStories = data[0];
     });
@@ -79,7 +84,7 @@ export class SearchPage {
 
   loadMore(event) {
     this.currentpage++;
-    this.stories.searchStory(this.searchbar.value, this.sortmethod, this.currentpage).subscribe((data) => {
+    this.stories.searchStory(this.searchbar.value, this.options, this.currentpage).subscribe((data) => {
       if (!data[0].length) {
         event.enable(false);
         return;
@@ -90,14 +95,14 @@ export class SearchPage {
   }
 
   saveSearch(query: string) {
+    if (!query) return;
+
     query = query.trim();
     if (query.length < 2) return;
     if (this.recentQueries.indexOf(query) > -1) return;
     if (this.starredQueries.indexOf(query) > -1) return;
     this.recentQueries.push(query);
     this.storage.set(RECENTQUERIES_KEY, this.recentQueries);
-    this.ref.detectChanges(); // Detects changes but doesn't update view.
-    this.ref.markForCheck();  // Marks view for check but doesn't detect changes.
   }
 
   pinSearch(event, query: string) {
@@ -133,20 +138,18 @@ export class SearchPage {
     }
   }
 
-  openSortPopover(ev: UIEvent) {
+  openOptionsPopover(ev: UIEvent) {
     let popover = this.popoverCtrl.create("SearchPopover", {
-      method: this.sortmethod
+      options: this.options
     });
 
     popover.present({
       ev: ev
     });
 
-    popover.onDidDismiss((method) => {
-      if (method) {
-        this.sortmethod = method;
+    popover.onDidDismiss((refresh) => {
+      if (this.searchbar.value && refresh)
         this.getStories();
-      }
     })
   }
 
