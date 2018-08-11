@@ -1,8 +1,6 @@
 # TODO
 
  - Add import export settings / history and downloads function
- - Add way to search for tags
-
 
 # IDEAS
 

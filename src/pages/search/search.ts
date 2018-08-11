@@ -31,6 +31,8 @@ export class SearchPage {
     popular: false,
     editorsChoice: false,
     winner: false,
+    astags: false,
+    category: undefined
   };
 
   constructor(
@@ -63,9 +65,14 @@ export class SearchPage {
   }
 
   ionViewWillEnter() {
-    if (this.query) this.search(this.query);
-    else if (this.searchbar.value == "")
+    if (this.query) {
+      this.options.astags = true;
+      this.options.sort = 'views';
+      this.options.category = '';
+      this.search(this.query);
+    } else if (this.searchbar.value == "") {
       setTimeout(() => { this.searchbar.setFocus(); }, 100);
+    }
   }
 
   getStories(query?: string) {

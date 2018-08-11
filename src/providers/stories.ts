@@ -52,6 +52,10 @@ export class Stories {
       "q": query,
       ...options
     };
+
+    if (options.astags) {
+      return this.tagsearch(filter, page);
+    }
     return this.newsearch(filter, page);
   }
 
@@ -218,8 +222,18 @@ export class Stories {
     });
   }
 
+  // api 3 used on search panel for keyword and tag search
+  private newsearch(filter: any, page?: number, urlIndex?: number, path?: string, tags = false) {
+    
+    if (!tags) {
+      if (filter.category) {
+        filter.categories = filter.category.map(c => parseInt(c));
+      }
+      delete filter.category;
+    } else if (Array.isArray(filter.category)) {
+      filter.category = parseInt(filter.category[0]);
+    }
 
-  private newsearch(filter: any, page?: number, urlIndex?: number, path?: string) {
     let params = {
       params: JSON.stringify({
         "page": page ? page : 1,
@@ -234,15 +248,19 @@ export class Stories {
     return this.api.get(path ? path : '3/search/stories', params, null, urlIndex).map((data: any) => {
       if (loader) loader.dismiss();
 
-      if (!data.data) {
-        if (!data.meta.hasOwnProperty('total'))
+      // tag portals uses new api but level 1 structure of old api :'(
+      let stories = tags ? data.submissions : data.data;
+      let total = tags ? data.meta.submissions_count : data.meta.total;
+
+      if (!stories) {
+        if (!total)
           this.api.showToast();
         return [[],0];
       }
 
-      return [data.data.map((story) => 
+      return [stories.map((story) => 
         this.extractFromNewSearch(story)
-      ), data.meta.total];
+      ), total];
 
     }).catch((error) => {
       if (loader) loader.dismiss();
@@ -250,6 +268,30 @@ export class Stories {
       console.error(error);
       return Observable.of([[],0]);
     });
+  }
+
+  private tagsearch(filter: any, page?: number, urlIndex?: number, path?: string) {
+    let lookup = {params: JSON.stringify({tags: filter.q.split(",").map(t => t.trim())})};
+    delete filter.q;
+
+    if (!page || page < 2)
+      this.api.showLoader();
+
+    // first lookup tag ids
+    return this.api.get(path ? path : '3/tagsportal/by-name', lookup, null, urlIndex)
+      .map((data: any) => {
+        return data.map(t => t.id);
+      })
+      
+      // then lookup results
+      .mergeMap(ids => {
+        let params = {
+          "tags": ids,
+          "sort_by": filter.sort,
+          ...filter
+        };
+        return this.newsearch(params, page, 0, '3/tagsportal/stories', true);
+      });
   }
 
 

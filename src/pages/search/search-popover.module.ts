@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SearchPopover } from './search-popover';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { SearchPopover } from './search-popover';
   ],
   imports: [
     IonicPageModule.forChild(SearchPopover),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    NgPipesModule
   ],
   entryComponents: [
     SearchPopover,

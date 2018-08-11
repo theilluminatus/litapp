@@ -3,19 +3,19 @@ import { IonicPageModule } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgPipesModule } from 'ngx-pipes';
 
-import { TopCatPage } from './top-cat';
+import { ExplorePage } from './explore';
 
 @NgModule({
   declarations: [
-    TopCatPage,
+    ExplorePage,
   ],
   imports: [
-    IonicPageModule.forChild(TopCatPage),
+    IonicPageModule.forChild(ExplorePage),
     TranslateModule.forChild(),
     NgPipesModule
   ],
   exports: [
-    TopCatPage
+    ExplorePage
   ]
 })
-export class TopCatPageModule { }
+export class ExplorePageModule { }

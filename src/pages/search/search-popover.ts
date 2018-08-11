@@ -1,40 +1,66 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { Globals } from '../../providers/globals';
 
 @IonicPage()
 @Component({
   selector: 'search-popover',
   template: `
 
+    <!--<h5>{{ 'SEARCH_OPTIONS' | translate }}</h5>-->
+
     <ion-list radio-group [(ngModel)]="options.sort">
       <ion-list-header>{{'SEARCH_SORT' | translate}}</ion-list-header>
 
-      <ion-item>
-        <ion-label>{{'RELEVANCY' | translate}}</ion-label>
-        <ion-radio value=""></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{'NEWEST' | translate}}</ion-label>
-        <ion-radio value="date"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{'OLDEST' | translate}}</ion-label>
-        <ion-radio value="date asc"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{'RATING' | translate}}</ion-label>
-        <ion-radio value="vote"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{'NUMBEROFCOMMENTS' | translate}}</ion-label>
-        <ion-radio value="views"></ion-radio>
-      </ion-item>
+      <ng-container *ngIf="!options.astags; else tagsSort">
+        <ion-item>
+          <ion-label>{{'RELEVANCY' | translate}}</ion-label>
+          <ion-radio value=""></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'NEWEST' | translate}}</ion-label>
+          <ion-radio value="date"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'OLDEST' | translate}}</ion-label>
+          <ion-radio value="date asc"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'RATING' | translate}}</ion-label>
+          <ion-radio value="vote"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'NUMBEROFCOMMENTS' | translate}}</ion-label>
+          <ion-radio value="comments"></ion-radio>
+        </ion-item>
+      </ng-container>
+
+      <ng-template #tagsSort>
+        <ion-item>
+          <ion-label>{{'VIEWCOUNT' | translate}}</ion-label>
+          <ion-radio value="views"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'RATING' | translate}}</ion-label>
+          <ion-radio value="rating"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'NUMBEROFFAVORITES' | translate}}</ion-label>
+          <ion-radio value="favorite"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'NEWEST' | translate}}</ion-label>
+          <ion-radio value="newest"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'OLDEST' | translate}}</ion-label>
+          <ion-radio value=""></ion-radio>
+        </ion-item>
+      </ng-template>
 
     </ion-list>
 
-    <ion-list>
-
-    <ion-list-header>{{'SEARCH_ONLYTAG' | translate}}</ion-list-header>
+    <ion-list-header>{{'SEARCH_ONLYSPECIAL' | translate}}</ion-list-header>
 
     <ion-grid>
       <ion-row>
@@ -61,10 +87,27 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
       </ion-row>
     </ion-grid>
 
+    <ion-item>
+      <ion-label>{{ 'SEARCH_CATEGORY' | translate }}</ion-label>
+      <ion-select [(ngModel)]="options.category" [multiple]="!options.astags">
+        <ion-option value="" *ngIf="options.astags">{{ 'SEARCH_ANYCAT' | translate }}</ion-option>
+        <ion-option *ngFor="let cat of (categories | orderBy: 'name')" [value]="cat.id">{{cat.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox [(ngModel)]="options.astags" (click)="changeDefaultSort()"></ion-checkbox>
+      <ion-label>{{'SEARCH_TAGS' | translate}}</ion-label>
+    </ion-item>
+
     <button ion-button (click)="save()">{{'SEARCH' | translate}}</button>
 
   `,
   styles: [`
+
+    h5 {
+      margin: 15px 15px 5px 15px;
+    }
 
     .list-header-md {
       border: none;
@@ -75,12 +118,20 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
       overflow-x: hidden;
     }
 
-    .item-inner {
-      border: none;
+    ::ng-deep search-popover .item-inner {
+      border: none !important;
     }
 
     .list-md .item-block .item-inner {
       border-color: #666;
+    }
+
+    .item-checkbox {
+      padding-left: 10px;
+    }
+
+    .checkbox {
+      margin-right: 8px !important;
     }
 
     .tags {
@@ -94,7 +145,8 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
     }
 
     .grid {
-      margin: 0 5px;
+      padding: 0 15px 0 15px;
+      font-size: 0.8em;
     }
 
     .grid .col {
@@ -113,8 +165,16 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
       margin: 0 5px 0 0;
     }
 
+    .grid .label {
+      font-size: 0.8em;
+    }
+
+    .select {
+      margin: 10px 0;
+    }
+
     .button {
-      margin: 10px;
+      margin: 15px 10px;
     }
 
   `]
@@ -122,13 +182,26 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 export class SearchPopover {
 
   options;
+  categories;
 
-  constructor(navParams: NavParams, private viewCtrl: ViewController) {
+  constructor(
+    navParams: NavParams,
+    private viewCtrl: ViewController,
+    public g: Globals
+  ) {
     this.options = navParams.get('options');
+    this.g.onReady().then(() => {
+      this.categories = this.g.getCategories();
+    });
   }
 
   save() {
     this.viewCtrl.dismiss(true);
+  }
+
+  changeDefaultSort() {
+    this.options.sort = this.options.astags ? 'views' : '';
+    this.options.category = this.options.astags ? '' : [];
   }
 
 }

@@ -1,0 +1,37 @@
+page-explore {
+
+	.scroll-content {
+		padding: 0 8px !important;
+	}
+
+	.list-md .item-block {
+		background: none;
+	}
+
+	.spinner {
+		text-align: center;
+    	width: 100%;
+	}
+
+	.list-md .item-block .item-inner {
+		border-color: #666;
+	}
+
+	[item-end] {
+		margin: 0 3px !important;
+	}
+
+	.folded {
+		max-height: calc( 50vh - 140px );
+		overflow-y: auto;
+	}
+
+	.card:not(:first-child) {
+		margin-top: 15px;
+	}
+
+	[padding] h4:first-child {
+		margin-top: 1.6rem;
+	}
+
+}

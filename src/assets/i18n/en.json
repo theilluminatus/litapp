@@ -16,7 +16,7 @@
   "SIGNUP": "Sign up",
 
   "TAB1_TITLE": "History",
-  "TAB2_TITLE": "Categories",
+  "TAB2_TITLE": "Explore",
   "TAB3_TITLE": "Search",
   "TAB4_TITLE": "Feed",
   "TAB5_TITLE": "Lists",
@@ -58,12 +58,17 @@
   "SEARCH_STARREDQUERIES": "Starred Queries",
   "SEARCH_HISTORY": "History",
   "SEARCH_SORT": "Sort results",
-  "SEARCH_ONLYTAG": "Only show stories that are:",
+  "SEARCH_TAGS": "Search as tags (commas!)",
+  "SEARCH_ONLYSPECIAL": "Only show stories that are:",
+  "SEARCH_CATEGORY": "Search in category",
+  "SEARCH_ANYCAT": "Any",
+  "SEARCH_OPTIONS": "Search options",
 
   "RELEVANCY": "Relevancy",
   "NEWEST": "Newest",
   "OLDEST": "Oldest",
   "NUMBEROFCOMMENTS": "Number of comments",
+  "NUMBEROFFAVORITES": "Number of favorites",
 
   "STORY_TOOLTIP_SHOWINFO": "More info",
   "STORY_ENDOFSERIES": "No more stories in this series",
@@ -111,10 +116,15 @@
   "TOPLIST_TITLE_PART": "Top stories of",
   "NEWLIST_TITLE_PART": "New stories of",
 
+  "EXPLORE_TOPTAGS": "Most used tags",
+  "EXPLORE_ALLCAT": "All",
+  "EXPLORE_ALLCATDESCR": "All categories",
+
   "DETAILS": "Details",
   "AUTHOR": "Author",
   "CATEGORY": "Category",
   "CATEGORIES": "Categories",
+  "EXPLORE": "Explore",
   "TAGS": "Tags",
   "RATING": "Rating",
   "LENGTH": "Length",

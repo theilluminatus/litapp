@@ -12,7 +12,7 @@ import { Feed } from '../../providers/providers';
 export class TabsPage {
 
   tab1Root = 'HistoryPage';
-  tab2Root = 'TopCatPage';
+  tab2Root = 'ExplorePage';
   tab3Root = 'SearchPage';
   tab4Root = 'FeedPage';
   tab5Root = 'ListListPage';
