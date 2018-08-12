@@ -27,6 +27,18 @@
     </ion-list>
   </form>
 
+  <button ion-button (click)="exportData()">
+    <ion-icon name="cloud-download"></ion-icon>&nbsp;
+    {{'SETTINGS_EXPORT' | translate}}
+  </button>
+
+  <button ion-button (click)="importData()">
+    <ion-icon name="cloud-upload"></ion-icon>&nbsp;
+    {{'SETTINGS_IMPORT' | translate}}
+  </button>
+
+  <br>
+
   <button ion-button (click)="g.checkForUpdates()">
     <ion-icon name="refresh"></ion-icon>&nbsp;
     {{'SETTINGS_CHECKFORUPDATES' | translate}}

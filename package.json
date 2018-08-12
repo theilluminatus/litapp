@@ -26,6 +26,7 @@
     "@ionic-native/browser-tab": "^4.10.0",
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/file": "^4.11.0",
     "@ionic-native/header-color": "^4.10.0",
     "@ionic-native/keyboard": "^4.10.0",
     "@ionic-native/social-sharing": "^4.10.0",
@@ -37,9 +38,11 @@
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "cordova-android": "7.0.0",
+    "cordova-android-support-gradle-release": "^1.4.4",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-fullscreen": "^1.2.0",
     "cordova-plugin-headercolor": "^1.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
@@ -76,10 +79,12 @@
       "cordova-plugin-x-toast": {},
       "cordova-plugin-x-socialsharing": {},
       "cordova-plugin-headercolor": {},
-      "cordova-plugin-browsertab": {}
+      "cordova-plugin-browsertab": {},
+      "cordova-plugin-file": {},
+      "cordova-android-support-gradle-release": {
+        "ANDROID_SUPPORT_VERSION": "24.+"
+      }
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

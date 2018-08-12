@@ -98,9 +98,8 @@ export class Globals {
    return this.api.get('3/tagsportal/top', params);
   }
 
-  searchTags(query: string) {
-    // https://literotica.com/api/3/tagsportal/by-name?params={"tags":["test"]}
-    // [{"id":1308,"tag":"latex","is_banned":0}]
+  getVersion() {
+    return this.version;
   }
 
 

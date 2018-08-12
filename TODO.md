@@ -1,7 +1,5 @@
 # TODO
 
- - Add import export settings / history and downloads function
-
 # IDEAS
 
  - Split story pages so no vertical scrolling occurs?
