@@ -4,6 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
+import { FileChooser  } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
 
 
 import { Globals, Api } from '../../providers/providers';
@@ -34,11 +36,13 @@ export class SettingsPage {
     public translate: TranslateService,
     public storage: Storage,
     public file: File,
+    public fileChooser: FileChooser,
+    public filePath: FilePath,
   ) { }
 
   ionViewWillEnter() {
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS','SETTINGS_IMPORTFAIL']).subscribe((values) => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS','SETTINGS_IMPORTFAIL','SETTNGS_IMPORTSUCCESS','RELOAD']).subscribe((values) => {
       this.translations = values;
     });
 
@@ -61,52 +65,74 @@ export class SettingsPage {
     });
   }
 
-  // TODO: Add location picker
-
   exportData() {
-    let data = {
-      type: exportDataIdentifier,
-      version: this.g.getVersion(),
-      timestamp: new Date().toISOString()
-    };
-    this.storage.forEach((value, key) => {
-      if ([STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY].indexOf(key) > -1) {
-        data[key] = value;
-      } else if (key.indexOf(STORY_KEY) > -1 && value.downloaded) {
-        data[key] = value;
-        if (!data[HISTORY_KEY]) data[HISTORY_KEY] = [];
-        data[HISTORY_KEY].push(value.id);
-      }
-    }).then(() => {
-      console.log( data );
-      let path = this.file.dataDirectory;
-      this.file.writeFile(path, "litapp.json", JSON.stringify(data));
-      this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+"/litapp.json");
-    });
+      let data = {
+        type: exportDataIdentifier,
+        version: this.g.getVersion(),
+        timestamp: new Date().toISOString()
+      };
+
+      this.storage.forEach((value, key, i) => {
+        
+        if ([STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY].indexOf(key) > -1) {
+          data[key] = value;
+        } else if (key.indexOf(STORY_KEY) > -1 && value.downloaded) {
+          data[key] = value;
+          if (!data[HISTORY_KEY]) data[HISTORY_KEY] = [];
+          data[HISTORY_KEY].push(value.id);
+        }
+        
+      }).then(() => {
+
+      let path = this.file.externalRootDirectory;
+        let filename = "litapp-"+Math.round(new Date().getTime() / 1000)+".json"
+        console.log( "writing", data, path + filename );
+
+        this.file.writeFile(path, filename, JSON.stringify(data), {replace: true}).then(() => {
+          this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
+
+        }).catch((err) => {
+          console.error(err);
+        });
+      });
   }
 
   importData() {
-    let path = this.file.dataDirectory;
-    this.file.readAsText(path, "litapp.json").then((text: any) => {
-      let data = JSON.parse(text);
+    
+    this.fileChooser.open().then(uri => {
+      console.log( "parsing", uri );
+      this.filePath.resolveNativePath(uri).then(path => {
+        let pathname = path.substring(0,path.lastIndexOf("/")+1)
+        let filename = path.substring(path.lastIndexOf("/")+1)
+        console.log( "reading", pathname, filename );
+        
+        this.file.readAsText(pathname, filename).then((text: any) => {
+          let data = JSON.parse(text);
+          console.log( "loading", data );
+    
+          if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
+            this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
+            return;
+          }
+    
+          for (const key in data) {
+            if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
+              const value = data[key];
+              this.storage.set(key, value);
+            }
+          }
+          
+          this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
+            window.location.hash = "";
+            window.location.reload();
+          })
+          
+        }).catch((error) => {
+          console.error(error);
+        });
 
-      if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
-        this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
-        return;
-      }
-
-      for (const key in data) {
-        if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
-          const value = data[key];
-          this.storage.set(key, value);
-        }
-      }
-  
-      window.location.reload();
-      
-    }).catch((error) => {
-      this.api.showToast(error);
-    });
+      });
+    }).catch(err => console.error(err));
   }
 
 }

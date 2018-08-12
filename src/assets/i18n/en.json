@@ -30,6 +30,7 @@
   "SETTINGS_IMPORT": "Import data",
   "SETTINGS_IMPORTFAIL": "Backup either not valid or compatible with this version of the app.",
   "SETTINGS_EXPORTSUCCESS": "File saved to",
+  "SETTNGS_IMPORTSUCCESS": "Successfully imported",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",
@@ -143,6 +144,7 @@
   "ONTIMESTAMP": "on",
   "TOP": "Top",
   "NEW": "New",
+  "RELOAD": "Reload",
 
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",

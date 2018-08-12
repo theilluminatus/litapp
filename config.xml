@@ -101,4 +101,6 @@
     <plugin name="cordova-android-support-gradle-release" spec="^1.4.4">
         <variable name="ANDROID_SUPPORT_VERSION" value="24.+" />
     </plugin>
+    <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
+    <plugin name="cordova-plugin-filepath" spec="^1.4.2" />
 </widget>

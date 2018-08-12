@@ -101,7 +101,9 @@ export class Api {
           duration: timeout ? timeout : 3000
         });
         toast.present();
-        resolve(toast);
+        toast.onDidDismiss(data => {
+          resolve(toast);
+        })
       });
       
     });
