@@ -14,7 +14,7 @@ export class Globals {
 
   private globals;
   private ready;
-  private version = 1.6;
+  private version = 1.7;
 
   constructor(
     public api: Api,
