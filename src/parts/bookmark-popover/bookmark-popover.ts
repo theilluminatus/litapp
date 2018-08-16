@@ -16,9 +16,11 @@ export class BookmarkPopover {
   alllists: List[];
   story: Story;
 
+  unregister;
+
   constructor(
     navParams: NavParams,
-    platform: Platform,
+    public platform: Platform,
     public viewCtrl: ViewController,
     public l: Lists
   ) {
@@ -32,10 +34,17 @@ export class BookmarkPopover {
       });
     });
     
-    let unregister = platform.registerBackButtonAction(() => {
+  }
+
+  ionViewDidEnter() {
+    this.unregister = this.platform.registerBackButtonAction(() => {
       this.viewCtrl.dismiss();
-      unregister();
+      this.unregister();
     });
+  }
+  
+  ionViewDidLeave() {
+    this.unregister();
   }
 
   toggleFromList(list: List) {

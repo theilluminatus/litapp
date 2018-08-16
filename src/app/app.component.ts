@@ -59,16 +59,6 @@ export class MyApp {
     public l: Lists,
     public f: Feed
   ) {
-
-    this.platform.registerBackButtonAction(() => {
-      this.api.hideLoader();
-      if (this.nav.getActive().index != 0)
-        this.nav.popToRoot();
-      else if (this.app.getActiveNav().canGoBack())
-        this.app.navPop();
-      else
-        this.platform.exitApp()
-    });
     this.initTranslate();
     this.settings.load().then(() => {
       if (this.settings.allSettings.checkforappupdates)
