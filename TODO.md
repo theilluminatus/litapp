@@ -11,5 +11,6 @@
 # BUGS
 
  - Fix rating sometimes shows as x.xx
+ - Don't refresh history when viewing downloads
 
 ## Also check TODOs in files!
