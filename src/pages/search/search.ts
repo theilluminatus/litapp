@@ -113,7 +113,6 @@ export class SearchPage {
   }
 
   pinSearch(event, query: string) {
-    console.log( event );
     event.stopPropagation();
     if (this.starredQueries.indexOf(query) > -1) return;
     this.starredQueries.push(query);

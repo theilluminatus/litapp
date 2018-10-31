@@ -53,7 +53,6 @@ export class LoginPage {
 
     try {
       this.toast.show(this.translations.SIGNUP_MESSAGE, '5000', 'bottom').subscribe(toast => {
-        console.log(this.translations.SIGNUP_MESSAGE);
       });
     } catch (e) {
         console.log(this.translations.SIGNUP_MESSAGE);

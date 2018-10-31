@@ -117,7 +117,6 @@ export class User {
       this.storage.get(USER_KEY).then((user) => {
         if (JSON.stringify(this.user) !== JSON.stringify(user)) {
           resolve(true);
-          console.log("different user objects", JSON.stringify(this.user), JSON.stringify(user));
         } else {
           resolve(false);
         }

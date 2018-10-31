@@ -102,7 +102,6 @@ export class Feed {
           story: !isNaN(item.what) ? undefined : this.s.extractFromFeed(item)
         });
       });
-      console.log( items );
 
       items.forEach(i => this.feed.push(i));
       this.feedtimeout = (new Date).getTime() + this.timeout;

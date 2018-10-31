@@ -86,7 +86,6 @@ export class SettingsPage {
 
       let path = this.file.externalRootDirectory;
         let filename = "litapp-"+Math.round(new Date().getTime() / 1000)+".json"
-        console.log( "writing", data, path + filename );
 
         this.file.writeFile(path, filename, JSON.stringify(data), {replace: true}).then(() => {
           this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
@@ -100,28 +99,25 @@ export class SettingsPage {
   importData() {
     
     this.fileChooser.open().then(uri => {
-      console.log( "parsing", uri );
       this.filePath.resolveNativePath(uri).then(path => {
         let pathname = path.substring(0,path.lastIndexOf("/")+1)
         let filename = path.substring(path.lastIndexOf("/")+1)
-        console.log( "reading", pathname, filename );
-        
+
         this.file.readAsText(pathname, filename).then((text: any) => {
           let data = JSON.parse(text);
-          console.log( "loading", data );
-    
+
           if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
             this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
             return;
           }
-    
+
           for (const key in data) {
             if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
               const value = data[key];
               this.storage.set(key, value);
             }
           }
-          
+
           this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
             window.location.hash = "";
             window.location.reload();
