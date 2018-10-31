@@ -421,7 +421,7 @@ export class Stories {
 
     let timestampParts = item.date_approve.split("/");
 
-    let author = this.a.extractFromSearch(item.author);
+    let author = this.a.extractFromNewSearch(item.author);
     let story = new Story({
       id: item.id,
       title: item.title,

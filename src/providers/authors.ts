@@ -164,5 +164,20 @@ export class Authors {
     return author;
   }
 
+  extractFromNewSearch(item) {
+    let cached = this.authors.get(item.userid);
+    if (cached)
+      return cached;
+
+    let author = new Author({
+      id: item.userid,
+      name: item.username,
+      picture: item.userpic,
+    });
+
+    this.authors.set(author.id, author);
+    return author;
+  }
+
 
 }

@@ -24,7 +24,7 @@
 
 <ion-content padding>
 
-  <ion-img [src]="author?.picture + '_default.jpg'"></ion-img>
+  <ion-img [src]="author?.picture + ''"></ion-img>
   <p *ngIf="author?.jointimestamp">{{'AUTHOR_JOINDATE' | translate}}: {{author?.jointimestamp*1000 | date}}</p>
   <p *ngIf="author?.updatetimestamp">{{'AUTHOR_UPDATEDATE' | translate}}: {{author?.updatetimestamp*1000 | date}}</p>
 
