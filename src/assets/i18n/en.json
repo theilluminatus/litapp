@@ -3,6 +3,7 @@
   "CONFIRM": "Are you sure?",
 
   "MENU_HOME": "Home",
+  "MENU_OPENLINK": "Open a link",
   "MENU_ACCOUNT": "Account",
   "MENU_SETTINGS": "Settings",
 
@@ -124,6 +125,9 @@
   "EXPLORE_TOPTAGS": "Most used tags",
   "EXPLORE_ALLCAT": "All",
   "EXPLORE_ALLCATDESCR": "All categories",
+
+  "OPENLINK_DESCRIPTION": "Paste a hyperlink below to open it directly in the app. You can view stories and authorpages this way.",
+  "OPENLINK_STORYWARNING": "The first search result should be the correct story.",
 
   "DETAILS": "Details",
   "AUTHOR": "Author",

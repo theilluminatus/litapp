@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform, App } from 'ionic-angular';
+import { Config, Nav, Platform, App, AlertController, ToastController } from 'ionic-angular';
 
 import { Globals, Api } from '../providers/providers';
 import { Stories } from '../providers/providers';
@@ -24,6 +24,10 @@ import { Settings } from '../providers/providers';
 
           <button menuClose ion-item (click)="openPage('TabsPage')">
             {{'MENU_HOME' | translate}}
+          </button>
+
+          <button menuClose ion-item (click)="openLinkDialog()">
+            {{'MENU_OPENLINK' | translate}}
           </button>
 
           <button menuClose ion-item (click)="openPage('AccountPage')">
@@ -52,6 +56,8 @@ export class MyApp {
     public app: App,
     private translate: TranslateService,
     private config: Config,
+    public alertCtrl: AlertController,
+    public toastCtrl: ToastController,
     public settings: Settings,
     public api: Api,
     public g: Globals,
@@ -97,4 +103,61 @@ export class MyApp {
     else
       this.nav.push(page);
   }
+
+  openLinkDialog() {
+
+    this.translate.get(["MENU_OPENLINK","OPENLINK_DESCRIPTION","OK_BUTTON","CANCEL_BUTTON","OPENLINK_STORYWARNING"]).subscribe(translations => {
+
+      this.alertCtrl.create({
+        title: translations.MENU_OPENLINK,
+        message: translations.OPENLINK_DESCRIPTION,
+        inputs: [{
+          name: 'url',
+          placeholder: 'https://www.literotica.com/...'
+        }],
+        buttons: [{
+          text: translations.OK_BUTTON,
+          handler: (data) => {
+
+            // https://www.literotica.com/s/slave-takes-mistress-to-hawaii
+            var storyRegex = /literotica\.com\/s\/([-a-zA-Z0-9._+]*)/g;
+            var storyMatch = storyRegex.exec(data.url);
+            if (storyMatch) {
+              
+              this.nav.push('SearchPage', {
+                storyurl: storyMatch[1]
+              });
+
+              this.toastCtrl.create({
+                message: translations.OPENLINK_STORYWARNING,
+                duration: 2000,
+                position: 'bottom'
+              }).present();
+
+            } else {
+
+              // https://www.literotica.com/stories/memberpage.php?uid=1015993&page=submissions
+              var authorRegex = /literotica\.com\/stories\/memberpage\.php\?.*uid=([0-9]*)/g;
+              var authorMatch = authorRegex.exec(data.url);
+              if (authorMatch) {
+
+                let author = { id: authorMatch[1] };
+                this.nav.push('AuthorPage', {
+                  author: author
+                });
+
+              }
+            }
+  
+          }},
+          { text: translations.CANCEL_BUTTON }
+        ]
+      }).present();
+
+    });
+
+
+    
+  }
+
 }

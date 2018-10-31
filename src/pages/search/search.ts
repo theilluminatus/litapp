@@ -23,6 +23,7 @@ export class SearchPage {
   recentQueries: string[] = [];
   starredQueries: string[] = [];
   query: string;
+  storyurl: string;
   totalResults: number;
   currentpage: number = 1;
 
@@ -45,6 +46,7 @@ export class SearchPage {
   ) {
 
     this.query = navParams.get('query');
+    this.storyurl = navParams.get('storyurl');
     this.storage.get(RECENTQUERIES_KEY).then((value) => {
       if (value)
         this.recentQueries = value;
@@ -70,6 +72,10 @@ export class SearchPage {
       this.options.sort = 'views';
       this.options.category = '';
       this.search(this.query);
+
+    } else if (this.storyurl) {
+      this.search(this.storyurl);
+      
     } else if (this.searchbar.value == "") {
       setTimeout(() => { this.searchbar.setFocus(); }, 100);
     }
