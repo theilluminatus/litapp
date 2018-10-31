@@ -128,6 +128,7 @@
 
   "OPENLINK_DESCRIPTION": "Paste a hyperlink below to open it directly in the app. You can view stories and authorpages this way.",
   "OPENLINK_STORYWARNING": "The first search result should be the correct story.",
+  "OPENLINK_OPENLINK_UNSUPPORTED": "Unsupported link.",
 
   "DETAILS": "Details",
   "AUTHOR": "Author",

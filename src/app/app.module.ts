@@ -17,6 +17,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
+import { WebIntent } from '@ionic-native/web-intent';
 
 import { Stories } from '../providers/providers';
 import { Authors } from '../providers/providers';
@@ -91,6 +92,7 @@ export function provideSettings(storage: Storage) {
     File,
     FileChooser,
     FilePath,
+    WebIntent,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

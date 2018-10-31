@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform, App, AlertController, ToastController } from 'ionic-angular';
+import { WebIntent } from '@ionic-native/web-intent';
 
 import { Globals, Api } from '../providers/providers';
 import { Stories } from '../providers/providers';
@@ -54,8 +55,9 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public app: App,
-    private translate: TranslateService,
-    private config: Config,
+    public translate: TranslateService,
+    public webIntent: WebIntent,
+    public config: Config,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public settings: Settings,
@@ -70,6 +72,21 @@ export class MyApp {
       if (this.settings.allSettings.checkforappupdates)
         this.g.checkForUpdates();
     });
+
+    this.catchShareIntent();
+    this.platform.resume.subscribe(() => {
+        this.catchShareIntent();
+    });
+  }
+
+  catchShareIntent() {
+    if (this.platform.is("cordova")) {
+      this.webIntent.getIntent().then((intent) => {
+        if (intent.action == "android.intent.action.SEND" && intent.extras) {
+         this.openURL(intent.extras['android.intent.extra.TEXT']);
+        }
+      });
+    }
   }
 
   initTranslate() {
@@ -104,9 +121,9 @@ export class MyApp {
       this.nav.push(page);
   }
 
-  openLinkDialog() {
+  openLinkDialog(url?) {
 
-    this.translate.get(["MENU_OPENLINK","OPENLINK_DESCRIPTION","OK_BUTTON","CANCEL_BUTTON","OPENLINK_STORYWARNING"]).subscribe(translations => {
+    this.translate.get(["MENU_OPENLINK","OPENLINK_DESCRIPTION","OK_BUTTON","CANCEL_BUTTON"]).subscribe(translations => {
 
       this.alertCtrl.create({
         title: translations.MENU_OPENLINK,
@@ -118,37 +135,7 @@ export class MyApp {
         buttons: [{
           text: translations.OK_BUTTON,
           handler: (data) => {
-
-            // https://www.literotica.com/s/slave-takes-mistress-to-hawaii
-            var storyRegex = /literotica\.com\/s\/([-a-zA-Z0-9._+]*)/g;
-            var storyMatch = storyRegex.exec(data.url);
-            if (storyMatch) {
-              
-              this.nav.push('SearchPage', {
-                storyurl: storyMatch[1]
-              });
-
-              this.toastCtrl.create({
-                message: translations.OPENLINK_STORYWARNING,
-                duration: 2000,
-                position: 'bottom'
-              }).present();
-
-            } else {
-
-              // https://www.literotica.com/stories/memberpage.php?uid=1015993&page=submissions
-              var authorRegex = /literotica\.com\/stories\/memberpage\.php\?.*uid=([0-9]*)/g;
-              var authorMatch = authorRegex.exec(data.url);
-              if (authorMatch) {
-
-                let author = { id: authorMatch[1] };
-                this.nav.push('AuthorPage', {
-                  author: author
-                });
-
-              }
-            }
-  
+            this.openURL(data.url);
           }},
           { text: translations.CANCEL_BUTTON }
         ]
@@ -156,8 +143,51 @@ export class MyApp {
 
     });
 
+  }
 
-    
+  openURL(url: string) {
+
+    // https://www.literotica.com/s/slave-takes-mistress-to-hawaii
+    var storyRegex = /literotica\.com\/s\/([-a-zA-Z0-9._+]*)/g;
+    var storyMatch = storyRegex.exec(url);
+    if (storyMatch) {
+
+      this.nav.push('SearchPage', {
+        storyurl: storyMatch[1]
+      });
+
+      this.translate.get(["OPENLINK_STORYWARNING"]).subscribe(translations => {
+        this.toastCtrl.create({
+          message: translations.OPENLINK_STORYWARNING,
+          duration: 2000,
+          position: 'bottom'
+        }).present();
+      });
+      return;
+
+    }
+
+    // https://www.literotica.com/stories/memberpage.php?uid=1015993&page=submissions
+    var authorRegex = /literotica\.com\/stories\/memberpage\.php\?.*uid=([0-9]*)/g;
+    var authorMatch = authorRegex.exec(url);
+    if (authorMatch) {
+
+      let author = { id: authorMatch[1] };
+      this.nav.push('AuthorPage', {
+        author: author
+      });
+      return;
+
+    }
+
+    this.translate.get(["OPENLINK_UNSUPPORTED"]).subscribe(translations => {
+      this.toastCtrl.create({
+        message: translations.OPENLINK_UNSUPPORTED,
+        duration: 2000,
+        position: 'bottom'
+      }).present();
+    });
+
   }
 
 }
