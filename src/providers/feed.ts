@@ -98,10 +98,11 @@ export class Feed {
           id: item.id,
           timestamp: item.when,
           author: this.a.extractFromFeed(item.who),
-          text: (!Array.isArray(item.what) ? [] : item.what),
-          story: (Array.isArray(item.what) ? undefined : this.s.extractFromFeed(item))
+          text: isNaN(item.what) ? [] : (Array.isArray(item.what) ? item.what : ["their profile"]),
+          story: !isNaN(item.what) ? undefined : this.s.extractFromFeed(item)
         });
       });
+      console.log( items );
 
       items.forEach(i => this.feed.push(i));
       this.feedtimeout = (new Date).getTime() + this.timeout;
