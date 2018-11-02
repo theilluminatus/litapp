@@ -11,8 +11,6 @@ page-search {
 	}
 
 	.starredmenu {
-		position: fixed;
-		top: 110px;
 
 		.item-inner {
 			padding: 0 16px;
@@ -20,10 +18,6 @@ page-search {
 
 		[item-end] .icon {
 			margin: 0 3px;
-		}
-
-		.scroll-content {
-			bottom: 60px;
 		}
 
 		.item-divider {
