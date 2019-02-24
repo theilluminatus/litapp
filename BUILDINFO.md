@@ -1,6 +1,15 @@
+
+> Use node v8 x86 for best compatibility!
+
+1. `npm i && npm i -g ionic@3.9.2 cordova`
+2. `npm start`
+3. Open `localhost:8100` in Chrome with `--disable-web-security`
+
+Run `npm rebuild node-sass` after changing node versions.
+
 ## Debugging
 
-`ionic cordova run android`
+`npm run android`
 
 You can easily make a separate debug version of the app by adding the following lines to the `/platforms/android/app/build.gradle` file at `line 169`: 
 
@@ -33,7 +42,7 @@ When releasing a new version you should update the version number in:
 
 Also don't forget to add a tag after committing and pushing with `git tag -a x.x` and `git push origin --tags`.
 
-#### Building
+#### Building apk
 
 `ionic cordova build android --prod --release -- -- --keystore=platforms/litapp-key.jks --storePassword="abc123" --alias=litapp --password="abc123"`
 

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, Platform, Tabs, Tab, App, NavController } from 'ionic-angular';
+import { IonicPage, Platform, Tabs, App, NavController } from 'ionic-angular';
 import { User, Api } from '../../providers/providers';
 import { Feed } from '../../providers/providers';
 

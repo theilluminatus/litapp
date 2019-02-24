@@ -1,5 +1,11 @@
+App development is currently dead because it does not build anymore:
+```
+Module build failed: Error: ENOENT: no such file or directory, open 'C:\github\illuminatus\litapp\src\app\main.js'
+```
+
 # TODO
  - Add link to open story / author page in browser
+ - Add button on story-detail to refresh data
 
 # IDEAS
  - Split story pages so no vertical scrolling occurs?
@@ -8,7 +14,6 @@
  - Find better api route for getting author following status together with bio
 
 # BUGS
-
  - Fix rating sometimes shows as x.xx
  - Don't refresh history when viewing downloads
 
