@@ -31,7 +31,7 @@ export class StoryDetailPage {
     private socialSharing: SocialSharing,
     private browser: BrowserTab
   ) {
-    this.story = new Story(navParams.get('story'));
+  	this.story = navParams.get('story');
 
     // load data when directly view details
     if (!this.story.cached) {
@@ -81,8 +81,6 @@ export class StoryDetailPage {
   }
 
   category(query: string) {
-
-
     this.translate.get(['STORYDETAIL_VIEWCAT','TOP', 'NEW']).subscribe(values => {
 
       let alert = this.alertCtrl.create({
@@ -139,7 +137,7 @@ export class StoryDetailPage {
   // updates only part of story
   refreshStory() {
     this.stories.getById(this.story.id, true).subscribe((story) => {
-      this.story.updateValues(story);
+      this.updateValues(story);
       this.myrating = this.story.myrating;
       this.stories.cache(this.story);
     });
@@ -147,5 +145,15 @@ export class StoryDetailPage {
 
   openLink() {
     this.browser.openUrl(this.story.url);
+  }
+
+  // quick and dirty fix
+  private updateValues(fields) {
+    for (const f in this.story) {
+      if (fields[f] !== undefined) {
+        // @ts-ignore
+        this.story[f] = fields[f];
+      }
+    }
   }
 }

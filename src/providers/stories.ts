@@ -115,16 +115,11 @@ export class Stories {
 
   // Get a story by ID
   getById(id: any, force: boolean = false) {
-
-    let cached;
-    if (!force) {
-      cached = this.stories.get(id);
-      if (cached) {
-        if (cached.length)
-          return Observable.of(cached);
-      }
-    } else {
-      cached = false;
+    
+    let cached = this.stories.get(id);
+    if (cached && !force) {
+      if (cached.length)
+        return Observable.of(cached);
     }
 
     let filter = [{"property": "submission_id", "value": parseInt(id)}];
@@ -140,7 +135,7 @@ export class Stories {
 
       if (!cached)
         cached = new Story({
-          id: Number.parseInt(data.pages[0].submission_id),
+          id: data.pages[0].submission_id,
           title: data.pages[0].name,
           url: data.pages[0].url,
           ratingenabled: data.pages[0].allow_vote
@@ -336,7 +331,7 @@ export class Stories {
 
     let author = this.a.extractFromFeed(item.who);
     let story = new Story({
-      id: item.what.id,
+      id: item.what.id.toString(),
       title: item.what.name,
       description: item.what.description,
       category: this.g.getCategory(item.what.category_id),
@@ -366,7 +361,7 @@ export class Stories {
 
     let author = this.a.extractFromFeed(item.author);
     let story = new Story({
-      id: item.id,
+      id: item.id.toString(),
       title: item.name,
       description: item.description,
       category: this.g.getCategory(item.category_id),
@@ -396,7 +391,7 @@ export class Stories {
 
     let author = this.a.extractFromSearch(item.user);
     let story = new Story({
-      id: item.id,
+      id: item.id.toString(),
       title: item.name,
       description: item.description,
       category: item.category.name,
@@ -428,7 +423,7 @@ export class Stories {
 
     let author = this.a.extractFromNewSearch(item.author);
     let story = new Story({
-      id: item.id,
+      id: item.id.toString(),
       title: item.title,
       description: item.description,
       category: item.category_info.name,
