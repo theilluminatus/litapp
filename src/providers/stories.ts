@@ -114,12 +114,17 @@ export class Stories {
 
 
   // Get a story by ID
-  getById(id: any) {
+  getById(id: any, force: boolean = false) {
 
-    let cached = this.stories.get(id);
-    if (cached) {
-      if (cached.length)
-        return Observable.of(cached);
+    let cached;
+    if (!force) {
+      cached = this.stories.get(id);
+      if (cached) {
+        if (cached.length)
+          return Observable.of(cached);
+      }
+    } else {
+      cached = false;
     }
 
     let filter = [{"property": "submission_id", "value": parseInt(id)}];
@@ -135,7 +140,7 @@ export class Stories {
 
       if (!cached)
         cached = new Story({
-          id: data.pages[0].submission_id,
+          id: Number.parseInt(data.pages[0].submission_id),
           title: data.pages[0].name,
           url: data.pages[0].url,
           ratingenabled: data.pages[0].allow_vote

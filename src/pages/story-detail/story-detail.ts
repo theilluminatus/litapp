@@ -29,7 +29,7 @@ export class StoryDetailPage {
     public user: User,
     private socialSharing: SocialSharing
   ) {
-  	this.story = navParams.get('story');
+    this.story = new Story(navParams.get('story'));
 
     // load data when directly view details
     if (!this.story.cached) {
@@ -134,4 +134,12 @@ export class StoryDetailPage {
       this.stories.download(this.story);
   }
 
+  // updates only part of story
+  refreshStory() {
+    this.stories.getById(this.story.id, true).subscribe((story) => {
+      this.story.updateValues(story);
+      this.myrating = this.story.myrating;
+      this.stories.cache(this.story);
+    });
+  }
 }

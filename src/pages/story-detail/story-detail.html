@@ -4,6 +4,11 @@
     <ion-title></ion-title>
     <ion-buttons end>
 
+      <button ion-button icon-only
+        (click)="refreshStory()"
+        [tooltip]="'REFRESH_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="refresh"></ion-icon>
+      </button>
 
       <button ion-button icon-only (click)="toggleDownload()"
         [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOAD' | translate" event="press" navTooltip>

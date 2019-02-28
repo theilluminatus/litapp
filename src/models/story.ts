@@ -4,18 +4,6 @@ import { List } from './list';
 
 export class Story {
 
-  constructor(fields: any) {
-
-    // Quick and dirty extend/assign fields to this model
-    for (const f in fields) {
-      // @ts-ignore
-      this[f] = fields[f];
-    }
-  }
-
-}
-
-export interface Story {
   [prop: string]: any;
 
   id: any;
@@ -49,4 +37,19 @@ export interface Story {
     text: string,
     timestamp: string
   }[];
+
+  constructor(fields: any) {
+    this.updateValues(fields);
+  }
+
+  updateValues(fields: any) {
+    // Quick and dirty extend/assign fields to this model
+    for (const f in fields) {
+      if (typeof fields[f] !== 'function') {
+        // @ts-ignore
+        this[f] = fields[f];
+      }
+    }
+  }
+
 }

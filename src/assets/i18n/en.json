@@ -53,6 +53,7 @@
   "DOWNLOAD_BUTTON": "Download",
   "SHARE_BUTTON": "Share",
   "CLOSE_BUTTON": "Close",
+  "REFRESH_BUTTON": "Refresh",
 
   "HISTORY_TITLE": "History",
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",

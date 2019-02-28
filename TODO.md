@@ -5,7 +5,6 @@ Module build failed: Error: ENOENT: no such file or directory, open 'C:\github\i
 
 # TODO
  - Add link to open story / author page in browser
- - Add button on story-detail to refresh data
 
 # IDEAS
  - Split story pages so no vertical scrolling occurs?
