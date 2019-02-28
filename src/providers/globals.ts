@@ -14,7 +14,7 @@ export class Globals {
 
   private globals;
   private ready;
-  private version = 1.9;
+  private version = 10; // just increase number, unrelated to version number
 
   constructor(
     public api: Api,
