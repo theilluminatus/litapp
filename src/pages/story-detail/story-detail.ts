@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { BrowserTab } from '@ionic-native/browser-tab';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
@@ -27,7 +28,8 @@ export class StoryDetailPage {
     public g: Globals,
     public stories: Stories,
     public user: User,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private browser: BrowserTab
   ) {
     this.story = new Story(navParams.get('story'));
 
@@ -141,5 +143,9 @@ export class StoryDetailPage {
       this.myrating = this.story.myrating;
       this.stories.cache(this.story);
     });
+  }
+
+  openLink() {
+    this.browser.openUrl(this.story.url);
   }
 }

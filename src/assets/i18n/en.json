@@ -54,6 +54,7 @@
   "SHARE_BUTTON": "Share",
   "CLOSE_BUTTON": "Close",
   "REFRESH_BUTTON": "Refresh",
+  "OPENLINK_BUTTON": "Open in browser",
 
   "HISTORY_TITLE": "History",
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",

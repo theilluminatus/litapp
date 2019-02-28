@@ -22,6 +22,12 @@
       </button>
 
       <button ion-button icon-only
+        (click)="openLink()"
+        [tooltip]="'OPENLINK_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="open"></ion-icon>
+      </button>
+
+      <button ion-button icon-only
         (click)="share()"
         [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="share"></ion-icon>
