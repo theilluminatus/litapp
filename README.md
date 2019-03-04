@@ -5,7 +5,7 @@ You can find more info and all releases here: https://theilluminatus.github.io/l
 
 For development: view [Build info](./BUILDINFO.md).
 
-For possible upcoming features: view [TODO](./TODO.md).
+For possible upcoming features and known bugs: view [TODO](./TODO.md).
 
 ## Contact
 
