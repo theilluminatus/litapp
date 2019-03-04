@@ -32,7 +32,7 @@ export class ListCreatePage {
       this.isNew = false;
 
     this.form = fb.group({
-      urlname: [list ? list.urlname : ""],
+      id: [list ? list.id : ""],
       name: [list ? list.name : '', Validators.required],
       description: [list ? list.description : '', Validators.required],
       visibility: [list ? "'"+list.visibility+"'" : "'true'"]
@@ -47,7 +47,7 @@ export class ListCreatePage {
     if (!this.form.valid) return;
 
     let templist = new List({
-      urlname: this.form.value.urlname,
+      id: this.form.value.id,
       name: this.form.value.name,
       description: this.form.value.description,
       visibility: this.form.value.visibility == "'true'" ? true:false

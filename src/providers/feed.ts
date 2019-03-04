@@ -80,13 +80,13 @@ export class Feed {
     if (showloader)
       loader = this.api.showLoader();
 
-    let params = {
+    let params = JSON.stringify({
       chunked: 1,
-      limit: 15,
-      last_id: lastid ? lastid : undefined
-    };
+      limit: 10,
+      last_id: lastid ? lastid : 0
+    });
 
-    return this.api.get('my/api/activity/wall',params,undefined,2).map((d: any) => {
+    return this.api.get('3/activity/wall?params='+params).map((d: any) => {
       if (loader) loader.dismiss();
       if (!d.data) {
         this.api.showToast();

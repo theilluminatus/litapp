@@ -141,7 +141,7 @@ export class Globals {
     if (this.globals) return Observable.of(this.globals);
 
     let loader = this.api.showLoader();
-    return this.api.get('my/api/constants',undefined,undefined,2).map((d: any) => {
+    return this.api.get('3/constants').map((d: any) => {
 
       if (loader) loader.dismiss();
       if (!d) {

@@ -322,8 +322,6 @@ export class Stories {
     this.storage.remove(STORY_KEY+"_"+story.id);
   }
 
-
-
   extractFromFeed(item) {
     let cached = this.stories.get(item.what.id);
     if (cached)
@@ -332,12 +330,12 @@ export class Stories {
     let author = this.a.extractFromFeed(item.who);
     let story = new Story({
       id: item.what.id.toString(),
-      title: item.what.name,
+      title: item.what.title,
       description: item.what.description,
-      category: this.g.getCategory(item.what.category_id),
+      category: item.what.category_info.name,
       lang: this.g.getLanguage(item.what.language),
-      timestamp: item.what.timestamp_published,
-      rating: item.what.rate,
+      timestamp: item.when,
+      rating: item.what.rate_all,
       viewcount: item.what.view_count,
       url: item.what.url,
       tags: !item.what.tags ? [] : item.what.tags.map((t) => t.tag),
@@ -362,12 +360,12 @@ export class Stories {
     let author = this.a.extractFromFeed(item.author);
     let story = new Story({
       id: item.id.toString(),
-      title: item.name,
+      title: item.title,
       description: item.description,
-      category: this.g.getCategory(item.category_id),
+      category: item.category_info.name,
       lang: this.g.getLanguage(item.language),
-      timestamp: item.timestamp_published,
-      rating: item.rate,
+      timestamp: item.date_added,
+      rating: item.rate_all,
       viewcount: item.view_count,
       url: item.url,
       tags: !item.tags ? [] : item.tags.map((t) => t.tag),
@@ -375,7 +373,7 @@ export class Stories {
       isnew: item.is_new,
       iswriterspick: item.writers_pick,
       iscontestwinner: item.contest_winner,
-      commentsenabled: item.enable_comments,
+      commentsenabled: item.enable_comments > 0 ? true : false,
       ratingenabled: item.allow_vote,
       author: author
     });

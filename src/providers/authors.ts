@@ -63,7 +63,7 @@ export class Authors {
   getFollowing() {
 
     let loader = this.api.showLoader();
-    return this.api.get('my/api/user/following', undefined, undefined, 2).map((data: any) => {
+    return this.api.get('3/users/'+ this.user.getId()+ '/favorite/authors').map((data: any) => {
       if (loader) loader.dismiss();
       if (!data.length) {
         this.api.showToast();
@@ -83,18 +83,16 @@ export class Authors {
   }
 
   follow(author: Author) {
-    
     let data = new FormData();
-    data.append("user_id", this.user.getId());
-    data.append("author_id", author.id);
-    data.append("session_id", this.user.getSession());
+    data.append("type", "member");
+    data.append("id", author.id);
 
-    return this.api.post('2/favorites/author-add', data, undefined, true).map((res: any) => {
-      if (res.error && res.error == "Author already in favorites list")
-        author.following = true;
-      else if (!res.success)
-        this.api.showToast();
-      return res.success;
+    return this.api.post('stories/addtofavs.php', data, undefined, undefined, 4).map((res: any) => {
+      if (res.indexOf('Favorites updated') > -1 || res.indexOf('You already have') > -1) {
+        return true;
+      } else {
+        return false;
+      }
     }).catch((error) => {
       this.api.showToast();
       console.error(error);
@@ -102,17 +100,13 @@ export class Authors {
     }).subscribe(d => {
       if (d)
         author.following = true;
+      else
+        this.api.showToast();
     });
   }
 
   unfollow(author: Author) {
-
-    let data = new FormData();
-    data.append("user_id", this.user.getId());
-    data.append("author_id", author.id);
-    data.append("session_id", this.user.getSession());
-
-    return this.api.post('2/favorites/author-remove', data, undefined, true).map((res: any) => {
+    return this.api.delete('3/users/follow/'+author.id).map((res: any) => {
       if (!res.success) this.api.showToast();
       return res.success;
     }).catch((error) => {
@@ -125,10 +119,6 @@ export class Authors {
     });
   }
 
-
-
-
-
   extractFromFeed(item) {
     let cached = this.authors.get(item.id);
     if (cached && cached.updatetimestamp)
@@ -138,10 +128,9 @@ export class Authors {
       cached = new Author({
         id: item.userid,
         name: item.username,
-        picture: item.userpic.currentUserpic,
+        picture: item.userpic,
       });
 
-    cached.updatetimestamp = item.lastactivity;
     cached.jointimestamp = item.joindate;
     cached.following = true;
 

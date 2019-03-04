@@ -20,7 +20,7 @@
 	<ion-list [virtualScroll]="sortingProp ? (authors | orderBy: sortingProp) : (authors)">
 		<button ion-item (click)="showAuthor(author)" *virtualItem="let author">
 			<ion-avatar>
-				<ion-img [src]="author?.picture + '_default.jpg'"></ion-img>
+				<ion-img [src]="author?.picture"></ion-img>
 			</ion-avatar>
 			<h2>{{author.name}}</h2>
 

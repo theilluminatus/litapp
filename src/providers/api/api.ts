@@ -8,10 +8,11 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class Api {
   urls = [
-    'https://www.literotica.com/api',
+    'https://literotica.com/api',
     'https://search.literotica.com/api',
     'https://www.literotica.com',
-    'https://raw.githubusercontent.com/theilluminatus/litapp/master/'
+    'https://raw.githubusercontent.com/theilluminatus/litapp/master/',
+    'https://literotica.com'
   ];
   
   // apikeys and appid are always the same
@@ -70,7 +71,7 @@ export class Api {
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.urls[0] + '/' + endpoint, body, reqOpts);
+    return this.http.patch(this.urls[0] + '/' + endpoint, body, reqOpts);
   }
 
   

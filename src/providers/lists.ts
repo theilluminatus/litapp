@@ -63,21 +63,22 @@ export class Lists {
     if (!hideLoader)
       loader = this.api.showLoader();
 
-    return this.api.get('my/api/lists',undefined,undefined,2).map((d: any) => {
+      // https://literotica.com/3/users/3507980/lists
+    return this.api.get('3/users/'+ this.user.getId()+ '/lists').map((d: any) => {
 
       if (loader) loader.dismiss();
-      if (!d.lists) {
+      if (d.error) {
         this.api.showToast();
         return [];
       }
 
-      this.lists = d.lists.map(l => new List({
+      this.lists = d.map(l => new List({
         id: l.id,
         urlname: l.urlname,
         name: l.title,
         description: l.description,
         visibility: !l.is_private,
-        size: l.items_count,
+        size: l.stories_count,
         isdeletable: l.is_deletable,
         createtimestamp: l.created_at,
         updatetimestamp: l.updated_at
@@ -103,10 +104,10 @@ export class Lists {
     if (!hideLoader)
       loader = this.api.showLoader();
 
-    return this.api.get('my/api/lists/'+urlname,undefined,undefined,2).map((d: any) => {
+    return this.api.get('3/users/'+ this.user.getId()+ '/lists/'+urlname).map((d: any) => {
 
       if (loader) loader.dismiss();
-        if (!d.submissions) {
+        if (!d.works.data) {
         this.api.showToast();
         return null;
       }
@@ -124,7 +125,7 @@ export class Lists {
           updatetimestamp: d.list.updated_at
         });
 
-      list.stories = d.submissions.map(story =>
+      list.stories = d.works.data.map(story =>
         this.s.extactFromList(story)
       );
 
@@ -138,12 +139,9 @@ export class Lists {
     });
   }
 
-
   addStory(list: List, story: Story) {
 
-    let path = list.urlname + "/" + story.id;
-
-    return this.api.post('my/api/lists/'+path, undefined, undefined, false, 2).map((res: any) => {
+    return this.api.put('3/stories/'+story.id+'/lists/'+list.id, {}).map((res: any) => {
       if (!res.success) this.api.showToast();
       return res.success;
     }).catch((error) => {
@@ -164,9 +162,7 @@ export class Lists {
 
   removeStory(list: List, story: Story) {
 
-    let path = list.urlname + "/" + story.id;
-       
-    return this.api.delete('my/api/lists/'+path, undefined, 2).map((res: any) => {
+    return this.api.delete('3/stories/'+story.id+'/lists/'+list.id).map((res: any) => {
       if (!res.success) this.api.showToast();
       return res.success;
     }).catch((error) => {
@@ -187,17 +183,15 @@ export class Lists {
     });
   }
 
-
-
   add(list: List) {
 
     let data = {
       title: list.name,
       description: list.description,
-      is_private: !list.visibility
+      isPrivate: list.visibility ? 0 : 1
     };
 
-    return this.api.post('my/api/lists', data, undefined, false, 2).map((res: any) => {
+    return this.api.post('3/users/'+this.user.getId()+'/lists', data, undefined, false).map((res: any) => {
 
       if (!res.success) {
         this.api.showToast();
@@ -210,7 +204,7 @@ export class Lists {
         name: res.list.title,
         description: res.list.description,
         visibility: !res.list.is_private,
-        size: res.list.items_count,
+        size: res.list.stories_count,
         isdeletable: res.list.is_deletable,
         createtimestamp: res.list.created_at
       }));
@@ -229,10 +223,10 @@ export class Lists {
     let data = {
       title: list.name,
       description: list.description,
-      is_private: !list.visibility
+      isPrivate: list.visibility ? 0 : 1
     };
 
-    return this.api.post('my/api/lists/'+list.urlname, data, undefined, false, 2).map((res: any) => {
+    return this.api.patch('3/lists/'+list.id, data).map((res: any) => {
 
       if (!res.success) {
         this.api.showToast(res.error);
@@ -240,7 +234,7 @@ export class Lists {
       }
 
       this.lists.forEach((l) => {
-        if (l.urlname == list.urlname) {
+        if (l.id == list.id) {
           l.name = res.list.title;
           l.description = res.list.description;
           l.visibility = !res.list.is_private;
@@ -258,7 +252,7 @@ export class Lists {
 
   delete(list: List) {
 
-    return this.api.delete('my/api/lists/'+list.urlname, {}, 2).map((res: any) => {
+    return this.api.delete('3/lists/'+list.id).map((res: any) => {
       if (!res.success) {
         this.api.showToast(res.error);
         return false;

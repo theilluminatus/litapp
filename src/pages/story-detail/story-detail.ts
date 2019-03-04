@@ -125,6 +125,7 @@ export class StoryDetailPage {
 
   share() {
     this.socialSharing.share(null, null, null, this.story.url);
+    console.log(this.story.url);
   }
 
   toggleDownload() {
@@ -145,6 +146,7 @@ export class StoryDetailPage {
 
   openLink() {
     this.browser.openUrl(this.story.url);
+    console.log(this.story.url);
   }
 
   // quick and dirty fix

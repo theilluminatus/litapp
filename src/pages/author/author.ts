@@ -100,6 +100,7 @@ export class AuthorPage {
 
   share() {
     this.socialSharing.share(null, null, null, "https://www.literotica.com/stories/memberpage.php?uid="+this.author.id);
+    console.log("https://www.literotica.com/stories/memberpage.php?uid="+this.author.id);
   }
 
 }
