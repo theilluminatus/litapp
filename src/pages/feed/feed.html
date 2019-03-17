@@ -29,11 +29,11 @@
         <button ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
 
             <ion-avatar large>
-              <ion-img cache="true" [src]="item.author.picture + '_default.jpg'"></ion-img>
+              <ion-img cache="true" [src]="item.author?.picture" *ngIf="item.author?.picture"></ion-img>
             </ion-avatar>
             <p>
-              <a>{{item.author.name}}</a>
-              {{ 'FEED_EDITED' | translate }} {{item.text.join(', ')}}
+              <a>{{item.author?.name}}</a>
+              {{ 'FEED_EDITED' | translate }} {{item.text?.join(', ')}}
             </p>
             <p>{{item.timestamp*1000 | date}}</p>
             

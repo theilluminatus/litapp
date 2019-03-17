@@ -94,13 +94,18 @@ export class Feed {
       }
 
       let items = d.data.map(item => {
-        return new FeedItem({
-          id: item.id,
-          timestamp: item.when,
-          author: this.a.extractFromFeed(item.who),
-          text: isNaN(item.what) ? [] : (Array.isArray(item.what) ? item.what : ["their profile"]),
-          story: !isNaN(item.what) ? undefined : this.s.extractFromFeed(item)
-        });
+        let isStory = item.action === 'published-story';
+        try {
+          return new FeedItem({
+            id: item.id,
+            timestamp: item.when,
+            author: this.a.extractFromFeed(item.who),
+            text: isStory ? [] : (Array.isArray(item.what) ? item.what : ["their profile"]),
+            story: !isStory ? undefined : this.s.extractFromFeed(item)
+          });
+        } catch (error) {
+          return new FeedItem(null);
+        }
       });
 
       items.forEach(i => this.feed.push(i));
