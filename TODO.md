@@ -8,7 +8,7 @@
 
 # TODO
 
-- Show loading indicator when lists are still loading at app start
+- 
 
 # BUGS
 

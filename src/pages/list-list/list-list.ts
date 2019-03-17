@@ -12,8 +12,10 @@ import { Lists } from '../../providers/providers';
 export class ListListPage {
 
   lists: List[];
+  showLoader = false;
 
   constructor(public navCtrl: NavController, public l: Lists) {
+    this.showLoader = true;
     this.l.onReady().then(() => {
     	this.refreshLists();
     });
@@ -54,6 +56,7 @@ export class ListListPage {
       if (data) {
         this.lists = [];
         data.forEach((d: any) => this.lists.push(d));
+        this.showLoader = false;
       }
     });
   }

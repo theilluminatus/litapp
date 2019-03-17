@@ -22,6 +22,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-spinner *ngIf="showLoader" style="width: 100%; margin-top: 25px;"></ion-spinner>
+
   <ion-list [virtualScroll]="feed" sliding="false" [headerFn]="showNewLine">
     <div *virtualItem="let item; let i=index">
 

@@ -18,6 +18,8 @@
 
 <ion-content padding>
 
+  <ion-spinner *ngIf="showLoader" style="width: 100%; margin-top: 25px;"></ion-spinner>
+
   <ion-list>
     <ion-item-sliding (click)="openList(list)" *ngFor="let list of (lists | orderBy:'id')" #slidingItem>
       <button ion-item>
