@@ -1,13 +1,17 @@
+
 # ![Logo](https://theilluminatus.github.io/litapp/images/icon.png "Logo") Litapp
+
 > An unofficial Literotica app
 
-You can find more info and all releases here: https://theilluminatus.github.io/litapp
+## More info
 
-Changelogs can be found here: https://github.com/theilluminatus/litapp/releases (Press `...` after version)
+- You can find more info and all releases on [the main page](https://theilluminatus.github.io/litapp).
 
-For development: view [Build info](./BUILDINFO.md).
+- Changelogs can be found on [the releases page](https://github.com/theilluminatus/litapp/releases) (Press `...` after version).
 
-For possible upcoming features and known bugs: view [TODO](./TODO.md).
+- For development: view [Build info](./BUILDINFO.md).
+
+- For possible upcoming features and known bugs: view [TODO](./TODO.md).
 
 ## Contact
 

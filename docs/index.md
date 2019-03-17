@@ -6,17 +6,8 @@
 - [v1.11](https://theilluminatus.github.io/litapp/releases/litapp-1.11.apk) (2019-03-04)
 - [v1.10](https://theilluminatus.github.io/litapp/releases/litapp-1.10.apk) (2019-02-28)
 - [v1.9](https://theilluminatus.github.io/litapp/releases/litapp-1.9.apk) (2018-10-31)
-- [v1.8](https://theilluminatus.github.io/litapp/releases/litapp-1.8.apk) (2018-08-16)
-- [v1.7](https://theilluminatus.github.io/litapp/releases/litapp-1.7.apk) (2018-08-12)
-- [v1.6](https://theilluminatus.github.io/litapp/releases/litapp-1.6.apk) (2018-07-21)
-- [v1.5](https://theilluminatus.github.io/litapp/releases/litapp-1.5.apk) (2018-06-23)
-- [v1.4](https://theilluminatus.github.io/litapp/releases/litapp-1.4.apk) (2018-05-28)
-- [v1.3](https://theilluminatus.github.io/litapp/releases/litapp-1.3.apk) (2018-03-26)
-- [v1.2](https://theilluminatus.github.io/litapp/releases/litapp-1.2.apk) (2018-03-05)
-- [v1.1](https://theilluminatus.github.io/litapp/releases/litapp-1.1.apk) (2018-02-23)
-- [v1.0](https://theilluminatus.github.io/litapp/releases/litapp-1.0.apk) (2018-02-16)
 
-Changelogs can be found here: https://github.com/theilluminatus/litapp/releases (Press `...` after version)
+Older versions and changelogs can be found on [the releases page](https://github.com/theilluminatus/litapp/releases) (Press `...` after version).
 
 ## Features
 
@@ -30,7 +21,7 @@ Changelogs can be found here: https://github.com/theilluminatus/litapp/releases 
 - Export / Import settings and downloaded stories
 - and more...
 
-#### After logging in with a literotica account you can:
+### After logging in with a literotica account you can:
 
 - View and add stories to your lists
 - View your feed and get notified when there's something new
