@@ -9,7 +9,6 @@
 # TODO
 
 - Show loading indicator when lists are still loading at app start
-- Fix download button on update doesn't work
 
 # BUGS
 

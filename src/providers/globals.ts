@@ -121,10 +121,7 @@ export class Globals {
 
             if (d.version > this.version) {
               this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON).then((toast: any) => {
-                toast.onDidDismiss(() => {
-                  this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
-                });
-                
+                this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
               });
             }
           } else {
