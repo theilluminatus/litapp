@@ -12,9 +12,10 @@
 
 # BUGS
 
-- Fix rating sometimes shows as x.xx
+- Feed items keep repeating after first next page load
 - (Un)follow doesn't seem to work server side + correctly catch success?
 - List story count != item count (problem server side)
+- Fix rating sometimes shows as x.xx
 - Don't refresh history when viewing downloads (?)
 
 ## Also check TODOs in files
