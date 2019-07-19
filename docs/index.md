@@ -31,6 +31,17 @@ Older versions and changelogs can be found on [the releases page](https://github
 
 <img alt="Search" title="Search" src="https://theilluminatus.github.io/litapp/images/search.jpg" width="250"> <img alt="Reading" title="Reading" src="https://theilluminatus.github.io/litapp/images/read.jpg" width="250"> <img alt="Story detail" title="Story detail" src="https://theilluminatus.github.io/litapp/images/detail.jpg" width="250"> <img alt="Author" title="Author" src="https://theilluminatus.github.io/litapp/images/author.jpg" width="250"> <img alt="Add to list" title="Add to list" src="https://theilluminatus.github.io/litapp/images/fav.jpg" width="250"> <img alt="Lists" title="Lists" src="https://theilluminatus.github.io/litapp/images/lists.jpg" width="250"> <img alt="Feed" title="Feed" src="https://theilluminatus.github.io/litapp/images/feed.jpg" width="250"> <img alt="Categories" title="Categories" src="https://theilluminatus.github.io/litapp/images/categories.jpg" width="250">
 
+## Tracking
+
+Since version 1.13 I started tracking some basic things out of pure curiosity. I'm using Google Analytics (with all advanced features disabled) and track:
+
+- Visits to this page
+- Opening the app
+- Logging in to an account (no account details of course)
+- Reading a story (not which one)
+
+This is purely to get an overview of how many people are using my app, since GitHub doesn't allow me to see download statistics. You can check these claims in the source code by searching ['track'](https://github.com/theilluminatus/litapp/search?l=TypeScript&q=track).
+
 ## Contact
 
 [theilluminatus@outlook.com](mailto:theilluminatus@outlook.com)

@@ -4,8 +4,7 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { BrowserTab } from '@ionic-native/browser-tab';
 import { Toast } from '@ionic-native/toast';
 
-import { User } from '../../providers/providers';
-
+import { Analytics, User } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -26,6 +25,7 @@ export class LoginPage {
     public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
+    public analytics: Analytics,
     private browser: BrowserTab,
     private toast: Toast
   ) {
@@ -38,7 +38,10 @@ export class LoginPage {
   login(event: UIEvent) {
     event.preventDefault();
     this.user.login(this.account).subscribe((resp) => {
-      setTimeout(() => this.navCtrl.goToRoot(null) , 500);
+      setTimeout(() => {
+        this.navCtrl.goToRoot(null);
+        this.analytics.track('Login');
+      }, 500);
     }, (err) => {
       let toast = this.toastCtrl.create({
         message: this.translations.LOGIN_ERROR,

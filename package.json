@@ -29,6 +29,7 @@
     "@ionic-native/file": "^4.11.0",
     "@ionic-native/file-chooser": "^4.11.0",
     "@ionic-native/file-path": "^4.11.0",
+    "@ionic-native/google-analytics": "^4.20.0",
     "@ionic-native/header-color": "^4.10.0",
     "@ionic-native/keyboard": "^4.10.0",
     "@ionic-native/social-sharing": "^4.10.0",
@@ -50,6 +51,7 @@
     "cordova-plugin-filechooser": "^1.0.1",
     "cordova-plugin-filepath": "^1.4.2",
     "cordova-plugin-fullscreen": "^1.2.0",
+    "cordova-plugin-google-analytics": "1.8.6",
     "cordova-plugin-headercolor": "^1.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -71,8 +73,9 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
-    "ionic": "^4.12.0",
-    "typescript": "2.4.2"
+    "ionic": "^3.9.2",
+    "typescript": "2.4.2",
+    "cordova": "8.1.1"
   },
   "description": "An unofficial Literotica app.",
   "cordova": {
@@ -93,7 +96,8 @@
       },
       "cordova-plugin-filechooser": {},
       "cordova-plugin-filepath": {},
-      "com-darryncampbell-cordova-plugin-intent": {}
+      "com-darryncampbell-cordova-plugin-intent": {},
+      "cordova-plugin-google-analytics": {}
     },
     "platforms": []
   }

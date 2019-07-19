@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { STORYSTYLEOPTIONS_KEY, HISTORY_KEY } from '../../providers/db';
-import { Stories } from '../../providers/providers';
+import { Stories, Analytics } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 
@@ -46,6 +46,7 @@ export class StoryViewPage {
     public storage: Storage,
     public user: User,
     public stories: Stories,
+    public analytics: Analytics,
     private popoverCtrl: PopoverController,
     private toastCtrl: ToastController,
     private androidFullScreen: AndroidFullScreen,
@@ -128,6 +129,7 @@ export class StoryViewPage {
       else
         this.androidFullScreen.showUnderSystemUI();
     }, 10);
+    this.analytics.track('StoryView');
   }
 
   ionViewWillLeave() {

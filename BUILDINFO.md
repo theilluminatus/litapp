@@ -3,7 +3,7 @@
 
 > Use node v8 x86 for best compatibility!
 
-1. `npm i && npm i -g ionic@3.9.2 cordova`
+1. `npm i && npm i -g ionic@3.9.2 cordova@8.1.1`
 2. `npm start`
 3. Open `localhost:8100` in Chrome with `--disable-web-security`
 

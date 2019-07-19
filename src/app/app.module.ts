@@ -18,8 +18,9 @@ import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { WebIntent } from '@ionic-native/web-intent';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
-import { Stories } from '../providers/providers';
+import { Stories, Analytics } from '../providers/providers';
 import { Authors } from '../providers/providers';
 import { Lists } from '../providers/providers';
 import { Feed } from '../providers/providers';
@@ -75,6 +76,7 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     Api,
+    Analytics,
     Stories,
     Authors,
     Lists,
@@ -83,6 +85,7 @@ export function provideSettings(storage: Storage) {
     User,
     AndroidFullScreen,
     BrowserTab,
+    GoogleAnalytics,
     SocialSharing,
     Keyboard,
     Toast,

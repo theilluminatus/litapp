@@ -1,3 +1,4 @@
+import { Analytics } from './analytics';
 import { Api } from './api/api';
 import { Stories } from './stories';
 import { Authors } from './authors';
@@ -8,6 +9,7 @@ import { Settings } from './settings/settings';
 import { User } from './user';
 
 export {
+    Analytics,
     Api,
     Stories,
     Authors,

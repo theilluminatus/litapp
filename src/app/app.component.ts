@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform, App, AlertController, ToastController } from 'ionic-angular';
 import { WebIntent } from '@ionic-native/web-intent';
 
-import { Globals, Api } from '../providers/providers';
+import { Globals, Analytics, Api } from '../providers/providers';
 import { Stories } from '../providers/providers';
 import { Lists } from '../providers/providers';
 import { Feed } from '../providers/providers';
@@ -61,6 +61,7 @@ export class MyApp {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public settings: Settings,
+    public analytics: Analytics, // necessary for tracking startup
     public api: Api,
     public g: Globals,
     public s: Stories,
