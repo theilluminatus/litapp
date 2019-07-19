@@ -104,7 +104,38 @@ export class Lists {
     if (!hideLoader)
       loader = this.api.showLoader();
 
-    return this.api.get('3/users/'+ this.user.getId()+ '/lists/'+urlname).map((d: any) => {
+    return Observable.create(observer => {
+      const loop = (page: number, partialList: any) => {
+        this.getListPage(urlname, loader, Object.assign({}, partialList), page).subscribe((l) => {
+          
+          if (!partialList.stories) {
+            partialList = l;
+          } else {
+            partialList.stories = partialList.stories.concat(l.stories);
+          }
+
+          if (l.size > partialList.stories.length) {
+            const next = page + 1;
+            loop(next, partialList);
+          } else {
+            this.lists[this.lists.indexOf(list)] = partialList;
+            observer.next(partialList);
+            observer.complete();
+          }
+        });
+      };
+
+      loop(1, list);
+    });
+  }
+
+  getListPage(urlname: string, loader: any, list: any, i: number = 1) {
+    let params = { 
+      "page": i,
+      "sort": "dateadd"
+    };
+
+    return this.api.get('3/users/'+ this.user.getId()+ '/lists/'+urlname, { params: JSON.stringify(params) }).map((d: any) => {
 
       if (loader) loader.dismiss();
         if (!d.works.data) {
@@ -119,7 +150,7 @@ export class Lists {
           name: d.list.title,
           description: d.list.description,
           visibility: !d.list.is_private,
-          size: d.list.items_count,
+          size: d.list.stories_count,
           isdeletable: d.list.is_deletable,
           createtimestamp: d.list.created_at,
           updatetimestamp: d.list.updated_at
