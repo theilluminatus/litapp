@@ -4,11 +4,15 @@
 		<ion-title>{{ 'FOLLOWING_TITLE' | translate }}</ion-title>
 
 		<ion-buttons end>
+		  <button end ion-button icon-only (click)="openExportPopover($event)"
+			[tooltip]="'LISTVIEW_EXPORT' | translate" event="press" navTooltip>
+			<ion-icon name="code-download"></ion-icon>
+		  </button>
 	      <button end ion-button icon-only (click)="toggleSorting()"
 	        [tooltip]="'FOLLOWING_TOOLTIP_SORT' | translate" event="press" navTooltip>
 			{{ ('FOLLOWING_SORT_' +sortingProp.toUpperCase()) | translate  }} &nbsp;
 	       <ion-icon name="funnel"></ion-icon>
-	     </button>
+		 </button>
 	   </ion-buttons>
 
 	</ion-navbar>

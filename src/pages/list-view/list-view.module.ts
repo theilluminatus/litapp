@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
+import { TooltipsModule } from 'ionic-tooltips';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { ListViewPage } from './list-view';
 import { StoryListPageModule } from '../../parts/story-list/story-list.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { ExportPopoverModule } from '../../parts/export-popover/export-popover.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     IonicPageModule.forChild(ListViewPage),
     TranslateModule.forChild(),
-    StoryListPageModule
+    TooltipsModule,
+    StoryListPageModule,
+    ExportPopoverModule
   ],
 })
 export class ListViewPageModule {}

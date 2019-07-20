@@ -5,6 +5,12 @@
     	<ion-icon [name]="!list?.visibility ? 'lock' : ''"></ion-icon>
     	{{ list?.name }} <small>({{ stories?.length }})</small>
     </ion-title>
+    <ion-buttons end>
+		<button end ion-button icon-only (click)="openExportPopover($event)"
+			[tooltip]="'LISTVIEW_EXPORT' | translate" event="press" navTooltip>
+			<ion-icon name="code-download"></ion-icon>
+		</button>
+	</ion-buttons>
   </ion-navbar>
 
 </ion-header>

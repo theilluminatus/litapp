@@ -4,6 +4,7 @@ import { FollowingPage } from './following';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 import { NgPipesModule } from 'ngx-pipes';
+import { ExportPopoverModule } from '../../parts/export-popover/export-popover.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { NgPipesModule } from 'ngx-pipes';
     IonicPageModule.forChild(FollowingPage),
     TranslateModule.forChild(),
     TooltipsModule,
-    NgPipesModule
+    NgPipesModule,
+    ExportPopoverModule,
   ],
 })
 export class FollowingPageModule {}

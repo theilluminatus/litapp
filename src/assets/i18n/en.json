@@ -118,6 +118,9 @@
   "LIST_PAGECOUNTDIVIDER": "Page: ",
   
   "LISTVIEW_FILTER": "Filter stories",
+  "LISTVIEW_EXPORT": "Export list",
+  "LISTVIEW_EXPORT_JSON": "Export as JSON",
+  "LISTVIEW_EXPORT_MARKDOWN": "Export as Markdown",
 
   "TOPLIST_TITLE_PART": "Top stories of",
   "NEWLIST_TITLE_PART": "New stories of",
