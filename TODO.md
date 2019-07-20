@@ -12,8 +12,7 @@
 
 # BUGS
 
-- Fix not showing story timestamp on list view page
-- Fix rating sometimes shows as x.xx
+- Fix rating sometimes shows as x.xx (?)
 - List story count != item count (problem server side) (?)
 - Don't refresh history when viewing downloads (?)
 

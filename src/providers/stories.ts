@@ -364,7 +364,7 @@ export class Stories {
       description: item.description,
       category: item.category_info.name,
       lang: this.g.getLanguage(item.language),
-      timestamp: item.date_added,
+      timestamp: Math.round(Date.parse(item.date_added)/1000),
       rating: item.rate_all,
       viewcount: item.view_count,
       url: item.url,
