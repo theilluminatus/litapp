@@ -9,6 +9,13 @@ import { User } from './user';
 import { Globals } from './globals';
 import { Api } from './api/api';
 
+const decodeHTML = (s: string) => {
+	const txt = document.createElement('textarea');
+  txt.innerHTML = s;
+  const value = txt.value;
+	return value;
+};
+
 @Injectable()
 export class Stories {
   
@@ -332,7 +339,7 @@ export class Stories {
       id: item.what.id.toString(),
       title: item.what.title,
       description: item.what.description,
-      category: item.what.category_info.name,
+      category: decodeHTML(item.what.category_info.name),
       lang: this.g.getLanguage(item.what.language),
       timestamp: item.when,
       rating: item.what.rate_all,
@@ -362,7 +369,7 @@ export class Stories {
       id: item.id.toString(),
       title: item.title,
       description: item.description,
-      category: item.category_info.name,
+      category: decodeHTML(item.category_info.name),
       lang: this.g.getLanguage(item.language),
       timestamp: Math.round(Date.parse(item.date_added)/1000),
       rating: item.rate_all,
@@ -411,7 +418,6 @@ export class Stories {
     return story;
   }
 
-
   extractFromNewSearch(item) {
     let cached = this.stories.get(item.id);
     if (cached)
@@ -424,7 +430,7 @@ export class Stories {
       id: item.id.toString(),
       title: item.title,
       description: item.description,
-      category: item.category_info.name,
+      category: decodeHTML(item.category_info.name),
       lang: this.g.getLanguage(item.language),
       timestamp: Math.round(Date.parse(timestampParts[2] + '-' + timestampParts[0] + '-' + timestampParts[1]+"T00:00:00")/1000),
       rating: item.rate_all,
