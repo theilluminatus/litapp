@@ -10,6 +10,11 @@
         <ion-icon name="refresh"></ion-icon>
       </button>
 
+      <button end ion-button icon-only (click)="export($event)"
+        [tooltip]="'LISTVIEW_EXPORT' | translate" event="press" navTooltip>
+        <ion-icon name="code-download"></ion-icon>
+		  </button>
+
       <button ion-button icon-only (click)="toggleDownload()"
         [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOAD' | translate" event="press" navTooltip>
         <ion-icon [name]="story.downloaded ? 'trash' : 'download'"></ion-icon>

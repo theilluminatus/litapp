@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { BrowserTab } from '@ionic-native/browser-tab';
+import { File } from '@ionic-native/file';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, Globals } from '../../providers/providers';
+import { Stories, Globals, Api } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -29,7 +30,9 @@ export class StoryDetailPage {
     public stories: Stories,
     public user: User,
     private socialSharing: SocialSharing,
-    private browser: BrowserTab
+    private browser: BrowserTab,
+    public file: File,
+    public api: Api
   ) {
   	this.story = navParams.get('story');
 
@@ -126,6 +129,43 @@ export class StoryDetailPage {
   share() {
     this.socialSharing.share(null, null, null, this.story.url);
     console.log(this.story.url);
+  }
+
+  export() {
+    const filename = "litapp-story-"+this.story.url+"-"+Math.round(new Date().getTime() / 1000)+".html";
+    const data = `
+<html>
+<body>
+  <h1>
+    <a href="https://www.literotica.com/s/${this.story.url}">${this.story.title}</a>
+    (by <a href="https://www.literotica.com/stories/memberpage.php?uid=${this.story.author.id}">${this.story.author.name})</a>
+  </h1>
+
+  <ul>
+    <li>Category: ${this.story.category} (Tags: [${this.story.tags.join(", ")}])</li>
+    <li>Rating: ${this.story.rating} (${this.story.viewcount} views)</li>
+    <li>${this.story.length} pages</li>
+    <li>Timestamp: ${new Date(parseInt(this.story.timestamp)*1000).toISOString()}</li>
+  </ul>
+
+  <article>
+
+    ${this.story.content.join('<br><hr><br>')}
+
+  </article>
+
+</body>
+</html>
+  `;
+
+    const path = this.file.externalRootDirectory;
+    this.file.writeFile(path, filename, data, {replace: true}).then(() => {
+      this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
+        this.api.showToast(values.SETTINGS_EXPORTSUCCESS+": "+path+filename);
+      });
+    }).catch((err) => {
+      console.error(err);
+    });
   }
 
   toggleDownload() {
