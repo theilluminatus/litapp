@@ -25,7 +25,7 @@ export class ExplorePage {
     this.translate.get(['EXPLORE_ALLCAT','EXPLORE_ALLCATDESCR']).subscribe(values => {
       this.g.onReady().then(() => {
         this.categories = this.g.getCategories();
-        this.categories.unshift({ id: 0, name: values.EXPLORE_ALLCAT, description: values.EXPLORE_ALLCATDESCR });
+        this.categories.unshift({ id: 0, name: values.EXPLORE_ALLCAT });
   
         this.g.getPopularTags().subscribe((tags) => {
           if (tags)

@@ -9,7 +9,6 @@
 # TODO
 
 - Add (unrelated) backup function for backing up your literotica lists and followed authors (json & markdown?)
-- Hardcode categories
 
 # BUGS
 
