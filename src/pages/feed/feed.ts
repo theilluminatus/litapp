@@ -46,20 +46,14 @@ export class FeedPage {
   }
 
   loadMore(event) {
-    if (!this.feed) {
-      event.complete()
-      return;
-    }
-
     this.f.query(this.feed[this.feed.length-1].id, false).subscribe((data) => {
-      if (data) {
-        if (!data.length) {
-          event.enable(false);
-          return;
-        }
+      if (data && data.length > 0) {
         data.forEach(i => this.feed.push(i));
+        event.complete();
+      } else {
+        event.enable(false);
+        this.enableInfinite = false;
       }
-      this.enableInfinite = false;
     });
   }
 
