@@ -3,11 +3,11 @@
 
 ## Releases
 
+- [v1.13](https://theilluminatus.github.io/litapp/releases/litapp-1.13.apk) (2019-07-20)
 - [v1.12](https://theilluminatus.github.io/litapp/releases/litapp-1.12.apk) (2019-03-17)
 - [v1.11](https://theilluminatus.github.io/litapp/releases/litapp-1.11.apk) (2019-03-04)
-- [v1.10](https://theilluminatus.github.io/litapp/releases/litapp-1.10.apk) (2019-02-28)
 
-Older versions and changelogs can be found on [the releases page](https://github.com/theilluminatus/litapp/releases) (Press `...` after version).
+Older changelogs can be found on [the releases page](https://github.com/theilluminatus/litapp/releases) (Press `...` after version). Older APKs can be found in the [releases folder](https://github.com/theilluminatus/litapp/tree/master/docs/releases).
 
 ## Features
 
@@ -19,6 +19,7 @@ Older versions and changelogs can be found on [the releases page](https://github
 - View top & new stories of all categories and most popular tags
 - Search in lists
 - Export / Import settings and downloaded stories
+- Export Stories (to HTML), Lists and followed authors (both to JSON and Markdown)
 - and more...
 
 ### After logging in with a literotica account you can:

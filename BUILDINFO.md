@@ -51,7 +51,7 @@ Also don't forget to add a tag after committing and pushing with `git tag -a x.x
 ### Building apk
 
 ```bash
-ionic cordova build android --prod --release -- -- --keystore=platforms/litapp-key.jks --storePassword="abc123" --alias=litapp --password="abc123"`
+ionic cordova build android --prod --release -- -- --keystore=platforms/litapp-key.jks --storePassword="abc123" --alias=litapp --password="abc123"
 ```
 
 The output can be found in [`/platforms/android/app/build/outputs/apk/release/`](`./platforms/android/app/build/outputs/apk/release/`).
