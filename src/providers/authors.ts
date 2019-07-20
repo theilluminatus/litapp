@@ -63,7 +63,7 @@ export class Authors {
   getFollowing() {
 
     let loader = this.api.showLoader();
-    return this.api.get('3/users/'+ this.user.getId()+ '/favorite/authors').map((data: any) => {
+    return this.api.get('3/users/'+ this.user.getId()+ '/favorite/authors?params={%22nocache%22:true}').map((data: any) => {
       if (loader) loader.dismiss();
       if (!data.length) {
         this.api.showToast();
@@ -87,12 +87,9 @@ export class Authors {
     data.append("type", "member");
     data.append("id", author.id);
 
-    return this.api.post('stories/addtofavs.php', data, undefined, undefined, 4).map((res: any) => {
-      if (res.indexOf('Favorites updated') > -1 || res.indexOf('You already have') > -1) {
-        return true;
-      } else {
-        return false;
-      }
+    return this.api.post('3/users/follow/'+author.id, {}).map((res: any) => {
+      if (!res.success) this.api.showToast();
+      return res.success;
     }).catch((error) => {
       this.api.showToast();
       console.error(error);

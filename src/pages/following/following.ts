@@ -50,12 +50,6 @@ export class FollowingPage {
       this.sortingProp = "name";
 
     else if (this.sortingProp == "name")
-      this.sortingProp = "jointimestamp";
-
-    else if (this.sortingProp == "jointimestamp")
-      this.sortingProp = "-updatetimestamp";
-
-    else if (this.sortingProp == "-updatetimestamp")
       this.sortingProp = "";
       
     else
