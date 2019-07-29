@@ -119,6 +119,7 @@ export class Lists {
             loop(next, partialList);
           } else {
             this.lists[this.lists.indexOf(list)] = partialList;
+            if (loader) loader.dismiss();
             observer.next(partialList);
             observer.complete();
           }
@@ -137,8 +138,7 @@ export class Lists {
 
     return this.api.get('3/users/'+ this.user.getId()+ '/lists/'+urlname, { params: JSON.stringify(params) }).map((d: any) => {
 
-      if (loader) loader.dismiss();
-        if (!d.works.data) {
+      if (!d.works.data) {
         this.api.showToast();
         return null;
       }
