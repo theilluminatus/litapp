@@ -58,11 +58,12 @@ page-story-view {
 
   .ng-scrollbar-thumb.grey,
   .ng-scrollbar-thumb.black {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.5);
   }
 
   .ng-scrollbar-autohide > .ng-scrollbar {
     transition: opacity 5s cubic-bezier(1.000, 0.000, 1.000, 0.000) !important;
+    margin-right: 3px;
   }
 
   .ng-scrollbar-autohide:hover > .ng-scrollbar {
