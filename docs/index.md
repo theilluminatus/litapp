@@ -1,7 +1,7 @@
 
 # ![Logo](https://theilluminatus.github.io/litapp/images/icon.png "Logo") Litapp
 
-## Releases
+## Releases (Android)
 
 - [v1.13](https://theilluminatus.github.io/litapp/releases/litapp-1.13.apk) (2019-07-20)
 - [v1.12](https://theilluminatus.github.io/litapp/releases/litapp-1.12.apk) (2019-03-17)
@@ -18,11 +18,12 @@ Older changelogs can be found on [the releases page](https://github.com/theillum
 - Search for keywords & tags
 - View top & new stories of all categories and most popular tags
 - Search in lists
-- Export / Import settings and downloaded stories
 - Export Stories (to HTML), Lists and followed authors (both to JSON and Markdown)
+- Export / Import settings and downloaded stories
+- Receive a notification when a new update for the app is available
 - and more...
 
-### After logging in with a literotica account you can:
+### After logging in with a Literotica account you also can:
 
 - View and add stories to your lists
 - View your feed and get notified when there's something new
@@ -31,6 +32,14 @@ Older changelogs can be found on [the releases page](https://github.com/theillum
 ## Screenshots
 
 <img alt="Search" title="Search" src="https://theilluminatus.github.io/litapp/images/search.jpg" width="250"> <img alt="Reading" title="Reading" src="https://theilluminatus.github.io/litapp/images/read.jpg" width="250"> <img alt="Story detail" title="Story detail" src="https://theilluminatus.github.io/litapp/images/detail.jpg" width="250"> <img alt="Author" title="Author" src="https://theilluminatus.github.io/litapp/images/author.jpg" width="250"> <img alt="Add to list" title="Add to list" src="https://theilluminatus.github.io/litapp/images/fav.jpg" width="250"> <img alt="Lists" title="Lists" src="https://theilluminatus.github.io/litapp/images/lists.jpg" width="250"> <img alt="Feed" title="Feed" src="https://theilluminatus.github.io/litapp/images/feed.jpg" width="250"> <img alt="Categories" title="Categories" src="https://theilluminatus.github.io/litapp/images/categories.jpg" width="250">
+
+## Installation
+
+The app is only supported from Android v4.4 (KitKat, released in 2013) and upward.
+
+Go to `Settings → Security → Unknown Sources` and enable the option called `Allow installation of apps...`. Then downloading the app at the top of the page, once the resulting `.apk` file is downloaded, install the app by pressing the notification or opening the file with a file manager app.
+
+[Read the official Android documentation for more information](https://developer.android.com/distribute/marketing-tools/alternative-distribution#websites)
 
 ## Tracking
 
