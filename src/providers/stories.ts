@@ -147,6 +147,11 @@ export class Stories {
           url: data.pages[0].url,
           ratingenabled: data.pages[0].allow_vote
         });
+      else if (force) {
+        cached.title = data.pages[0].name;
+        cached.url = data.pages[0].url;
+        cached.ratingenabled = data.pages[0].allow_vote;
+      }
 
       let tags = !data.pages[0].tags ? [] : data.pages[0].tags
         .sort((a,b) => b.submission_count - a.submission_count )

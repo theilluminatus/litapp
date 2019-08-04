@@ -13,7 +13,7 @@ Run `npm rebuild node-sass` after changing node versions.
 
 `npm run android`
 
-You can easily make a separate debug version of the app by adding the following lines to the `/platforms/android/app/build.gradle` file at `line 169`:
+You can easily make a separate debug version of the app by adding the following lines to the [build.gradle](/platforms/android/app/build.gradle) file at `line 169`:
 
 ```gradle
 buildTypes {
@@ -24,7 +24,7 @@ buildTypes {
 }
 ```
 
-If you want to debug an android production build, add the following line to the `onCreate` method in `platforms/android/app/src/main/java/com/illuminatus/litapp/MainActivity.java`:
+If you want to debug an android production build, add the following line to the `onCreate` method in [MainActivity.java](./platforms/android/app/src/main/java/com/illuminatus/litapp/MainActivity.java):
 
 ```java
 import android.webkit.WebView;
@@ -45,6 +45,8 @@ When releasing a new version you should update the version number in:
 - [`/docs/_config.yml`](./docs/_config.yml#L6)
 
 In total, there should be 8 changes to commit including a new apk. Default commit message is "Release vX.XX"
+
+Make sure `setWebContentsDebuggingEnabled` isn't still set in [MainActivity.java](./platforms/android/app/src/main/java/com/illuminatus/litapp/MainActivity.java).
 
 Also don't forget to add a tag after committing and pushing with `git tag -a x.x` and `git push origin --tags`.
 
