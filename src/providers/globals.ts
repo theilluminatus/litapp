@@ -83,12 +83,6 @@ export class Globals {
     return categories;
   }
 
-  getCategory(id: number) {
-    if (this.globals.categories)
-      return this.globals.categories[id] ? this.globals.categories[id].name : "Unknown";
-    return null;
-  }
-
   getLanguage(id: number) {
     if (this.globals.languages)
       return Object.keys(this.globals.languages).filter((i) => {
