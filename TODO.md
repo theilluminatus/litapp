@@ -8,7 +8,7 @@
 
 # TODO
 
-- Add error indicator when Literotica can't be reached at app start
+- 
 
 # BUGS
 

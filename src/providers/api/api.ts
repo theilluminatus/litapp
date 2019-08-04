@@ -29,7 +29,7 @@ export class Api {
     public toastCtrl: ToastController
   ) { }
 
-  get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number) {
+  get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number, timeout?: number) {
     if (!reqOpts) {
       reqOpts = {
         params: new HttpParams({encoder: new WebHttpUrlEncodingCodec()})
@@ -48,7 +48,9 @@ export class Api {
     reqOpts.params = reqOpts.params.set('apikey', this.apikey);
     reqOpts.params = reqOpts.params.set('appid', this.appid);
 
-    return this.http.get(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
+    const req = this.http.get(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
+    if (timeout) return req.timeout(timeout);
+    return req;
   }
 
   post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean, urlIndex?: number) {
