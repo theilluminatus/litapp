@@ -72,6 +72,13 @@ export class MyApp {
     this.settings.load().then(() => {
       if (this.settings.allSettings.checkforappupdates)
         this.g.checkForUpdates();
+
+      if (this.settings.allSettings.amoledBlackTheme) {
+        const styleSheet = document.createElement("link");
+        styleSheet.setAttribute("href", "./assets/black-theme.css");
+        styleSheet.setAttribute("rel", "stylesheet");
+        document.head.appendChild(styleSheet);
+      }
     });
 
     this.catchShareIntent();

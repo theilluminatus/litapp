@@ -51,11 +51,12 @@ export class SettingsPage {
       this.settingsReady = true;
       this.options = this.settings.allSettings;
 
-      // add settings here & in html
+      // add settings here & in html (defaults in app.module.ts)
       this.form = this.formBuilder.group({
         checkforfeedupdates: [this.options.checkforfeedupdates],
         checkforappupdates: [this.options.checkforappupdates],
-        loadalllistsonstart: [this.options.loadalllistsonstart]
+        loadalllistsonstart: [this.options.loadalllistsonstart],
+        amoledBlackTheme: [this.options.amoledBlackTheme],
       });
 
       this.form.valueChanges.subscribe((v) => {
