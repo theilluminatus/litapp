@@ -8,7 +8,10 @@
 
 # TODO
 
-- 
+- Setting to cache lists
+- list loading: show how many pages progress
+- amoled dark mode? (no clue how, manually override all compiled css? multiple main.css files?)
+- Log connection errors in analytics
 
 # BUGS
 
