@@ -10,7 +10,6 @@
 
 - Setting to cache lists
 - amoled dark mode? (no clue how, manually override all compiled css? multiple main.css files?)
-- Log connection errors in analytics
 
 # BUGS
 

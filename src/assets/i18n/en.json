@@ -33,6 +33,7 @@
   "SETTINGS_EXPORTSUCCESS": "File saved to",
   "SETTNGS_IMPORTSUCCESS": "Successfully imported",
   "SETTINGS_GITHUB_LINK": "Visit homepage",
+  "SETTINGS_SAVEERRORLOG": "Save error log",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",

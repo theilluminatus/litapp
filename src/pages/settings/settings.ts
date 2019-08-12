@@ -84,8 +84,8 @@ export class SettingsPage {
         
       }).then(() => {
 
-      let path = this.file.externalRootDirectory;
-        let filename = "litapp-"+Math.round(new Date().getTime() / 1000)+".json"
+        let path = this.file.externalRootDirectory;
+        let filename = "litapp-"+Math.round(new Date().getTime() / 1000)+".json";
 
         this.file.writeFile(path, filename, JSON.stringify(data), {replace: true}).then(() => {
           this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
@@ -129,6 +129,17 @@ export class SettingsPage {
 
       });
     }).catch(err => console.error(err));
+  }
+
+  saveErrorLog() {
+    let path = this.file.externalRootDirectory;
+    let filename = "litapp-errorlog-"+Math.round(new Date().getTime() / 1000)+".json";
+    // @ts-ignore
+    let data = JSON.stringify(window.consoleLog);
+
+    this.file.writeFile(path, filename, data, {replace: true}).then(() => {
+      this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
+    });
   }
 
 }
