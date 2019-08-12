@@ -29,6 +29,15 @@ ion-app.md [padding] .scroll-content {
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
+  display: block;
+}
+
+.loading-wrapper .loading-content {
+	color: white;
+	margin-top: -50px;
+	text-align: center;
+	margin-left: 0 !important;
+	font-size: 0.9em;
 }
 
 ion-spinner {

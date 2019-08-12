@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { LoadingController, ToastController } from 'ionic-angular';
+import { LoadingController, ToastController, Loading } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -20,7 +20,7 @@ export class Api {
   public appid: string = '24b7c3f9d904ebd679299b1ce5506bc305a5ab40';
 
   translations;
-  loader;
+  loader: Loading;
 
   constructor(
     public http: HttpClient,
@@ -86,6 +86,11 @@ export class Api {
       this.loader = undefined;
     });
     return this.loader;
+  }
+
+  updateLoader(content: string) {
+    if (!this.loader) return;
+    this.loader.setContent(content);
   }
 
   hideLoader() {

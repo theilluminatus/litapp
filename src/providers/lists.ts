@@ -116,6 +116,7 @@ export class Lists {
 
           if (l.size > partialList.stories.length) {
             const next = page + 1;
+            this.api.updateLoader(Math.round(partialList.stories.length / l.size *100)+"%");
             loop(next, partialList);
           } else {
             this.lists[this.lists.indexOf(list)] = partialList;
