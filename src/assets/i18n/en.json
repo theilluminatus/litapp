@@ -26,7 +26,7 @@
   "SETTINGS_CHECKFORFEEDUPDATES": "Automatically check for feed updates",
   "SETTINGS_CHECKFORAPPUPDATES": "Automatically check for app updates",
   "SETTINGS_CHECKFORUPDATES": "Check for app updates",
-  "SETTINGS_LOADALLLISTS": "Load all lists on app start",
+  "SETTINGS_CACHELISTS": "Cache lists between app starts",
   "SETTINGS_EXPORT": "Export data",
   "SETTINGS_IMPORT": "Import data",
   "SETTINGS_IMPORTFAIL": "Backup either not valid or compatible with this version of the app.",

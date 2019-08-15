@@ -51,14 +51,24 @@ export class ListListPage {
     });
   }
 
-  private refreshLists() {
-    this.l.query().subscribe((data: any) => {
+  private refreshLists(force: boolean = false) {
+    const callback = data => {
       if (data) {
         this.lists = [];
         data.forEach((d: any) => this.lists.push(d));
         this.showLoader = false;
       }
-    });
+    };
+
+    if (force) {
+      this.l.refresh().subscribe((data: any) => {
+        callback(data);
+      });
+    } else {
+      this.l.query().subscribe((data: any) => {
+        callback(data);
+      });
+    }
   }
 
 }

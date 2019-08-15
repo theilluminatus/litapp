@@ -55,7 +55,7 @@ export class SettingsPage {
       this.form = this.formBuilder.group({
         checkforfeedupdates: [this.options.checkforfeedupdates],
         checkforappupdates: [this.options.checkforappupdates],
-        loadalllistsonstart: [this.options.loadalllistsonstart],
+        cachelists: [this.options.cachelists],
         amoledBlackTheme: [this.options.amoledBlackTheme],
       });
 

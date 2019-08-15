@@ -8,7 +8,7 @@
 
 # TODO
 
-- Setting to cache lists
+- 
 
 # BUGS
 

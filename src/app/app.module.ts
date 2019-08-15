@@ -46,7 +46,7 @@ export function provideSettings(storage: Storage) {
   return new Settings(storage, {
     checkforfeedupdates: true,
     checkforappupdates: true,
-    loadalllistsonstart: true,
+    cachelists: true,
     amoledBlackTheme: false
   });
 }

@@ -6,6 +6,10 @@
     </button>
     <ion-title>{{ 'LISTLIST_TITLE' | translate }}</ion-title>
     <ion-buttons end>
+      <button end ion-button icon-only (click)="refreshLists(true)"
+        [tooltip]="'REFRESH_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="refresh"></ion-icon>
+      </button>
       <button end ion-button icon-only (click)="addList()"
         [tooltip]="'ADD_BUTTON' | translate" event="press" navTooltip>
        <ion-icon name="add"></ion-icon>

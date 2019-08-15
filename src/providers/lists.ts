@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { Storage } from '@ionic/storage';
 
 import { List } from '../models/list';
 import { Story } from '../models/story';
@@ -7,6 +8,7 @@ import { Settings } from './settings/settings';
 import { Stories } from './stories';
 import { User } from './user';
 import { Api } from './api/api';
+import { LIST_KEY } from './db';
 
 @Injectable()
 export class Lists {
@@ -18,7 +20,8 @@ export class Lists {
     public api: Api,
     public s: Stories,
     public settings: Settings,
-    public user: User
+    public user: User,
+    public storage: Storage,
   ) {
 
     this.ready = new Promise((resolve, reject) => {
@@ -26,12 +29,20 @@ export class Lists {
       Promise.all([
         this.settings.load(),
         this.user.onReady(),
-        this.s.onReady()
-      ]).then(() => {
+        this.s.onReady(),
+        this.storage.get(LIST_KEY),
+      ]).then((res) => {
 
-        if (!this.settings.allSettings.loadalllistsonstart || !this.user.isLoggedIn()) {
+        if (!this.settings.allSettings.cachelists || !this.user.isLoggedIn()) {
           resolve();
+          if (res[3]) {
+            this.storage.remove(LIST_KEY);
+          }
           return;
+        }
+
+        if (res[3]) {
+          this.lists = res[3];
         }
 
         this.query(true).subscribe((lists: any) => {
@@ -63,7 +74,7 @@ export class Lists {
     if (!hideLoader)
       loader = this.api.showLoader();
 
-      // https://literotica.com/3/users/3507980/lists
+    // https://literotica.com/3/users/3507980/lists
     return this.api.get('3/users/'+ this.user.getId()+ '/lists').map((d: any) => {
 
       if (loader) loader.dismiss();
@@ -83,6 +94,7 @@ export class Lists {
         createtimestamp: l.created_at,
         updatetimestamp: l.updated_at
       }));
+      this.storage.set(LIST_KEY, this.lists);
 
       return this.lists;
 
@@ -120,6 +132,7 @@ export class Lists {
             loop(next, partialList);
           } else {
             this.lists[this.lists.indexOf(list)] = partialList;
+            this.storage.set(LIST_KEY, this.lists);
             if (loader) loader.dismiss();
             observer.next(partialList);
             observer.complete();
@@ -186,6 +199,7 @@ export class Lists {
         if (!list.stories) list['stories'] = [];
         list.stories.push(story);
         list.size++;
+        this.storage.set(LIST_KEY, this.lists);
 
       }
     });
@@ -210,6 +224,7 @@ export class Lists {
             list.stories.splice(i,1);
         })
         list.size--;
+        this.storage.set(LIST_KEY, this.lists);
 
       }
     });
@@ -240,6 +255,7 @@ export class Lists {
         isdeletable: res.list.is_deletable,
         createtimestamp: res.list.created_at
       }));
+      this.storage.set(LIST_KEY, this.lists);
 
       return true;
     }).catch((error) => {
@@ -272,6 +288,7 @@ export class Lists {
           l.visibility = !res.list.is_private;
         }
       });
+      this.storage.set(LIST_KEY, this.lists);
 
       return true;
     }).catch((error) => {
@@ -294,6 +311,7 @@ export class Lists {
         if (l.urlname == list.urlname)
           this.lists.splice(i,1);
       });
+      this.storage.set(LIST_KEY, this.lists);
 
       return true;
     }).catch((error) => {
@@ -301,6 +319,12 @@ export class Lists {
       console.error(error);
       return Observable.of(false);
     });
+  }
+
+  refresh() {
+    this.storage.remove(LIST_KEY);
+    this.lists = null;
+    return this.query();
   }
 
 }
