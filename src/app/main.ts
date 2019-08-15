@@ -8,8 +8,10 @@ console = new Proxy(console, {
         const method = obj[prop];
         return (...args) => {
             let result = method.apply(this, args);
-            window.consoleLog.push(JSON.parse(JSON.stringify({ prop, args })));
-            if (window.consoleLog.length > 50) window.consoleLog.shift();
+            try {
+                window.consoleLog.push(JSON.parse(JSON.stringify({ prop, args })));
+                if (window.consoleLog.length > 50) window.consoleLog.shift();
+            } catch (e) {}
             return result;
         };
     },
