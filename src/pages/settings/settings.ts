@@ -14,6 +14,8 @@ import { STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY, HISTORY_KEY, STORY
 
 const exportDataIdentifier = "Exported data for Litapp (com.illuminatus.litapp)";
 
+declare const window: any;
+
 @IonicPage()
 @Component({
   selector: 'page-settings',
@@ -135,7 +137,6 @@ export class SettingsPage {
   saveErrorLog() {
     let path = this.file.externalRootDirectory;
     let filename = "litapp-errorlog-"+Math.round(new Date().getTime() / 1000)+".json";
-    // @ts-ignore
     let data = JSON.stringify(window.consoleLog);
 
     this.file.writeFile(path, filename, data, {replace: true}).then(() => {
