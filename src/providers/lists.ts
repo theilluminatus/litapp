@@ -119,7 +119,8 @@ export class Lists {
     return Observable.create(observer => {
       const loop = (page: number, partialList: any) => {
         this.getListPage(urlname, loader, Object.assign({}, partialList), page).subscribe((l) => {
-          
+          if(!l) return;
+
           if (!partialList.stories) {
             partialList = l;
           } else {
