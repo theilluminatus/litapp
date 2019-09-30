@@ -1,18 +1,21 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { LoadingController, ToastController, Loading } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
+import { ENV } from '../../app/env';
+
+// @ts-ignore
+const corsProxy = ENV.CORS_PROXY || "";
 
 @Injectable()
 export class Api {
   urls = [
-    'https://literotica.com/api',
-    'https://search.literotica.com/api',
-    'https://www.literotica.com',
-    'https://raw.githubusercontent.com/theilluminatus/litapp/master/',
-    'https://literotica.com'
+    corsProxy+'https://literotica.com/api',
+    corsProxy+'https://search.literotica.com/api',
+    corsProxy+'https://www.literotica.com',
+    corsProxy+'https://raw.githubusercontent.com/theilluminatus/litapp/master',
+    corsProxy+'https://literotica.com'
   ];
   
   // apikeys and appid are always the same

@@ -57,3 +57,12 @@ ionic cordova build android --prod --release -- -- --keystore=platforms/litapp-k
 ```
 
 The output can be found in [`/platforms/android/app/build/outputs/apk/release/`](`./platforms/android/app/build/outputs/apk/release/`).
+
+### Building web app
+
+Make sure the CORS_PROXY environment variable is still correct and run `./build_web.sh`.
+Commit the eventual changes.
+
+### Updating CORS proxy
+
+`// TODO: Publish CORS proxy and write documentation`

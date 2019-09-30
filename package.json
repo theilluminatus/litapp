@@ -10,7 +10,9 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "ionic:watch:before": "node ./setup.js",
+    "ionic:build:before": "node ./setup.js"
   },
   "dependencies": {
     "@angular/animations": "^5.2.11",
