@@ -9,6 +9,8 @@
 
 Run `npm rebuild node-sass` after changing node versions.
 
+Running the app with `npm start` will initialize the default environment variables in `src/app/env.ts`, from then on you can edit them.
+
 ## Debugging
 
 `npm run android`
@@ -65,4 +67,6 @@ Commit the eventual changes.
 
 ### Updating CORS proxy
 
-`// TODO: Publish CORS proxy and write documentation`
+Clone the cors-proxy repo by running `git submodule update` in the root directory.
+
+`// TODO: Publish CORS proxy and write deploy documentation`
