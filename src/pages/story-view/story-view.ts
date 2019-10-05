@@ -157,7 +157,7 @@ export class StoryViewPage {
 
   private immersive() {
     if (this.fullscreen) {
-      // TODO: find a way to show statusbar under system ui immediatly
+      // TODO: find a way to show statusbar under system ui immediately
       this.androidFullScreen.showSystemUI();
       this.androidFullScreen.showUnderSystemUI();
     } else {

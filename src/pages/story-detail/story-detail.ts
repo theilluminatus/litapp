@@ -164,6 +164,7 @@ export class StoryDetailPage {
         this.api.showToast(values.SETTINGS_EXPORTSUCCESS+": "+path+filename);
       });
     }).catch((err) => {
+      console.info(data)
       console.error(err);
     });
   }
