@@ -14,7 +14,7 @@ const {isValidHostName, parseURL} = require('./cors-escape/lib/helpers');
  * @param request {ServerRequest}
  */
 function withCORS(headers, request) {
-    headers['access-control-allow-origin'] = 'http://localhost:8100'; // Edited
+    headers['access-control-allow-origin'] = 'https://theilluminatus.github.io'; // Edited
     headers['access-control-allow-credentials'] = true; // Edited
     const corsMaxAge = request.corsEscapeRequestState.corsMaxAge;
     if (corsMaxAge) {

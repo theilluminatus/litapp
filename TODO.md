@@ -10,6 +10,7 @@
 
 - WebApp: Stub native packages (download files instead of saving, google analytics... -> see app.module.ts)
 - WebApp: Add links to homepage
+- WebApp: add service worker to cache SPA
 - Auto update version number and build deploy script (GitHub action on tag?)
 
 # BUGS
