@@ -97,7 +97,7 @@ export class Api {
   }
 
   hideLoader() {
-    if (this.loader) this.loader.dismiss();
+    if (this.loader) this.loader.dismiss().catch(()=>{});
   }
 
   showToast(text?: string, timeout?: number, button?: string) {

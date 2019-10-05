@@ -24,4 +24,8 @@ export class StorySeriesPage {
     });
   }
 
+  download() {
+    this.stories.downloadSeries(this.series);
+  }
+
 }

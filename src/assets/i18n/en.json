@@ -117,6 +117,8 @@
   "AUTHOR_UPDATEDATE": "Last updated",
 
   "SERIES_TITLE": "All stories in this series",
+  "SERIES_DOWNLOAD": "Download all stories",
+  "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
   

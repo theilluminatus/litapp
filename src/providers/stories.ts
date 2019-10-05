@@ -8,6 +8,7 @@ import { Authors } from './authors';
 import { User } from './user';
 import { Globals } from './globals';
 import { Api } from './api/api';
+import { TranslateService } from '@ngx-translate/core';
 
 const decodeHTML = (s: string) => {
 	const txt = document.createElement('textarea');
@@ -27,7 +28,8 @@ export class Stories {
     public a: Authors,
     public user: User,
     public g: Globals,
-    public storage: Storage
+    public storage: Storage,
+    public translate: TranslateService,
   ) {
 
     this.ready = new Promise((resolve, reject) => {
@@ -121,7 +123,7 @@ export class Stories {
 
 
   // Get a story by ID
-  getById(id: any, force: boolean = false) {
+  getById(id: any, force: boolean = false, noLoaderDismiss = false) {
     
     let cached = this.stories.get(id);
     if (cached && !force) {
@@ -134,7 +136,7 @@ export class Stories {
 
     let loader = this.api.showLoader();
     return this.api.get('2/submissions/pages', params).map((data: any) => {
-      if (loader) loader.dismiss();
+      if (loader && !noLoaderDismiss) loader.dismiss();
       if (!data.success) {
         this.api.showToast();
         return null;
@@ -200,7 +202,38 @@ export class Stories {
       });
   }
 
+  downloadSeries(series: Story[]) {
+    this.api.showLoader();
+    return new Promise(resolve => {
+      const loop = (index: number) => {
+        if (index >= series.length) {
+          this.api.hideLoader();
+          resolve();
+          return;
+        } else if (!series[index].cached) {
+          this.getById(series[index].id, false, true).subscribe((s) => {
+            if (s) {
+              this.download(s);
+            } else {
+              this.translate.get(['SERIES_DOWNLOAD_ERROR']).subscribe(values => {
+                this.api.showToast(values.SERIES_DOWNLOAD_ERROR);
+              });
+              this.api.hideLoader();
+              return;
+            }
+            this.api.updateLoader(Math.round(index + 1 / series.length *100)+"%");
+            loop(index+1);
+          });
+          return;
+        }
+        this.download(series[index]);
+        this.api.updateLoader(Math.round(index + 1 / series.length *100)+"%");
+        loop(index+1);
+      };
 
+      loop(0);
+    });
+  }
 
   // helper for similar requests
   private search(filter: any, page?: number, sort?: string, urlIndex?: number, path?: string) {
