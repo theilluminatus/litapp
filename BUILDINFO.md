@@ -69,4 +69,15 @@ Commit the eventual changes.
 
 Clone the cors-proxy repo by running `git submodule update` in the root directory.
 
-`// TODO: Publish CORS proxy and write deploy documentation`
+On first setup:
+
+1. `heroku login`
+2. `heroku git:remote -a litapp-cors`
+3. `heroku buildpacks:set https://github.com/timanovsky/subdir-heroku-buildpack`
+4. `heroku buildpacks:add heroku/nodejs`
+5. `heroku config:set PROJECT_PATH=proxy-cors`
+
+Deploying:
+```bash
+git push heroku `git subtree split --prefix proxy-cors master`:master --force
+```

@@ -1,0 +1,3 @@
+[submodule "cors-escape"]
+	path = cors-escape
+	url = https://github.com/shalvah/cors-escape

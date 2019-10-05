@@ -10,17 +10,15 @@
 
 - WebApp: Stub native packages (download files instead of saving, google analytics... -> see app.module.ts)
 - WebApp: Add links to homepage
-- WebApp: Deploy proxy (Heroku?) & update webapp build script + document flow
-- Include stack trace in exported log file
 - Auto update version number and build deploy script (GitHub action on tag?)
 
 # BUGS
 
-- Fix rating sometimes shows as x.xx (?)
-- List story count != item count (problem server side) (?)
-- Don't refresh history when viewing downloads
-- Downloaded stories disappearing?
-- Downloading stories to file doesn't always work (ENCODING_ERR?)
-- Downloading stories to file button has wrong label
+## Not reproducible
 
-## Also check TODOs in files
+- List story count != item count (problem server side)
+- Fix rating sometimes shows as x.xx (?)
+- Downloaded stories disappearing without internet connection?
+- Downloading stories to file doesn't always work (ENCODING_ERR?)
+
+> Also check TODOs in files!

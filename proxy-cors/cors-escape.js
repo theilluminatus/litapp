@@ -242,6 +242,11 @@ function getHandler(options, proxy) {
         const query = require('querystring').parse(req.url.replace(/^\/(\?)?/, ''));
         const location = parseURL(query.url || req.url.slice(1));
 
+        if (!location) {
+            res.end('');
+            return;
+        }
+
         if (location.port > 65535) {
             // Port is higher than 65535
             res.writeHead(400, 'Invalid port', corsHeaders);

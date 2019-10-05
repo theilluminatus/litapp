@@ -3,7 +3,7 @@
 rm -rf build/*
 
 # Add all needed env variables here
-CORS_PROXY=http://localhost:8101/ ionic build --prod
+CORS_PROXY=https://litapp-cors.herokuapp.com/ ionic build --prod
 
 mkdir -p docs/app
 rm -rf docs/app/*

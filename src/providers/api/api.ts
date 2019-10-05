@@ -5,22 +5,14 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { ENV } from '../../app/env';
 
-// @ts-ignore
-const corsProxy = ENV.CORS_PROXY || "";
-
 @Injectable()
 export class Api {
-  urls = [
-    corsProxy+'https://literotica.com/api',
-    corsProxy+'https://search.literotica.com/api',
-    corsProxy+'https://www.literotica.com',
-    corsProxy+'https://raw.githubusercontent.com/theilluminatus/litapp/master',
-    corsProxy+'https://literotica.com'
-  ];
-  
+
   // apikeys and appid are always the same
   public apikey: string = '70b3a71911b398a98d3dac695f34cf279c270ea0';
   public appid: string = '24b7c3f9d904ebd679299b1ce5506bc305a5ab40';
+  public corsProxy: string = ENV.CORS_PROXY || "";
+  public urls = this.getUrls();
 
   translations;
   loader: Loading;
@@ -30,7 +22,26 @@ export class Api {
     public translate: TranslateService,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController
-  ) { }
+  ) {
+    try {
+      const search = location.search.substring(1);
+      const queryParams = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+      if (queryParams.proxy) {
+        this.corsProxy = queryParams.proxy;
+        this.urls = this.getUrls();
+      }
+    } catch (e) {}
+  }
+
+  getUrls() {
+    return [
+      this.corsProxy+'https://literotica.com/api',
+      this.corsProxy+'https://search.literotica.com/api',
+      this.corsProxy+'https://www.literotica.com',
+      this.corsProxy+'https://raw.githubusercontent.com/theilluminatus/litapp/master',
+      this.corsProxy+'https://literotica.com'
+    ];
+  }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number, timeout?: number) {
     if (!reqOpts) {
@@ -50,7 +61,6 @@ export class Api {
     reqOpts.withCredentials = true;
     reqOpts.params = reqOpts.params.set('apikey', this.apikey);
     reqOpts.params = reqOpts.params.set('appid', this.appid);
-
     const req = this.http.get(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
     if (timeout) return req.timeout(timeout);
     return req;

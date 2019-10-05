@@ -4,11 +4,17 @@
   "license": "",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env CORSESCAPE_ORIGIN_WHITELIST=http://localhost:8100 node server.js"
+    "start": "node server.js",
+    "local": "cross-env CORSESCAPE_ORIGIN_WHITELIST=http://localhost:8100 node server.js"
   },
   "engines": {
     "node": ">=8.10.0",
     "npm": ">=6.1.0"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "http-proxy": "^1.17.0",
+    "proxy-from-env": "^1.0.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0"
