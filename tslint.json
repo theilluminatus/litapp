@@ -1,11 +1,24 @@
 {
+  "extends": ["tslint-config-prettier", "tslint-config-airbnb"],
   "rules": {
     "no-duplicate-variable": true,
-    "no-unused-variable": [
-      true
-    ]
+    "no-unused-variable": [true],
+    "max-line-length": {
+      "options": {
+        "limit": 140
+      }
+    },
+    "ter-arrow-parens": false,
+    "radix": false,
+    "no-parameter-reassignment": {
+      "severity": "warn"
+    },
+    "align": {
+      "severity": "warn"
+    }
   },
-  "rulesDirectory": [
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ]
+  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"],
+  "linterOptions": {
+    "exclude": ["docs", "*.md", "src/app/env.ts"]
+  }
 }

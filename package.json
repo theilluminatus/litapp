@@ -8,7 +8,8 @@
     "android": "ionic cordova run android",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
+    "lint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "ionic:watch:before": "node ./setup.js",
@@ -76,9 +77,15 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
+    "cordova": "8.1.2",
+    "husky": "^3.0.9",
     "ionic": "^3.9.2",
-    "typescript": "2.4.2",
-    "cordova": "8.1.2"
+    "prettier": "^1.18.2",
+    "pretty-quick": "^2.0.0",
+    "tslint": "^5.20.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "2.4.2"
   },
   "description": "An unofficial Literotica app.",
   "cordova": {
@@ -103,5 +110,10 @@
       "cordova-plugin-google-analytics": {}
     },
     "platforms": []
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && tsc --noEmit && npm run lint"
+    }
   }
 }

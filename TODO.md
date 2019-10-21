@@ -1,7 +1,5 @@
-
 # TODO
 
-- Lint and prettify codebase
 - Capture API output JSONs to create mockapi so demo can keep working forever
 - Remove @ionic-native/toast dependency from login.ts
 - Auto update version number and build deploy script (GitHub action on tag?)
@@ -10,20 +8,20 @@
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
 
-# BUGS
+## BUGS
 
-## To investigate
+### To investigate
 
 - History list sometimes doesn't go past +- 20 items, app restart fixes this
 
-## Not reproducible
+### Not reproducible
 
 - List story count != item count (problem server side)
 - Fix rating sometimes shows as x.xx (?)
 - Downloaded stories disappearing without internet connection?
 - Downloading stories to file doesn't always work (ENCODING_ERR?)
 
-# MISSING DATA
+## MISSING DATA
 
 - Find API route to get all categories (old was removed, now hardcoded)
 - Find API route for story comments

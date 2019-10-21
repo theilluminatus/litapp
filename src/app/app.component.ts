@@ -3,11 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform, App, AlertController, ToastController } from 'ionic-angular';
 import { WebIntent } from '@ionic-native/web-intent';
 
-import { Globals, Analytics, Api } from '../providers/providers';
-import { Stories } from '../providers/providers';
-import { Lists } from '../providers/providers';
-import { Feed } from '../providers/providers';
-import { Settings } from '../providers/providers';
+import { Globals, Analytics, Api, Stories, Lists, Feed, Settings } from '../providers/providers';
 
 @Component({
   template: `
@@ -46,7 +42,7 @@ import { Settings } from '../providers/providers';
     <ion-nav #content root="TabsPage"></ion-nav>
 
 
-  `
+  `,
 })
 export class MyApp {
 
@@ -66,32 +62,33 @@ export class MyApp {
     public g: Globals,
     public s: Stories,
     public l: Lists,
-    public f: Feed
+    public f: Feed,
   ) {
     this.initTranslate();
     this.settings.load().then(() => {
-      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode)
+      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode) {
         this.g.checkForUpdates();
+      }
 
       if (this.settings.allSettings.amoledBlackTheme) {
-        const styleSheet = document.createElement("link");
-        styleSheet.setAttribute("href", "./assets/black-theme.css");
-        styleSheet.setAttribute("rel", "stylesheet");
+        const styleSheet = document.createElement('link');
+        styleSheet.setAttribute('href', './assets/black-theme.css');
+        styleSheet.setAttribute('rel', 'stylesheet');
         document.head.appendChild(styleSheet);
       }
     });
 
     this.catchShareIntent();
     this.platform.resume.subscribe(() => {
-        this.catchShareIntent();
+      this.catchShareIntent();
     });
   }
 
   catchShareIntent() {
-    if (this.platform.is("cordova")) {
+    if (this.platform.is('cordova')) {
       this.webIntent.getIntent().then((intent) => {
-        if (intent.action == "android.intent.action.SEND" && intent.extras) {
-         this.openURL(intent.extras['android.intent.extra.TEXT']);
+        if (intent.action === 'android.intent.action.SEND' && intent.extras) {
+          this.openURL(intent.extras['android.intent.extra.TEXT']);
         }
       });
     }
@@ -123,30 +120,31 @@ export class MyApp {
   }
 
   openPage(page) {
-    if (page.title == 'TabsPage')
+    if (page.title === 'TabsPage') {
       this.nav.setRoot(page);
-    else
+    } else {
       this.nav.push(page);
+    }
   }
 
   openLinkDialog(url?) {
 
-    this.translate.get(["MENU_OPENLINK","OPENLINK_DESCRIPTION","OK_BUTTON","CANCEL_BUTTON"]).subscribe(translations => {
+    this.translate.get(['MENU_OPENLINK', 'OPENLINK_DESCRIPTION', 'OK_BUTTON', 'CANCEL_BUTTON']).subscribe(translations => {
 
       this.alertCtrl.create({
         title: translations.MENU_OPENLINK,
         message: translations.OPENLINK_DESCRIPTION,
         inputs: [{
           name: 'url',
-          placeholder: 'https://www.literotica.com/...'
+          placeholder: 'https://www.literotica.com/...',
         }],
         buttons: [{
           text: translations.OK_BUTTON,
           handler: (data) => {
             this.openURL(data.url);
           }},
-          { text: translations.CANCEL_BUTTON }
-        ]
+          { text: translations.CANCEL_BUTTON },
+        ],
       }).present();
 
     });
@@ -156,19 +154,19 @@ export class MyApp {
   openURL(url: string) {
 
     // https://www.literotica.com/s/slave-takes-mistress-to-hawaii
-    var storyRegex = /literotica\.com\/s\/([-a-zA-Z0-9._+]*)/g;
-    var storyMatch = storyRegex.exec(url);
+    const storyRegex = /literotica\.com\/s\/([-a-zA-Z0-9._+]*)/g;
+    const storyMatch = storyRegex.exec(url);
     if (storyMatch) {
 
       this.nav.push('SearchPage', {
-        storyurl: storyMatch[1]
+        storyurl: storyMatch[1],
       });
 
-      this.translate.get(["OPENLINK_STORYWARNING"]).subscribe(translations => {
+      this.translate.get(['OPENLINK_STORYWARNING']).subscribe(translations => {
         this.toastCtrl.create({
           message: translations.OPENLINK_STORYWARNING,
           duration: 2000,
-          position: 'bottom'
+          position: 'bottom',
         }).present();
       });
       return;
@@ -176,23 +174,23 @@ export class MyApp {
     }
 
     // https://www.literotica.com/stories/memberpage.php?uid=1015993&page=submissions
-    var authorRegex = /literotica\.com\/stories\/memberpage\.php\?.*uid=([0-9]*)/g;
-    var authorMatch = authorRegex.exec(url);
+    const authorRegex = /literotica\.com\/stories\/memberpage\.php\?.*uid=([0-9]*)/g;
+    const authorMatch = authorRegex.exec(url);
     if (authorMatch) {
 
-      let author = { id: authorMatch[1] };
+      const author = { id: authorMatch[1] };
       this.nav.push('AuthorPage', {
-        author: author
+        author,
       });
       return;
 
     }
 
-    this.translate.get(["OPENLINK_UNSUPPORTED"]).subscribe(translations => {
+    this.translate.get(['OPENLINK_UNSUPPORTED']).subscribe(translations => {
       this.toastCtrl.create({
         message: translations.OPENLINK_UNSUPPORTED,
         duration: 2000,
-        position: 'bottom'
+        position: 'bottom',
       }).present();
     });
 
