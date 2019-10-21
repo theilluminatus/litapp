@@ -27,11 +27,11 @@ import { Settings } from '../providers/providers';
             {{'MENU_HOME' | translate}}
           </button>
 
-          <button menuClose ion-item (click)="openLinkDialog()">
+          <button menuClose ion-item (click)="openLinkDialog()" *ngIf="!settings.allSettings.offlineMode">
             {{'MENU_OPENLINK' | translate}}
           </button>
 
-          <button menuClose ion-item (click)="openPage('AccountPage')">
+          <button menuClose ion-item (click)="openPage('AccountPage')" *ngIf="!settings.allSettings.offlineMode">
             {{'MENU_ACCOUNT' | translate}}
           </button>
 
@@ -70,7 +70,7 @@ export class MyApp {
   ) {
     this.initTranslate();
     this.settings.load().then(() => {
-      if (this.settings.allSettings.checkforappupdates)
+      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode)
         this.g.checkForUpdates();
 
       if (this.settings.allSettings.amoledBlackTheme) {

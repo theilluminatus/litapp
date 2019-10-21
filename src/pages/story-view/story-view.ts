@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { STORYSTYLEOPTIONS_KEY, HISTORY_KEY } from '../../providers/db';
-import { Stories, Analytics } from '../../providers/providers';
+import { Stories, Analytics, Settings } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { Story } from '../../models/story';
 
@@ -44,6 +44,7 @@ export class StoryViewPage {
     public navCtrl: NavController,
     public platform: Platform,
     public storage: Storage,
+    public appSettings: Settings,
     public user: User,
     public stories: Stories,
     public analytics: Analytics,

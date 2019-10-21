@@ -8,6 +8,7 @@ import { Globals } from './globals';
 import { Settings } from './settings/settings';
 import { User } from './user';
 
+// Do not import from this barrelfile inside the barrel, no loops!
 export {
     Analytics,
     Api,

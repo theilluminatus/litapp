@@ -111,7 +111,7 @@ export class Globals {
 
     this.api.get('app.json',undefined,undefined,3)
       .catch((error) => {
-        console.error("globals,checkForUpdates", error);
+        console.error("globals.checkForUpdates", error);
         return Observable.of(false);
       }).subscribe((d: any) => {
 

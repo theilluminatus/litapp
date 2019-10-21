@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, Platform, Tabs, App, NavController } from 'ionic-angular';
 import { User, Api } from '../../providers/providers';
 import { Feed } from '../../providers/providers';
+import { Settings } from '../../providers/providers';
 
 @IonicPage({priority: 'high'})
 @Component({
@@ -32,6 +33,7 @@ export class TabsPage {
     public translateService: TranslateService,
     public api: Api,
     public user: User,
+    public settings: Settings,
     public f: Feed
   ) {
 

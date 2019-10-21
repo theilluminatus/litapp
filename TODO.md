@@ -2,6 +2,7 @@
 # TODO
 
 - Lint and prettify codebase
+- Capture API output JSONs to create mockapi so demo can keep working forever
 - Remove @ionic-native/toast dependency from login.ts
 - Auto update version number and build deploy script (GitHub action on tag?)
 

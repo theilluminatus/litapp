@@ -36,7 +36,7 @@ export class Feed {
         this.user.onReady()
       ]).then(() => {
 
-        if (!this.settings.allSettings.checkforfeedupdates || !this.user.isLoggedIn()) {
+        if (!this.settings.allSettings.checkforfeedupdates || this.settings.allSettings.offlineMode || !this.user.isLoggedIn()) {
           resolve();
           return;
         }

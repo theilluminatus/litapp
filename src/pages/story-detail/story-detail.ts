@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, Globals, Api } from '../../providers/providers';
+import { Stories, Globals, Api, Settings } from '../../providers/providers';
 import { User } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
@@ -29,6 +29,7 @@ export class StoryDetailPage {
     public translate: TranslateService,
     public g: Globals,
     public stories: Stories,
+    public settings: Settings,
     public user: User,
     private socialSharing: SocialSharing,
     private browser: BrowserTab,
@@ -56,6 +57,7 @@ export class StoryDetailPage {
   }
 
   showAuthor(author: Author) {
+    if (this.settings.allSettings.offlineMode) return;
     this.navCtrl.push('AuthorPage', {
       author: author
     });
@@ -79,12 +81,14 @@ export class StoryDetailPage {
   }
 
   search(query: string) {
+    if (this.settings.allSettings.offlineMode) return;
     this.navCtrl.push("SearchPage", {
       query: query
     });
   }
 
   category(query: string) {
+    if (this.settings.allSettings.offlineMode) return;
     this.translate.get(['STORYDETAIL_VIEWCAT','TOP', 'NEW']).subscribe(values => {
 
       let alert = this.alertCtrl.create({

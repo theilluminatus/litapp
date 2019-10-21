@@ -6,6 +6,7 @@
 
       <button ion-button icon-only
         (click)="refreshStory()"
+        *ngIf="!settings.allSettings.offlineMode"
         [tooltip]="'REFRESH_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="refresh"></ion-icon>
       </button>
@@ -28,6 +29,7 @@
 
       <button ion-button icon-only
         (click)="openLink()"
+        *ngIf="!settings.allSettings.offlineMode"
         [tooltip]="'OPENLINK_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="open"></ion-icon>
       </button>
@@ -50,11 +52,11 @@
   <p>{{story.description}}</p>
 
   <p>
-    <button ion-button *ngIf="story.series > 0" (click)="showSeries()">
+    <button ion-button *ngIf="story.series > 0 && !settings.allSettings.offlineMode" (click)="showSeries()">
       <ion-icon name="albums"></ion-icon>&nbsp;
       {{'STORYDETAIL_SERIES' | translate }}
     </button>
-    <button ion-button (click)="showRelated()">
+    <button ion-button *ngIf="!settings.allSettings.offlineMode" (click)="showRelated()">
       <ion-icon name="pricetags"></ion-icon>&nbsp;
       {{'STORYDETAIL_RELATED' | translate }}
     </button>

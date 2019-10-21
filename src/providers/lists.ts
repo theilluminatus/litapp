@@ -33,7 +33,7 @@ export class Lists {
         this.storage.get(LIST_KEY),
       ]).then((res) => {
 
-        if (!this.settings.allSettings.cachelists || !this.user.isLoggedIn()) {
+        if (!this.settings.allSettings.cachelists || this.settings.allSettings.offlineMode || !this.user.isLoggedIn()) {
           resolve();
           if (res[3]) {
             this.storage.remove(LIST_KEY);

@@ -24,7 +24,7 @@ declare const window: any;
 })
 export class SettingsPage {
 
-  options: any;
+  options: any = {};
   settingsReady = false;
   form: FormGroup;
 
@@ -71,6 +71,7 @@ export class SettingsPage {
         checkforappupdates: [this.options.checkforappupdates],
         cachelists: [this.options.cachelists],
         amoledBlackTheme: [this.options.amoledBlackTheme],
+        offlineMode: [this.options.offlineMode],
       });
 
       this.form.valueChanges.subscribe((v) => {
@@ -96,7 +97,7 @@ export class SettingsPage {
           if (!data[HISTORY_KEY]) data[HISTORY_KEY] = [];
           data[HISTORY_KEY].push(value.id);
         }
-        
+
       }).then(() => {
 
         let path = this.file.externalRootDirectory;
@@ -114,24 +115,31 @@ export class SettingsPage {
   importData() {
 
     const handleData = (input: string) => {
-      let data = JSON.parse(input);
 
-      if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
-        this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
-        return;
-      }
+      try {
 
-      for (const key in data) {
-        if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
-          const value = data[key];
-          this.storage.set(key, value);
+        let data = JSON.parse(input);
+
+        if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
+          this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
+          return;
         }
-      }
 
-      this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
-        window.location.hash = "";
-        window.location.reload();
-      });
+        for (const key in data) {
+          if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
+            const value = data[key];
+            this.storage.set(key, value);
+          }
+        }
+
+        this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
+          window.location.hash = "";
+          window.location.reload();
+        });
+
+      } catch (e) {
+        console.error("settings.importData", [input], e);
+      }
     };
 
     const promptForInputInstead = () => {
@@ -169,12 +177,13 @@ export class SettingsPage {
       deviceWidth: this.platform.width(),
       deviceHeight: this.platform.height(),
       deviceOrientation: this.platform.isLandscape() ? "landscape" : "portrait",
+      deviceUuid: this.device.uuid,
       appLanguage: this.platform.lang(),
       appCordova: this.device.cordova,
       appVersion: this.g.getVersion(),
       apiKey: this.api.apikey,
       appId: this.api.appid,
-      uuid: this.device.uuid,
+      appSettings: this.settings.allSettings,
     })
 
     let data = JSON.stringify(window.consoleLog);

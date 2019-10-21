@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { USER_KEY, FEED_KEY } from './db';
 import { Api } from './api/api';
+import { Settings } from './settings/settings';
 
 @Injectable()
 export class User {
@@ -17,15 +18,21 @@ export class User {
 
   constructor(
     public api: Api,
+    public settings: Settings,
     public storage: Storage,
     public translate: TranslateService,
     public toastCtrl: ToastController
   ) {
 
     this.ready = new Promise((resolve, reject) => {
-      this.storage.get(USER_KEY).then((data) => {
-        if (data) {
-          this.user = data;
+
+      Promise.all([
+        this.settings.load(),
+        this.storage.get(USER_KEY),
+      ]).then((data) => {
+
+        if (!this.settings.allSettings.offlineMode && data[1]) {
+          this.user = data[1];
           if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
 
             setTimeout(() => {
@@ -93,7 +100,7 @@ export class User {
   }
 
   isLoggedIn(): boolean {
-    return this.user ? true : false;
+    return this.user && !this.settings.allSettings.offlineMode;
   }
 
   getId() {

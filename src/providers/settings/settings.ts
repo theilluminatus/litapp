@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage';
 export class Settings {
   private SETTINGS_KEY: string = '_settings';
 
-  settings: any;
+  settings: any = {};
 
   _defaults: any;
   _readyPromise: Promise<any>;

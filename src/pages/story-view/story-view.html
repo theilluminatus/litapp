@@ -12,7 +12,7 @@
       </button>
       
       <button ion-button icon-only
-        *ngIf="story?.series" (click)="showSeries(story)"
+        *ngIf="story?.series && !appSettings.allSettings.offlineMode" (click)="showSeries(story)"
         [tooltip]="'STORYDETAIL_SERIES' | translate" event="press" navTooltip>
         <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
       </button>

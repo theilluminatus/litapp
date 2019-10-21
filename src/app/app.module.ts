@@ -48,7 +48,8 @@ export function provideSettings(storage: Storage) {
     checkforfeedupdates: true,
     checkforappupdates: true,
     cachelists: true,
-    amoledBlackTheme: false
+    amoledBlackTheme: false,
+    offlineMode: false,
   });
 }
 

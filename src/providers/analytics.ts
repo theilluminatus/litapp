@@ -2,19 +2,23 @@ import { Injectable } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Globals } from './globals';
 import { handleNoCordovaError } from '../app/utils';
+import { Settings } from './settings/settings';
 
 @Injectable()
 export class Analytics {
 
   constructor(
     public g: Globals,
+    public settings: Settings,
     public googleAnalytics: GoogleAnalytics,
   ) {
 
     Promise.all([
-      // this.settings.load(),
+      this.settings.load(),
       this.g.onReady(),
     ]).then(() => {
+
+      if (this.settings.allSettings.offlineMode) return;
       
       try {
         // setup tracking
@@ -37,8 +41,9 @@ export class Analytics {
   }
 
   track(view: string) {
-    this.googleAnalytics.trackView(view);
     console.info('Track', view);
+    if (this.settings.allSettings.offlineMode) return;
+    this.googleAnalytics.trackView(view);
   }
 
 }
