@@ -2,7 +2,9 @@
 # TODO
 
 - Lint and prettify codebase
+- Remove @ionic-native/toast dependency from login.ts
 - Auto update version number and build deploy script (GitHub action on tag?)
+
 - WebApp: Stub native packages (download files instead of saving, google analytics... -> see app.module.ts)
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
@@ -12,7 +14,6 @@
 ## To investigate
 
 - History list sometimes doesn't go past +- 20 items, app restart fixes this
-- 
 
 ## Not reproducible
 

@@ -1,4 +1,3 @@
-
 # ![Logo](https://theilluminatus.github.io/litapp/images/icon.png "Logo") Litapp
 
 ## Releases (Android)
@@ -51,6 +50,12 @@ Since version 1.13 I started tracking some basic things out of pure curiosity. I
 - Reading a story (not which one)
 
 This is purely to get an overview of how many people are using my app, since GitHub doesn't allow me to see download statistics. You can check these claims in the source code by searching ['track'](https://github.com/theilluminatus/litapp/search?l=TypeScript&q=track).
+
+## Frequently Asked Questions
+
+I am getting the following message: `Error while communicating with server`.
+
+> Most frequently this is either a temporary problem with the Literotica servers or your country blocking the Literotica servers. Please try to access the Literotica website directly in a browser and/or the official app. If this problem persists, feel free to contact me (Tip: also include the "Error Log" in your mail to help me debug the problem).
 
 ## Contact
 
