@@ -1,10 +1,8 @@
 # TODO
 
 - Capture API output JSONs to create mockapi so demo can keep working forever
-- Remove @ionic-native/toast dependency from login.ts
 - Auto update version number and build deploy script (GitHub action on tag?)
 
-- WebApp: Stub native packages (download files instead of saving, google analytics... -> see app.module.ts)
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
 
