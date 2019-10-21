@@ -1,7 +1,6 @@
 
 declare const window: any;
 
-// All manually logged values use console.info()
 // keep last 75 console logs for sending reports
 window.consoleLog = [];
 console = new Proxy(console, {

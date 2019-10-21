@@ -38,7 +38,7 @@ export class Analytics {
 
   track(view: string) {
     this.googleAnalytics.trackView(view);
-    console.log('Track', view);
+    console.info('Track', view);
   }
 
 }

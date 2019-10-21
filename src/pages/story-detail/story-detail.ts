@@ -166,8 +166,7 @@ export class StoryDetailPage {
         this.api.showToast(values.SETTINGS_EXPORTSUCCESS+": "+path+filename);
       });
     }).catch(err => handleNoCordovaError(err, () => {
-      this.translate.get("NOSUPPORT_MSG").subscribe(label => alert(label));
-      console.info("Save story HTML", data);
+      this.translate.get("COPYPROMPT_MSG").subscribe(label => prompt(label, data));
     }));
   }
 

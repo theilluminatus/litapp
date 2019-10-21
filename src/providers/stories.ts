@@ -171,7 +171,7 @@ export class Stories {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("stories.getById", [id], error);
       return Observable.of(null);
     });
   }
@@ -188,7 +188,7 @@ export class Stories {
 
     this.api.post('2/submissions/vote', data, undefined, true)
       .catch((error) => {
-        console.error(error);
+        console.error("stories.rate", [story, rating], error);
         return Observable.throw(error);
       }).subscribe((data) => {
         
@@ -262,7 +262,7 @@ export class Stories {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("stories.search", [filter, page, sort], error);
       return Observable.of([[],0]);
     });
   }
@@ -310,7 +310,7 @@ export class Stories {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("stories.newsearch", [filter, page, tags], error);
       return Observable.of([[],0]);
     });
   }

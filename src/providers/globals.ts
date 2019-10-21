@@ -111,7 +111,7 @@ export class Globals {
 
     this.api.get('app.json',undefined,undefined,3)
       .catch((error) => {
-        console.error(error);
+        console.error("globals,checkForUpdates", error);
         return Observable.of(false);
       }).subscribe((d: any) => {
 
@@ -157,7 +157,7 @@ export class Globals {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("globals.query", error);
       return Observable.of(null);
     });
   }

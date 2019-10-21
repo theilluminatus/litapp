@@ -53,7 +53,7 @@ export class Authors {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("author.getDetails", [id], error);
       return Observable.of(null);
     });
   }
@@ -77,7 +77,7 @@ export class Authors {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("author.getFollowing", error);
       return Observable.of([]);
     });
   }
@@ -92,7 +92,7 @@ export class Authors {
       return res.success;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("author.follow", [author], error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d)
@@ -108,7 +108,7 @@ export class Authors {
       return res.success;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("author.unfollow", [author], error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d)

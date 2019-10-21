@@ -9,7 +9,7 @@ export class User {
 
   login(accountInfo: any) {
     this._user = { username: accountInfo.username };
-    console.log("logged in", this._user);
+    console.info("Login", this._user);
     return Observable.of(new Object()).mapTo(this._user);
   }
 

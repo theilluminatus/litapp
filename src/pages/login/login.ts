@@ -5,6 +5,7 @@ import { BrowserTab } from '@ionic-native/browser-tab';
 import { Toast } from '@ionic-native/toast';
 
 import { Analytics, User } from '../../providers/providers';
+import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
 @Component({
@@ -55,13 +56,13 @@ export class LoginPage {
   signup() {
 
     try {
-      this.toast.show(this.translations.SIGNUP_MESSAGE, '5000', 'bottom').subscribe(toast => {
-      });
-    } catch (e) {
-        console.log(this.translations.SIGNUP_MESSAGE);
+      this.toast.show(this.translations.SIGNUP_MESSAGE, '5000', 'bottom').subscribe(toast => {});
+    } catch (err) {
+      handleNoCordovaError(err, () => alert(this.translations.SIGNUP_MESSAGE));
     }
 
-    this.browser.openUrl('https://www.literotica.com/stories/signup.php');
+    const url = 'https://www.literotica.com/stories/signup.php';
+    this.browser.openUrl(url).catch(err => handleNoCordovaError(err, () => window.open(url)));
 
   }
 }

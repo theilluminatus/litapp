@@ -101,7 +101,7 @@ export class Lists {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("lists.query", error);
       return Observable.of([]);
     });
   }
@@ -180,7 +180,7 @@ export class Lists {
     }).catch((error) => {
       if (loader) loader.dismiss();
       this.api.showToast();
-      console.error(error);
+      console.error("lists.getListPage", [urlname, list, i], error);
       return Observable.of(null);
     });
   }
@@ -192,7 +192,7 @@ export class Lists {
       return res.success;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("lists.addStory", [list, story], error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d) {
@@ -214,7 +214,7 @@ export class Lists {
       return res.success;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("lists.removeStory", [list, story], error);
       return Observable.of(false);
     }).subscribe(d => {
       if (d) {
@@ -261,7 +261,7 @@ export class Lists {
       return true;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("lists.add", [list], error);
       return Observable.of(false);
     });
   }
@@ -294,7 +294,7 @@ export class Lists {
       return true;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("lists.edit", [list], error);
       return Observable.of(false);
     });
   }
@@ -317,7 +317,7 @@ export class Lists {
       return true;
     }).catch((error) => {
       this.api.showToast();
-      console.error(error);
+      console.error("lists.delete", [list], error);
       return Observable.of(false);
     });
   }
