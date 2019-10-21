@@ -10,16 +10,11 @@ import { Stories } from '../../providers/providers';
   templateUrl: 'story-series.html',
 })
 export class StorySeriesPage {
-
   series: Story[];
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public stories: Stories
-  ) {
-  	let story: Story = navParams.get('story');
-    this.stories.getSeries(story.series).subscribe((data) => {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public stories: Stories) {
+    const story: Story = navParams.get('story');
+    this.stories.getSeries(story.series).subscribe(data => {
       this.series = data[0];
     });
   }
@@ -27,5 +22,4 @@ export class StorySeriesPage {
   download() {
     this.stories.downloadSeries(this.series);
   }
-
 }

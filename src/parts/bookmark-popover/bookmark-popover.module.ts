@@ -7,17 +7,8 @@ import { NgPipesModule } from 'ngx-pipes';
 import { BookmarkPopover } from './bookmark-popover';
 
 @NgModule({
-  declarations: [
-    BookmarkPopover,
-  ],
-  imports: [
-    IonicPageModule.forChild(BookmarkPopover),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    NgPipesModule
-  ],
-  entryComponents: [
-    BookmarkPopover,
-  ]
+  declarations: [BookmarkPopover],
+  imports: [IonicPageModule.forChild(BookmarkPopover), TranslateModule.forChild(), TooltipsModule, NgPipesModule],
+  entryComponents: [BookmarkPopover],
 })
 export class BookmarkPopoverModule {}

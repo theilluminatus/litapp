@@ -6,16 +6,8 @@ import { SearchPopover } from './search-popover';
 import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
-  declarations: [
-    SearchPopover,
-  ],
-  imports: [
-    IonicPageModule.forChild(SearchPopover),
-    TranslateModule.forChild(),
-    NgPipesModule
-  ],
-  entryComponents: [
-    SearchPopover,
-  ]
+  declarations: [SearchPopover],
+  imports: [IonicPageModule.forChild(SearchPopover), TranslateModule.forChild(), NgPipesModule],
+  entryComponents: [SearchPopover],
 })
 export class SearchPopoverModule {}

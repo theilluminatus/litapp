@@ -7,14 +7,7 @@ import { StoryListItemModule } from '../../parts/story-list-item/story-list-item
 import { FeedPage } from './feed';
 
 @NgModule({
-  declarations: [
-    FeedPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(FeedPage),
-    TranslateModule.forChild(),
-    StoryListItemModule,
-    TooltipsModule
-  ],
+  declarations: [FeedPage],
+  imports: [IonicPageModule.forChild(FeedPage), TranslateModule.forChild(), StoryListItemModule, TooltipsModule],
 })
 export class FeedPageModule {}

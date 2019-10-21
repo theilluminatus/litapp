@@ -13,9 +13,8 @@ import { handleNoCordovaError } from '../../app/utils';
   templateUrl: 'following.html',
 })
 export class FollowingPage {
-
   authors: Author[];
-  sortingProp: string = "";
+  sortingProp: string = '';
   translations;
 
   constructor(
@@ -27,64 +26,59 @@ export class FollowingPage {
     public api: Api,
     public translate: TranslateService,
   ) {
-
-  	this.a.getFollowing().subscribe((authors) => {
+    this.a.getFollowing().subscribe(authors => {
       this.authors = authors;
     });
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG']).subscribe((values) => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG']).subscribe(values => {
       this.translations = values;
     });
-
   }
 
   followToggle(author: Author, $event) {
-
     $event.stopPropagation();
 
     if (author.following) {
       this.a.unfollow(author);
-
     } else {
       this.a.follow(author);
     }
-
   }
 
   showAuthor(author: Author) {
     this.navCtrl.push('AuthorPage', {
-      author: author
+      author,
     });
   }
 
   toggleSorting() {
-    if (this.sortingProp == "")
-      this.sortingProp = "name";
-
-    else if (this.sortingProp == "name")
-      this.sortingProp = "";
-      
-    else
-      this.sortingProp = "";
+    if (this.sortingProp === '') {
+      this.sortingProp = 'name';
+    } else if (this.sortingProp === 'name') {
+      this.sortingProp = '';
+    } else {
+      this.sortingProp = '';
+    }
   }
 
   openExportPopover(ev: UIEvent) {
-    let popover = this.popoverCtrl.create("ExportPopover");
+    const popover = this.popoverCtrl.create('ExportPopover');
 
     popover.present({
-      ev: ev
+      ev,
     });
 
     popover.onDidDismiss((choice: string) => {
       if (choice) {
         let data = null;
-        let filename = "litapp-following-"+Math.round(new Date().getTime() / 1000);
+        // tslint:disable-next-line: prefer-template
+        let filename = 'litapp-following-' + Math.round(new Date().getTime() / 1000);
 
-        if (choice == 'json') {
-          filename += ".json";
+        if (choice === 'json') {
+          filename += '.json';
           data = JSON.stringify(this.authors);
-        } else if (choice == 'markdown') {
-          filename += ".md";
+        } else if (choice === 'markdown') {
+          filename += '.md';
           // converting to markdown
           data = `
 # Followed authors
@@ -97,13 +91,14 @@ export class FollowingPage {
           });
         }
 
-        let path = this.file.externalRootDirectory;
-        this.file.writeFile(path, filename, data, {replace: true}).then(() => {
-          this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
-        }).catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
-
+        const path = this.file.externalRootDirectory;
+        this.file
+          .writeFile(path, filename, data, { replace: true })
+          .then(() => {
+            this.api.showToast(`${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+          })
+          .catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
       }
     });
   }
-
 }

@@ -6,16 +6,8 @@ import { NgPipesModule } from 'ngx-pipes';
 import { ExplorePage } from './explore';
 
 @NgModule({
-  declarations: [
-    ExplorePage,
-  ],
-  imports: [
-    IonicPageModule.forChild(ExplorePage),
-    TranslateModule.forChild(),
-    NgPipesModule
-  ],
-  exports: [
-    ExplorePage
-  ]
+  declarations: [ExplorePage],
+  imports: [IonicPageModule.forChild(ExplorePage), TranslateModule.forChild(), NgPipesModule],
+  exports: [ExplorePage],
 })
-export class ExplorePageModule { }
+export class ExplorePageModule {}

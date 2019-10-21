@@ -5,15 +5,8 @@ import { IonicPageModule } from 'ionic-angular';
 import { LoginPage } from './login';
 
 @NgModule({
-  declarations: [
-    LoginPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(LoginPage),
-    TranslateModule.forChild()
-  ],
-  exports: [
-    LoginPage
-  ]
+  declarations: [LoginPage],
+  imports: [IonicPageModule.forChild(LoginPage), TranslateModule.forChild()],
+  exports: [LoginPage],
 })
-export class LoginPageModule { }
+export class LoginPageModule {}

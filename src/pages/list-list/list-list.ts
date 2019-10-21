@@ -4,32 +4,31 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { List } from '../../models/list';
 import { Lists } from '../../providers/providers';
 
-@IonicPage({priority: 'high'})
+@IonicPage({ priority: 'high' })
 @Component({
   selector: 'page-list-list',
   templateUrl: 'list-list.html',
 })
 export class ListListPage {
-
   lists: List[];
   showLoader = false;
 
   constructor(public navCtrl: NavController, public l: Lists) {
     this.showLoader = true;
     this.l.onReady().then(() => {
-    	this.refreshLists();
+      this.refreshLists();
     });
   }
 
   openList(list: List) {
     this.navCtrl.push('ListViewPage', {
-      list: list
+      list,
     });
   }
 
   addList() {
     this.navCtrl.push('ListCreatePage', {
-      callback: () => this.refreshLists()
+      callback: () => this.refreshLists(),
     });
   }
 
@@ -37,16 +36,16 @@ export class ListListPage {
     event.stopPropagation();
     item.close();
     this.navCtrl.push('ListCreatePage', {
-      list: list
+      list,
     });
   }
 
   delete(list: List, item, event) {
     event.stopPropagation();
-    this.l.delete(list).subscribe((d) => {
+    this.l.delete(list).subscribe(d => {
       if (d) {
         item.close();
-        this.refreshLists()
+        this.refreshLists();
       }
     });
   }
@@ -70,5 +69,4 @@ export class ListListPage {
       });
     }
   }
-
 }

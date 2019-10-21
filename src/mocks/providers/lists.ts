@@ -3,13 +3,11 @@ import { Injectable } from '@angular/core';
 import { List } from '../../models/list';
 import { deflists } from '../data';
 
-
 @Injectable()
-export class Lists {;
-
+export class Lists {
   lists: List[];
 
-  constructor() { 
+  constructor() {
     this.lists = deflists;
   }
 
@@ -18,12 +16,13 @@ export class Lists {;
       return this.lists;
     }
 
-    return this.lists.filter((list) => {
-      for (let key in params) {
-        let field = list[key];
-        if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
+    return this.lists.filter(list => {
+      for (const key in params) {
+        const field = list[key];
+        if (typeof field === 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
           return list;
-        } else if (field == params[key]) {
+        }
+        if (field === params[key]) {
           return list;
         }
       }

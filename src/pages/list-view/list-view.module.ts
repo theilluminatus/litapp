@@ -8,15 +8,7 @@ import { StoryListPageModule } from '../../parts/story-list/story-list.module';
 import { ExportPopoverModule } from '../../parts/export-popover/export-popover.module';
 
 @NgModule({
-  declarations: [
-    ListViewPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(ListViewPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    StoryListPageModule,
-    ExportPopoverModule
-  ],
+  declarations: [ListViewPage],
+  imports: [IonicPageModule.forChild(ListViewPage), TranslateModule.forChild(), TooltipsModule, StoryListPageModule, ExportPopoverModule],
 })
 export class ListViewPageModule {}

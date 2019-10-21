@@ -3,10 +3,8 @@ import { Injectable } from '@angular/core';
 import { Author } from '../../models/author';
 import { defauthors } from '../data';
 
-
 @Injectable()
 export class Authors {
-
   authors: Author[];
 
   constructor() {
@@ -18,12 +16,13 @@ export class Authors {
       return this.authors;
     }
 
-    return this.authors.filter((author) => {
-      for (let key in params) {
-        let field = author[key];
-        if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
+    return this.authors.filter(author => {
+      for (const key in params) {
+        const field = author[key];
+        if (typeof field === 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
           return author;
-        } else if (field == params[key]) {
+        }
+        if (field === params[key]) {
           return author;
         }
       }

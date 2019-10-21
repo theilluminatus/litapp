@@ -10,13 +10,12 @@ import { handleNoCordovaError } from '../../app/utils';
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-  
-  account: { username: string, password: string } = {
+  account: { username: string; password: string } = {
     username: '',
-    password: ''
+    password: '',
   };
 
   private translations;
@@ -28,33 +27,34 @@ export class LoginPage {
     public translateService: TranslateService,
     public analytics: Analytics,
     private browser: BrowserTab,
-    private toast: Toast
+    private toast: Toast,
   ) {
-
-    this.translateService.get(['LOGIN_ERROR','SIGNUP_MESSAGE']).subscribe((values) => {
+    this.translateService.get(['LOGIN_ERROR', 'SIGNUP_MESSAGE']).subscribe(values => {
       this.translations = values;
     });
   }
 
   login(event: UIEvent) {
     event.preventDefault();
-    this.user.login(this.account).subscribe((resp) => {
-      setTimeout(() => {
-        this.navCtrl.goToRoot(null);
-        this.analytics.track('Login');
-      }, 500);
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: this.translations.LOGIN_ERROR,
-        duration: 3000,
-        position: 'bottom'
-      });
-      toast.present();
-    });
+    this.user.login(this.account).subscribe(
+      resp => {
+        setTimeout(() => {
+          this.navCtrl.goToRoot(null);
+          this.analytics.track('Login');
+        }, 500);
+      },
+      err => {
+        const toast = this.toastCtrl.create({
+          message: this.translations.LOGIN_ERROR,
+          duration: 3000,
+          position: 'bottom',
+        });
+        toast.present();
+      },
+    );
   }
 
   signup() {
-
     try {
       this.toast.show(this.translations.SIGNUP_MESSAGE, '5000', 'bottom').subscribe(toast => {});
     } catch (err) {
@@ -63,6 +63,5 @@ export class LoginPage {
 
     const url = 'https://www.literotica.com/stories/signup.php';
     this.browser.openUrl(url).catch(err => handleNoCordovaError(err, () => window.open(url)));
-
   }
 }

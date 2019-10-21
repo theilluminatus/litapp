@@ -9,19 +9,15 @@ import { StoryPopoverModule } from './story-popover.module';
 import { BookmarkPopoverModule } from '../../parts/bookmark-popover/bookmark-popover.module';
 
 @NgModule({
-  declarations: [
-    StoryViewPage,
-  ],
+  declarations: [StoryViewPage],
   imports: [
     IonicPageModule.forChild(StoryViewPage),
     TranslateModule.forChild(),
     TooltipsModule,
     ScrollbarModule,
     StoryPopoverModule,
-    BookmarkPopoverModule
+    BookmarkPopoverModule,
   ],
-  exports: [
-    StoryViewPage,
-  ],
+  exports: [StoryViewPage],
 })
-export class StoryViewPageModule { }
+export class StoryViewPageModule {}

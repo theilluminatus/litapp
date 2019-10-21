@@ -21,14 +21,7 @@ import { WebIntent } from '@ionic-native/web-intent';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Device } from '@ionic-native/device';
 
-import { Stories, Analytics } from '../providers/providers';
-import { Authors } from '../providers/providers';
-import { Lists } from '../providers/providers';
-import { Feed } from '../providers/providers';
-import { Globals } from '../providers/providers';
-import { Settings } from '../providers/providers';
-import { User } from '../providers/providers';
-import { Api } from '../providers/providers';
+import { Stories, Analytics, Authors, Lists, Feed, Globals, Settings, User, Api } from '../providers/providers';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -54,9 +47,7 @@ export function provideSettings(storage: Storage) {
 }
 
 @NgModule({
-  declarations: [
-    MyApp
-  ],
+  declarations: [MyApp],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -64,19 +55,17 @@ export function provideSettings(storage: Storage) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     IonicModule.forRoot(MyApp, {
-      preloadModules: true
+      preloadModules: true,
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp
-  ],
+  entryComponents: [MyApp],
   providers: [
     Api,
     Analytics,
@@ -102,7 +91,7 @@ export function provideSettings(storage: Storage) {
     Device,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
-  ]
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+  ],
 })
-export class AppModule { }
+export class AppModule {}

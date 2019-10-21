@@ -5,13 +5,7 @@ import { StoryListPageModule } from '../../parts/story-list/story-list.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    TopListPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(TopListPage),
-    TranslateModule.forChild(),
-    StoryListPageModule
-  ],
+  declarations: [TopListPage],
+  imports: [IonicPageModule.forChild(TopListPage), TranslateModule.forChild(), StoryListPageModule],
 })
 export class TopListPageModule {}

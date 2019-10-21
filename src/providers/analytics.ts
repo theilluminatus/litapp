@@ -6,20 +6,10 @@ import { Settings } from './settings/settings';
 
 @Injectable()
 export class Analytics {
-
-  constructor(
-    public g: Globals,
-    public settings: Settings,
-    public googleAnalytics: GoogleAnalytics,
-  ) {
-
-    Promise.all([
-      this.settings.load(),
-      this.g.onReady(),
-    ]).then(() => {
-
+  constructor(public g: Globals, public settings: Settings, public googleAnalytics: GoogleAnalytics) {
+    Promise.all([this.settings.load(), this.g.onReady()]).then(() => {
       if (this.settings.allSettings.offlineMode) return;
-      
+
       try {
         // setup tracking
         Promise.all([
@@ -27,17 +17,15 @@ export class Analytics {
           this.googleAnalytics.setAnonymizeIp(true),
           this.googleAnalytics.setAllowIDFACollection(false),
           this.googleAnalytics.setAppVersion(this.g.getVersion().toString()),
-        ]).then(() => {
-          this.track("Startup");
-
-        }).catch(e => handleNoCordovaError(e));
-
-      } catch(e) {
-        handleNoCordovaError(e)
+        ])
+          .then(() => {
+            this.track('Startup');
+          })
+          .catch(e => handleNoCordovaError(e));
+      } catch (e) {
+        handleNoCordovaError(e);
       }
-
     });
-
   }
 
   track(view: string) {
@@ -45,5 +33,4 @@ export class Analytics {
     if (this.settings.allSettings.offlineMode) return;
     this.googleAnalytics.trackView(view);
   }
-
 }

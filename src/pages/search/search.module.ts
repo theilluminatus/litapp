@@ -9,19 +9,8 @@ import { StoryListPageModule } from '../../parts/story-list/story-list.module';
 import { ReverseArrayPipe } from '../../pipes/reverseArray';
 
 @NgModule({
-  declarations: [
-    SearchPage,
-    ReverseArrayPipe
-  ],
-  imports: [
-    IonicPageModule.forChild(SearchPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    SearchPopoverModule,
-    StoryListPageModule
-  ],
-  exports: [
-    SearchPage
-  ]
+  declarations: [SearchPage, ReverseArrayPipe],
+  imports: [IonicPageModule.forChild(SearchPage), TranslateModule.forChild(), TooltipsModule, SearchPopoverModule, StoryListPageModule],
+  exports: [SearchPage],
 })
-export class SearchPageModule { }
+export class SearchPageModule {}

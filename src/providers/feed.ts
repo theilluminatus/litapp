@@ -12,13 +12,12 @@ import { Api } from './api/api';
 
 @Injectable()
 export class Feed {
-
   private ready;
-  private timeout = 1000*60*10;
+  private timeout = 1000 * 60 * 10;
   private feed;
-  private feedtimeout = (new Date()).getTime() + this.timeout;
+  private feedtimeout = new Date().getTime() + this.timeout;
 
-  feedbadge = "";
+  feedbadge = '';
 
   constructor(
     public api: Api,
@@ -26,42 +25,33 @@ export class Feed {
     public a: Authors,
     public user: User,
     public settings: Settings,
-    public storage: Storage
+    public storage: Storage,
   ) {
-
     this.ready = new Promise((resolve, reject) => {
-
-      Promise.all([
-        this.settings.load(),
-        this.user.onReady()
-      ]).then(() => {
-
+      Promise.all([this.settings.load(), this.user.onReady()]).then(() => {
         if (!this.settings.allSettings.checkforfeedupdates || this.settings.allSettings.offlineMode || !this.user.isLoggedIn()) {
           resolve();
           return;
         }
 
-        this.feedbadge = "·";
+        this.feedbadge = '·';
 
-        this.query().subscribe((d) => {
-
+        this.query().subscribe(d => {
           if (d) {
-            this.storage.get(FEED_KEY).then((id) => {
-              for (let i=0; i<d.length; i++) {
-                if (id == d[i].id) {
+            this.storage.get(FEED_KEY).then(id => {
+              for (let i = 0; i < d.length; i += 1) {
+                if (id === d[i].id) {
                   this.feedbadge = String(i);
                   break;
                 }
               }
-              if (this.feedbadge == "") this.feedbadge = "15+";
+              if (this.feedbadge === '') this.feedbadge = '15+';
               resolve();
             });
           } else resolve();
         });
-
       });
     });
-
   }
 
   onReady() {
@@ -69,57 +59,61 @@ export class Feed {
   }
 
   query(lastid?: number, showloader?: boolean, force = false) {
-
-    if ( !force && !lastid && this.feed && (new Date).getTime() < this.feedtimeout)
+    if (!force && !lastid && this.feed && new Date().getTime() < this.feedtimeout) {
       return Observable.of(this.feed);
+    }
 
-    if (!lastid || !this.feed)
+    if (!lastid || !this.feed) {
       this.feed = [];
+    }
 
     let loader;
-    if (showloader)
+    if (showloader) {
       loader = this.api.showLoader();
+    }
 
-    let params = {
+    const params = {
       chunked: 1,
       limit: 10,
     };
 
-    if (lastid)
+    if (lastid) {
       params['last_id'] = lastid;
+    }
 
-    return this.api.get('3/activity/wall?params='+JSON.stringify(params)).map((d: any) => {
-      if (loader) loader.dismiss();
-      if (!d.data) {
-        this.api.showToast();
-        return [];
-      }
-
-      let items = d.data.map(item => {
-        let isStory = item.action === 'published-story';
-        try {
-          return new FeedItem({
-            id: item.id,
-            timestamp: item.when,
-            author: this.a.extractFromFeed(item.who),
-            text: isStory ? [] : (Array.isArray(item.what) ? item.what : ["their profile"]),
-            story: !isStory ? undefined : this.s.extractFromFeed(item)
-          });
-        } catch (error) {
-          return new FeedItem(null);
+    return this.api
+      .get(`3/activity/wall?params=${JSON.stringify(params)}`)
+      .map((d: any) => {
+        if (loader) loader.dismiss();
+        if (!d.data) {
+          this.api.showToast();
+          return [];
         }
+
+        const items = d.data.map(item => {
+          const isStory = item.action === 'published-story';
+          try {
+            return new FeedItem({
+              id: item.id,
+              timestamp: item.when,
+              author: this.a.extractFromFeed(item.who),
+              text: isStory ? [] : Array.isArray(item.what) ? item.what : ['their profile'],
+              story: !isStory ? undefined : this.s.extractFromFeed(item),
+            });
+          } catch (error) {
+            return new FeedItem(null);
+          }
+        });
+
+        items.forEach(i => this.feed.push(i));
+        this.feedtimeout = new Date().getTime() + this.timeout;
+        return items;
+      })
+      .catch(error => {
+        if (loader) loader.dismiss();
+        this.api.showToast();
+        console.error('feed.query', [lastid], error);
+        return Observable.of([]);
       });
-
-      items.forEach(i => this.feed.push(i));
-      this.feedtimeout = (new Date).getTime() + this.timeout;
-      return items;
-
-    }).catch((error) => {
-      if (loader) loader.dismiss();
-      this.api.showToast();
-      console.error("feed.query", [lastid], error);
-      return Observable.of([]);
-    });
   }
-
 }

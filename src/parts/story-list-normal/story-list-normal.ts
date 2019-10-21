@@ -5,12 +5,11 @@ import { Story } from '../../models/story';
 
 @Component({
   selector: 'story-list-normal',
-  templateUrl: 'story-list-normal.html'
+  templateUrl: 'story-list-normal.html',
 })
 export class StoryListNormalPage {
-
   Math: Math = Math;
-  
+
   @Input() stories: Story[];
   @Input() ishistory: boolean = false;
   @Input() infinite: boolean = false;
@@ -19,15 +18,15 @@ export class StoryListNormalPage {
 
   enableInfinite = true;
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController) {}
 
   public enableInfinity() {
     this.enableInfinite = true;
   }
 
   loadMore($event) {
-    if (this.infinite)
+    if (this.infinite) {
       this.ionInfinite.emit($event);
+    }
   }
-
 }

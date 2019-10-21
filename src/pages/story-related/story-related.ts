@@ -10,18 +10,12 @@ import { Stories } from '../../providers/providers';
   templateUrl: 'story-related.html',
 })
 export class StoryRelatedPage {
-
   related: Story[];
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public stories: Stories
-  ) {
-  	let story: Story = navParams.get('story');
-    this.stories.getRelated(story.id).subscribe((data) => {
-  	  this.related = data[0];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public stories: Stories) {
+    const story: Story = navParams.get('story');
+    this.stories.getRelated(story.id).subscribe(data => {
+      this.related = data[0];
     });
   }
-
 }

@@ -6,16 +6,12 @@ import { User } from '../../providers/providers';
 @IonicPage()
 @Component({
   selector: 'page-account',
-  templateUrl: 'account.html'
+  templateUrl: 'account.html',
 })
 export class AccountPage {
-
   firstload = true;
 
-  constructor(
-    public navCtrl: NavController,
-    public user: User
-  ) { }
+  constructor(public navCtrl: NavController, public user: User) {}
 
   ionViewDidEnter() {
     if (!this.user.isLoggedIn() && this.firstload) {
@@ -24,7 +20,7 @@ export class AccountPage {
       return;
     }
 
-    this.user.checkIfEverythingIsFucked().then((answer) => {
+    this.user.checkIfEverythingIsFucked().then(answer => {
       if (answer) {
         this.user.logout();
         this.login();
@@ -37,8 +33,7 @@ export class AccountPage {
   }
 
   logout() {
-  	this.user.logout();
+    this.user.logout();
     this.navCtrl.push('TabsPage');
   }
-
 }

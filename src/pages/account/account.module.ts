@@ -5,15 +5,8 @@ import { IonicPageModule } from 'ionic-angular';
 import { AccountPage } from './account';
 
 @NgModule({
-  declarations: [
-    AccountPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(AccountPage),
-    TranslateModule.forChild()
-  ],
-  exports: [
-    AccountPage
-  ]
+  declarations: [AccountPage],
+  imports: [IonicPageModule.forChild(AccountPage), TranslateModule.forChild()],
+  exports: [AccountPage],
 })
-export class AccountPageModule { }
+export class AccountPageModule {}

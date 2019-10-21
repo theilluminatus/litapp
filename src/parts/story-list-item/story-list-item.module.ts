@@ -8,18 +8,8 @@ import { StoryListItem } from './story-list-item';
 import { BookmarkPopoverModule } from '../bookmark-popover/bookmark-popover.module';
 
 @NgModule({
-  declarations: [
-    StoryListItem,
-  ],
-  imports: [
-    IonicPageModule.forChild(StoryListItem),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    NgPipesModule,
-    BookmarkPopoverModule
-  ],
-  exports: [
-    StoryListItem
-  ]
+  declarations: [StoryListItem],
+  imports: [IonicPageModule.forChild(StoryListItem), TranslateModule.forChild(), TooltipsModule, NgPipesModule, BookmarkPopoverModule],
+  exports: [StoryListItem],
 })
-export class StoryListItemModule { }
+export class StoryListItemModule {}

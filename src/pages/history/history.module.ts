@@ -7,14 +7,7 @@ import { HistoryPage } from './history';
 import { StoryListPageModule } from '../../parts/story-list/story-list.module';
 
 @NgModule({
-  declarations: [
-    HistoryPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(HistoryPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    StoryListPageModule
-  ],
+  declarations: [HistoryPage],
+  imports: [IonicPageModule.forChild(HistoryPage), TranslateModule.forChild(), TooltipsModule, StoryListPageModule],
 })
 export class HistoryPageModule {}

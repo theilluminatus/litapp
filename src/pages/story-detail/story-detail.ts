@@ -7,17 +7,15 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, Globals, Api, Settings } from '../../providers/providers';
-import { User } from '../../providers/providers';
+import { Stories, Globals, Api, Settings, User } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
-@IonicPage({priority: 'low'})
+@IonicPage({ priority: 'low' })
 @Component({
   selector: 'page-story-detail',
   templateUrl: 'story-detail.html',
 })
 export class StoryDetailPage {
-
   story: Story;
   myrating: number;
 
@@ -34,13 +32,13 @@ export class StoryDetailPage {
     private socialSharing: SocialSharing,
     private browser: BrowserTab,
     public file: File,
-    public api: Api
+    public api: Api,
   ) {
-  	this.story = navParams.get('story');
+    this.story = navParams.get('story');
 
     // load data when directly view details
     if (!this.story.cached) {
-      this.stories.getById(this.story.id).subscribe((story) => {
+      this.stories.getById(this.story.id).subscribe(story => {
         if (!story) {
           this.navCtrl.pop();
           return;
@@ -59,19 +57,19 @@ export class StoryDetailPage {
   showAuthor(author: Author) {
     if (this.settings.allSettings.offlineMode) return;
     this.navCtrl.push('AuthorPage', {
-      author: author
+      author,
     });
   }
 
   showSeries() {
     this.navCtrl.push('StorySeriesPage', {
-      story: this.story
+      story: this.story,
     });
   }
 
   showRelated() {
     this.navCtrl.push('StoryRelatedPage', {
-      story: this.story
+      story: this.story,
     });
   }
 
@@ -82,63 +80,66 @@ export class StoryDetailPage {
 
   search(query: string) {
     if (this.settings.allSettings.offlineMode) return;
-    this.navCtrl.push("SearchPage", {
-      query: query
+    this.navCtrl.push('SearchPage', {
+      query,
     });
   }
 
   category(query: string) {
     if (this.settings.allSettings.offlineMode) return;
-    this.translate.get(['STORYDETAIL_VIEWCAT','TOP', 'NEW']).subscribe(values => {
-
-      let alert = this.alertCtrl.create({
+    this.translate.get(['STORYDETAIL_VIEWCAT', 'TOP', 'NEW']).subscribe(values => {
+      const alert = this.alertCtrl.create({
         title: values.STORYDETAIL_VIEWCAT,
-        buttons: [{
-          text: values.TOP,
-          handler: (d) => {
-            this.openCategoryListPage("top", query);
-          }
-        }, {
-          text: values.NEW,
-          handler: (d) => {
-            this.openCategoryListPage("new", query);
-          }
-        }]
+        buttons: [
+          {
+            text: values.TOP,
+            handler: d => {
+              this.openCategoryListPage('top', query);
+            },
+          },
+          {
+            text: values.NEW,
+            handler: d => {
+              this.openCategoryListPage('new', query);
+            },
+          },
+        ],
       });
       alert.present();
-
     });
-
   }
 
   openCategoryListPage(order: string, categoryName: string) {
     this.g.onReady().then(() => {
-      let category = this.g.getCategories().find(c => c.name == categoryName);
+      const category = this.g.getCategories().find(c => c.name === categoryName);
       this.navCtrl.push('TopListPage', {
-        category: category,
-        order: order
+        category,
+        order,
       });
     });
   }
 
   openListPicker(ev: UIEvent) {
-    let popover = this.popoverCtrl.create("BookmarkPopover", {
-      story: this.story
+    const popover = this.popoverCtrl.create('BookmarkPopover', {
+      story: this.story,
     });
 
     popover.present({
-      ev: ev
+      ev,
     });
   }
 
   share() {
-    this.socialSharing.share(null, null, null, this.story.url).catch(err => handleNoCordovaError(err, () => {
-      this.translate.get('COPYPROMPT_MSG').subscribe(label => prompt(label, this.story.url));
-    }));
+    this.socialSharing.share(null, null, null, this.story.url).catch(err =>
+      handleNoCordovaError(err, () => {
+        this.translate.get('COPYPROMPT_MSG').subscribe(label => prompt(label, this.story.url));
+      }),
+    );
   }
 
   export() {
-    const filename = "litapp-story-"+this.story.url+"-"+Math.round(new Date().getTime() / 1000)+".html";
+    // tslint:disable-next-line: prefer-template
+    const filename = 'litapp-story-' + this.story.url + '-' + Math.round(new Date().getTime() / 1000) + '.html';
     const data = `
 <html>
 <body>
@@ -148,10 +149,10 @@ export class StoryDetailPage {
   </h1>
 
   <ul>
-    <li>Category: ${this.story.category} (Tags: [${this.story.tags.join(", ")}])</li>
+    <li>Category: ${this.story.category} (Tags: [${this.story.tags.join(', ')}])</li>
     <li>Rating: ${this.story.rating} (${this.story.viewcount} views)</li>
     <li>${this.story.length} pages</li>
-    <li>Timestamp: ${new Date(parseInt(this.story.timestamp)*1000).toISOString()}</li>
+    <li>Timestamp: ${new Date(parseInt(this.story.timestamp) * 1000).toISOString()}</li>
   </ul>
 
   <article>
@@ -165,25 +166,31 @@ export class StoryDetailPage {
   `;
 
     const path = this.file.externalRootDirectory;
-    this.file.writeFile(path, filename, data, {replace: true}).then(() => {
-      this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
-        this.api.showToast(values.SETTINGS_EXPORTSUCCESS+": "+path+filename);
-      });
-    }).catch(err => handleNoCordovaError(err, () => {
-      this.translate.get("COPYPROMPT_MSG").subscribe(label => prompt(label, data));
-    }));
+    this.file
+      .writeFile(path, filename, data, { replace: true })
+      .then(() => {
+        this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
+          this.api.showToast(`${values.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+        });
+      })
+      .catch(err =>
+        handleNoCordovaError(err, () => {
+          this.translate.get('COPYPROMPT_MSG').subscribe(label => prompt(label, data));
+        }),
+      );
   }
 
   toggleDownload() {
-    if (this.story.downloaded)
+    if (this.story.downloaded) {
       this.stories.undownload(this.story);
-    else
+    } else {
       this.stories.download(this.story);
+    }
   }
 
   // updates only part of story
   refreshStory() {
-    this.stories.getById(this.story.id, true).subscribe((story) => {
+    this.stories.getById(this.story.id, true).subscribe(story => {
       this.updateValues(story);
       this.myrating = this.story.myrating;
       this.stories.cache(this.story);
@@ -191,9 +198,7 @@ export class StoryDetailPage {
   }
 
   openLink() {
-    this.browser
-      .openUrl(this.story.url)
-      .catch(err => handleNoCordovaError(err, () => window.open(this.story.url)));
+    this.browser.openUrl(this.story.url).catch(err => handleNoCordovaError(err, () => window.open(this.story.url)));
   }
 
   // quick and dirty fix

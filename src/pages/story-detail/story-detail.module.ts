@@ -7,14 +7,7 @@ import { StoryDetailPage } from './story-detail';
 import { BookmarkPopoverModule } from '../../parts/bookmark-popover/bookmark-popover.module';
 
 @NgModule({
-  declarations: [
-    StoryDetailPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(StoryDetailPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    BookmarkPopoverModule
-  ],
+  declarations: [StoryDetailPage],
+  imports: [IonicPageModule.forChild(StoryDetailPage), TranslateModule.forChild(), TooltipsModule, BookmarkPopoverModule],
 })
 export class StoryDetailPageModule {}

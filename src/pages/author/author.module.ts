@@ -7,14 +7,7 @@ import { AuthorPage } from './author';
 import { StoryListNormalPageModule } from '../../parts/story-list-normal/story-list-normal.module';
 
 @NgModule({
-  declarations: [
-    AuthorPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(AuthorPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    StoryListNormalPageModule
-  ],
+  declarations: [AuthorPage],
+  imports: [IonicPageModule.forChild(AuthorPage), TranslateModule.forChild(), TooltipsModule, StoryListNormalPageModule],
 })
 export class AuthorPageModule {}

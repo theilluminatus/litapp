@@ -6,14 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipsModule } from 'ionic-tooltips';
 
 @NgModule({
-  declarations: [
-    StorySeriesPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(StorySeriesPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    StoryListPageModule
-  ],
+  declarations: [StorySeriesPage],
+  imports: [IonicPageModule.forChild(StorySeriesPage), TranslateModule.forChild(), TooltipsModule, StoryListPageModule],
 })
 export class StorySeriesPageModule {}

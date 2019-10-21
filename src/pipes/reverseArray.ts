@@ -2,10 +2,10 @@ import { Pipe } from '@angular/core';
 
 @Pipe({
   name: 'reverse',
-  pure: false
+  pure: false,
 })
 export class ReverseArrayPipe {
-  transform (values) {
+  transform(values) {
     if (values) {
       return values.slice().reverse();
     }

@@ -12,7 +12,6 @@ import { Settings } from './settings/settings';
 
 @Injectable()
 export class User {
-
   private user: any;
   private ready;
 
@@ -21,39 +20,30 @@ export class User {
     public settings: Settings,
     public storage: Storage,
     public translate: TranslateService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
   ) {
-
     this.ready = new Promise((resolve, reject) => {
-
-      Promise.all([
-        this.settings.load(),
-        this.storage.get(USER_KEY),
-      ]).then((data) => {
-
+      Promise.all([this.settings.load(), this.storage.get(USER_KEY)]).then(data => {
         if (!this.settings.allSettings.offlineMode && data[1]) {
           this.user = data[1];
-          if (this.user.date + 1000*60*60*24*360 < (new Date()).getTime() ) {
-
+          if (this.user.date + 1000 * 60 * 60 * 24 * 360 < new Date().getTime()) {
             setTimeout(() => {
               this.translate.get(['SESSIONTIMEOUT_MSG', 'CLOSE_BUTTON']).subscribe(values => {
-                let toast = this.toastCtrl.create({
+                const toast = this.toastCtrl.create({
                   message: values.SESSIONTIMEOUT_MSG,
                   showCloseButton: true,
                   closeButtonText: values.CLOSE_BUTTON,
-                  duration: 15000
+                  duration: 15000,
                 });
                 toast.present();
                 this.removeStoredUser();
               });
             }, 2000);
-
           }
         }
         resolve();
       });
     });
-
   }
 
   onReady() {
@@ -61,12 +51,11 @@ export class User {
   }
 
   login(info: any) {
+    const loader = this.api.showLoader();
 
-    let loader = this.api.showLoader();
-
-    let data = new FormData();
-    data.append("username", info.username);
-    data.append("password", String(Md5.hashStr(info.password)));
+    const data = new FormData();
+    data.append('username', info.username);
+    data.append('password', String(Md5.hashStr(info.password)));
 
     return this.api.post('2/auth/login', data, undefined, true).map((res: any) => {
       if (res.success) {
@@ -74,7 +63,7 @@ export class User {
         if (loader) loader.dismiss();
       } else {
         if (loader) loader.dismiss();
-        throw Observable.throw(res); 
+        throw Observable.throw(res);
       }
     });
   }
@@ -84,19 +73,19 @@ export class User {
       id: resp.login.user.user_id,
       username: resp.login.user.username,
       session: resp.login.session_id,
-      date: (new Date()).getTime()
+      date: new Date().getTime(),
     };
     this.storage.set(USER_KEY, this.user);
 
     // second api to get lists
-    let data = new FormData();
-    data.append("command", "Login");
-    data.append("uname", info.username);
-    data.append("pwd", info.password);
+    const data = new FormData();
+    data.append('command', 'Login');
+    data.append('uname', info.username);
+    data.append('pwd', info.password);
 
     // getting cookie from second api
     // TODO: check if cookie set correctly? -> message on fail
-    this.api.post('members/login.php', data, {withCredentials:true}, undefined, 2).subscribe();
+    this.api.post('members/login.php', data, { withCredentials: true }, undefined, 2).subscribe();
   }
 
   isLoggedIn(): boolean {
@@ -120,8 +109,8 @@ export class User {
   }
 
   checkIfEverythingIsFucked() {
-    return new Promise((resolve) => {
-      this.storage.get(USER_KEY).then((user) => {
+    return new Promise(resolve => {
+      this.storage.get(USER_KEY).then(user => {
         if (JSON.stringify(this.user) !== JSON.stringify(user)) {
           resolve(true);
         } else {

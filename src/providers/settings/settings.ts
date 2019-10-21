@@ -10,7 +10,9 @@ export class Settings {
 
   settings: any = {};
 
+  // tslint:disable-next-line: variable-name
   _defaults: any;
+  // tslint:disable-next-line: variable-name
   _readyPromise: Promise<any>;
 
   constructor(public storage: Storage, defaults: any) {
@@ -18,20 +20,20 @@ export class Settings {
   }
 
   load() {
-    return this.storage.get(this.SETTINGS_KEY).then((value) => {
+    return this.storage.get(this.SETTINGS_KEY).then(value => {
       if (value) {
         this.settings = value;
         return this._mergeDefaults(this._defaults);
-      } else {
-        return this.setAll(this._defaults).then((val) => {
-          this.settings = val;
-        })
       }
+      return this.setAll(this._defaults).then(val => {
+        this.settings = val;
+      });
     });
   }
 
+  // tslint:disable-next-line: function-name
   _mergeDefaults(defaults: any) {
-    for (let k in defaults) {
+    for (const k in defaults) {
       if (!(k in this.settings)) {
         this.settings[k] = defaults[k];
       }
@@ -40,7 +42,7 @@ export class Settings {
   }
 
   merge(settings: any) {
-    for (let k in settings) {
+    for (const k in settings) {
       this.settings[k] = settings[k];
     }
     return this.save();
@@ -56,10 +58,9 @@ export class Settings {
   }
 
   getValue(key: string) {
-    return this.storage.get(this.SETTINGS_KEY)
-      .then(settings => {
-        return settings[key];
-      });
+    return this.storage.get(this.SETTINGS_KEY).then(settings => {
+      return settings[key];
+    });
   }
 
   save() {
