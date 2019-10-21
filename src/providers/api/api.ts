@@ -5,6 +5,19 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { ENV } from '../../app/env';
 
+const handleAPIError = (error: Error, url: string, data: any, method: string) => {
+  console.info({
+    type: "API_Error",
+    name: error.name,
+    url,
+    method,
+    data,
+    message: error.message,
+    stack: error.stack,
+  });
+  throw error;
+};
+
 @Injectable()
 export class Api {
 
@@ -61,7 +74,8 @@ export class Api {
     reqOpts.withCredentials = true;
     reqOpts.params = reqOpts.params.set('apikey', this.apikey);
     reqOpts.params = reqOpts.params.set('appid', this.appid);
-    const req = this.http.get(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
+    const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
+    const req = this.http.get(url, reqOpts).catch(err => handleAPIError(err, url, reqOpts.params, "GET"));
     if (timeout) return req.timeout(timeout);
     return req;
   }
@@ -74,19 +88,23 @@ export class Api {
         endpoint += '?apikey='+this.apikey+'&appid='+this.appid;
     }
 
-    return this.http.post(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, body, reqOpts);
+    const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
+    return this.http.post(url, body, reqOpts).catch(err => handleAPIError(err, url, body, "POST"));
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.urls[0] + '/' + endpoint, body, reqOpts);
+    const url = this.urls[0] + '/' + endpoint;
+    return this.http.put(url, body, reqOpts).catch(err => handleAPIError(err, url, body, "PUT"));
   }
 
   delete(endpoint: string, reqOpts?: any, urlIndex?: number) {
-    return this.http.delete(this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint, reqOpts);
+    const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
+    return this.http.delete(url, reqOpts).catch(err => handleAPIError(err, url, {}, "DELETE"));
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.patch(this.urls[0] + '/' + endpoint, body, reqOpts);
+    const url = this.urls[0] + '/' + endpoint;
+    return this.http.patch(url, body, reqOpts).catch(err => handleAPIError(err, url, body, "PATCH"));
   }
 
   

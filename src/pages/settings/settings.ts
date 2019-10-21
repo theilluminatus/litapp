@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
 import { FileChooser  } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-
+import { Device } from '@ionic-native/device';
 
 import { Globals, Api } from '../../providers/providers';
 import { Settings } from '../../providers/providers';
 import { STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY, HISTORY_KEY, STORY_KEY } from '../../providers/db';
+import { handleNoCordovaError } from '../../app/utils';
 
 const exportDataIdentifier = "Exported data for Litapp (com.illuminatus.litapp)";
 
@@ -30,6 +31,8 @@ export class SettingsPage {
   translations;
 
   constructor(public navCtrl: NavController,
+    public platform: Platform,
+    public device: Device,
     public api: Api,
     public g: Globals,
     public settings: Settings,
@@ -44,7 +47,7 @@ export class SettingsPage {
 
   ionViewWillEnter() {
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS','SETTINGS_IMPORTFAIL','SETTNGS_IMPORTSUCCESS','RELOAD']).subscribe((values) => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS','SETTINGS_IMPORTFAIL','SETTNGS_IMPORTSUCCESS','RELOAD','COPYPROMPT_MSG']).subscribe((values) => {
       this.translations = values;
     });
 
@@ -137,11 +140,33 @@ export class SettingsPage {
   saveErrorLog() {
     let path = this.file.externalRootDirectory;
     let filename = "litapp-errorlog-"+Math.round(new Date().getTime() / 1000)+".json";
+
+    // log some device data before saving to file
+    console.info({
+      unixTime: new Date().getTime(),
+      deviceManufacturer: this.device.manufacturer,
+      deviceModel: this.device.model,
+      deviceActualVersion: this.device.version,
+      deviceVersions: this.platform.versions(),
+      devicePlatforms: this.platform.platforms(),
+      deviceWidth: this.platform.width(),
+      deviceHeight: this.platform.height(),
+      deviceOrientation: this.platform.isLandscape() ? "landscape" : "portrait",
+      appLanguage: this.platform.lang(),
+      appCordova: this.device.cordova,
+      appVersion: this.g.getVersion(),
+      apiKey: this.api.apikey,
+      appId: this.api.appid,
+      uuid: this.device.uuid,
+    })
+
     let data = JSON.stringify(window.consoleLog);
 
     this.file.writeFile(path, filename, data, {replace: true}).then(() => {
       this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
-    });
+    }).catch(err => handleNoCordovaError(err, e => {
+      prompt(this.translations.COPYPROMPT_MSG, data);
+    }));
   }
 
 }

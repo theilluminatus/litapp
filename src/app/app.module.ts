@@ -19,6 +19,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { WebIntent } from '@ionic-native/web-intent';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { Device } from '@ionic-native/device';
 
 import { Stories, Analytics } from '../providers/providers';
 import { Authors } from '../providers/providers';
@@ -97,6 +98,7 @@ export function provideSettings(storage: Storage) {
     FileChooser,
     FilePath,
     WebIntent,
+    Device,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

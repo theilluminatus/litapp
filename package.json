@@ -28,6 +28,7 @@
     "@ionic-native/browser-tab": "^4.10.0",
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/device": "^4.20.0",
     "@ionic-native/file": "^4.11.0",
     "@ionic-native/file-chooser": "^4.11.0",
     "@ionic-native/file-path": "^4.11.0",

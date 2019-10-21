@@ -1,7 +1,8 @@
 
 declare const window: any;
 
-// keep all console logs for sending reports
+// All manually logged values use console.info()
+// keep last 75 console logs for sending reports
 window.consoleLog = [];
 console = new Proxy(console, {
     get: (obj, prop) => {
@@ -10,7 +11,7 @@ console = new Proxy(console, {
             let result = method.apply(this, args);
             try {
                 window.consoleLog.push(JSON.parse(JSON.stringify({ prop, args })));
-                if (window.consoleLog.length > 50) window.consoleLog.shift();
+                if (window.consoleLog.length > 75) window.consoleLog.shift();
             } catch (e) {}
             return result;
         };
