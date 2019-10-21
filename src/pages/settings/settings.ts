@@ -47,9 +47,18 @@ export class SettingsPage {
 
   ionViewWillEnter() {
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS','SETTINGS_IMPORTFAIL','SETTNGS_IMPORTSUCCESS','RELOAD','COPYPROMPT_MSG']).subscribe((values) => {
-      this.translations = values;
-    });
+    this.translate
+      .get([
+        "SETTINGS_EXPORTSUCCESS",
+        "SETTINGS_IMPORTFAIL",
+        "SETTNGS_IMPORTSUCCESS",
+        "RELOAD",
+        "COPYPROMPT_MSG",
+        "PASTEPROMPT_MSG",
+      ])
+      .subscribe((values) => {
+        this.translations = values;
+      });
 
     // load settings
     this.settings.load().then(() => {
@@ -96,13 +105,40 @@ export class SettingsPage {
         this.file.writeFile(path, filename, JSON.stringify(data), {replace: true}).then(() => {
           this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
 
-        }).catch((err) => {
-          console.error(err);
-        });
+        }).catch(err => handleNoCordovaError(err, e => {
+          prompt(this.translations.COPYPROMPT_MSG, JSON.stringify(data));
+        }));
       });
   }
 
   importData() {
+
+    const handleData = (input: string) => {
+      let data = JSON.parse(input);
+
+      if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
+        this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
+        return;
+      }
+
+      for (const key in data) {
+        if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
+          const value = data[key];
+          this.storage.set(key, value);
+        }
+      }
+
+      this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
+        window.location.hash = "";
+        window.location.reload();
+      });
+    };
+
+    const promptForInputInstead = () => {
+      const data = prompt(this.translations.PASTEPROMPT_MSG, "");
+      if (data)
+        handleData(data);
+    };
     
     this.fileChooser.open().then(uri => {
       this.filePath.resolveNativePath(uri).then(path => {
@@ -110,31 +146,12 @@ export class SettingsPage {
         let filename = path.substring(path.lastIndexOf("/")+1)
 
         this.file.readAsText(pathname, filename).then((text: any) => {
-          let data = JSON.parse(text);
-
-          if (data.type != exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
-            this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
-            return;
-          }
-
-          for (const key in data) {
-            if (data.hasOwnProperty(key) && key.indexOf("_") == 0) {
-              const value = data[key];
-              this.storage.set(key, value);
-            }
-          }
-
-          this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
-            window.location.hash = "";
-            window.location.reload();
-          })
+          handleData(text);
           
-        }).catch((error) => {
-          console.error(error);
-        });
+        }).catch(err => handleNoCordovaError(err, () => promptForInputInstead()));
 
       });
-    }).catch(err => console.error(err));
+    }).catch(err => handleNoCordovaError(err, () => promptForInputInstead()));
   }
 
   saveErrorLog() {

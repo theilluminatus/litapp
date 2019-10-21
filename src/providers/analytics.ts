@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Globals } from './globals';
+import { handleNoCordovaError } from '../app/utils';
 
 @Injectable()
 export class Analytics {
@@ -25,10 +26,10 @@ export class Analytics {
         ]).then(() => {
           this.track("Startup");
 
-        }).catch(e => console.error('Error starting GoogleAnalytics', e));
+        }).catch(e => handleNoCordovaError(e));
 
       } catch(e) {
-        console.error('Error starting GoogleAnalytics', e)
+        handleNoCordovaError(e)
       }
 
     });

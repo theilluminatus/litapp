@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
 import { Lists, Api } from '../../providers/providers';
+import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
 @Component({
@@ -35,7 +36,7 @@ export class ListViewPage {
 	    });
     });
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe((values) => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG']).subscribe((values) => {
       this.translations = values;
     });
   }
@@ -107,9 +108,7 @@ export class ListViewPage {
         let path = this.file.externalRootDirectory;
         this.file.writeFile(path, filename, data, {replace: true}).then(() => {
           this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
-        }).catch((err) => {
-          console.error(err);
-        });
+        }).catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
 
       }
     });

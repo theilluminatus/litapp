@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Author } from '../../models/author';
 import { Authors, Api } from '../../providers/providers';
+import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,7 @@ export class FollowingPage {
       this.authors = authors;
     });
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe((values) => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG']).subscribe((values) => {
       this.translations = values;
     });
 
@@ -99,9 +100,7 @@ export class FollowingPage {
         let path = this.file.externalRootDirectory;
         this.file.writeFile(path, filename, data, {replace: true}).then(() => {
           this.api.showToast(this.translations.SETTINGS_EXPORTSUCCESS+": "+path+filename);
-        }).catch((err) => {
-          console.error(err);
-        });
+        }).catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
 
       }
     });

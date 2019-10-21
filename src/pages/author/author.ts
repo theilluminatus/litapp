@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { TranslateService } from '@ngx-translate/core';
 
 import { User } from '../../providers/providers';
 import { Stories } from '../../providers/providers';
 import { Authors } from '../../providers/providers';
 import { Author } from '../../models/author';
+import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage({priority: 'low'})
 @Component({
@@ -26,6 +28,7 @@ export class AuthorPage {
     private socialSharing: SocialSharing,
     public navCtrl: NavController,
     public navParams: NavParams,
+    public translate: TranslateService,
     public s: Stories,
     public a: Authors,
     public user: User
@@ -99,8 +102,10 @@ export class AuthorPage {
   }
 
   share() {
-    this.socialSharing.share(null, null, null, "https://www.literotica.com/stories/memberpage.php?uid="+this.author.id);
-    console.log("https://www.literotica.com/stories/memberpage.php?uid="+this.author.id);
+    const url = "https://www.literotica.com/stories/memberpage.php?uid="+this.author.id;
+    this.socialSharing.share(null, null, null, url).catch(err => handleNoCordovaError(err, () => {
+      this.translate.get('COPYPROMPT_MSG').subscribe(label => prompt(label, url));
+    }));
   }
 
 }

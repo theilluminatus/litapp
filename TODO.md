@@ -1,6 +1,7 @@
 
 # TODO
 
+- Lint and prettify codebase
 - Auto update version number and build deploy script (GitHub action on tag?)
 - WebApp: Stub native packages (download files instead of saving, google analytics... -> see app.module.ts)
 - WebApp: Add links to homepage

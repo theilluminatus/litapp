@@ -3,12 +3,13 @@ import { IonicPage, NavController, NavParams, PopoverController, AlertController
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { BrowserTab } from '@ionic-native/browser-tab';
 import { File } from '@ionic-native/file';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 import { Stories, Globals, Api } from '../../providers/providers';
 import { User } from '../../providers/providers';
-import { TranslateService } from '@ngx-translate/core';
+import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage({priority: 'low'})
 @Component({
@@ -127,8 +128,9 @@ export class StoryDetailPage {
   }
 
   share() {
-    this.socialSharing.share(null, null, null, this.story.url);
-    console.log(this.story.url);
+    this.socialSharing.share(null, null, null, this.story.url).catch(err => handleNoCordovaError(err, () => {
+      this.translate.get('COPYPROMPT_MSG').subscribe(label => prompt(label, this.story.url));
+    }));
   }
 
   export() {
@@ -163,10 +165,10 @@ export class StoryDetailPage {
       this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
         this.api.showToast(values.SETTINGS_EXPORTSUCCESS+": "+path+filename);
       });
-    }).catch((err) => {
-      console.info(data)
-      console.error(err);
-    });
+    }).catch(err => handleNoCordovaError(err, () => {
+      this.translate.get("NOSUPPORT_MSG").subscribe(label => alert(label));
+      console.info("Save story HTML", data);
+    }));
   }
 
   toggleDownload() {
@@ -186,8 +188,9 @@ export class StoryDetailPage {
   }
 
   openLink() {
-    this.browser.openUrl(this.story.url);
-    console.log(this.story.url);
+    this.browser
+      .openUrl(this.story.url)
+      .catch(err => handleNoCordovaError(err, () => window.open(this.story.url)));
   }
 
   // quick and dirty fix
