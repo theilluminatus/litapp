@@ -34,11 +34,15 @@
   "SETTNGS_IMPORTSUCCESS": "Successfully imported",
   "SETTINGS_GITHUB_LINK": "Visit homepage",
   "SETTINGS_SAVEERRORLOG": "Save error log",
-  "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme (restart app)",
+  "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme (app restart needed)",
+  "SETTINGS_OFFLINEMODE": "Offline mode (app restart needed)",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",
   "UPDATE_FAILEDMSG": "Could not check for updates",
+  "COPYPROMPT_MSG": "File system couldn't be accessed. Please manually copy this text and save it.",
+  "PASTEPROMPT_MSG": "File system couldn't be accessed. Please manually paste the needed text here.",
+  "NOSUPPORT_MSG": "Unfortunatly this function is not available on this platform.",
 
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
@@ -99,7 +103,7 @@
   "FEED_TITLE": "My Feed",
   "FEED_EDITED": "edited",
   "FEED_TOOLTIP_FOLLOWING": "Following authors",
-  
+
   "LISTLIST_TITLE": "My Lists",
   "LISTCREATE_TITLE": "Create new list",
   "LISTCREATE_NAME": "Name",
@@ -122,7 +126,7 @@
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
-  
+
   "LISTVIEW_FILTER": "Filter stories",
   "LISTVIEW_EXPORT": "Export list",
   "LISTVIEW_EXPORT_JSON": "Export as JSON",

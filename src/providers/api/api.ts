@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController, Loading } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-
 import { ENV } from '../../app/env';
 
 const handleAPIError = (error: Error, url: string, data: any, method: string) => {

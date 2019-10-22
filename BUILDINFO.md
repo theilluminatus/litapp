@@ -38,13 +38,13 @@ WebView.setWebContentsDebuggingEnabled(true);
 
 When releasing a new version you should update the version number in:
 
-- [`/src/providers/globals.ts`](./src/providers/globals.ts#L17)
-- [`/app.json`](./app.json#L2-L3)
-- [`/package.json`](./package.json#L3)
-- [`/package-lock.json`](./package-lock.json#L3)
-- [`/config.xml`](./config.xml#L2)
-- [`/docs/index.md`](./docs/index.md#L6)
-- [`/docs/_config.yml`](./docs/_config.yml#L6)
+- [`src/providers/globals.ts`](./src/providers/globals.ts#L17)
+- [`app.json`](./app.json#L2-L3) x2
+- [`package.json`](./package.json#L3)
+- [`package-lock.json`](./package-lock.json#L3)
+- [`config.xml`](./config.xml#L2)
+- [`docs/index.md`](./docs/index.md#L6) x3
+- [`docs/_config.yml`](./docs/_config.yml#L6)
 
 In total, there should be 8 changes to commit including a new apk. Default commit message is "Release vX.XX"
 
@@ -58,7 +58,7 @@ Also don't forget to add a tag after committing and pushing with `git tag -a x.x
 ionic cordova build android --prod --release -- -- --keystore=platforms/litapp-key.jks --storePassword="abc123" --alias=litapp --password="abc123"
 ```
 
-The output can be found in [`/platforms/android/app/build/outputs/apk/release/`](`./platforms/android/app/build/outputs/apk/release/`).
+The output can be found in [`platforms/android/app/build/outputs/apk/release/`](`./platforms/android/app/build/outputs/apk/release/`).
 
 ### Building web app
 
