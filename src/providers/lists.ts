@@ -112,22 +112,23 @@ export class Lists {
         this.getListPage(urlname, loader, Object.assign({}, partialList), page).subscribe(l => {
           if (!l) return;
 
+          let newPartialList = partialList;
           if (!partialList.stories) {
-            partialList = l;
+            newPartialList = l;
           } else {
-            partialList.stories = partialList.stories.concat(l.stories);
+            newPartialList.stories = newPartialList.stories.concat(l.stories);
           }
 
-          if (l.size > partialList.stories.length) {
+          if (l.size > newPartialList.stories.length) {
             const next = page + 1;
             // tslint:disable-next-line: prefer-template
-            this.api.updateLoader(Math.round((partialList.stories.length / l.size) * 100) + '%');
-            loop(next, partialList);
+            this.api.updateLoader(Math.round((newPartialList.stories.length / l.size) * 100) + '%');
+            loop(next, newPartialList);
           } else {
-            this.lists[this.lists.indexOf(list)] = partialList;
+            this.lists[this.lists.indexOf(list)] = newPartialList;
             this.storage.set(LIST_KEY, this.lists);
             if (loader) loader.dismiss();
-            observer.next(partialList);
+            observer.next(newPartialList);
             observer.complete();
           }
         });
@@ -151,8 +152,9 @@ export class Lists {
           return null;
         }
 
+        let newList = list;
         if (!list) {
-          list = new List({
+          newList = new List({
             id: d.list.id,
             urlname: d.list.urlname,
             name: d.list.title,
@@ -165,9 +167,9 @@ export class Lists {
           });
         }
 
-        list.stories = d.works.data.map(story => this.s.extactFromList(story));
+        newList.stories = d.works.data.map(story => this.s.extactFromList(story));
 
-        return list;
+        return newList;
       })
       .catch(error => {
         if (loader) loader.dismiss();

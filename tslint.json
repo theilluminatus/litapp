@@ -10,9 +10,6 @@
     },
     "ter-arrow-parens": false,
     "radix": false,
-    "no-parameter-reassignment": {
-      "severity": "warn"
-    },
     "align": {
       "severity": "warn"
     }

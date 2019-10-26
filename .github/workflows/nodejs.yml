@@ -1,0 +1,25 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  test:
+    name: Lint and Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '11.x'
+
+      - name: Install binaries
+        run: npm install #--only=dev
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typing
+        run: npm run test:typing

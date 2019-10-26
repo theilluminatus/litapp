@@ -63,39 +63,41 @@ export class Api {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number, timeout?: number) {
+    let newReqOpts = reqOpts;
     if (!reqOpts) {
-      reqOpts = {
+      newReqOpts = {
         params: new HttpParams({ encoder: new WebHttpUrlEncodingCodec() }),
       };
     }
 
     // Support easy query params for GET requests
     if (params) {
-      reqOpts.params = new HttpParams({ encoder: new WebHttpUrlEncodingCodec() });
+      newReqOpts.params = new HttpParams({ encoder: new WebHttpUrlEncodingCodec() });
       for (const k in params) {
-        reqOpts.params = reqOpts.params.set(k, params[k]);
+        newReqOpts.params = newReqOpts.params.set(k, params[k]);
       }
     }
 
-    reqOpts.withCredentials = true;
-    reqOpts.params = reqOpts.params.set('apikey', this.apikey);
-    reqOpts.params = reqOpts.params.set('appid', this.appid);
+    newReqOpts.withCredentials = true;
+    newReqOpts.params = newReqOpts.params.set('apikey', this.apikey);
+    newReqOpts.params = newReqOpts.params.set('appid', this.appid);
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
-    const req = this.http.get(url, reqOpts).catch(err => handleAPIError(err, url, reqOpts.params, 'GET'));
+    const req = this.http.get(url, newReqOpts).catch(err => handleAPIError(err, url, newReqOpts.params, 'GET'));
     if (timeout) return req.timeout(timeout);
     return req;
   }
 
   post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean, urlIndex?: number) {
+    let newEndpoint = endpoint;
     if (addIDs) {
       if (endpoint.indexOf('?') > -1) {
-        endpoint += '&apikey=' + this.apikey + '&appid=' + this.appid;
+        newEndpoint += '&apikey=' + this.apikey + '&appid=' + this.appid;
       } else {
-        endpoint += '?apikey=' + this.apikey + '&appid=' + this.appid;
+        newEndpoint += '?apikey=' + this.apikey + '&appid=' + this.appid;
       }
     }
 
-    const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
+    const url = this.urls[urlIndex ? urlIndex : 0] + '/' + newEndpoint;
     return this.http.post(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'POST'));
   }
 

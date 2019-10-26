@@ -248,14 +248,15 @@ export class StoryPopover {
   }
 
   changeAlign(dir: string) {
+    let newDir = dir;
     if (dir === 'side') {
       if (this.platform.dir() === 'rtl') {
-        dir = 'right';
+        newDir = 'right';
       } else {
-        dir = 'left';
+        newDir = 'left';
       }
     }
-    this.settings.textalign = dir;
+    this.settings.textalign = newDir;
   }
 
   toggleLowContrast(event) {

@@ -95,9 +95,7 @@ export class StoryViewPage {
     }
 
     // add to history
-    this.storage.get(HISTORY_KEY).then(history => {
-      if (!history) history = [];
-
+    this.storage.get(HISTORY_KEY).then((history = []) => {
       if (history.indexOf(this.story.id) > -1) {
         history.splice(history.indexOf(this.story.id), 1);
       }

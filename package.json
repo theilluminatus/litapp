@@ -10,6 +10,7 @@
     "build": "ionic-app-scripts build",
     "lint": "tslint --project tsconfig.json --config tslint.json",
     "lint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
+    "test:typing": "tsc --noEmit",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "ionic:watch:before": "node ./setup.js",
@@ -111,9 +112,12 @@
     },
     "platforms": []
   },
+  "engines": {
+    "node": "11.x"
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && tsc --noEmit && npm run lint"
+      "pre-commit": "pretty-quick --staged && npm run test:typing && npm run lint"
     }
   }
 }
