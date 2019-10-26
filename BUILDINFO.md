@@ -36,15 +36,15 @@ WebView.setWebContentsDebuggingEnabled(true);
 
 ## Releasing
 
-When releasing a new version you should update the version number in:
+When releasing a new version you can run `./update_version.sh 1.XX`, this script should update the version number in:
 
 - [`src/providers/globals.ts`](./src/providers/globals.ts#L17)
 - [`app.json`](./app.json#L2-L3) x2
 - [`package.json`](./package.json#L3)
 - [`package-lock.json`](./package-lock.json#L3)
 - [`config.xml`](./config.xml#L2)
-- [`docs/index.md`](./docs/index.md#L6) x3
-- [`docs/_config.yml`](./docs/_config.yml#L6)
+- [`docs/index.md`](./docs/index.md#L6) x2
+- [`docs/_config.yml`](./docs/_config.yml#L7)
 
 In total, there should be 8 changes to commit including a new apk. Default commit message is "Release vX.XX"
 

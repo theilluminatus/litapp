@@ -1,8 +1,10 @@
 # TODO
 
 - Capture API output JSONs to create mockapi so demo can keep working forever
-- Auto update version number and build deploy script (GitHub action on tag?)
+- Build deploy script (GitHub action on tag?)
+- Error log: add logged in boolean + log app start message
 
+- Webapp: disable update check + wrong app version default
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
 
