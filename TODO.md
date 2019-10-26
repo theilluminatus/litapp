@@ -3,6 +3,8 @@
 - Capture API output JSONs to create mockapi so demo can keep working forever
 - Build deploy script (GitHub action on tag?)
 
+- Webapp: search sort popup doesnt work
+- Webapp: Author page on web app, tabs not clickable due to hover effect
 - Webapp: disable update check + wrong app version default
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
