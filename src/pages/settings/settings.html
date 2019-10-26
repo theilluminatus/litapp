@@ -1,23 +1,20 @@
 <ion-header>
-
   <ion-navbar>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ 'SETTINGS_TITLE' | translate }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
-
   <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list>
       <ion-item>
         <ion-label>{{'SETTINGS_CHECKFORFEEDUPDATES' | translate}}</ion-label>
         <ion-toggle formControlName="checkforfeedupdates"></ion-toggle>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="!isWebApp">
         <ion-label>{{'SETTINGS_CHECKFORAPPUPDATES' | translate}}</ion-label>
         <ion-toggle formControlName="checkforappupdates"></ion-toggle>
       </ion-item>
@@ -33,37 +30,32 @@
         <ion-label>{{'SETTINGS_OFFLINEMODE' | translate}}</ion-label>
         <ion-toggle formControlName="offlineMode"></ion-toggle>
       </ion-item>
+      <ion-item *ngIf="!isWebApp">
+        <ion-label>{{'SETTINGS_ENABLELOCK' | translate}}</ion-label>
+        <ion-toggle formControlName="enableLock"></ion-toggle>
+      </ion-item>
     </ion-list>
   </form>
 
-  <button ion-button (click)="exportData()">
-    <ion-icon name="cloud-download"></ion-icon>&nbsp;
-    {{'SETTINGS_EXPORT' | translate}}
+  <button ion-button (click)="exportData()"><ion-icon name="cloud-download"></ion-icon>&nbsp; {{'SETTINGS_EXPORT' | translate}}</button>
+
+  <button ion-button (click)="importData()"><ion-icon name="cloud-upload"></ion-icon>&nbsp; {{'SETTINGS_IMPORT' | translate}}</button>
+
+  <br />
+
+  <button ion-button (click)="g.checkForUpdates()" *ngIf="!options.offlineMode && !isWebApp">
+    <ion-icon name="refresh"></ion-icon>&nbsp; {{'SETTINGS_CHECKFORUPDATES' | translate}}
   </button>
 
-  <button ion-button (click)="importData()">
-    <ion-icon name="cloud-upload"></ion-icon>&nbsp;
-    {{'SETTINGS_IMPORT' | translate}}
-  </button>
-
-  <br>
-
-  <button ion-button (click)="g.checkForUpdates()" *ngIf="!options.offlineMode">
-    <ion-icon name="refresh"></ion-icon>&nbsp;
-    {{'SETTINGS_CHECKFORUPDATES' | translate}}
-  </button>
-
-  <br>
-  <br>
+  <br />
+  <br />
 
   <button ion-button (click)="saveErrorLog()" color="secondary">
-    <ion-icon name="bug"></ion-icon>&nbsp;
-    {{'SETTINGS_SAVEERRORLOG' | translate}}
+    <ion-icon name="bug"></ion-icon>&nbsp; {{'SETTINGS_SAVEERRORLOG' | translate}}
   </button>
-  
-  <br>
-  <br>
-  
-  <a href="https://theilluminatus.github.io/litapp" target="new" *ngIf="!options.offlineMode">{{'SETTINGS_GITHUB_LINK' | translate}}</a>
 
+  <br />
+  <br />
+
+  <a href="https://theilluminatus.github.io/litapp" target="new" *ngIf="!options.offlineMode">{{'SETTINGS_GITHUB_LINK' | translate}}</a>
 </ion-content>

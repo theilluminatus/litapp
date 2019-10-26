@@ -20,6 +20,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { WebIntent } from '@ionic-native/web-intent';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Device } from '@ionic-native/device';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 import { Stories, Analytics, Authors, Lists, Feed, Globals, Settings, User, Api } from '../providers/providers';
 import { MyApp } from './app.component';
@@ -43,6 +44,7 @@ export function provideSettings(storage: Storage) {
     cachelists: true,
     amoledBlackTheme: false,
     offlineMode: false,
+    enableLock: false,
   });
 }
 
@@ -89,6 +91,7 @@ export function provideSettings(storage: Storage) {
     FilePath,
     WebIntent,
     Device,
+    FingerprintAIO,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },

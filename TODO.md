@@ -7,7 +7,7 @@
 
 ## Requests
 
-- Lock app with passcode and / or fingerprint
+- 
 
 ## BUGS
 

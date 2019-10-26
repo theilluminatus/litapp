@@ -25,6 +25,7 @@ export class SettingsPage {
   options: any = {};
   settingsReady = false;
   form: FormGroup;
+  isWebApp = false;
 
   translations;
 
@@ -52,6 +53,8 @@ export class SettingsPage {
         this.translations = values;
       });
 
+    this.isWebApp = !this.platform.is('cordova');
+
     // load settings
     this.settings.load().then(() => {
       this.settingsReady = true;
@@ -64,6 +67,7 @@ export class SettingsPage {
         cachelists: [this.options.cachelists],
         amoledBlackTheme: [this.options.amoledBlackTheme],
         offlineMode: [this.options.offlineMode],
+        enableLock: [this.options.enableLock],
       });
 
       this.form.valueChanges.subscribe(v => {

@@ -34,6 +34,7 @@
     "@ionic-native/file": "^4.11.0",
     "@ionic-native/file-chooser": "^4.11.0",
     "@ionic-native/file-path": "^4.11.0",
+    "@ionic-native/fingerprint-aio": "^4.20.0",
     "@ionic-native/google-analytics": "^4.20.0",
     "@ionic-native/header-color": "^4.10.0",
     "@ionic-native/keyboard": "^4.10.0",
@@ -55,6 +56,7 @@
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-filechooser": "^1.0.1",
     "cordova-plugin-filepath": "^1.4.2",
+    "cordova-plugin-fingerprint-aio": "2.0.0",
     "cordova-plugin-fullscreen": "^1.2.0",
     "cordova-plugin-google-analytics": "1.8.6",
     "cordova-plugin-headercolor": "^1.0.0",
@@ -108,7 +110,8 @@
       "cordova-plugin-filechooser": {},
       "cordova-plugin-filepath": {},
       "com-darryncampbell-cordova-plugin-intent": {},
-      "cordova-plugin-google-analytics": {}
+      "cordova-plugin-google-analytics": {},
+      "cordova-plugin-fingerprint-aio": {}
     },
     "platforms": []
   },

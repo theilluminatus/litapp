@@ -36,6 +36,7 @@
   "SETTINGS_SAVEERRORLOG": "Save error log",
   "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme (app restart needed)",
   "SETTINGS_OFFLINEMODE": "Offline mode (app restart needed)",
+  "SETTINGS_ENABLELOCK": "Require device unlock to start app",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",
@@ -103,7 +104,7 @@
   "FEED_TITLE": "My Feed",
   "FEED_EDITED": "edited",
   "FEED_TOOLTIP_FOLLOWING": "Following authors",
-  
+
   "LISTLIST_TITLE": "My Lists",
   "LISTCREATE_TITLE": "Create new list",
   "LISTCREATE_NAME": "Name",
@@ -126,7 +127,7 @@
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
-  
+
   "LISTVIEW_FILTER": "Filter stories",
   "LISTVIEW_EXPORT": "Export list",
   "LISTVIEW_EXPORT_JSON": "Export as JSON",
