@@ -1,5 +1,4 @@
 page-story-view {
-
   ion-header {
     top: 0;
     z-index: 9999;
@@ -19,7 +18,8 @@ page-story-view {
     border-color: transparent;
   }
 
-  .back-button.show-back-button, .toolbar-title {
+  .back-button.show-back-button,
+  .toolbar-title {
     color: inherit;
     padding: 0;
   }
@@ -58,11 +58,11 @@ page-story-view {
 
   .ng-scrollbar-thumb.grey,
   .ng-scrollbar-thumb.black {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .ng-scrollbar-autohide > .ng-scrollbar {
-    transition: opacity 5s cubic-bezier(1.000, 0.000, 1.000, 0.000) !important;
+    transition: opacity 5s cubic-bezier(1, 0, 1, 0) !important;
     margin-right: 3px;
   }
 
@@ -70,7 +70,8 @@ page-story-view {
     opacity: 0;
   }
 
-  .ng-scrollbar-autohide:active > .ng-scrollbar, .ng-scrollbar-autohide:focus > .ng-scrollbar {
+  .ng-scrollbar-autohide:active > .ng-scrollbar,
+  .ng-scrollbar-autohide:focus > .ng-scrollbar {
     opacity: 1;
     transition: unset !important;
   }
@@ -86,14 +87,13 @@ page-story-view {
     bottom: 0;
     left: 0;
     z-index: 999;
-    padding: 0 10px 50px 10px;
+    padding: 0 10px;
     transition: bottom 0.5s;
     display: flex;
     flex-flow: row no-wrap;
     justify-content: space-around;
     align-items: center;
     align-content: center;
-
 
     .range {
       flex-grow: 1;
@@ -112,5 +112,4 @@ page-story-view {
   .pagination.fullscreen {
     bottom: -100px;
   }
-
 }

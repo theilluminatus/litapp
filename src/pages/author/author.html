@@ -1,40 +1,37 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{author?.name}}</ion-title>
     <ion-buttons end>
-      
-      <button ion-button icon-only
-        (click)="share()"
-        [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
+      <button ion-button icon-only (click)="share()" [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="share"></ion-icon>
       </button>
 
-      <button ion-button icon-only
-        *ngIf="user.isLoggedIn()" (click)="followToggle()"
-        [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate" event="press" navTooltip>
+      <button
+        ion-button
+        icon-only
+        *ngIf="user.isLoggedIn()"
+        (click)="followToggle()"
+        [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon [name]="author?.following ? 'remove-circle' : 'person-add'"></ion-icon>
       </button>
-
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
   <ion-img [src]="author?.picture + ''"></ion-img>
   <p *ngIf="author?.jointimestamp">{{'AUTHOR_JOINDATE' | translate}}: {{author?.jointimestamp*1000 | date}}</p>
   <p *ngIf="author?.updatetimestamp">{{'AUTHOR_UPDATEDATE' | translate}}: {{author?.updatetimestamp*1000 | date}}</p>
 
-  <div class="bio">
-    <p #biotext [innerHTML]="author?.bio"></p>
-    <div class="arrow" *ngIf="showArrow">
+  <div class="bio" (click)="toggleBio()">
+    <p #biotext [innerHTML]="author?.bio" [style.maxHeight]="showBio ? 'unset' : '115px'"></p>
+    <div class="arrow" *ngIf="showArrow && !showBio">
       <ion-icon name="arrow-down"></ion-icon>
     </div>
   </div>
-
 
   <ion-segment [(ngModel)]="openSegment">
     <ion-segment-button value="stories" (click)="loadSubmissions()">
@@ -45,10 +42,17 @@
     </ion-segment-button>
   </ion-segment>
 
-  <story-list-normal *ngIf="openSegment=='stories'" [stories]="author?.stories"
-    infinite="true" (ionInfinite)="loadMoreSubmissions($event)"></story-list-normal>
+  <story-list-normal
+    *ngIf="openSegment=='stories'"
+    [stories]="author?.stories"
+    infinite="true"
+    (ionInfinite)="loadMoreSubmissions($event)"
+  ></story-list-normal>
 
-	<story-list-normal *ngIf="openSegment=='favs'" [stories]="author?.favs" 
-    infinite="true" (ionInfinite)="loadMoreFavs($event)"></story-list-normal>
-
+  <story-list-normal
+    *ngIf="openSegment=='favs'"
+    [stories]="author?.favs"
+    infinite="true"
+    (ionInfinite)="loadMoreFavs($event)"
+  ></story-list-normal>
 </ion-content>

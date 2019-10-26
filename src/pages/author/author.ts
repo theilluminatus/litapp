@@ -16,6 +16,7 @@ export class AuthorPage {
   @ViewChild('biotext') biotext;
   author: Author;
   showArrow = false;
+  showBio = false;
   loaded = false;
   openSegment = '';
   currentSubmissionsPage = 1;
@@ -74,6 +75,10 @@ export class AuthorPage {
       data[0].forEach(s => this.author.stories.push(s));
       event.complete();
     });
+  }
+
+  toggleBio() {
+    this.showBio = !this.showBio;
   }
 
   loadMoreFavs(event) {

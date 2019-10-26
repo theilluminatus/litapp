@@ -1,6 +1,6 @@
 # TODO
 
-- Build deploy script (GitHub action on tag?)
+- Build deploy script (GitHub action on tag, ms appcenter?)
 
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
@@ -10,9 +10,6 @@
 - Lock app with passcode and / or fingerprint
 
 ## BUGS
-
-- Webapp: Search sort popup doesnt work
-- Webapp: Author page on web app, tabs not clickable due to hover effect
 
 ### To investigate
 

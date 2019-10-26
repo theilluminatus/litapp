@@ -19,6 +19,7 @@ export class StoryViewPage {
 
   slides: any[] = [];
   dir: string = 'ltr';
+  webApp: boolean = true;
   slidesPerView: number = 1;
   fullscreen = false;
   firstTimeNextPage = true;
@@ -53,6 +54,7 @@ export class StoryViewPage {
     navParams: NavParams,
   ) {
     this.dir = platform.dir();
+    this.webApp = !platform.is('cordova');
     // this.slidesPerView = platform.isPortrait() ? 1 : 2;
     this.story = navParams.get('story');
     this.fullscreen = navParams.get('fullscreen') || this.fullscreen;
@@ -95,7 +97,8 @@ export class StoryViewPage {
     }
 
     // add to history
-    this.storage.get(HISTORY_KEY).then((history = []) => {
+    this.storage.get(HISTORY_KEY).then(tempHistory => {
+      const history = tempHistory || [];
       if (history.indexOf(this.story.id) > -1) {
         history.splice(history.indexOf(this.story.id), 1);
       }

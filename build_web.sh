@@ -13,8 +13,10 @@ rm -rf build/*
 
 STYLE=$(cat <<-END
 @media (hover: hover) {
-    html { display: flex; justify-content: center; align-items: center; }
-    body { max-width: 50vmin; max-height: 85vmin; min-width: 400px; min-height: 680px; }
+    html { display: flex; justify-content: center; align-items: center; contain: strict; }
+    body { max-width: 50vmin; max-height: 85vmin; min-width: 400px; min-height: 680px; overflow: visible; }
+    .app-root { contain: none; }
+    .popover-content { top: 20% !important; left: calc( 50% - 125px ) !important; max-height: 60%; overflow: auto; }
 }
 END
 )

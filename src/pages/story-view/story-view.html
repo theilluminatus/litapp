@@ -1,34 +1,44 @@
 <ion-header [class]="fullscreen ? 'fullscreen': ''" no-border>
   <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
     <ion-title>
-        {{ story.title }}
+      {{ story.title }}
     </ion-title>
     <ion-buttons end>
-
-      <button ion-button icon-only
-        *ngIf="user.isLoggedIn()" (click)="openListPicker($event)"
-        [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
+      <button
+        ion-button
+        icon-only
+        *ngIf="user.isLoggedIn()"
+        (click)="openListPicker($event)"
+        [tooltip]="'BOOKMARK_BUTTON' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
       </button>
-      
-      <button ion-button icon-only
-        *ngIf="story?.series && !appSettings.allSettings.offlineMode" (click)="showSeries(story)"
-        [tooltip]="'STORYDETAIL_SERIES' | translate" event="press" navTooltip>
+
+      <button
+        ion-button
+        icon-only
+        *ngIf="story?.series && !appSettings.allSettings.offlineMode"
+        (click)="showSeries(story)"
+        [tooltip]="'STORYDETAIL_SERIES' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
       </button>
 
-      <button ion-button icon-only (click)="showInfo(story)"
-        [tooltip]="'STORY_TOOLTIP_SHOWINFO' | translate" event="press" navTooltip>
+      <button ion-button icon-only (click)="showInfo(story)" [tooltip]="'STORY_TOOLTIP_SHOWINFO' | translate" event="press" navTooltip>
         <ion-icon name="information-circle" [style.color]="settings.color"></ion-icon>
       </button>
-
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content fullscreen="true">
-
-  <ion-slides ion-fixed #slidesElement
+  <ion-slides
+    ion-fixed
+    #slidesElement
     (ionSlideDidChange)="slideChanged()"
     [slidesPerView]="slidesPerView"
     [dir]="dir"
@@ -38,8 +48,8 @@
     [style.fontFamily]="settings.font + ', sans-serif'"
     [style.textAlign]="settings.textalign"
     [style.background]="settings.background"
-    [style.color]="settings.color">
-
+    [style.color]="settings.color"
+  >
     <ion-slide *ngFor="let slide of slides; let i=index">
       <ng-container *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5">
         <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
@@ -48,19 +58,28 @@
       </ng-container>
     </ion-slide>
   </ion-slides>
-
 </ion-content>
 
-<div class="pagination {{fullscreen ? 'fullscreen': ''}}"
+<div
+  class="pagination {{fullscreen ? 'fullscreen': ''}}"
   [style.background]="settings.background"
-  [style.color]="settings.color">
-
+  [style.color]="settings.color"
+  [style.paddingBottom]="!webApp ? '50px' : '0'"
+>
   <button ion-button icon-only clear (click)="showPopover($event)">
     <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
   </button>
 
-  <ion-range #range (ionChange)="slidesElement.slideTo($event.value-1)"
-    *ngIf="slides.length > 1" pin="true" [snaps]="slides.length < 15" step="1" min="1" [max]="slides.length"></ion-range>
+  <ion-range
+    #range
+    (ionChange)="slidesElement.slideTo($event.value-1)"
+    *ngIf="slides.length > 1"
+    pin="true"
+    [snaps]="slides.length < 15"
+    step="1"
+    min="1"
+    [max]="slides.length"
+  ></ion-range>
 
   <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
 </div>
