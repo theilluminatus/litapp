@@ -18,6 +18,9 @@ jobs:
       - name: Install binaries
         run: npm install #--only=dev
 
+      - name: Create env
+        run: npm run ionic:build:before
+
       - name: Lint
         run: npm run lint
 
