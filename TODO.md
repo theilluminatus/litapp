@@ -2,7 +2,6 @@
 
 - Capture API output JSONs to create mockapi so demo can keep working forever
 - Build deploy script (GitHub action on tag?)
-- Error log: add logged in boolean + log app start message
 
 - Webapp: disable update check + wrong app version default
 - WebApp: Add links to homepage

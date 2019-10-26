@@ -8,7 +8,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { Device } from '@ionic-native/device';
 
-import { Globals, Api, Settings } from '../../providers/providers';
+import { Globals, Api, Settings, User } from '../../providers/providers';
 import { STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY, HISTORY_KEY, STORY_KEY } from '../../providers/db';
 import { handleNoCordovaError } from '../../app/utils';
 
@@ -33,6 +33,7 @@ export class SettingsPage {
     public platform: Platform,
     public device: Device,
     public api: Api,
+    public user: User,
     public g: Globals,
     public settings: Settings,
     public formBuilder: FormBuilder,
@@ -180,6 +181,7 @@ export class SettingsPage {
       apiKey: this.api.apikey,
       appId: this.api.appid,
       appSettings: this.settings.allSettings,
+      userLoggedIn: this.user.isLoggedIn(),
     });
 
     const data = JSON.stringify(window.consoleLog);

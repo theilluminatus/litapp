@@ -16,6 +16,8 @@ console = new Proxy(console, {
   },
 });
 
+console.info('App started', new Date().getTime());
+
 // start app
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';
