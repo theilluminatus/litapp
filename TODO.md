@@ -11,6 +11,8 @@
 
 ## BUGS
 
+- Category link on story-detail page doesn't work (for category Celebrities)
+
 ### To investigate
 
 - History list sometimes doesn't go past +- 20 items, app restart fixes this
