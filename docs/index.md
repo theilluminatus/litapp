@@ -2,9 +2,9 @@
 
 ## Releases (Android)
 
+- [v1.16](https://theilluminatus.github.io/litapp/releases/litapp-1.16.apk) (2019-11-02)
 - [v1.15](https://theilluminatus.github.io/litapp/releases/litapp-1.15.apk) (2019-10-22)
 - [v1.14](https://theilluminatus.github.io/litapp/releases/litapp-1.14.apk) (2019-08-15)
-- [v1.13](https://theilluminatus.github.io/litapp/releases/litapp-1.13.apk) (2019-07-20)
 
 Older changelogs can be found on [the releases page](https://github.com/theilluminatus/litapp/releases) (Press `...` after version). Older APKs can be found in the [releases folder](https://github.com/theilluminatus/litapp/tree/master/docs/releases).
 

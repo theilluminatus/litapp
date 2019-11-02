@@ -36,6 +36,7 @@
   "SETTINGS_SAVEERRORLOG": "Save error log",
   "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme (app restart needed)",
   "SETTINGS_OFFLINEMODE": "Offline mode (app restart needed)",
+  "SETTINGS_ENABLELOCK": "Require device unlock to start app",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",
