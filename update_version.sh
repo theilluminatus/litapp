@@ -1,6 +1,11 @@
 
 # Usage: ./update_version.sh 1.16
 
+if [[ $# -eq 0 ]] ; then
+    echo 'Please add the next version number as argument like so `./update_version.sh 1.16`'
+    exit 0
+fi
+
 function updateFile () {
     FILE=$1
     LINE=$2
