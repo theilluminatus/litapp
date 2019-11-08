@@ -10,13 +10,22 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v1
 
+      - name: Cache
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-4
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '11.x'
 
       - name: Install binaries
-        run: npm install #--only=dev
+        run: npm install
 
       - name: Create env
         run: npm run ionic:build:before
