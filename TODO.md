@@ -1,21 +1,26 @@
 # TODO
 
 - Build deploy script (GitHub action on tag, ms appcenter?)
+- Add mock API for integration testing and demo
 
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
 
-## Requests
+## Request
 
-- 
+- Allow sorting of downloaded stories (new/old, title, author, category) + filter?
 
 ## BUGS
 
+- Offline mode:
+  - Works correctly when slow internet?
+  - Stories in list disappear after few seconds?
+  - Story reading page is empty at first
+  - Offline mode toggle disappears after enabling?
+- Recycler list doesn't work as expected (sometimes doesn't go past +- 20 items)
+  - Webview version in error log
+  - Add toggle to use full list instead of recycler
 - Category link on story-detail page doesn't work (for category Celebrities)
-
-### To investigate
-
-- History list sometimes doesn't go past +- 20 items, app restart fixes this
 
 ### Not reproducible
 
