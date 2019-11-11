@@ -1,27 +1,48 @@
 <ion-header>
-
   <ion-navbar>
-  	<button ion-button icon-only menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }}</ion-title>
     <ion-buttons end>
-      <button *ngIf="!onlyDownloaded && stories.length > 0" end ion-button icon-only (click)="clearAll()"
-        [tooltip]="'HISTORY_TOOLTIP_CLEAR' | translate" event="press" navTooltip>
+      <button end ion-button icon-only (click)="openSortPopover($event)" [tooltip]="'HISTORY_SORT' | translate" event="press" navTooltip>
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+
+      <button
+        *ngIf="!onlyDownloaded && stories.length > 0"
+        end
+        ion-button
+        icon-only
+        (click)="clearAll()"
+        [tooltip]="'HISTORY_TOOLTIP_CLEAR' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="trash"></ion-icon>
       </button>
 
-      <button end ion-button icon-only (click)="toggleDownloaded()"
-        [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate" event="press" navTooltip>
+      <button
+        end
+        ion-button
+        icon-only
+        (click)="toggleDownloaded()"
+        [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon [name]="onlyDownloaded ? 'cloud' : 'cloud-download'"></ion-icon>
       </button>
-	  </ion-buttons>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <story-list [stories]="filteredStories" (onDeleteBySwiping)="delete($event)" (onDownloadBySwiping)="download($event)" ishistory="true">
+  <story-list
+    [stories]="filteredStories | orderBy: sortMethod"
+    (onDeleteBySwiping)="delete($event)"
+    (onDownloadBySwiping)="download($event)"
+    ishistory="true"
+  >
   </story-list>
 </ion-content>

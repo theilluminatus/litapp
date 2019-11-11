@@ -68,6 +68,7 @@
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",
+  "HISTORY_SORT": "Sort stories",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
@@ -163,6 +164,8 @@
   "TOP": "Top",
   "NEW": "New",
   "RELOAD": "Reload",
+  "TITLE": "Title",
+  "DOWNLOADED": "Download time",
 
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",

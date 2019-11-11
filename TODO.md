@@ -6,9 +6,9 @@
 - WebApp: Add links to homepage
 - WebApp: add service worker to cache SPA
 
-## Request
+## Requests
 
-- Allow sorting of downloaded stories (new/old, title, author, category) + filter?
+- 
 
 ## BUGS
 

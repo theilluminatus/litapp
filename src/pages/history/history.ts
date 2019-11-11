@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, PopoverController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
@@ -15,6 +15,7 @@ import { Story } from '../../models/story';
 export class HistoryPage {
   stories: Story[] = [];
   filteredStories: Story[] = [];
+  sortMethod: string;
 
   onlyDownloaded = false;
   private translations;
@@ -25,6 +26,7 @@ export class HistoryPage {
     public alertCtrl: AlertController,
     public storage: Storage,
     public s: Stories,
+    private popoverCtrl: PopoverController,
   ) {
     this.translate.get(['HISTORY_TOOLTIP_CLEAR', 'CONFIRM', 'OK_BUTTON', 'CANCEL_BUTTON']).subscribe(values => {
       this.translations = values;
@@ -148,5 +150,18 @@ export class HistoryPage {
 
   download(story: Story) {
     this.s.download(story);
+  }
+
+  openSortPopover(ev: UIEvent) {
+    const popover = this.popoverCtrl.create('SortPopover', {
+      sortMethod: this.sortMethod,
+    });
+
+    popover.present({
+      ev,
+    });
+    popover.onDidDismiss(method => {
+      this.sortMethod = method;
+    });
   }
 }
