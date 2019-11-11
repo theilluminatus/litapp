@@ -12,10 +12,7 @@
 
 ## BUGS
 
-- Offline mode:
-  - Works correctly when slow internet?
-  - Stories in list disappear after few seconds?
-  - Story reading page is empty at first
+- 
 
 ### Not reproducible
 

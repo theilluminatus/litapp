@@ -30,6 +30,7 @@
         [tooltip]="'HISTORY_TOOLTIP_DOWNLOADS' | translate"
         event="press"
         navTooltip
+        *ngIf="!settings.allSettings.offlineMode"
       >
         <ion-icon [name]="onlyDownloaded ? 'cloud' : 'cloud-download'"></ion-icon>
       </button>

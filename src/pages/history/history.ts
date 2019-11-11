@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
 import { HISTORY_KEY, STORY_KEY } from '../../providers/db';
-import { Stories } from '../../providers/providers';
+import { Stories, Settings } from '../../providers/providers';
 import { Story } from '../../models/story';
 
 @IonicPage({ priority: 'high' })
@@ -25,6 +25,7 @@ export class HistoryPage {
     public alertCtrl: AlertController,
     public storage: Storage,
     public s: Stories,
+    public settings: Settings,
     private popoverCtrl: PopoverController,
   ) {
     this.translate.get(['HISTORY_TOOLTIP_CLEAR', 'CONFIRM', 'OK_BUTTON', 'CANCEL_BUTTON']).subscribe(values => {
@@ -33,7 +34,8 @@ export class HistoryPage {
   }
 
   ionViewWillEnter() {
-    this.s.onReady().then(() => {
+    Promise.all([this.s.onReady(), this.settings.load()]).then(() => {
+      this.onlyDownloaded = this.settings.allSettings.offlineMode;
       this.buildList();
     });
   }

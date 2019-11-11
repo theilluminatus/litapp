@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { LoadingController, ToastController, Loading } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ENV } from '../../app/env';
+import { Settings } from '../settings/settings';
 
 const handleAPIError = (error: Error, url: string, data: any, method: string) => {
   console.info({
@@ -34,6 +35,7 @@ export class Api {
     public translate: TranslateService,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
+    public settings: Settings,
   ) {
     try {
       const search = location.search.substring(1);
@@ -63,6 +65,7 @@ export class Api {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number, timeout?: number) {
+    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
     let newReqOpts = reqOpts;
     if (!reqOpts) {
       newReqOpts = {
@@ -88,6 +91,7 @@ export class Api {
   }
 
   post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean, urlIndex?: number) {
+    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
     let newEndpoint = endpoint;
     if (addIDs) {
       if (endpoint.indexOf('?') > -1) {
@@ -102,16 +106,19 @@ export class Api {
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {
+    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
     const url = this.urls[0] + '/' + endpoint;
     return this.http.put(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'PUT'));
   }
 
   delete(endpoint: string, reqOpts?: any, urlIndex?: number) {
+    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
     return this.http.delete(url, reqOpts).catch(err => handleAPIError(err, url, {}, 'DELETE'));
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
+    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
     const url = this.urls[0] + '/' + endpoint;
     return this.http.patch(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'PATCH'));
   }
@@ -152,11 +159,20 @@ export class Api {
       });
     });
   }
+
+  showOfflineModeError() {
+    this.translate.get(['OFFLINE_ERROR']).subscribe(values => {
+      this.showToast(values.OFFLINE_ERROR);
+    });
+    this.hideLoader();
+    return Observable.of();
+  }
 }
 
 // Source: https://github.com/angular/angular/issues/11058#issuecomment-351864976
 // tslint:disable-next-line: no-duplicate-imports
 import { HttpParameterCodec } from '@angular/common/http';
+import { Observable } from 'rxjs';
 export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
   encodeKey(k: string): string {
     return encodeURIComponent(k);
