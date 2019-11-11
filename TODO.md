@@ -17,9 +17,6 @@
   - Stories in list disappear after few seconds?
   - Story reading page is empty at first
   - Offline mode toggle disappears after enabling?
-- Recycler list doesn't work as expected (sometimes doesn't go past +- 20 items)
-  - Webview version in error log
-  - Add toggle to use full list instead of recycler
 
 ### Not reproducible
 
