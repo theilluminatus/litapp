@@ -34,7 +34,14 @@
         <ion-label>{{'SETTINGS_ENABLELOCK' | translate}}</ion-label>
         <ion-toggle formControlName="enableLock"></ion-toggle>
       </ion-item>
+      <ion-item>
+        <ion-label>{{'SETTINGS_FORCENORMALLIST' | translate}}</ion-label>
+        <ion-toggle formControlName="forceNormalList"></ion-toggle>
+      </ion-item>
     </ion-list>
+    <p>
+      {{'SETTINGS_RESTART_DISCLAIMER' | translate}}
+    </p>
   </form>
 
   <button ion-button (click)="exportData()"><ion-icon name="cloud-download"></ion-icon>&nbsp; {{'SETTINGS_EXPORT' | translate}}</button>

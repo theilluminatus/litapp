@@ -1,22 +1,41 @@
-
 <div style="height: 100%; width: 100%">
   <p *ngIf="!stories?.length" class="empty">
     {{'STORYLIST_EMPTY' | translate}}
   </p>
 
-  <ion-list [virtualScroll]="stories" [headerFn]="showHeaders" [sliding]="ishistory">
+  <ng-container *ngIf="!settings.allSettings.forceNormalList">
+    <ion-list [virtualScroll]="stories" [headerFn]="showHeaders" [sliding]="ishistory" approxItemHeight="97px">
+      <ion-item-divider *virtualHeader="let pageindicator">
+        {{'LIST_PAGECOUNTDIVIDER' | translate}} {{ pageindicator }}
+      </ion-item-divider>
+      <div *virtualItem="let story">
+        <story-list-item
+          [ishistory]="ishistory"
+          [story]="story"
+          (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"
+          (onDownloadBySwiping)="onDownloadBySwiping.emit($event)"
+        ></story-list-item>
+      </div>
+    </ion-list>
+  </ng-container>
 
-    <ion-item-divider *virtualHeader="let pageindicator">
-      {{'LIST_PAGECOUNTDIVIDER' | translate}} {{ pageindicator }}
-    </ion-item-divider>
-
-    <div *virtualItem="let story">
-      <story-list-item [ishistory]="ishistory" [story]="story" (onDeleteBySwiping)="onDeleteBySwiping.emit($event)" (onDownloadBySwiping)="onDownloadBySwiping.emit($event)"></story-list-item>
-    </div>
-
-  </ion-list>
+  <ng-container *ngIf="settings.allSettings.forceNormalList">
+    <ion-list [sliding]="ishistory">
+      <ng-container *ngFor="let story of stories; let i=index">
+        <ion-item-divider *ngIf="!!showHeaders(story, i, stories)">
+          {{'LIST_PAGECOUNTDIVIDER' | translate}} {{ showHeaders(story, i, stories) }}
+        </ion-item-divider>
+        <story-list-item
+          [ishistory]="ishistory"
+          [story]="story"
+          (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"
+          (onDownloadBySwiping)="onDownloadBySwiping.emit($event)"
+        ></story-list-item>
+      </ng-container>
+    </ion-list>
+  </ng-container>
 
   <ion-infinite-scroll [enabled]="enableInfinite" (ionInfinite)="loadMore($event)" *ngIf="infinite && stories?.length > 9">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </div>

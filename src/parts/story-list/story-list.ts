@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { Story } from '../../models/story';
+import { Settings } from '../../providers/providers';
 
 @Component({
   selector: 'story-list',
@@ -19,15 +20,13 @@ export class StoryListPage {
 
   enableInfinite = true;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public settings: Settings) {}
 
   showHeaders(record, recordIndex, records) {
-    if (this.ishistory) return null;
     const pagesize = 10;
-    if (recordIndex % pagesize === 0 && recordIndex > 0) {
+    if (!this.ishistory && recordIndex % pagesize === 0 && recordIndex > 0) {
       const page = Math.round(recordIndex / pagesize);
-      // tslint:disable-next-line: prefer-template
-      return page + 1 + ' (' + (page * pagesize + 1) + ' - ' + (page + 1) * pagesize + ')';
+      return `${page + 1} (${page * pagesize + 1} - ${(page + 1) * pagesize})`;
     }
     return null;
   }

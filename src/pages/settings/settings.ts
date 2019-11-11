@@ -68,6 +68,7 @@ export class SettingsPage {
         amoledBlackTheme: [this.options.amoledBlackTheme],
         offlineMode: [this.options.offlineMode],
         enableLock: [this.options.enableLock],
+        forceNormalList: [this.options.forceNormalList],
       });
 
       this.form.valueChanges.subscribe(v => {

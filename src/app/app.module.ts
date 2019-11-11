@@ -45,6 +45,7 @@ export function provideSettings(storage: Storage) {
     amoledBlackTheme: false,
     offlineMode: false,
     enableLock: false,
+    forceNormalList: false,
   });
 }
 
