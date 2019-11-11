@@ -23,6 +23,7 @@
   "TAB5_TITLE": "Lists",
 
   "SETTINGS_TITLE": "Settings",
+  "SETTINGS_RESTART_DISCLAIMER": "(Some of these settings require the app to be restarted)",
   "SETTINGS_CHECKFORFEEDUPDATES": "Automatically check for feed updates",
   "SETTINGS_CHECKFORAPPUPDATES": "Automatically check for app updates",
   "SETTINGS_CHECKFORUPDATES": "Check for app updates",
@@ -34,9 +35,10 @@
   "SETTNGS_IMPORTSUCCESS": "Successfully imported",
   "SETTINGS_GITHUB_LINK": "Visit homepage",
   "SETTINGS_SAVEERRORLOG": "Save error log",
-  "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme (app restart needed)",
-  "SETTINGS_OFFLINEMODE": "Offline mode (app restart needed)",
+  "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme",
+  "SETTINGS_OFFLINEMODE": "Offline mode",
   "SETTINGS_ENABLELOCK": "Require device unlock to start app",
+  "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
 
   "LOAD_ERROR": "Error while communicating with server",
   "UPDATE_MSG": "There is an update available",
@@ -44,6 +46,7 @@
   "COPYPROMPT_MSG": "File system couldn't be accessed. Please manually copy this text and save it.",
   "PASTEPROMPT_MSG": "File system couldn't be accessed. Please manually paste the needed text here.",
   "NOSUPPORT_MSG": "Unfortunatly this function is not available on this platform.",
+  "OFFLINE_ERROR": "This function is not available in offline mode.",
 
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
@@ -68,6 +71,7 @@
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",
+  "HISTORY_SORT": "Sort stories",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
@@ -163,6 +167,9 @@
   "TOP": "Top",
   "NEW": "New",
   "RELOAD": "Reload",
+  "TITLE": "Title",
+  "DOWNLOADED": "Download time",
+  "FIRST_ACCESSED": "Default",
 
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",
