@@ -70,7 +70,7 @@ export class MyApp {
         this.loggedIn = true;
       }
 
-      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode) {
+      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode && this.platform.is('cordova')) {
         this.g.checkForUpdates();
       }
 
