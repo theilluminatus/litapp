@@ -1,8 +1,9 @@
+#!/bin/sh
 
-# Usage: ./update_version.sh 1.16
+# Usage: ./update_version.sh 1.XX
 
 if [[ $# -eq 0 ]] ; then
-    echo 'Please add the next version number as argument like so `./update_version.sh 1.16`'
+    echo 'Please add the next version number as argument like so `./update_version.sh 1.XX`'
     exit 0
 fi
 

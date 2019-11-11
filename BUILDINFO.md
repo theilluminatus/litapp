@@ -36,6 +36,8 @@ WebView.setWebContentsDebuggingEnabled(true);
 
 ## Releasing
 
+> This whole process was automated with `./release.sh`. The following steps are kept here as documentation.
+
 When releasing a new version you can run `./update_version.sh 1.XX`, this script should update the version number in:
 
 - [`src/providers/globals.ts`](./src/providers/globals.ts#L17)
