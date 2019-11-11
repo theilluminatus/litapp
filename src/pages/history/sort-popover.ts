@@ -38,7 +38,7 @@ export class SortPopover {
   sortMethod: string;
 
   constructor(navParams: NavParams, private viewCtrl: ViewController) {
-    this.sortMethod = navParams.get('sortMethod');
+    this.sortMethod = navParams.get('sortMethod') || '-downloadtimestamp';
   }
 
   save() {

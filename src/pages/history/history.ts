@@ -83,20 +83,21 @@ export class HistoryPage {
       return;
     }
 
-    this.filteredStories = [];
-    const tmp = [];
-    this.storage.forEach((value, key, index) => {
-      if (key.indexOf(STORY_KEY) === 0) {
-        if (value.downloaded) {
-          this.s.getById(value.id).subscribe(story => {
-            tmp.push(story);
-          });
+    this.storage.length().then(length => {
+      const tmp = [];
+      this.storage.forEach((value, key, index) => {
+        if (key.indexOf(STORY_KEY) === 0) {
+          if (value.downloaded) {
+            this.s.getById(value.id).subscribe(story => {
+              tmp.push(story);
+            });
+          }
         }
-      }
+        if (index >= length - 1) {
+          this.filteredStories = tmp;
+        }
+      });
     });
-
-    tmp.sort(s => s.downloadtimestamp);
-    this.filteredStories = tmp;
   }
 
   clearAll() {
