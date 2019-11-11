@@ -358,8 +358,15 @@ export class Stories {
 
   uncache(story: Story) {
     story.cached = false;
-    story.downloaded = false;
-    this.storage.remove(`${STORY_KEY}_${story.id}`);
+    this.undownload(story);
+  }
+
+  uncacheAll(excludeDownloaded?: boolean) {
+    this.stories.forEach(story => {
+      if (!excludeDownloaded || !story.downloaded) {
+        this.uncache(story);
+      }
+    });
   }
 
   extractFromFeed(item) {

@@ -13,7 +13,6 @@ import { Story } from '../../models/story';
   templateUrl: 'history.html',
 })
 export class HistoryPage {
-  stories: Story[] = [];
   filteredStories: Story[] = [];
   sortMethod: string;
 
@@ -35,66 +34,75 @@ export class HistoryPage {
 
   ionViewWillEnter() {
     this.s.onReady().then(() => {
-      this.storage.get(HISTORY_KEY).then(history => {
-        let loadedIndex = 0;
-        if (history) {
-          history.forEach((id, index) => {
-            this.s.getById(id).subscribe(story => {
-              if (story) {
-                this.stories[history.length - index - 1] = story;
-              }
-
-              loadedIndex += 1;
-              if (loadedIndex === history.length) {
-                this.loadingFinished();
-              }
-            });
-          });
-        }
-      });
+      this.buildList();
     });
   }
 
   toggleDownloaded() {
     this.onlyDownloaded = !this.onlyDownloaded;
-    this.updateFilter();
+    this.buildList();
   }
 
-  private loadingFinished() {
-    const maxNumberOfStories = 30;
-    const toRemove = this.stories.filter((story, i) => {
-      if (i > maxNumberOfStories - 1) {
-        return story;
+  private buildList() {
+    if (this.onlyDownloaded) this.buildDownloadedList();
+    else this.buildHistoryList();
+  }
+
+  private buildHistoryList() {
+    this.storage.get(HISTORY_KEY).then(history => {
+      let loadedIndex = 0;
+      if (history) {
+        const temp = [];
+        history.forEach((id, index) => {
+          this.s.getById(id).subscribe(story => {
+            if (story) {
+              temp[history.length - index - 1] = story;
+            }
+
+            loadedIndex += 1;
+            if (loadedIndex === history.length) {
+              this.cleanHistory();
+              this.filteredStories = temp;
+            }
+          });
+        });
+      } else {
+        this.filteredStories = [];
       }
     });
+  }
+
+  private cleanHistory() {
+    const maxNumberOfStories = 50;
+    const toRemove = this.filteredStories
+      .sort(s => (s.downloadedtimestamp ? s.downloadedtimestamp.getTime() : 0))
+      .reverse()
+      .filter((story, i) => {
+        if (i > maxNumberOfStories - 1) {
+          return story;
+        }
+      });
 
     toRemove.forEach(story => {
       if (!story.downloaded) {
         this.delete(story);
       }
     });
-
-    this.updateFilter();
   }
 
-  private updateFilter() {
-    if (!this.onlyDownloaded) {
-      this.filteredStories = this.stories;
-      return;
-    }
-
+  private buildDownloadedList() {
     this.storage.length().then(length => {
-      const tmp = [];
+      const temp = [];
       this.storage.forEach((value, key, index) => {
         if (key.indexOf(STORY_KEY) === 0) {
           if (value.downloaded) {
             this.s.getById(value.id).subscribe(story => {
-              tmp.push(story);
+              temp.push(story);
             });
           }
         }
         if (index >= length - 1) {
-          this.filteredStories = tmp;
+          this.filteredStories = temp;
         }
       });
     });
@@ -110,14 +118,9 @@ export class HistoryPage {
             text: this.translations.OK_BUTTON,
             handler: () => {
               this.onlyDownloaded = false;
-              this.stories.forEach(story => {
-                if (!story.downloaded) {
-                  this.s.uncache(story);
-                }
-              });
-              this.stories = [];
+              this.s.uncacheAll(true);
               this.storage.remove(HISTORY_KEY);
-              this.updateFilter();
+              this.buildList();
             },
           },
           { text: this.translations.CANCEL_BUTTON },
@@ -131,20 +134,8 @@ export class HistoryPage {
     this.s.uncache(story);
     this.storage.get(HISTORY_KEY).then(history => {
       if (history) {
-        history.forEach((id, index) => {
-          if (id === story.id) {
-            history.splice(index, 1);
-          }
-        });
-        this.storage.set(HISTORY_KEY, history);
-      }
-    });
-
-    // remove from list
-    this.stories.forEach((item, index) => {
-      if (item === story) {
-        this.stories.splice(index, 1);
-        this.updateFilter();
+        history.splice(history.indexOf(story.id), 1);
+        this.storage.set(HISTORY_KEY, history).then(() => this.buildList());
       }
     });
   }
@@ -162,7 +153,9 @@ export class HistoryPage {
       ev,
     });
     popover.onDidDismiss(method => {
-      this.sortMethod = method;
+      if (method !== null) {
+        this.sortMethod = method;
+      }
     });
   }
 }

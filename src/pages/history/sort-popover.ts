@@ -8,8 +8,8 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
     <ion-list radio-group [(ngModel)]="sortMethod">
       <ion-list-header>{{ 'HISTORY_SORT' | translate }}</ion-list-header>
       <ion-item>
-        <ion-label>{{ 'DOWNLOADED' | translate }}</ion-label>
-        <ion-radio value="-downloadtimestamp" (ionSelect)="save()"></ion-radio>
+        <ion-label>{{ 'FIRST_ACCESSED' | translate }}</ion-label>
+        <ion-radio value="" (ionSelect)="save()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>{{ 'NEWEST' | translate }}</ion-label>
@@ -31,6 +31,10 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
         <ion-label>{{ 'CATEGORY' | translate }}</ion-label>
         <ion-radio value="category" (ionSelect)="save()"></ion-radio>
       </ion-item>
+      <ion-item>
+        <ion-label>{{ 'DOWNLOADED' | translate }}</ion-label>
+        <ion-radio value="-downloadtimestamp" (ionSelect)="save()"></ion-radio>
+      </ion-item>
     </ion-list>
   `,
 })
@@ -38,7 +42,7 @@ export class SortPopover {
   sortMethod: string;
 
   constructor(navParams: NavParams, private viewCtrl: ViewController) {
-    this.sortMethod = navParams.get('sortMethod') || '-downloadtimestamp';
+    this.sortMethod = navParams.get('sortMethod') || '';
   }
 
   save() {
