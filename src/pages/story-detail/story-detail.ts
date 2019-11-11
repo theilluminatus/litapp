@@ -111,7 +111,7 @@ export class StoryDetailPage {
 
   openCategoryListPage(order: string, categoryName: string) {
     this.g.onReady().then(() => {
-      const category = this.g.getCategories().find(c => c.name === categoryName);
+      const category = this.g.getClosestCategory(categoryName);
       this.navCtrl.push('TopListPage', {
         category,
         order,

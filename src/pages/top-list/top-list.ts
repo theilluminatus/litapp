@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Story } from '../../models/story';
-import { Stories } from '../../providers/providers';
+import { Stories, Globals } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -10,14 +10,19 @@ import { Stories } from '../../providers/providers';
   templateUrl: 'top-list.html',
 })
 export class TopListPage {
-  stories: Story[];
+  stories: Story[] = [];
   currentpage = 1;
   cat;
   order;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public s: Stories) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public s: Stories, public globals: Globals) {
     this.cat = navParams.get('category');
     this.order = navParams.get('order');
+
+    if (!this.cat) {
+      this.cat = { name: 'Error' };
+      return;
+    }
 
     if (this.order === 'new') {
       this.s.getNew(this.cat.id).subscribe(data => {

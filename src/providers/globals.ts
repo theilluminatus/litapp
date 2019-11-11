@@ -113,6 +113,16 @@ export class Globals {
     return categories;
   }
 
+  getClosestCategory(name: string) {
+    const exactMatch = this.getCategories().find(c => c.name === name);
+    if (exactMatch) return exactMatch;
+
+    const indexMatch = this.getCategories().find(c => c.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+    if (indexMatch) return indexMatch;
+
+    return null;
+  }
+
   getLanguage(id: number) {
     if (this.globals.languages) {
       return Object.keys(this.globals.languages).filter(i => {

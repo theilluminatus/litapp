@@ -20,7 +20,6 @@
 - Recycler list doesn't work as expected (sometimes doesn't go past +- 20 items)
   - Webview version in error log
   - Add toggle to use full list instead of recycler
-- Category link on story-detail page doesn't work (for category Celebrities)
 
 ### Not reproducible
 
