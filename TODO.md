@@ -16,7 +16,6 @@
   - Works correctly when slow internet?
   - Stories in list disappear after few seconds?
   - Story reading page is empty at first
-  - Offline mode toggle disappears after enabling?
 
 ### Not reproducible
 

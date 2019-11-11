@@ -28,6 +28,9 @@ export class SettingsPage {
   isWebApp = false;
 
   translations;
+  requireReloadSettings = ['offlineMode', 'amoledBlackTheme', 'forceNormalList'];
+
+  private prevOptions: any = {};
 
   constructor(
     public navCtrl: NavController,
@@ -59,6 +62,7 @@ export class SettingsPage {
     this.settings.load().then(() => {
       this.settingsReady = true;
       this.options = this.settings.allSettings;
+      this.prevOptions = this.settings.allSettings;
 
       // add settings here & in html (defaults in app.module.ts)
       this.form = this.formBuilder.group({
@@ -72,7 +76,19 @@ export class SettingsPage {
       });
 
       this.form.valueChanges.subscribe(v => {
-        this.settings.merge(this.form.value);
+        // check which setting changed and reload if necessary
+        const diff = Object.keys(v).filter(key => {
+          if (this.prevOptions.hasOwnProperty(key) && this.prevOptions[key] === v[key]) return false;
+          return true;
+        });
+
+        // save settings
+        this.settings.merge(this.form.value).then(() => {
+          this.prevOptions = v;
+          if (diff.filter(setting => this.requireReloadSettings.indexOf(setting) >= 0).length) {
+            window.location.reload();
+          }
+        });
       });
     });
   }
