@@ -9,6 +9,7 @@ import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 import { Stories, Api, Settings, User, Categories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
+import { Category } from '../../models/category';
 
 @IonicPage({ priority: 'low' })
 @Component({
@@ -85,7 +86,7 @@ export class StoryDetailPage {
     });
   }
 
-  category(query: string) {
+  category(query: number) {
     if (this.settings.allSettings.offlineMode) return;
     this.translate.get(['STORYDETAIL_VIEWCAT', 'TOP', 'NEW']).subscribe(values => {
       const alert = this.alertCtrl.create({
@@ -94,13 +95,13 @@ export class StoryDetailPage {
           {
             text: values.TOP,
             handler: d => {
-              this.openCategoryListPage('top', query);
+              this.openCategoryListPage(query, 'top');
             },
           },
           {
             text: values.NEW,
             handler: d => {
-              this.openCategoryListPage('new', query);
+              this.openCategoryListPage(query, 'new');
             },
           },
         ],
@@ -109,11 +110,12 @@ export class StoryDetailPage {
     });
   }
 
-  openCategoryListPage(order: string, categoryName: string) {
-    const category = this.c.getClosestCategory(categoryName);
-    this.navCtrl.push('TopListPage', {
-      category,
-      order,
+  openCategoryListPage(catID: number, sortOrder: string) {
+    this.c.get(catID).subscribe((cat: Category) => {
+      this.navCtrl.push('TopListPage', {
+        category: cat,
+        order: sortOrder,
+      });
     });
   }
 

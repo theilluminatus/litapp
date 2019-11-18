@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Story } from '../../models/story';
 import { Stories, Globals } from '../../providers/providers';
+import { Category } from '../../models/category';
 
 @IonicPage()
 @Component({
@@ -12,15 +13,15 @@ import { Stories, Globals } from '../../providers/providers';
 export class TopListPage {
   stories: Story[] = [];
   currentpage = 1;
-  cat;
-  order;
+  cat: Category;
+  order: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public s: Stories, public globals: Globals) {
     this.cat = navParams.get('category');
     this.order = navParams.get('order');
 
     if (!this.cat) {
-      this.cat = { name: 'Error' };
+      this.cat = new Category({ name: 'Error' });
       return;
     }
 

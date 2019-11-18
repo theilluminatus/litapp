@@ -36,10 +36,10 @@ export class ExplorePage {
     });
   }
 
-  openCategory(cat, order = 'top') {
+  openCategory(cat: Category, sortOrder: string) {
     this.navCtrl.push('TopListPage', {
-      order,
       category: cat,
+      order: sortOrder,
     });
   }
 

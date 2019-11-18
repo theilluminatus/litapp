@@ -1,64 +1,83 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title></ion-title>
     <ion-buttons end>
-
-      <button ion-button icon-only
+      <button
+        ion-button
+        icon-only
         (click)="refreshStory()"
         *ngIf="!settings.allSettings.offlineMode"
-        [tooltip]="'REFRESH_BUTTON' | translate" event="press" navTooltip>
+        [tooltip]="'REFRESH_BUTTON' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="refresh"></ion-icon>
       </button>
 
-      <button end ion-button icon-only (click)="export($event)"
-        [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOADFILE' | translate" event="press" navTooltip>
+      <button
+        end
+        ion-button
+        icon-only
+        (click)="export($event)"
+        [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOADFILE' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="code-download"></ion-icon>
-		  </button>
+      </button>
 
-      <button ion-button icon-only (click)="toggleDownload()"
-        [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOAD' | translate" event="press" navTooltip>
+      <button
+        ion-button
+        icon-only
+        (click)="toggleDownload()"
+        [tooltip]="'STORYDETAIL_TOOLTIP_DOWNLOAD' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon [name]="story.downloaded ? 'trash' : 'download'"></ion-icon>
       </button>
 
-      <button ion-button icon-only
-        *ngIf="user.isLoggedIn()" (click)="openListPicker($event)"
-        [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
+      <button
+        ion-button
+        icon-only
+        *ngIf="user.isLoggedIn()"
+        (click)="openListPicker($event)"
+        [tooltip]="'BOOKMARK_BUTTON' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="bookmark"></ion-icon>
       </button>
 
-      <button ion-button icon-only
+      <button
+        ion-button
+        icon-only
         (click)="openLink()"
         *ngIf="!settings.allSettings.offlineMode"
-        [tooltip]="'OPENLINK_BUTTON' | translate" event="press" navTooltip>
+        [tooltip]="'OPENLINK_BUTTON' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="open"></ion-icon>
       </button>
 
-      <button ion-button icon-only
-        (click)="share()"
-        [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
+      <button ion-button icon-only (click)="share()" [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="share"></ion-icon>
       </button>
-
-   </ion-buttons>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
   <h2>{{story.title}}</h2>
   <p>{{story.description}}</p>
 
   <p>
     <button ion-button *ngIf="story.series > 0 && !settings.allSettings.offlineMode" (click)="showSeries()">
-      <ion-icon name="albums"></ion-icon>&nbsp;
-      {{'STORYDETAIL_SERIES' | translate }}
+      <ion-icon name="albums"></ion-icon>&nbsp; {{'STORYDETAIL_SERIES' | translate }}
     </button>
     <button ion-button *ngIf="!settings.allSettings.offlineMode" (click)="showRelated()">
-      <ion-icon name="pricetags"></ion-icon>&nbsp;
-      {{'STORYDETAIL_RELATED' | translate }}
+      <ion-icon name="pricetags"></ion-icon>&nbsp; {{'STORYDETAIL_RELATED' | translate }}
     </button>
   </p>
 
@@ -72,7 +91,7 @@
   </p>
 
   <p><strong>{{'AUTHOR' | translate}}: </strong> <a (click)="showAuthor(story.author)">{{story.author.name}}</a></p>
-  <p *ngIf="story.category"><strong>{{'CATEGORY' | translate}}: </strong> <a (click)="category(story.category)">{{story.category}}</a></p>
+  <p *ngIf="story.category"><strong>{{'CATEGORY' | translate}}: </strong> <a (click)="category(story.categoryID)">{{story.category}}</a></p>
 
   <p class="tags" *ngIf="story.tags && story.tags.length > 0">
     <strong>{{'TAGS' | translate}}: </strong>
@@ -96,12 +115,11 @@
   <ng-container *ngIf="story.comments && story.commentsenabled">
     <h2>{{'COMMENTS' | translate}}</h2>
     <ion-list class="comments">
-    	<ion-item *ngFor="let comment of story.comments">
-    		<h3>{{comment.user}}</h3>
-    		<h6>{{comment.timestamp}}</h6>
-    		<p>{{comment.text}}</p>
-    	</ion-item>
+      <ion-item *ngFor="let comment of story.comments">
+        <h3>{{comment.user}}</h3>
+        <h6>{{comment.timestamp}}</h6>
+        <p>{{comment.text}}</p>
+      </ion-item>
     </ion-list>
   </ng-container>
-
 </ion-content>

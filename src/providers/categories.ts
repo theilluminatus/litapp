@@ -56,6 +56,12 @@ export class Categories {
     };
   }
 
+  get(id: number) {
+    return this.categories.map((cats: Category[]) => {
+      return cats.find((cat: Category) => cat.id === id);
+    });
+  }
+
   getAll() {
     // Current known types are 'master' (custom injected), 'story', 'poem', and 'illustra'
     // 'illustra' is not supported at this time (needs work to support the new comic format)
@@ -84,18 +90,8 @@ export class Categories {
 
   getType(type: string) {
     // TODO: Throw error for unsupported types
-    return this.categories.map((cats: Category[]) => {
+    return this.getAllSorted().map((cats: Category[]) => {
       return cats.filter((c: Category) => c.type === type);
     });
-  }
-
-  getClosestCategory(name: string) {
-    const exactMatch = this.categories.find((c: Category) => c.name === name);
-    if (exactMatch) return exactMatch;
-
-    const indexMatch = this.categories.find((c: Category) => c.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
-    if (indexMatch) return indexMatch;
-
-    return null;
   }
 }
