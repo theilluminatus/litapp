@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Globals } from '../../providers/providers';
+import { Globals, Categories } from '../../providers/providers';
 import { TranslateService } from '@ngx-translate/core';
+import { Category } from '../../models/category';
 
 @IonicPage({ priority: 'high' })
 @Component({
@@ -10,22 +11,27 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'explore.html',
 })
 export class ExplorePage {
-  categories = [];
+  groupedCats: Category[][];
   popularTags: any = [];
   foldCats = true;
   foldTags = true;
 
-  constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public g: Globals) {
-    this.translate.get(['EXPLORE_ALLCAT', 'EXPLORE_ALLCATDESCR']).subscribe(values => {
-      this.g.onReady().then(() => {
-        this.categories = this.g.getCategories();
-        this.categories.unshift({ id: 0, name: values.EXPLORE_ALLCAT });
+  constructor(
+    public translate: TranslateService,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public g: Globals,
+    public c: Categories,
+  ) {
+    this.c.getAllSortedGrouped().subscribe((cats: Category[][]) => {
+      this.groupedCats = cats;
+    });
 
-        this.g.getPopularTags().subscribe(tags => {
-          if (tags) {
-            this.popularTags = tags;
-          }
-        });
+    this.g.onReady().then(() => {
+      this.g.getPopularTags().subscribe(tags => {
+        if (tags) {
+          this.popularTags = tags;
+        }
       });
     });
   }

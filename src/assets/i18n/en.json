@@ -137,11 +137,12 @@
   "LISTVIEW_EXPORT_JSON": "Export as JSON",
   "LISTVIEW_EXPORT_MARKDOWN": "Export as Markdown",
 
-  "TOPLIST_TITLE_PART": "Top stories of",
-  "NEWLIST_TITLE_PART": "New stories of",
+  "TOPLIST_TITLE_PART": "Top",
+  "NEWLIST_TITLE_PART": "New",
 
-  "EXPLORE_TOPTAGS": "Most used tags",
+  "EXPLORE_TOPTAGS": "Most popular tags",
   "EXPLORE_ALLCAT": "All",
+  "EXPLORE_ALLCATDESCR": "All Categories",
 
   "OPENLINK_DESCRIPTION": "Paste a hyperlink below to open it directly in the app. You can view stories and authorpages this way.",
   "OPENLINK_STORYWARNING": "The first search result should be the correct story.",

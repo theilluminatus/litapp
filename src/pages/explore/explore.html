@@ -1,53 +1,49 @@
 <ion-header>
-	<ion-navbar>
-		<button ion-button icon-only menuToggle>
-			<ion-icon name="menu"></ion-icon>
-		</button>
-		<ion-title>{{ 'EXPLORE' | translate }}</ion-title>
-	</ion-navbar>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'EXPLORE' | translate }}</ion-title>
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+  <ion-card>
+    <ion-card-header (click)="foldCats = !foldCats">
+      <ion-icon [name]="foldCats ? 'arrow-dropright':'arrow-dropdown'"></ion-icon>
+      {{ 'CATEGORIES' | translate }}
+    </ion-card-header>
 
-	<ion-card>
-		<ion-card-header (click)="foldCats = !foldCats">
-			<ion-icon [name]="foldCats ? 'arrow-dropright':'arrow-dropdown'"></ion-icon>
-			{{ 'CATEGORIES' | translate }}
-		</ion-card-header>
+    <ion-card-content>
+      <ion-list [class.folded]="foldCats">
+        <ion-item-group *ngFor="let catGrp of groupedCats">
+          <button ion-item *ngFor="let cat of catGrp">
+            <button ion-button outline item-end (click)="openCategory(cat, 'top')">Top</button>
+            <button ion-button outline item-end (click)="openCategory(cat, 'new')">New</button>
 
-		<ion-card-content>
-			<ion-list [class.folded]="foldCats">
-				<button ion-item *ngFor="let cat of (categories | orderBy: 'name')">
-					<button ion-button outline item-end (click)="openCategory(cat, 'top')">Top</button>
-					<button ion-button outline item-end (click)="openCategory(cat, 'new')">New</button>
+            <h2>{{ cat.name }}</h2>
+            <p>{{ cat.description }}</p>
+          </button>
+          <ion-item-divider></ion-item-divider>
+        </ion-item-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-					<h2>{{ cat.name }}</h2>
-					<p>{{ cat.description }}</p>
+  <ion-card>
+    <ion-card-header (click)="foldTags = !foldTags">
+      <ion-icon [name]="foldTags ? 'arrow-dropright':'arrow-dropdown'"></ion-icon>
+      {{ 'EXPLORE_TOPTAGS' | translate }}
+    </ion-card-header>
 
-				</button>
-			</ion-list>
-		</ion-card-content>
-	</ion-card>
+    <ion-card-content>
+      <ion-spinner name="crescent" *ngIf="!popularTags.length"></ion-spinner>
 
-	<ion-card>
-
-		<ion-card-header (click)="foldTags = !foldTags">
-			<ion-icon [name]="foldTags ? 'arrow-dropright':'arrow-dropdown'"></ion-icon>
-			{{ 'EXPLORE_TOPTAGS' | translate }}
-		</ion-card-header>
-
-		<ion-card-content>
-
-			<ion-spinner name="crescent" *ngIf="!popularTags.length"></ion-spinner>
-
-			<ion-list [class.folded]="foldTags">
-				<button ion-item *ngFor="let tag of popularTags" (click)="openTag(tag.tag)">
-
-					<h2>{{ tag.tag }} <small>({{ tag.cnt }})</small></h2>
-
-				</button>
-			</ion-list>
-		</ion-card-content>
-	</ion-card>
+      <ion-list [class.folded]="foldTags">
+        <button ion-item *ngFor="let tag of popularTags" (click)="openTag(tag.tag)">
+          <h2>{{ tag.tag }} <small>({{ tag.cnt }})</small></h2>
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

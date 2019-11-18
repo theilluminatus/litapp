@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, Globals, Api, Settings, User } from '../../providers/providers';
+import { Stories, Api, Settings, User, Categories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage({ priority: 'low' })
@@ -25,7 +25,7 @@ export class StoryDetailPage {
     public alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
     public translate: TranslateService,
-    public g: Globals,
+    public c: Categories,
     public stories: Stories,
     public settings: Settings,
     public user: User,
@@ -110,12 +110,10 @@ export class StoryDetailPage {
   }
 
   openCategoryListPage(order: string, categoryName: string) {
-    this.g.onReady().then(() => {
-      const category = this.g.getClosestCategory(categoryName);
-      this.navCtrl.push('TopListPage', {
-        category,
-        order,
-      });
+    const category = this.c.getClosestCategory(categoryName);
+    this.navCtrl.push('TopListPage', {
+      category,
+      order,
     });
   }
 

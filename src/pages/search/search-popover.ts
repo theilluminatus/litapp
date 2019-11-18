@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
-import { Globals } from '../../providers/globals';
+import { Categories } from '../../providers/providers';
+import { Category } from '../../models/category';
 
 @IonicPage()
 @Component({
@@ -87,7 +88,7 @@ import { Globals } from '../../providers/globals';
       <ion-label>{{ 'SEARCH_CATEGORY' | translate }}</ion-label>
       <ion-select [(ngModel)]="options.category" [multiple]="!options.astags">
         <ion-option value="" *ngIf="options.astags">{{ 'SEARCH_ANYCAT' | translate }}</ion-option>
-        <ion-option *ngFor="let cat of categories | orderBy: 'name'" [value]="cat.id">{{ cat.name }}</ion-option>
+        <ion-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</ion-option>
       </ion-select>
     </ion-item>
 
@@ -178,10 +179,10 @@ export class SearchPopover {
   options;
   categories;
 
-  constructor(navParams: NavParams, private viewCtrl: ViewController, public g: Globals) {
+  constructor(navParams: NavParams, private viewCtrl: ViewController, public c: Categories) {
     this.options = navParams.get('options');
-    this.g.onReady().then(() => {
-      this.categories = this.g.getCategories();
+    this.c.getAllSorted().subscribe((cats: Category[]) => {
+      this.categories = cats;
     });
   }
 
