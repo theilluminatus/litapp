@@ -1,8 +1,6 @@
-
 import { Story } from './story';
 
 export class List {
-
   constructor(fields: any) {
     // Quick and dirty extend/assign fields to this model
     for (const f in fields) {
@@ -10,7 +8,6 @@ export class List {
       this[f] = fields[f];
     }
   }
-
 }
 
 export interface List {
@@ -25,6 +22,7 @@ export interface List {
   isdeletable: boolean;
   createtimestamp: string;
   updatetimestamp: string;
+  lastPage: number;
 
   stories: Story[];
 }

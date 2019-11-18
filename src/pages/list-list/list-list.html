@@ -1,34 +1,36 @@
 <ion-header>
-
   <ion-navbar>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ 'LISTLIST_TITLE' | translate }}</ion-title>
     <ion-buttons end>
-      <button end ion-button icon-only (click)="refreshLists(true)"
-        [tooltip]="'REFRESH_BUTTON' | translate" event="press" navTooltip>
+      <button end ion-button icon-only (click)="refreshLists(true)" [tooltip]="'REFRESH_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="refresh"></ion-icon>
       </button>
-      <button end ion-button icon-only (click)="addList()"
-        [tooltip]="'ADD_BUTTON' | translate" event="press" navTooltip>
-       <ion-icon name="add"></ion-icon>
-     </button>
-   </ion-buttons>
+      <button end ion-button icon-only (click)="addList()" [tooltip]="'ADD_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
   <ion-spinner *ngIf="showLoader" style="width: 100%; margin-top: 25px;"></ion-spinner>
 
   <ion-list>
     <ion-item-sliding (click)="openList(list)" *ngFor="let list of (lists | orderBy:'id')" #slidingItem>
       <button ion-item>
         <ion-icon class="indicator" [name]="!list.visibility ? 'lock' : ''"></ion-icon>
-        <h2>{{list.name}} <small>({{list.size}})</small></h2>
+        <!-- Color and values here aim to represent the actual story count instead of the 
+        potentially incorrect count reported by the lists api. If the counts do not agree,
+        the text is greyed out. -->
+        <h2>
+          {{list.name}}
+          <small [ngStyle]="{'color': list.stories && (list.stories.length != list.size) ? '#666' : 'white'}">
+            ({{list.stories ? list.stories.length : list.size}})
+          </small>
+        </h2>
         <p>{{list.description}}</p>
       </button>
       <ion-item-options side="right" *ngIf="list.isdeletable">
@@ -43,5 +45,4 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-
 </ion-content>
