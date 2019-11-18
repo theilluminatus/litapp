@@ -71,7 +71,7 @@ export class Categories {
   }
 
   getAllSortedGrouped() {
-    return this.getAll().map((cats: Category[]) => {
+    return this.getAllSorted().map((cats: Category[]) => {
       const groupedCats: Category[][] = [];
 
       this.sortMap.forEach((v: number, k: string) => {

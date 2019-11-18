@@ -225,7 +225,7 @@ export class Lists {
               list.stories.splice(i, 1);
             }
           });
-          list.size = -1;
+          list.size -= 1;
           this.storage.set(LIST_KEY, this.lists);
         }
       });
