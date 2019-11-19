@@ -16,14 +16,12 @@
 
 ### Not reproducible
 
-- List story count != item count (problem server side)
 - Fix rating sometimes shows as x.xx (?)
 - Downloaded stories disappearing without internet connection?
 - Downloading stories to file doesn't always work (ENCODING_ERR?)
 
 ## MISSING DATA
 
-- Find API route to get all categories (old was removed, now hardcoded)
 - Find API route for story comments
 - Find better API route for getting author following status together with bio
 - Find better API route to get more story metadata (especially 'new' badge) for improved story refresh

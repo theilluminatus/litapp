@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Category } from '../models/category';
 import { TranslateService } from '@ngx-translate/core';
 import { Api } from './api/api';
+import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 
 @Injectable()
 export class Categories {
@@ -89,7 +90,10 @@ export class Categories {
   }
 
   getType(type: string) {
-    // TODO: Throw error for unsupported types
+    if (!this.sortMap.has(type)) {
+      console.error('categories.getType', [type], 'Unsupported Category Type');
+      return new EmptyObservable<Categories[]>();
+    }
     return this.getAllSorted().map((cats: Category[]) => {
       return cats.filter((c: Category) => c.type === type);
     });
