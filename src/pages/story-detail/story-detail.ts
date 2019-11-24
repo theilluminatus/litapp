@@ -79,14 +79,14 @@ export class StoryDetailPage {
     this.stories.rate(this.story, this.myrating);
   }
 
-  search(query: string) {
+  search(query: string | number) {
     if (this.settings.allSettings.offlineMode) return;
     this.navCtrl.push('SearchPage', {
       query,
     });
   }
 
-  category(query: number) {
+  category(story: Story) {
     if (this.settings.allSettings.offlineMode) return;
     this.translate.get(['STORYDETAIL_VIEWCAT', 'TOP', 'NEW']).subscribe(values => {
       const alert = this.alertCtrl.create({
@@ -95,13 +95,13 @@ export class StoryDetailPage {
           {
             text: values.TOP,
             handler: d => {
-              this.openCategoryListPage(query, 'top');
+              this.openCategoryListPage(story, 'top');
             },
           },
           {
             text: values.NEW,
             handler: d => {
-              this.openCategoryListPage(query, 'new');
+              this.openCategoryListPage(story as any, 'new');
             },
           },
         ],
@@ -110,8 +110,8 @@ export class StoryDetailPage {
     });
   }
 
-  openCategoryListPage(catID: number, sortOrder: string) {
-    this.c.get(catID).subscribe((cat: Category) => {
+  openCategoryListPage(story: Story, sortOrder: string) {
+    this.c.getClosestCategory((story.categoryID || story.category).toString()).subscribe((cat: Category) => {
       this.navCtrl.push('TopListPage', {
         category: cat,
         order: sortOrder,

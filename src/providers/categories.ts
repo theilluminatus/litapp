@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 
 import { Category } from '../models/category';
-import { TranslateService } from '@ngx-translate/core';
 import { Api } from './api/api';
-import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 
 @Injectable()
 export class Categories {
@@ -86,6 +86,18 @@ export class Categories {
       });
 
       return groupedCats;
+    });
+  }
+
+  // query can be category id or name (for backwards compatibility)
+  getClosestCategory(query: string) {
+    return this.getAll().map(categories => {
+      return categories.find(c => {
+        if (c.id && c.id.toString() === query) return true;
+        if (c.name && c.name === query) return true;
+        if (c.name && c.name.toLowerCase().indexOf(query.toLowerCase()) > -1) return true;
+        return false;
+      });
     });
   }
 
