@@ -21,6 +21,7 @@ export interface Story {
   rating: number;
   myrating: number;
   category: string;
+  categoryID: number;
   lang: string;
   tags: string[];
   series: number;

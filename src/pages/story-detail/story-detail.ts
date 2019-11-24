@@ -7,8 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, Globals, Api, Settings, User } from '../../providers/providers';
+import { Stories, Api, Settings, User, Categories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
+import { Category } from '../../models/category';
 
 @IonicPage({ priority: 'low' })
 @Component({
@@ -25,7 +26,7 @@ export class StoryDetailPage {
     public alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
     public translate: TranslateService,
-    public g: Globals,
+    public c: Categories,
     public stories: Stories,
     public settings: Settings,
     public user: User,
@@ -85,7 +86,7 @@ export class StoryDetailPage {
     });
   }
 
-  category(query: string) {
+  category(query: number) {
     if (this.settings.allSettings.offlineMode) return;
     this.translate.get(['STORYDETAIL_VIEWCAT', 'TOP', 'NEW']).subscribe(values => {
       const alert = this.alertCtrl.create({
@@ -94,13 +95,13 @@ export class StoryDetailPage {
           {
             text: values.TOP,
             handler: d => {
-              this.openCategoryListPage('top', query);
+              this.openCategoryListPage(query, 'top');
             },
           },
           {
             text: values.NEW,
             handler: d => {
-              this.openCategoryListPage('new', query);
+              this.openCategoryListPage(query, 'new');
             },
           },
         ],
@@ -109,12 +110,11 @@ export class StoryDetailPage {
     });
   }
 
-  openCategoryListPage(order: string, categoryName: string) {
-    this.g.onReady().then(() => {
-      const category = this.g.getClosestCategory(categoryName);
+  openCategoryListPage(catID: number, sortOrder: string) {
+    this.c.get(catID).subscribe((cat: Category) => {
       this.navCtrl.push('TopListPage', {
-        category,
-        order,
+        category: cat,
+        order: sortOrder,
       });
     });
   }

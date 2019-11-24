@@ -81,6 +81,7 @@ export class Lists {
               isdeletable: l.is_deletable,
               createtimestamp: l.created_at,
               updatetimestamp: l.updated_at,
+              lastPage: -1,
             }),
         );
         this.storage.set(LIST_KEY, this.lists);
@@ -119,7 +120,7 @@ export class Lists {
             newPartialList.stories = newPartialList.stories.concat(l.stories);
           }
 
-          if (l.size > newPartialList.stories.length) {
+          if (l.size > newPartialList.stories.length && page < newPartialList.lastPage) {
             const next = page + 1;
             // tslint:disable-next-line: prefer-template
             this.api.updateLoader(Math.round((newPartialList.stories.length / l.size) * 100) + '%');
@@ -166,6 +167,9 @@ export class Lists {
             updatetimestamp: d.list.updated_at,
           });
         }
+
+        // Update page numbers (work around for "inconsistent story count" bug)
+        newList.lastPage = d.works.meta.last_page;
 
         newList.stories = d.works.data.map(story => this.s.extactFromList(story));
 
@@ -221,7 +225,7 @@ export class Lists {
               list.stories.splice(i, 1);
             }
           });
-          list.size = -1;
+          list.size -= 1;
           this.storage.set(LIST_KEY, this.lists);
         }
       });

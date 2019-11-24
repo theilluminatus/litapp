@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
-import { Lists, Api } from '../../providers/providers';
+import { Lists, Api, Categories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
@@ -22,6 +22,7 @@ export class ListViewPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public l: Lists,
+    public c: Categories,
     private popoverCtrl: PopoverController,
     public translate: TranslateService,
     public file: File,

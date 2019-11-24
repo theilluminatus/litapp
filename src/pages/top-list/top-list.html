@@ -1,19 +1,16 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title >
+    <ion-title>
       <span *ngIf='order=="top"; else new'>
-        {{'TOPLIST_TITLE_PART' | translate}} {{ cat.name }}
+        {{ cat.name }} ({{'TOPLIST_TITLE_PART' | translate}})
       </span>
       <ng-template #new>
-        {{'NEWLIST_TITLE_PART' | translate}} {{ cat.name }}
+        {{ cat.name }} ({{'NEWLIST_TITLE_PART' | translate}})
       </ng-template>
     </ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-	<story-list [stories]="stories" infinite="true" (ionInfinite)="loadMore($event)"></story-list>
+  <story-list [stories]="stories" infinite="true" (ionInfinite)="loadMore($event)"></story-list>
 </ion-content>

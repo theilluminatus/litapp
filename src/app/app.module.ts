@@ -22,7 +22,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Device } from '@ionic-native/device';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
-import { Stories, Analytics, Authors, Lists, Feed, Globals, Settings, User, Api } from '../providers/providers';
+import { Stories, Categories, Analytics, Authors, Lists, Feed, Globals, Settings, User, Api } from '../providers/providers';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -73,6 +73,7 @@ export function provideSettings(storage: Storage) {
     Api,
     Analytics,
     Stories,
+    Categories,
     Authors,
     Lists,
     Feed,
