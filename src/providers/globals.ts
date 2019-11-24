@@ -13,7 +13,7 @@ import { GLOBALS_KEY, VERSION_KEY } from './db';
 export class Globals {
   private globals;
   private ready;
-  private version = 17; // just increase number, unrelated to version number
+  private version = 18; // just increase number, unrelated to version number
 
   constructor(
     public api: Api,
