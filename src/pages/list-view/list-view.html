@@ -7,7 +7,9 @@
       <ion-icon [name]="!list?.visibility ? 'lock' : ''"></ion-icon>
       {{ list?.name }}
       <small [ngStyle]="{'color': (stories && stories.length != list.size) ? '#666' : 'white'}">
-        ({{stories.length}})
+        <ng-container *ngIf="stories">
+          ({{stories.length}})
+        </ng-container>
       </small>
     </ion-title>
     <ion-buttons end>
