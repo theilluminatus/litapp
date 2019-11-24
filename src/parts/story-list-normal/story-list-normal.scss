@@ -1,23 +1,21 @@
 story-list-normal {
+  .empty {
+    text-align: center;
+    border-top: none;
+    opacity: 0.7;
+    margin: 0;
+    padding-top: 10px;
+  }
 
-	.empty {
-		text-align: center;
-		border-top: none;
-		opacity: 0.7;
-		margin: 0;
-    	padding-top: 10px;
-	}
+  .item-divider {
+    background: none;
+    text-align: center;
+    border: none;
+    margin-top: 7px;
+    font-weigth: bold;
+  }
 
-	.item-divider {
-		background: none;
-    	text-align: center;
-    	border: none;
-    	margin-top: 7px;
-    	font-weigth: bold;
-	}
-
-	.list-md .item-block .item-inner {
-		border-color: #666;
-	}
-
+  .list-md .item-block .item-inner {
+    border-color: #666;
+  }
 }

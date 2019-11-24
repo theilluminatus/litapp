@@ -1,23 +1,18 @@
 <ion-header>
-
   <ion-navbar>
-  	<button ion-button icon-only menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ 'FEED_TITLE' | translate }}</ion-title>
     <ion-buttons end>
-      <button end ion-button icon-only (click)="openFollowing()"
-        [tooltip]="'FEED_TOOLTIP_FOLLOWING' | translate" event="press" navTooltip>
-       <ion-icon name="people"></ion-icon>
-     </button>
-   </ion-buttons>
- </ion-navbar>
-
+      <button end ion-button icon-only (click)="openFollowing()" [tooltip]="'FEED_TOOLTIP_FOLLOWING' | translate" event="press" navTooltip>
+        <ion-icon name="people"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-
   <ion-refresher (ionRefresh)="refresh($event, false, true)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -26,22 +21,19 @@
 
   <ion-list [virtualScroll]="feed" sliding="false" [headerFn]="showNewLine">
     <div *virtualItem="let item; let i=index">
-
       <ng-container *ngIf="!item.story; else s">
         <button ion-item approxItemHeight="90px" class="author" (click)="openAuthor(item.author,$event)">
-
-            <ion-avatar large>
-              <ion-img cache="true" [src]="item.author?.picture" *ngIf="item.author?.picture"></ion-img>
-            </ion-avatar>
-            <p>
-              <a>{{item.author?.name}}</a>
-              {{ 'FEED_EDITED' | translate }} {{item.text?.join(', ')}}
-            </p>
-            <p>{{item.timestamp*1000 | date}}</p>
-            
+          <ion-avatar large>
+            <ion-img cache="true" [src]="item.author?.picture" *ngIf="item.author?.picture"></ion-img>
+          </ion-avatar>
+          <p>
+            <a>{{item.author?.name}}</a>
+            {{ 'FEED_EDITED' | translate }} {{item.text?.join(', ')}}
+          </p>
+          <p>{{item.timestamp*1000 | date}}</p>
         </button>
       </ng-container>
-        
+
       <ng-template #s>
         <story-list-item [story]="item.story"></story-list-item>
       </ng-template>
@@ -49,13 +41,10 @@
       <p *ngIf="item.id==lastviewedid && i > 0" class="oldline">
         Older items
       </p>
-      
     </div>
-
   </ion-list>
 
   <ion-infinite-scroll [enabled]="enableInfinite" (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
 </ion-content>

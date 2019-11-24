@@ -1,8 +1,6 @@
-
 import { Story } from './story';
 
 export class Author {
-
   constructor(fields: any) {
     // Quick and dirty extend/assign fields to this model
     for (const f in fields) {
@@ -10,7 +8,6 @@ export class Author {
       this[f] = fields[f];
     }
   }
-
 }
 
 export interface Author {

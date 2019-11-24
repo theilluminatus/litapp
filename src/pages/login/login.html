@@ -1,17 +1,12 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
   <form (submit)="login($event)">
     <ion-list>
-
       <ion-item>
         <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
         <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
@@ -25,12 +20,10 @@
       <div padding>
         <button ion-button color="primary" block>{{ 'LOGIN' | translate }}</button>
       </div>
-
     </ion-list>
   </form>
 
   <div padding>
     <button ion-button outline color="primary" block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
   </div>
-
 </ion-content>

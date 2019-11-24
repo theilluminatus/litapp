@@ -1,29 +1,27 @@
 page-story-detail {
+  h2 {
+    margin-top: 1.6rem !important;
+  }
 
-	h2 {
-		margin-top: 1.6rem !important;
-	}
+  .comments p {
+    white-space: pre-wrap;
+  }
 
-	.comments p {
-		white-space: pre-wrap;
-	}
+  .rate {
+    padding: 0 10px;
+    display: flex;
+    flex-flow: row no-wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
 
-	.rate {
-	    padding: 0 10px;
-	    display: flex;
-	    flex-flow: row no-wrap;
-	    justify-content: space-around;
-	    align-items: center;
-	    align-content: center;
+    .range {
+      flex-grow: 1;
+      padding: 0 20px 0 0;
+    }
 
-	    .range {
-	      flex-grow: 1;
-	      padding: 0 20px 0 0;
-	    }
-
-	    .range-md .range-pin {
-	      z-index: 9999;
-		}
-	}
-
+    .range-md .range-pin {
+      z-index: 9999;
+    }
+  }
 }

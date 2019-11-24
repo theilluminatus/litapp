@@ -1,9 +1,8 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
-$font-path: "../assets/fonts";
+$font-path: '../assets/fonts';
 
-@import "ionic.globals";
-
+@import 'ionic.globals';
 
 // Shared Variables
 // --------------------------------------------------
@@ -12,13 +11,12 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$text-color:        #fff;
-$background-color:  #242424;
+$text-color: #fff;
+$background-color: #242424;
 
 $refresher-icon-color: #666;
 $refresher-border-color: transparent;
 $img-placeholder-background: #666;
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -29,51 +27,41 @@ $img-placeholder-background: #666;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  red: #F44336,
-  blue: #3F51B5,
-  yellow: #FFEB3B,
-  green: #388E3C,
-
-  primary:    #2196F3,
-  secondary:  #3F51B5,
-  danger:     #F44336,
-  light:      #222,
-  lighter:      #111,
-  dark:       #f4f4f4,
-  darker:       #fff,
+  red: #f44336,
+  blue: #3f51b5,
+  yellow: #ffeb3b,
+  green: #388e3c,
+  primary: #2196f3,
+  secondary: #3f51b5,
+  danger: #f44336,
+  light: #222,
+  lighter: #111,
+  dark: #f4f4f4,
+  darker: #fff,
 );
-
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-$spinner-md-crescent-color: #3F51B5;
-$spinner-md-ios-color: #3F51B5;
-$spinner-md-bubbles-color:	#3F51B5;
-$spinner-md-circles-color:	#3F51B5;
-$spinner-md-crescent-color:	#3F51B5;
-$spinner-md-dots-color: #3F51B5;
+$spinner-md-crescent-color: #3f51b5;
+$spinner-md-ios-color: #3f51b5;
+$spinner-md-bubbles-color: #3f51b5;
+$spinner-md-circles-color: #3f51b5;
+$spinner-md-crescent-color: #3f51b5;
+$spinner-md-dots-color: #3f51b5;
 
 $card-md-background-color: #2a2a2a;
 $card-md-header-color: #fff;
-$card-md-text-color	: #ddd;
-
-
+$card-md-text-color: #ddd;
 
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
 
 // App Theme
 // --------------------------------------------------
@@ -82,19 +70,17 @@ $card-md-text-color	: #ddd;
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.dark";
-
+@import 'ionic.theme.dark';
 
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionic.ionicons";
-
+@import 'ionic.ionicons';
 
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+@import 'roboto';
+@import 'noto-sans';

@@ -1,4 +1,3 @@
-
 export const STARREDQUERIES_KEY: string = '_queries';
 export const RECENTQUERIES_KEY: string = '_recentqueries';
 export const STORYSTYLEOPTIONS_KEY: string = '_storystyle';

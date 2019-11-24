@@ -1,20 +1,14 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{'SERIES_TITLE' | translate}}</ion-title>
     <ion-buttons end>
-
-      <button ion-button icon-only (click)="download()"
-        [tooltip]="'SERIES_DOWNLOAD' | translate" event="press" navTooltip>
+      <button ion-button icon-only (click)="download()" [tooltip]="'SERIES_DOWNLOAD' | translate" event="press" navTooltip>
         <ion-icon name="download"></ion-icon>
       </button>
-
-   </ion-buttons>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-	<story-list [stories]="series"></story-list>
+  <story-list [stories]="series"></story-list>
 </ion-content>

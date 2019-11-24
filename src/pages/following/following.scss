@@ -1,12 +1,10 @@
 page-following {
+  ion-avatar {
+    float: left;
+    margin-right: 10px;
+  }
 
-	ion-avatar {
-		float: left;
-		margin-right: 10px;
-	}
-
-	.list-md .item-block .item-inner {
-		border-color: #666;
-	}
-
+  .list-md .item-block .item-inner {
+    border-color: #666;
+  }
 }

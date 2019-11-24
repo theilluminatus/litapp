@@ -1,28 +1,22 @@
 <ion-header>
-
   <ion-navbar>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ 'ACCOUNT_TITLE' | translate }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <button *ngIf="!user.isLoggedIn()" ion-button block (click)="login()">
+    {{ 'LOGIN' | translate }}
+  </button>
 
-	<button *ngIf="!user.isLoggedIn()" ion-button block (click)="login()">
-		{{ 'LOGIN' | translate }}
-	</button>
+  <ng-container *ngIf="user.isLoggedIn()">
+    <p><strong>{{'USERNAME' | translate}}:</strong> {{user.getDetails().username}}</p>
 
-	<ng-container *ngIf="user.isLoggedIn()">
-
-		<p><strong>{{'USERNAME' | translate}}:</strong> {{user.getDetails().username}}</p>
-
-		<button ion-button block (click)="logout()">
-			{{ 'LOGOUT' | translate }}
-		</button>
-	</ng-container>
-
+    <button ion-button block (click)="logout()">
+      {{ 'LOGOUT' | translate }}
+    </button>
+  </ng-container>
 </ion-content>

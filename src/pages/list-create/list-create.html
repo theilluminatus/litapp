@@ -1,5 +1,4 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{ 'LISTCREATE_TITLE' | translate }}</ion-title>
     <ion-buttons start>
@@ -19,9 +18,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">

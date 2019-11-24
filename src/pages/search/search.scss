@@ -1,29 +1,25 @@
 page-search {
+  .savebutton {
+    margin-left: -40px !important;
+    position: relative;
+    right: 10px;
+  }
 
-	.savebutton {
-		margin-left: -40px !important;
-		position: relative;
-		right: 10px;
-	}
+  .bar-button-menutoggle {
+    display: inline;
+  }
 
-	.bar-button-menutoggle {
-	     display: inline;
-	}
+  .starredmenu {
+    .item-inner {
+      padding: 0 16px;
+    }
 
-	.starredmenu {
+    [item-end] .icon {
+      margin: 0 3px;
+    }
 
-		.item-inner {
-			padding: 0 16px;
-		}
-
-		[item-end] .icon {
-			margin: 0 3px;
-		}
-
-		.item-divider {
-			opacity: 0.33;
-		}
-
-	}
-
+    .item-divider {
+      opacity: 0.33;
+    }
+  }
 }

@@ -1,16 +1,18 @@
-
 <div style="height: 100%; width: 100%">
   <p *ngIf="!stories?.length" class="empty">
     {{'STORYLIST_EMPTY' | translate}}
   </p>
 
   <ion-list [sliding]="ishistory">
-
-    <story-list-item [ishistory]="ishistory" *ngFor="let story of stories" [story]="story" (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"></story-list-item>
-
+    <story-list-item
+      [ishistory]="ishistory"
+      *ngFor="let story of stories"
+      [story]="story"
+      (onDeleteBySwiping)="onDeleteBySwiping.emit($event)"
+    ></story-list-item>
   </ion-list>
 
   <ion-infinite-scroll [enabled]="enableInfinite" (ionInfinite)="loadMore($event)" *ngIf="infinite && stories?.length > 9">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </div>

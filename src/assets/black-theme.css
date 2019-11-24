@@ -1,4 +1,3 @@
-
 .ion-app,
 .content,
 .item,
@@ -7,27 +6,28 @@
 .menu-inner,
 .popover-content,
 .card {
-    background: #000 !important;
+  background: #000 !important;
 }
 
 .toolbar-background {
-    background: transparent;
+  background: transparent;
 }
 
 .searchbar-input {
-    background: #222 !important;
-    color: #fff !important;
+  background: #222 !important;
+  color: #fff !important;
 }
 
 .alert-wrapper {
-    background: #111;
+  background: #111;
 }
 
 .alert-wrapper {
-    background: #111 !important;
-    color: #fff;
+  background: #111 !important;
+  color: #fff;
 }
 
-.alert-message, .alert-input {
-    color: #fff !important;
+.alert-message,
+.alert-input {
+  color: #fff !important;
 }

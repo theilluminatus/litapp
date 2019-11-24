@@ -1,9 +1,7 @@
-
 import { Author } from './author';
 import { Story } from './story';
 
 export class FeedItem {
-
   constructor(fields: any) {
     // Quick and dirty extend/assign fields to this model
     for (const f in fields) {
@@ -11,7 +9,6 @@ export class FeedItem {
       this[f] = fields[f];
     }
   }
-
 }
 
 export interface FeedItem {

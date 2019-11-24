@@ -1,12 +1,10 @@
 page-list-list {
+  .list-md .item-block .item-inner {
+    border-color: #666;
+  }
 
-	.list-md .item-block .item-inner {
-		border-color: #666;
-	}
-
-	.indicator {
-		float: left;
-		margin-right: 10px;
-	}
-
+  .indicator {
+    float: left;
+    margin-right: 10px;
+  }
 }

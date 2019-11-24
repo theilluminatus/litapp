@@ -1,31 +1,31 @@
 // http://ionicframework.com/docs/v2/theming/
 
 .bar-buttons button {
-	margin: 0 5px;
+  margin: 0 5px;
 }
 
 .ion-page .list .item {
-	padding-left: 0;
+  padding-left: 0;
 }
 
 .menu-inner .list .item-inner {
-	border-bottom: none;
+  border-bottom: none;
 }
 
 .menu-inner .icon[item-end] {
-	margin-right: 10px !important;
+  margin-right: 10px !important;
 }
 
 ion-app.md [padding] .scroll-content {
-	padding-top: 0;
-	padding-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .popover-viewport .list .item-inner {
-	border: none;
+  border: none;
 }
 
-.loading-wrapper{
+.loading-wrapper {
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
@@ -33,11 +33,11 @@ ion-app.md [padding] .scroll-content {
 }
 
 .loading-wrapper .loading-content {
-	color: white;
-	margin-top: -50px;
-	text-align: center;
-	margin-left: 0 !important;
-	font-size: 0.9em;
+  color: white;
+  margin-top: -50px;
+  text-align: center;
+  margin-left: 0 !important;
+  font-size: 0.9em;
 }
 
 ion-spinner {
@@ -46,12 +46,16 @@ ion-spinner {
 }
 
 .item-md.activated {
-  background-color: rgba(0,0,0,0.15) !important;
+  background-color: rgba(0, 0, 0, 0.15) !important;
 }
 
 ion-item-options.icons button {
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
-.overui .toast-top { padding-bottom: 25px; }
-.overui .toast-bottom { padding-bottom: 50px; }
+.overui .toast-top {
+  padding-bottom: 25px;
+}
+.overui .toast-bottom {
+  padding-bottom: 50px;
+}

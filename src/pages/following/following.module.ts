@@ -7,15 +7,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { ExportPopoverModule } from '../../parts/export-popover/export-popover.module';
 
 @NgModule({
-  declarations: [
-    FollowingPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(FollowingPage),
-    TranslateModule.forChild(),
-    TooltipsModule,
-    NgPipesModule,
-    ExportPopoverModule,
-  ],
+  declarations: [FollowingPage],
+  imports: [IonicPageModule.forChild(FollowingPage), TranslateModule.forChild(), TooltipsModule, NgPipesModule, ExportPopoverModule],
 })
 export class FollowingPageModule {}

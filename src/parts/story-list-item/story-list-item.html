@@ -1,7 +1,5 @@
-
 <ion-item-sliding approxItemHeight="105px" #slidingItem>
   <button ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
-
     <h2>
       <ion-icon name="eye" *ngIf="story?.cached && !story?.downloaded && !ishistory"></ion-icon>
       <ion-icon name="download" *ngIf="story?.downloaded"></ion-icon>
@@ -14,8 +12,8 @@
 
     <p>{{story?.description}}<ng-container *ngIf="story?.lang"> ({{story?.lang}})</ng-container></p>
     <p>
-      <ion-icon name="star"></ion-icon> {{story?.rating}}
-      ({{story?.viewcount > 1000 ? Math.round(story?.viewcount/1000)+'k' : story?.viewcount}})
+      <ion-icon name="star"></ion-icon> {{story?.rating}} ({{story?.viewcount > 1000 ? Math.round(story?.viewcount/1000)+'k' :
+      story?.viewcount}})
       <em> {{ 'BYAUTHOR' | translate }} {{story?.author?.name}}</em>
       {{ 'ONTIMESTAMP' | translate }} {{(story?.timestamp*1000) | date:'yyyy-MM-dd' }}
     </p>
@@ -26,11 +24,18 @@
     </p>
 
     <ion-note *ngIf="user.isLoggedIn()" item-end>
-      <button ion-button icon-only clear="true" (click)="openListPicker(story, $event)" [tooltip]="'BOOKMARK_BUTTON' | translate" event="press" navTooltip>
+      <button
+        ion-button
+        icon-only
+        clear="true"
+        (click)="openListPicker(story, $event)"
+        [tooltip]="'BOOKMARK_BUTTON' | translate"
+        event="press"
+        navTooltip
+      >
         <ion-icon name="star-outline"></ion-icon>
       </button>
     </ion-note>
-
   </button>
 
   <ion-item-options>

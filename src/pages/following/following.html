@@ -1,41 +1,48 @@
 <ion-header>
-	<ion-navbar>
+  <ion-navbar>
+    <ion-title>{{ 'FOLLOWING_TITLE' | translate }}</ion-title>
 
-		<ion-title>{{ 'FOLLOWING_TITLE' | translate }}</ion-title>
-
-		<ion-buttons end>
-		  <button end ion-button icon-only (click)="openExportPopover($event)"
-			[tooltip]="'LISTVIEW_EXPORT' | translate" event="press" navTooltip>
-			<ion-icon name="code-download"></ion-icon>
-		  </button>
-	      <button end ion-button icon-only (click)="toggleSorting()"
-	        [tooltip]="'FOLLOWING_TOOLTIP_SORT' | translate" event="press" navTooltip>
-			{{ ('FOLLOWING_SORT_' +sortingProp.toUpperCase()) | translate  }} &nbsp;
-	       <ion-icon name="funnel"></ion-icon>
-		 </button>
-	   </ion-buttons>
-
-	</ion-navbar>
+    <ion-buttons end>
+      <button
+        end
+        ion-button
+        icon-only
+        (click)="openExportPopover($event)"
+        [tooltip]="'LISTVIEW_EXPORT' | translate"
+        event="press"
+        navTooltip
+      >
+        <ion-icon name="code-download"></ion-icon>
+      </button>
+      <button end ion-button icon-only (click)="toggleSorting()" [tooltip]="'FOLLOWING_TOOLTIP_SORT' | translate" event="press" navTooltip>
+        {{ ('FOLLOWING_SORT_' +sortingProp.toUpperCase()) | translate }} &nbsp;
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+  <ion-list [virtualScroll]="sortingProp ? (authors | orderBy: sortingProp) : (authors)">
+    <button ion-item (click)="showAuthor(author)" *virtualItem="let author">
+      <ion-avatar>
+        <ion-img [src]="author?.picture"></ion-img>
+      </ion-avatar>
+      <h2>{{author.name}}</h2>
 
-	<ion-list [virtualScroll]="sortingProp ? (authors | orderBy: sortingProp) : (authors)">
-		<button ion-item (click)="showAuthor(author)" *virtualItem="let author">
-			<ion-avatar>
-				<ion-img [src]="author?.picture"></ion-img>
-			</ion-avatar>
-			<h2>{{author.name}}</h2>
-
-			<ion-note item-end>
-		    <button ion-button icon-only clear (click)="followToggle(author, $event)"
-	        [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate" event="press" navTooltip>
-	        <ion-icon [name]="author.following?'remove-circle':'person-add'"></ion-icon>
-	      </button>
-		  </ion-note>
-
-		</button>
-	</ion-list>
-
+      <ion-note item-end>
+        <button
+          ion-button
+          icon-only
+          clear
+          (click)="followToggle(author, $event)"
+          [tooltip]="'AUTHOR_TOOLTIP_FOLLOW' | translate"
+          event="press"
+          navTooltip
+        >
+          <ion-icon [name]="author.following?'remove-circle':'person-add'"></ion-icon>
+        </button>
+      </ion-note>
+    </button>
+  </ion-list>
 </ion-content>
