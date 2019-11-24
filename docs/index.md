@@ -53,10 +53,19 @@ This is purely to get an overview of how many people are using my app, since Git
 
 ## Frequently Asked Questions
 
+If you encounter a problem or have a feature request, please check my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md) first.
+
+### Errors
+
 I am getting the following message: `Error while communicating with server`.
 
 > Most frequently this is either a temporary problem with the Literotica servers or your country blocking the Literotica servers. Please try to access the Literotica website directly in a browser and/or the official app. If this problem persists, feel free to contact me (Tip: also include the "Error Log" in your mail to help me debug the problem).
 
+When starting the app it loads for a long time and then shows an error popup with the text: `Connection to the server was unsuccessful`.
+
+> Please reboot your device, if this didn't fix it, try to clear the app data.
+
 ## Contact
 
+Do you have questions, bug reports, feature requests or even a PR you want to merge? Send me an email at:  
 [theilluminatus@outlook.com](mailto:theilluminatus@outlook.com)
