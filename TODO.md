@@ -1,8 +1,10 @@
 # TODO
 
+- Split downloaded stories from history, separate tab (more functions like search, grouping...)
+- Add more descriptive error messages
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)
 - Add mock API for integration testing and demo (in case Literotica servers go down)
-
+- WebApp: Disable forced account logout on update
 - WebApp: Add links to homepage and promote
 - WebApp: Service worker to cache SPA
 
