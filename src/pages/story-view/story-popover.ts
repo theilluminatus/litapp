@@ -224,27 +224,24 @@ export class StoryPopover {
   }
 
   changeFontSize(direction: string) {
-    if (this.settings.fontsize < 5) return;
-    if (this.settings.fontsize > 30) return;
-
     if (direction === 'larger') {
-      this.settings.fontsize += 1;
+      if (this.settings.fontsize < 30) this.settings.fontsize += 1;
     } else {
-      this.settings.fontsize -= 1;
+      if (this.settings.fontsize > 5) this.settings.fontsize -= 1;
     }
 
-    this.settings.lineheight = this.settings.fontsize * 1.42857;
+    this.settings.lineheight = this.settings.fontsize * 1.45;
   }
 
   changeLineHeight(direction: string) {
-    if (this.settings.lineheight < this.settings.fontsize) return;
-    if (this.settings.lineheight > this.settings.fontsize * 3) return;
+    const currentLineRatio = this.settings.lineheight / this.settings.fontsize;
 
     if (direction === 'larger') {
-      this.settings.lineheight += 1;
+      if (currentLineRatio < 2.5) this.settings.lineheight = Math.ceil(this.settings.fontsize * (currentLineRatio + 0.1));
     } else {
-      this.settings.lineheight = -1;
+      if (currentLineRatio > 0.5) this.settings.lineheight = Math.floor(this.settings.fontsize * (currentLineRatio - 0.1));
     }
+    console.log(this.settings.lineheight);
   }
 
   changeAlign(dir: string) {
