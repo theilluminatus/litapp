@@ -1,5 +1,6 @@
 # TODO
 
+- History page: show read percentage
 - Split downloaded stories from history, separate tab (more functions like search, grouping...)
 - Add more descriptive error messages
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)
@@ -14,7 +15,7 @@
 
 ## Bugs
 
-- 
+- Older downloaded stories cannot be added to lists after a while
 
 ### Not reproducible bugs
 
