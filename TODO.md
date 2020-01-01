@@ -1,6 +1,7 @@
 # TODO
 
 - History page: show read percentage
+- Add button to download all stories in list
 - Split downloaded stories from history, separate tab (more functions like search, grouping...)
 - Add more descriptive error messages
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)
