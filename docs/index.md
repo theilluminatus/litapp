@@ -65,6 +65,10 @@ When starting the app it loads for a long time and then shows an error popup wit
 
 > Please reboot your device, if this didn't fix it, try to clear the app data.
 
+### Requested Features / Bugfixes
+
+Unfortunately I sometimes get feature requests or encounter bugs that I cannot fix / implement due to time or platform constraints. You can see the list with a short explanation at the bottom of my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md#requested)
+
 ## Contact
 
 Do you have questions, bug reports, feature requests or even a PR you want to merge? Send me an email at:  
