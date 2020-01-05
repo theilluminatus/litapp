@@ -52,7 +52,7 @@
   <br />
   <h3>{{'SETTINGS_ABOUTAPP' | translate}}</h3>
 
-  <button ion-button (click)="g.checkForUpdates()" *ngIf="!options.offlineMode && !g.isWebApp()">
+  <button ion-button (click)="g.checkForUpdates(true)" *ngIf="!options.offlineMode && !g.isWebApp()">
     <ion-icon name="refresh"></ion-icon>&nbsp; {{'SETTINGS_CHECKFORUPDATES' | translate}}
   </button>
 

@@ -94,15 +94,19 @@ export class Globals {
     return !this.platform.is('cordova') && !ENV.DEV;
   }
 
-  checkForUpdates() {
-    this.api
-      .get('app.json', undefined, undefined, 3)
-      .catch(error => {
-        console.error('globals.checkForUpdates', error);
-        return Observable.of(false);
-      })
-      .subscribe((d: any) => {
-        this.translate.get(['UPDATE_FAILEDMSG', 'UPDATE_MSG', 'DOWNLOAD_BUTTON']).subscribe(values => {
+  checkForUpdates(manual: boolean = false) {
+    if (this.isWebApp()) return;
+
+    this.translate.get(['UPDATE_STARTED', 'UPDATE_MSG', 'UPDATE_ALREADYDONE', 'UPDATE_FAILEDMSG', 'DOWNLOAD_BUTTON']).subscribe(values => {
+      // check for updates
+      if (manual) this.api.showToast(values.UPDATE_STARTED, 2000);
+      this.api
+        .get('app.json', undefined, undefined, 3)
+        .catch(error => {
+          console.error('globals.checkForUpdates', error);
+          return Observable.of(false);
+        })
+        .subscribe((d: any) => {
           if (d) {
             if (d.appid !== this.api.appid) {
               this.api.appid = d.appid;
@@ -111,16 +115,18 @@ export class Globals {
               this.api.apikey = d.apikey;
             }
 
-            if (d.version > this.version && !this.isWebApp()) {
+            if (d.version > this.version) {
               this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON).then((toast: any) => {
                 this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
               });
+            } else {
+              if (manual) this.api.showToast(values.UPDATE_ALREADYDONE);
             }
           } else {
             this.api.showToast(values.UPDATE_FAILEDMSG);
           }
         });
-      });
+    });
   }
 
   private query() {

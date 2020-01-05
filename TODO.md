@@ -4,7 +4,6 @@
 
 ## Features
 
-- Add notifications (checking, new update found, no new update found) when pressing check for app update.
 - Add more descriptive error messages
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...)
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)

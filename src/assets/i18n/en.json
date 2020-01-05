@@ -43,7 +43,9 @@
   "SETTINGS_VERSION": "Current build version",
 
   "LOAD_ERROR": "Error while communicating with server",
+  "UPDATE_STARTED": "Checking for updates...",
   "UPDATE_MSG": "There is an update available",
+  "UPDATE_ALREADYDONE": "The most current version is already installed",
   "UPDATE_FAILEDMSG": "Could not check for updates",
   "COPYPROMPT_MSG": "File system couldn't be accessed. Please manually copy this text and save it.",
   "PASTEPROMPT_MSG": "File system couldn't be accessed. Please manually paste the needed text here.",
@@ -131,7 +133,7 @@
 
   "SERIES_TITLE": "All stories in this series",
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
-  "SERIES_DOWNLOAD_SIZEWARNING": "This list contains a lot of stories, are you sure you want to download them all? This might take a while and doesn't always work very well.",
+  "SERIES_DOWNLOAD_SIZEWARNING": "This list contains a lot of stories, are you sure you want to download them all? \nThis might take a while and doesn't always work very well.",
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
 
