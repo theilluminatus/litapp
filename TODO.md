@@ -4,7 +4,6 @@
 
 ## Features
 
-- History page: show read percentage
 - Add version info on settings screen (or bottom of navigation drawer?)
 - Add button to download all stories in list
 - Add notifications (checking, new update found, no new update found) when pressing check for app update.
