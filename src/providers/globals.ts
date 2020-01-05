@@ -8,6 +8,7 @@ import { ToastController, Platform } from 'ionic-angular';
 import { Api } from './api/api';
 import { User } from './user';
 import { GLOBALS_KEY, VERSION_KEY } from './db';
+import { ENV } from '../app/env';
 
 @Injectable()
 export class Globals {
@@ -88,6 +89,11 @@ export class Globals {
     return this.version;
   }
 
+  isWebApp() {
+    // Override to show everything when developing in browser
+    return !this.platform.is('cordova') && !ENV.DEV;
+  }
+
   checkForUpdates() {
     this.api
       .get('app.json', undefined, undefined, 3)
@@ -105,7 +111,7 @@ export class Globals {
               this.api.apikey = d.apikey;
             }
 
-            if (d.version > this.version && this.platform.is('cordova')) {
+            if (d.version > this.version && !this.isWebApp()) {
               this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON).then((toast: any) => {
                 this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
               });

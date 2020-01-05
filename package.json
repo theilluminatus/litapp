@@ -4,7 +4,7 @@
   "author": "Illuminatus",
   "private": true,
   "scripts": {
-    "start": "ionic serve --no-open",
+    "start": "cross-env DEV=true ionic serve --no-open",
     "android": "ionic cordova run android",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
@@ -81,6 +81,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
     "cordova": "8.1.2",
+    "cross-env": "^6.0.3",
     "husky": "^3.0.9",
     "ionic": "^3.9.2",
     "prettier": "^1.18.2",

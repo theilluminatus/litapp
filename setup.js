@@ -2,6 +2,7 @@
 
 var ENV = {
   CORS_PROXY: process.env.CORS_PROXY || '',
+  DEV: process.env.DEV || false,
 };
 
 // Writes to file

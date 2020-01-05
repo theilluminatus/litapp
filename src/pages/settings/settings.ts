@@ -25,7 +25,6 @@ export class SettingsPage {
   options: any = {};
   settingsReady = false;
   form: FormGroup;
-  isWebApp = false;
 
   translations;
   requireReloadSettings = ['offlineMode', 'amoledBlackTheme', 'forceNormalList'];
@@ -51,12 +50,10 @@ export class SettingsPage {
 
   ionViewWillEnter() {
     this.translate
-      .get(['SETTINGS_EXPORTSUCCESS', 'SETTINGS_IMPORTFAIL', 'SETTNGS_IMPORTSUCCESS', 'RELOAD', 'COPYPROMPT_MSG', 'PASTEPROMPT_MSG'])
+      .get(['SETTINGS_EXPORTSUCCESS', 'SETTINGS_IMPORTFAIL', 'SETTINGS_IMPORTSUCCESS', 'RELOAD', 'COPYPROMPT_MSG', 'PASTEPROMPT_MSG'])
       .subscribe(values => {
         this.translations = values;
       });
-
-    this.isWebApp = !this.platform.is('cordova');
 
     // load settings
     this.settings.load().then(() => {
@@ -145,7 +142,7 @@ export class SettingsPage {
           }
         }
 
-        this.api.showToast(this.translations.SETTNGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
+        this.api.showToast(this.translations.SETTINGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
           window.location.hash = '';
           window.location.reload();
         });

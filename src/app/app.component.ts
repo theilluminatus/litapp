@@ -64,13 +64,13 @@ export class MyApp {
   ) {
     this.initTranslate();
     this.settings.load().then(() => {
-      if (this.platform.is('cordova') && this.settings.allSettings.enableLock && !this.loggedIn) {
+      if (this.settings.allSettings.enableLock && !this.loggedIn && !this.g.isWebApp()) {
         this.showLockScreen();
       } else {
         this.loggedIn = true;
       }
 
-      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode && this.platform.is('cordova')) {
+      if (this.settings.allSettings.checkforappupdates && !this.settings.allSettings.offlineMode && !this.g.isWebApp()) {
         this.g.checkForUpdates();
       }
 
@@ -114,12 +114,15 @@ export class MyApp {
   }
 
   catchShareIntent() {
-    if (this.platform.is('cordova')) {
-      this.webIntent.getIntent().then(intent => {
-        if (intent.action === 'android.intent.action.SEND' && intent.extras) {
-          this.openURL(intent.extras['android.intent.extra.TEXT']);
-        }
-      });
+    if (!this.g.isWebApp()) {
+      this.webIntent
+        .getIntent()
+        .then(intent => {
+          if (intent.action === 'android.intent.action.SEND' && intent.extras) {
+            this.openURL(intent.extras['android.intent.extra.TEXT']);
+          }
+        })
+        .catch(e => console.warn('Native: tried webIntent:', e));
     }
   }
 
