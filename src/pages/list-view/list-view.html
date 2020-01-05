@@ -24,6 +24,9 @@
       >
         <ion-icon name="code-download"></ion-icon>
       </button>
+      <button ion-button icon-only (click)="downloadAll()" [tooltip]="'DOWNLOAD_ALL_BUTTON' | translate" event="press" navTooltip>
+        <ion-icon name="download"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

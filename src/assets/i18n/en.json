@@ -64,6 +64,7 @@
   "EDIT_BUTTON": "Edit",
   "BOOKMARK_BUTTON": "Bookmark",
   "DOWNLOAD_BUTTON": "Download",
+  "DOWNLOAD_ALL_BUTTON": "Download all stories",
   "SHARE_BUTTON": "Share",
   "CLOSE_BUTTON": "Close",
   "REFRESH_BUTTON": "Refresh",
@@ -129,8 +130,8 @@
   "AUTHOR_UPDATEDATE": "Last updated",
 
   "SERIES_TITLE": "All stories in this series",
-  "SERIES_DOWNLOAD": "Download all stories",
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
+  "SERIES_DOWNLOAD_SIZEWARNING": "This list contains a lot of stories, are you sure you want to download them all? This might take a while and doesn't always work very well.",
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
 

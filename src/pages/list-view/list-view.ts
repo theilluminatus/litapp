@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
-import { Lists, Api, Categories } from '../../providers/providers';
+import { Lists, Api, Categories, Stories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
@@ -27,6 +27,7 @@ export class ListViewPage {
     public translate: TranslateService,
     public file: File,
     public api: Api,
+    public s: Stories,
   ) {
     const list = navParams.get('list');
     this.l.onReady().then(() => {
@@ -63,6 +64,10 @@ export class ListViewPage {
 
       return false;
     });
+  }
+
+  downloadAll() {
+    this.s.downloadSeries(this.stories);
   }
 
   openExportPopover(ev: UIEvent) {

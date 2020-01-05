@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertController } from 'ionic-angular';
 
 import { Story } from '../models/story';
 import { STORY_KEY } from './db';
@@ -29,6 +30,7 @@ export class Stories {
     public g: Globals,
     public storage: Storage,
     public translate: TranslateService,
+    public alertCtrl: AlertController,
   ) {
     this.ready = new Promise((resolve, reject) => {
       this.storage.keys().then(keys => {
@@ -188,39 +190,62 @@ export class Stories {
   }
 
   downloadSeries(series: Story[]) {
-    this.api.showLoader();
-    return new Promise(resolve => {
-      const loop = (index: number) => {
-        if (index >= series.length) {
-          this.api.hideLoader();
-          resolve();
-          return;
-        }
-        if (!series[index].cached) {
-          this.getById(series[index].id, false, true).subscribe(s => {
-            if (s) {
-              this.download(s);
-            } else {
-              this.translate.get(['SERIES_DOWNLOAD_ERROR']).subscribe(values => {
-                this.api.showToast(values.SERIES_DOWNLOAD_ERROR);
-              });
-              this.api.hideLoader();
-              return;
-            }
-            // tslint:disable-next-line: prefer-template
-            this.api.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
-            loop(index + 1);
-          });
-          return;
-        }
-        this.download(series[index]);
-        // tslint:disable-next-line: prefer-template
-        this.api.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
-        loop(index + 1);
-      };
+    // define downloading loop
+    const loop = (index: number = 0) => {
+      if (index < 1) {
+        this.api.showLoader();
+      }
 
-      loop(0);
-    });
+      if (index >= series.length) {
+        this.api.hideLoader();
+        // done!
+        return;
+      }
+      if (!series[index].cached) {
+        this.getById(series[index].id, false, true).subscribe(s => {
+          if (s) {
+            this.download(s);
+          } else {
+            this.translate.get(['SERIES_DOWNLOAD_ERROR']).subscribe(values => {
+              this.api.showToast(values.SERIES_DOWNLOAD_ERROR);
+            });
+            this.api.hideLoader();
+            return;
+          }
+          // tslint:disable-next-line: prefer-template
+          this.api.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
+          loop(index + 1);
+        });
+        return;
+      }
+      this.download(series[index]);
+      // tslint:disable-next-line: prefer-template
+      this.api.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
+      loop(index + 1);
+    };
+
+    // ask for confirmation when lots of stories in list
+    if (series.length > 10) {
+      this.translate.get(['CONFIRM', 'SERIES_DOWNLOAD_SIZEWARNING', 'DOWNLOAD_BUTTON', 'CANCEL_BUTTON']).subscribe(translations => {
+        this.alertCtrl
+          .create({
+            title: translations.CONFIRM,
+            message: translations.SERIES_DOWNLOAD_SIZEWARNING,
+            buttons: [
+              {
+                text: translations.DOWNLOAD_BUTTON,
+                handler: () => {
+                  loop();
+                },
+              },
+              { text: translations.CANCEL_BUTTON },
+            ],
+          })
+          .present();
+      });
+    } else {
+      loop();
+    }
   }
 
   // helper for similar requests
