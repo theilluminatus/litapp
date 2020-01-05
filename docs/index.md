@@ -67,7 +67,7 @@ When starting the app it loads for a long time and then shows an error popup wit
 
 ### Requested Features / Bugfixes
 
-Unfortunately I sometimes get feature requests or encounter bugs that I cannot fix / implement due to time or platform constraints. You can see the list with a short explanation at the bottom of my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md#requested)
+Unfortunately I sometimes get feature requests or encounter bugs that I cannot fix / implement due to time or platform constraints. You can see the list with a short explanation at the bottom of my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md#features--bugfixes-that-currently-will-not-be-fixed).
 
 ## Contact
 
