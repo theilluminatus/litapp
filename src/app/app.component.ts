@@ -214,10 +214,14 @@ export class MyApp {
       return;
     }
 
-    this.translate.get(['OPENLINK_UNSUPPORTED']).subscribe(translations => {
+    this.translate.get(['OPENLINK_UNSUPPORTED', 'OPENLINK_UNSUPPORTED_POEM']).subscribe(translations => {
+      // https://www.literotica.com/p/a-demons-lust
+      const poemRegex = /literotica\.com\/p\/([-a-zA-Z0-9._+]*)/g;
+      const poemMatch = poemRegex.exec(url);
+
       this.toastCtrl
         .create({
-          message: translations.OPENLINK_UNSUPPORTED,
+          message: poemMatch ? translations.OPENLINK_UNSUPPORTED_POEM : translations.OPENLINK_UNSUPPORTED,
           duration: 2000,
           position: 'bottom',
         })

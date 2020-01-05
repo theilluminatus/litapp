@@ -4,10 +4,8 @@
 
 ## Features
 
-- Allow viewing poems via url link (https://www.literotica.com/p/ID)
 - History page: show read percentage
 - Add version info on settings screen (or bottom of navigation drawer?)
-- Add a way to search for authors or directly open an authors page (perhaps by url link?)
 - Add button to download all stories in list
 - Add notifications (checking, new update found, no new update found) when pressing check for app update.
 - Add more descriptive error messages
@@ -21,7 +19,6 @@
 ## Bugs
 
 - Older downloaded stories cannot be added to lists after a while
-- OPENLINK_UNSUPPORTED: translation doesn't work
 
 # Features / Bugfixes that currently will not be fixed
 
