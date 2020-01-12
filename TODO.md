@@ -4,6 +4,7 @@
 
 ## Features
 
+- Support illustrated stories in online mode
 - Add more descriptive error messages
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...)
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)
@@ -25,6 +26,12 @@
     > This issue originates from Ionic (a package to more easily create apps), this might be fixed by updating to a newer version, but this will take a lot of time and might introduce newer other bugs.
 
     > A possible solution is to kill and restart the app or even reboot your phone.
+
+- Feature: Reading and searching for poems
+    > Unfortunately the existence of poems was not taken into account when designing and creating the app. It will take considerable effort to implement this feature, as such it is currently not planned
+
+- Feature: Reading illustrated stories in offline mode.
+    > As you might have noticed, you can download illustrated stories and read them online, unfortunately the images will not be downloaded locally. This would require completely overhauling the way stories are downloaded.
 
 ## Not reproducible bugs
 
