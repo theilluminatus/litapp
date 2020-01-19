@@ -53,7 +53,7 @@
     <ion-slide *ngFor="let slide of slides; let i=index">
       <ng-container *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5">
         <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
-          <p [innerHTML]="slide.content"></p>
+          <p id="slide-content" [innerHTML]="slide.content"></p>
         </ng-scrollbar>
       </ng-container>
     </ion-slide>

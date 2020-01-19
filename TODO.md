@@ -4,7 +4,6 @@
 
 ## Features
 
-- Support illustrated stories in online mode
 - Add more descriptive error messages-
 - Limit amount of failed connection messages (max only one at a time + perhaps link to offline mode?)
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...)

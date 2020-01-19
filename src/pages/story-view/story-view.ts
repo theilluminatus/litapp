@@ -109,13 +109,15 @@ export class StoryViewPage {
   }
 
   private addSlides() {
-    this.story.content.forEach((item, index) =>
+    this.story.content.forEach((item, index) => {
+      // Add fallback handlers for images
+      const parsedContent = item.replace('<img src=', '<img alt="&nbsp;Error while loading image." src=');
       this.slides.push({
-        content: item,
+        content: parsedContent,
         page: index,
         desktoppage: index,
-      }),
-    );
+      });
+    });
   }
 
   ionViewWillEnter() {

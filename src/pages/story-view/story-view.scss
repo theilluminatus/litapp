@@ -76,9 +76,15 @@ page-story-view {
     transition: unset !important;
   }
 
-  p {
+  #slide-content {
     margin: 0;
     padding: 75px 20px 95px 20px;
+  }
+
+  #slide-content img {
+    min-width: 100%;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   .pagination {
