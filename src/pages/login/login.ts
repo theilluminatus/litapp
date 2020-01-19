@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { BrowserTab } from '@ionic-native/browser-tab';
 import { Toast } from '@ionic-native/toast';
 
-import { Analytics, User } from '../../providers/providers';
+import { Analytics, User, UX } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
@@ -23,11 +23,11 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public user: User,
-    public toastCtrl: ToastController,
     public translateService: TranslateService,
     public analytics: Analytics,
     private browser: BrowserTab,
     private toast: Toast,
+    public ux: UX,
   ) {
     this.translateService.get(['LOGIN_ERROR', 'SIGNUP_MESSAGE']).subscribe(values => {
       this.translations = values;
@@ -44,18 +44,15 @@ export class LoginPage {
         }, 500);
       },
       err => {
-        const toast = this.toastCtrl.create({
-          message: this.translations.LOGIN_ERROR,
-          duration: 3000,
-          position: 'bottom',
-        });
-        toast.present();
+        console.error('login failed', err.error);
+        this.ux.showToast('ERROR', `${this.translations.LOGIN_ERROR}: ${err.error.error}`, 3000);
       },
     );
   }
 
   signup() {
     try {
+      // This is a special OS toast so the user can still read it while the browser is opened
       this.toast.show(this.translations.SIGNUP_MESSAGE, '5000', 'bottom').subscribe(toast => {});
     } catch (err) {
       handleNoCordovaError(err, () => alert(this.translations.SIGNUP_MESSAGE));

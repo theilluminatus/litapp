@@ -4,7 +4,7 @@ import { File } from '@ionic-native/file';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Author } from '../../models/author';
-import { Authors, Api } from '../../providers/providers';
+import { Authors, UX } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
@@ -23,7 +23,7 @@ export class FollowingPage {
     public a: Authors,
     private popoverCtrl: PopoverController,
     public file: File,
-    public api: Api,
+    public ux: UX,
     public translate: TranslateService,
   ) {
     this.a.getFollowing().subscribe(authors => {
@@ -95,7 +95,7 @@ export class FollowingPage {
         this.file
           .writeFile(path, filename, data, { replace: true })
           .then(() => {
-            this.api.showToast(`${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+            this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
           })
           .catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
       }

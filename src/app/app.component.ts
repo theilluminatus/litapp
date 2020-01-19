@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform, App, AlertController, ToastController } from 'ionic-angular';
+import { Config, Nav, Platform, App, AlertController } from 'ionic-angular';
 import { WebIntent } from '@ionic-native/web-intent';
 
-import { Globals, Analytics, Api, Stories, Lists, Feed, Settings } from '../providers/providers';
+import { Globals, Analytics, UX, Stories, Lists, Feed, Settings } from '../providers/providers';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 @Component({
@@ -52,10 +52,9 @@ export class MyApp {
     public webIntent: WebIntent,
     public config: Config,
     public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
     public settings: Settings,
     public analytics: Analytics, // necessary for tracking startup
-    public api: Api,
+    public ux: UX,
     public g: Globals,
     public s: Stories,
     public l: Lists,
@@ -194,15 +193,7 @@ export class MyApp {
         storyurl: storyMatch[1],
       });
 
-      this.translate.get(['OPENLINK_STORYWARNING']).subscribe(translations => {
-        this.toastCtrl
-          .create({
-            message: translations.OPENLINK_STORYWARNING,
-            duration: 2000,
-            position: 'bottom',
-          })
-          .present();
-      });
+      this.ux.showToast('INFO', 'OPENLINK_STORYWARNING', 2500);
       return;
     }
 
@@ -217,18 +208,9 @@ export class MyApp {
       return;
     }
 
-    this.translate.get(['OPENLINK_UNSUPPORTED', 'OPENLINK_UNSUPPORTED_POEM']).subscribe(translations => {
-      // https://www.literotica.com/p/a-demons-lust
-      const poemRegex = /literotica\.com\/p\/([-a-zA-Z0-9._+]*)/g;
-      const poemMatch = poemRegex.exec(url);
-
-      this.toastCtrl
-        .create({
-          message: poemMatch ? translations.OPENLINK_UNSUPPORTED_POEM : translations.OPENLINK_UNSUPPORTED,
-          duration: 2000,
-          position: 'bottom',
-        })
-        .present();
-    });
+    // https://www.literotica.com/p/a-demons-lust
+    const poemRegex = /literotica\.com\/p\/([-a-zA-Z0-9._+]*)/g;
+    const poemMatch = poemRegex.exec(url);
+    this.ux.showToast('INFO', poemMatch ? 'OPENLINK_UNSUPPORTED_POEM' : 'OPENLINK_UNSUPPORTED', 2500);
   }
 }

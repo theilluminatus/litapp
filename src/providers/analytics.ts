@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Globals } from './globals';
 import { handleNoCordovaError } from '../app/utils';
-import { Settings } from './settings/settings';
+import { Settings } from './settings';
 
 @Injectable()
 export class Analytics {

@@ -3,12 +3,14 @@ import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { BrowserTab } from '@ionic-native/browser-tab';
-import { ToastController, Platform } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 
-import { Api } from './api/api';
+import { Api } from './shared/api';
 import { User } from './user';
 import { GLOBALS_KEY, VERSION_KEY } from './db';
 import { ENV } from '../app/env';
+import { handleNoCordovaError } from '../app/utils';
+import { UX } from './shared/ux';
 
 @Injectable()
 export class Globals {
@@ -23,21 +25,13 @@ export class Globals {
     public storage: Storage,
     public translate: TranslateService,
     private browser: BrowserTab,
-    public toastCtrl: ToastController,
+    public ux: UX,
   ) {
     this.storage.get(VERSION_KEY).then(v => {
       if (v && v !== this.version) {
         setTimeout(() => {
-          this.translate.get(['UPDATED_MSG', 'CLOSE_BUTTON']).subscribe(values => {
-            const toast = this.toastCtrl.create({
-              message: values.UPDATED_MSG,
-              showCloseButton: true,
-              closeButtonText: values.CLOSE_BUTTON,
-              duration: 15000,
-            });
-            toast.present();
-            this.user.removeStoredUser();
-          });
+          this.ux.showToast('INFO', 'UPDATED_MSG', 15000);
+          this.user.removeStoredUser();
         }, 2000);
       }
 
@@ -96,49 +90,47 @@ export class Globals {
 
   checkForUpdates(manual: boolean = false) {
     if (this.isWebApp()) return;
-
-    this.translate.get(['UPDATE_STARTED', 'UPDATE_MSG', 'UPDATE_ALREADYDONE', 'UPDATE_FAILEDMSG', 'DOWNLOAD_BUTTON']).subscribe(values => {
-      // check for updates
-      if (manual) this.api.showToast(values.UPDATE_STARTED, 2000);
-      this.api
-        .get('app.json', undefined, undefined, 3)
-        .catch(error => {
-          console.error('globals.checkForUpdates', error);
-          return Observable.of(false);
-        })
-        .subscribe((d: any) => {
-          if (d) {
-            if (d.appid !== this.api.appid) {
-              this.api.appid = d.appid;
-            }
-            if (d.apikey !== this.api.apikey) {
-              this.api.apikey = d.apikey;
-            }
-
-            if (d.version > this.version) {
-              this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON, true).then((toast: any) => {
-                this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
-              });
-            } else {
-              if (manual) this.api.showToast(values.UPDATE_ALREADYDONE, undefined, undefined, true);
-            }
-          } else {
-            this.api.showToast(values.UPDATE_FAILEDMSG, undefined, undefined, true);
+    // check for updates
+    if (manual) this.ux.showToast('INFO', 'UPDATE_STARTED', 2000);
+    this.api
+      .get('app.json', undefined, undefined, 3)
+      .catch(error => {
+        console.error('globals.checkForUpdates', error);
+        return Observable.of(false);
+      })
+      .subscribe((d: any) => {
+        if (d) {
+          if (d.appid !== this.api.appid) {
+            this.api.appid = d.appid;
           }
-        });
-    });
+          if (d.apikey !== this.api.apikey) {
+            this.api.apikey = d.apikey;
+          }
+
+          if (d.version > this.version) {
+            this.ux.showToast('INFO', 'UPDATE_MSG', 15000, 'DOWNLOAD_BUTTON', true).then(() => {
+              const updateLink = d.updatelink || 'https://theilluminatus.github.io/litapp';
+              this.browser.openUrl(updateLink).catch(err => handleNoCordovaError(err, () => window.open(updateLink)));
+            });
+          } else {
+            if (manual) this.ux.showToast('INFO', 'UPDATE_ALREADYDONE', undefined, undefined, true);
+          }
+        } else {
+          this.ux.showToast('ERROR', 'UPDATE_FAILEDMSG', undefined, undefined, true);
+        }
+      });
   }
 
   private query() {
     if (this.globals) return Observable.of(this.globals);
 
-    const loader = this.api.showLoader();
+    const loader = this.ux.showLoader();
     return this.api
       .get('3/constants', null, null, null, 10000)
       .map((d: any) => {
         if (loader) loader.dismiss();
         if (!d) {
-          this.api.showToast();
+          this.ux.showToast();
           return null;
         }
 
@@ -148,7 +140,7 @@ export class Globals {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('globals.query', error);
         return Observable.of(null);
       });

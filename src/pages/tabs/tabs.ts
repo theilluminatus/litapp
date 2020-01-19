@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, Platform, Tabs, App, NavController } from 'ionic-angular';
-import { User, Api, Feed, Settings } from '../../providers/providers';
+import { User, UX, Feed, Settings } from '../../providers/providers';
 
 @IonicPage({ priority: 'high' })
 @Component({
@@ -28,13 +28,13 @@ export class TabsPage {
     public app: App,
     public navCtrl: NavController,
     public translateService: TranslateService,
-    public api: Api,
+    public ux: UX,
     public user: User,
     public settings: Settings,
     public f: Feed,
   ) {
     this.platform.registerBackButtonAction(() => {
-      this.api.hideLoader();
+      this.ux.hideLoader();
       this.app.goBack();
 
       // code lets you return to history page before closing app, but doesnt work on search page for some reason

@@ -1,10 +1,27 @@
 // tslint:disable: prefer-template
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpParameterCodec } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController, Loading, Toast } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+import { Loading, Toast } from 'ionic-angular';
 import { ENV } from '../../app/env';
-import { Settings } from '../settings/settings';
+import { Settings } from '../settings';
+import { UX } from './ux';
+
+// Source: https://github.com/angular/angular/issues/11058#issuecomment-351864976
+// tslint:disable-next-line: no-duplicate-imports
+export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
+  encodeKey(k: string): string {
+    return encodeURIComponent(k);
+  }
+  encodeValue(v: string): string {
+    return encodeURIComponent(v);
+  }
+  decodeKey(k: string): string {
+    return decodeURIComponent(k);
+  }
+  decodeValue(v: string) {
+    return decodeURIComponent(v);
+  }
+}
 
 const handleAPIError = (error: Error, url: string, data: any, method: string) => {
   console.info({
@@ -27,18 +44,11 @@ export class Api {
   public corsProxy: string = ENV.CORS_PROXY || '';
   public urls = this.getUrls();
 
-  translations;
   loader: Loading;
   activeToasts: Toast[] = [];
   offlineModeErrorCount = 0;
 
-  constructor(
-    public http: HttpClient,
-    public translate: TranslateService,
-    public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController,
-    public settings: Settings,
-  ) {
+  constructor(public http: HttpClient, public ux: UX, public settings: Settings) {
     try {
       const search = location.search.substring(1);
       const queryParams = JSON.parse(
@@ -67,7 +77,7 @@ export class Api {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number, timeout?: number) {
-    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
+    if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     let newReqOpts = reqOpts;
     if (!reqOpts) {
       newReqOpts = {
@@ -93,7 +103,7 @@ export class Api {
   }
 
   post(endpoint: string, body: any, reqOpts?: any, addIDs?: boolean, urlIndex?: number) {
-    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
+    if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     let newEndpoint = endpoint;
     if (addIDs) {
       if (endpoint.indexOf('?') > -1) {
@@ -108,95 +118,20 @@ export class Api {
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {
-    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
+    if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     const url = this.urls[0] + '/' + endpoint;
     return this.http.put(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'PUT'));
   }
 
   delete(endpoint: string, reqOpts?: any, urlIndex?: number) {
-    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
+    if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
     return this.http.delete(url, reqOpts).catch(err => handleAPIError(err, url, {}, 'DELETE'));
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
-    if (this.settings.allSettings.offlineMode) return this.showOfflineModeError();
+    if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     const url = this.urls[0] + '/' + endpoint;
     return this.http.patch(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'PATCH'));
-  }
-
-  showLoader() {
-    if (this.loader) return this.loader;
-    this.loader = this.loadingCtrl.create({ spinner: 'crescent' });
-    this.loader.present();
-    this.loader.onDidDismiss(() => {
-      this.loader = undefined;
-    });
-    return this.loader;
-  }
-
-  updateLoader(content: string) {
-    if (!this.loader) return;
-    this.loader.setContent(content);
-  }
-
-  hideLoader() {
-    if (this.loader) this.loader.dismiss().catch(() => {});
-  }
-
-  showToast(text?: string, timeout?: number, button?: string, removePrevious?: boolean) {
-    return new Promise(resolve => {
-      this.translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
-        this.translations = values;
-        const toast = this.toastCtrl.create({
-          message: text ? text : this.translations.LOAD_ERROR,
-          showCloseButton: true,
-          closeButtonText: button ? button : this.translations.CLOSE_BUTTON,
-          duration: timeout ? timeout : 3000,
-        });
-        toast.present();
-        toast.onDidDismiss(data => {
-          resolve(toast);
-          this.activeToasts.splice(this.activeToasts.indexOf(toast), 1);
-        });
-
-        if (removePrevious) {
-          this.activeToasts.forEach(toast => toast.dismiss());
-          this.activeToasts = [toast];
-        } else {
-          this.activeToasts.push(toast);
-        }
-      });
-    });
-  }
-
-  showOfflineModeError() {
-    if (this.offlineModeErrorCount < 3) {
-      this.translate.get(['OFFLINE_ERROR']).subscribe(values => {
-        this.showToast(values.OFFLINE_ERROR);
-      });
-      this.offlineModeErrorCount = this.offlineModeErrorCount + 1;
-    }
-    this.hideLoader();
-    return Observable.of();
-  }
-}
-
-// Source: https://github.com/angular/angular/issues/11058#issuecomment-351864976
-// tslint:disable-next-line: no-duplicate-imports
-import { HttpParameterCodec } from '@angular/common/http';
-import { Observable } from 'rxjs';
-export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
-  encodeKey(k: string): string {
-    return encodeURIComponent(k);
-  }
-  encodeValue(v: string): string {
-    return encodeURIComponent(v);
-  }
-  decodeKey(k: string): string {
-    return decodeURIComponent(k);
-  }
-  decodeValue(v: string) {
-    return decodeURIComponent(v);
   }
 }

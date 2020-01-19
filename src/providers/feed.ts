@@ -6,9 +6,10 @@ import { FeedItem } from '../models/feeditem';
 import { Stories } from './stories';
 import { Authors } from './authors';
 import { User } from './user';
-import { Settings } from './settings/settings';
+import { Settings } from './settings';
 import { FEED_KEY } from './db';
-import { Api } from './api/api';
+import { Api } from './shared/api';
+import { UX } from './shared/ux';
 
 @Injectable()
 export class Feed {
@@ -26,6 +27,7 @@ export class Feed {
     public user: User,
     public settings: Settings,
     public storage: Storage,
+    public ux: UX,
   ) {
     this.ready = new Promise((resolve, reject) => {
       Promise.all([this.settings.load(), this.user.onReady()]).then(() => {
@@ -69,7 +71,7 @@ export class Feed {
 
     let loader;
     if (showloader) {
-      loader = this.api.showLoader();
+      loader = this.ux.showLoader();
     }
 
     const params = {
@@ -86,7 +88,7 @@ export class Feed {
       .map((d: any) => {
         if (loader) loader.dismiss();
         if (!d.data) {
-          this.api.showToast();
+          this.ux.showToast();
           return [];
         }
 
@@ -111,7 +113,7 @@ export class Feed {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('feed.query', [lastid], error);
         return Observable.of([]);
       });

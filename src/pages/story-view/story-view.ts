@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController, ToastController } from 'ionic-angular';
+import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { STORYSTYLEOPTIONS_KEY, HISTORY_KEY } from '../../providers/db';
-import { Stories, Analytics, Settings, User } from '../../providers/providers';
+import { Stories, Analytics, Settings, User, UX } from '../../providers/providers';
 import { Story } from '../../models/story';
 
 @IonicPage({ priority: 'low' })
@@ -48,7 +48,7 @@ export class StoryViewPage {
     public stories: Stories,
     public analytics: Analytics,
     private popoverCtrl: PopoverController,
-    private toastCtrl: ToastController,
+    public ux: UX,
     private androidFullScreen: AndroidFullScreen,
     translate: TranslateService,
     navParams: NavParams,
@@ -219,14 +219,7 @@ export class StoryViewPage {
           }
         }
 
-        const toast = this.toastCtrl.create({
-          message: this.translations.STORY_ENDOFSERIES,
-          showCloseButton: true,
-          closeButtonText: this.translations.CLOSE_BUTTON,
-          duration: 2000,
-          cssClass: 'overui',
-        });
-        toast.present();
+        this.ux.showToast('INFO', 'STORY_ENDOFSERIES', 2000, undefined, undefined, true);
       });
 
       return;

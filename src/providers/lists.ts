@@ -4,18 +4,19 @@ import { Storage } from '@ionic/storage';
 
 import { List } from '../models/list';
 import { Story } from '../models/story';
-import { Settings } from './settings/settings';
+import { Settings } from './settings';
 import { Stories } from './stories';
 import { User } from './user';
-import { Api } from './api/api';
+import { Api } from './shared/api';
 import { LIST_KEY } from './db';
+import { UX } from './shared/ux';
 
 @Injectable()
 export class Lists {
   private lists: List[];
   private ready;
 
-  constructor(public api: Api, public s: Stories, public settings: Settings, public user: User, public storage: Storage) {
+  constructor(public api: Api, public s: Stories, public settings: Settings, public user: User, public storage: Storage, public ux: UX) {
     this.ready = new Promise((resolve, reject) => {
       Promise.all([this.settings.load(), this.user.onReady(), this.s.onReady(), this.storage.get(LIST_KEY)]).then(res => {
         if (!this.settings.allSettings.cachelists || this.settings.allSettings.offlineMode || !this.user.isLoggedIn()) {
@@ -56,7 +57,7 @@ export class Lists {
 
     let loader;
     if (!hideLoader) {
-      loader = this.api.showLoader();
+      loader = this.ux.showLoader();
     }
 
     // https://literotica.com/3/users/3507980/lists
@@ -65,7 +66,7 @@ export class Lists {
       .map((d: any) => {
         if (loader) loader.dismiss();
         if (d.error) {
-          this.api.showToast();
+          this.ux.showToast();
           return [];
         }
 
@@ -90,7 +91,7 @@ export class Lists {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.query', error);
         return Observable.of([]);
       });
@@ -105,7 +106,7 @@ export class Lists {
 
     let loader;
     if (!hideLoader) {
-      loader = this.api.showLoader();
+      loader = this.ux.showLoader();
     }
 
     return Observable.create(observer => {
@@ -123,7 +124,7 @@ export class Lists {
           if (l.size > newPartialList.stories.length && page < newPartialList.lastPage) {
             const next = page + 1;
             // tslint:disable-next-line: prefer-template
-            this.api.updateLoader(Math.round((newPartialList.stories.length / l.size) * 100) + '%');
+            this.ux.updateLoader(Math.round((newPartialList.stories.length / l.size) * 100) + '%');
             loop(next, newPartialList);
           } else {
             this.lists[this.lists.indexOf(list)] = newPartialList;
@@ -149,7 +150,7 @@ export class Lists {
       .get(`3/users/${this.user.getId()}/lists/${urlname}`, { params: JSON.stringify(params) })
       .map((d: any) => {
         if (!d.works.data) {
-          this.api.showToast();
+          this.ux.showToast();
           return null;
         }
 
@@ -177,7 +178,7 @@ export class Lists {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.getListPage', [urlname, list, i], error);
         return Observable.of(null);
       });
@@ -187,11 +188,11 @@ export class Lists {
     return this.api
       .put(`3/stories/${story.id}/lists/${list.id}`, {})
       .map((res: any) => {
-        if (!res.success) this.api.showToast();
+        if (!res.success) this.ux.showToast();
         return res.success;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.addStory', [list, story], error);
         return Observable.of(false);
       })
@@ -209,11 +210,11 @@ export class Lists {
     return this.api
       .delete(`3/stories/${story.id}/lists/${list.id}`)
       .map((res: any) => {
-        if (!res.success) this.api.showToast();
+        if (!res.success) this.ux.showToast();
         return res.success;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.removeStory', [list, story], error);
         return Observable.of(false);
       })
@@ -242,7 +243,7 @@ export class Lists {
       .post(`3/users/${this.user.getId()}/lists`, data, undefined, false)
       .map((res: any) => {
         if (!res.success) {
-          this.api.showToast();
+          this.ux.showToast();
           return false;
         }
 
@@ -263,7 +264,7 @@ export class Lists {
         return true;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.add', [list], error);
         return Observable.of(false);
       });
@@ -280,7 +281,8 @@ export class Lists {
       .patch(`3/lists/${list.id}`, data)
       .map((res: any) => {
         if (!res.success) {
-          this.api.showToast(res.error);
+          this.ux.showToast();
+          console.error('update list', res.error);
           return false;
         }
 
@@ -296,7 +298,7 @@ export class Lists {
         return true;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.edit', [list], error);
         return Observable.of(false);
       });
@@ -307,7 +309,8 @@ export class Lists {
       .delete(`3/lists/${list.id}`)
       .map((res: any) => {
         if (!res.success) {
-          this.api.showToast(res.error);
+          this.ux.showToast();
+          console.error('delete list', res.error);
           return false;
         }
 
@@ -321,7 +324,7 @@ export class Lists {
         return true;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('lists.delete', [list], error);
         return Observable.of(false);
       });

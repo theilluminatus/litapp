@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Rx';
 
 import { Author } from '../models/author';
 import { User } from './user';
-import { Api } from './api/api';
+import { Api } from './shared/api';
+import { UX } from './shared/ux';
 
 @Injectable()
 export class Authors {
   private authors: Map<number, Author> = new Map<number, Author>();
 
-  constructor(public api: Api, public user: User, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {}
+  constructor(public api: Api, public user: User, public loadingCtrl: LoadingController, public ux: UX) {}
 
   // Get an authors bio
   getDetails(id: any) {
@@ -23,13 +24,13 @@ export class Authors {
       return Observable.of(cached);
     }
 
-    const loader = this.api.showLoader();
+    const loader = this.ux.showLoader();
     return this.api
       .get('1/user-bio', params)
       .map((data: any) => {
         if (loader) loader.dismiss();
         if (!data.success) {
-          this.api.showToast();
+          this.ux.showToast();
           return null;
         }
 
@@ -49,7 +50,7 @@ export class Authors {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('author.getDetails', [id], error);
         return Observable.of(null);
       });
@@ -57,13 +58,13 @@ export class Authors {
 
   // get authors you are following
   getFollowing() {
-    const loader = this.api.showLoader();
+    const loader = this.ux.showLoader();
     return this.api
       .get(`3/users/${this.user.getId()}/favorite/authors?params={%22nocache%22:true}`)
       .map((data: any) => {
         if (loader) loader.dismiss();
         if (!data.length) {
-          this.api.showToast();
+          this.ux.showToast();
           return [];
         }
 
@@ -71,7 +72,7 @@ export class Authors {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('author.getFollowing', error);
         return Observable.of([]);
       });
@@ -85,11 +86,11 @@ export class Authors {
     return this.api
       .post(`3/users/follow/${author.id}`, {})
       .map((res: any) => {
-        if (!res.success) this.api.showToast();
+        if (!res.success) this.ux.showToast();
         return res.success;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('author.follow', [author], error);
         return Observable.of(false);
       })
@@ -97,7 +98,7 @@ export class Authors {
         if (d) {
           author.following = true;
         } else {
-          this.api.showToast();
+          this.ux.showToast();
         }
       });
   }
@@ -106,11 +107,11 @@ export class Authors {
     return this.api
       .delete(`3/users/follow/${author.id}`)
       .map((res: any) => {
-        if (!res.success) this.api.showToast();
+        if (!res.success) this.ux.showToast();
         return res.success;
       })
       .catch(error => {
-        this.api.showToast();
+        this.ux.showToast();
         console.error('author.unfollow', [author], error);
         return Observable.of(false);
       })

@@ -3,41 +3,27 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Storage } from '@ionic/storage';
-import { ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { USER_KEY, FEED_KEY } from './db';
-import { Api } from './api/api';
-import { Settings } from './settings/settings';
+import { Api } from './shared/api';
+import { Settings } from './settings';
+import { UX } from './shared/ux';
 
 @Injectable()
 export class User {
   private user: any;
   private ready;
 
-  constructor(
-    public api: Api,
-    public settings: Settings,
-    public storage: Storage,
-    public translate: TranslateService,
-    public toastCtrl: ToastController,
-  ) {
+  constructor(public api: Api, public settings: Settings, public storage: Storage, public translate: TranslateService, public ux: UX) {
     this.ready = new Promise((resolve, reject) => {
       Promise.all([this.settings.load(), this.storage.get(USER_KEY)]).then(data => {
         if (!this.settings.allSettings.offlineMode && data[1]) {
           this.user = data[1];
           if (this.user.date + 1000 * 60 * 60 * 24 * 360 < new Date().getTime()) {
             setTimeout(() => {
-              this.translate.get(['SESSIONTIMEOUT_MSG', 'CLOSE_BUTTON']).subscribe(values => {
-                const toast = this.toastCtrl.create({
-                  message: values.SESSIONTIMEOUT_MSG,
-                  showCloseButton: true,
-                  closeButtonText: values.CLOSE_BUTTON,
-                  duration: 15000,
-                });
-                toast.present();
-                this.removeStoredUser();
-              });
+              this.ux.showToast('INFO', 'SESSIONTIMEOUT_MSG', 15000);
+              this.removeStoredUser();
             }, 2000);
           }
         }
@@ -51,7 +37,7 @@ export class User {
   }
 
   login(info: any) {
-    const loader = this.api.showLoader();
+    const loader = this.ux.showLoader();
 
     const data = new FormData();
     data.append('username', info.username);

@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
-import { Lists, Api, Categories, Stories } from '../../providers/providers';
+import { Lists, UX, Categories, Stories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 
 @IonicPage()
@@ -26,7 +26,7 @@ export class ListViewPage {
     private popoverCtrl: PopoverController,
     public translate: TranslateService,
     public file: File,
-    public api: Api,
+    public ux: UX,
     public s: Stories,
   ) {
     const list = navParams.get('list');
@@ -114,7 +114,7 @@ export class ListViewPage {
         this.file
           .writeFile(path, filename, data, { replace: true })
           .then(() => {
-            this.api.showToast(`${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+            this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
           })
           .catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
       }

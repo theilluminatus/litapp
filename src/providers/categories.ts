@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 
 import { Category } from '../models/category';
-import { Api } from './api/api';
+import { Api } from './shared/api';
 
 @Injectable()
 export class Categories {

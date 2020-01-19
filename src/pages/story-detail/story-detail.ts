@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, Api, Settings, User, Categories } from '../../providers/providers';
+import { Stories, UX, Settings, User, Categories } from '../../providers/providers';
 import { handleNoCordovaError } from '../../app/utils';
 import { Category } from '../../models/category';
 
@@ -33,7 +33,7 @@ export class StoryDetailPage {
     private socialSharing: SocialSharing,
     private browser: BrowserTab,
     public file: File,
-    public api: Api,
+    public ux: UX,
   ) {
     this.story = navParams.get('story');
 
@@ -170,7 +170,7 @@ export class StoryDetailPage {
       .writeFile(path, filename, data, { replace: true })
       .then(() => {
         this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
-          this.api.showToast(`${values.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+          this.ux.showToast('INFO', `${values.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
         });
       })
       .catch(err =>

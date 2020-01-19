@@ -8,7 +8,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { Device } from '@ionic-native/device';
 
-import { Globals, Api, Settings, User } from '../../providers/providers';
+import { Globals, Api, UX, Settings, User } from '../../providers/providers';
 import { STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY, HISTORY_KEY, STORY_KEY } from '../../providers/db';
 import { handleNoCordovaError } from '../../app/utils';
 
@@ -36,6 +36,7 @@ export class SettingsPage {
     public platform: Platform,
     public device: Device,
     public api: Api,
+    public ux: UX,
     public user: User,
     public g: Globals,
     public settings: Settings,
@@ -49,11 +50,9 @@ export class SettingsPage {
   ) {}
 
   ionViewWillEnter() {
-    this.translate
-      .get(['SETTINGS_EXPORTSUCCESS', 'SETTINGS_IMPORTFAIL', 'SETTINGS_IMPORTSUCCESS', 'RELOAD', 'COPYPROMPT_MSG', 'PASTEPROMPT_MSG'])
-      .subscribe(values => {
-        this.translations = values;
-      });
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG', 'PASTEPROMPT_MSG']).subscribe(values => {
+      this.translations = values;
+    });
 
     // load settings
     this.settings.load().then(() => {
@@ -115,7 +114,7 @@ export class SettingsPage {
         this.file
           .writeFile(path, filename, JSON.stringify(data), { replace: true })
           .then(() => {
-            this.api.showToast(`${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+            this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
           })
           .catch(err =>
             handleNoCordovaError(err, e => {
@@ -131,7 +130,7 @@ export class SettingsPage {
         const data = JSON.parse(input);
 
         if (data.type !== exportDataIdentifier || data.version > this.g.getVersion() || !data.timestamp) {
-          this.api.showToast(this.translations.SETTINGS_IMPORTFAIL);
+          this.ux.showToast('ERROR', 'SETTINGS_IMPORTFAIL');
           return;
         }
 
@@ -142,7 +141,7 @@ export class SettingsPage {
           }
         }
 
-        this.api.showToast(this.translations.SETTINGS_IMPORTSUCCESS, 100000, this.translations.RELOAD).then(() => {
+        this.ux.showToast('INFO', 'SETTINGS_IMPORTSUCCESS', 100000, 'RELOAD').then(() => {
           window.location.hash = '';
           window.location.reload();
         });
@@ -207,7 +206,7 @@ export class SettingsPage {
     this.file
       .writeFile(path, filename, data, { replace: true })
       .then(() => {
-        this.api.showToast(`${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+        this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
       })
       .catch(err =>
         handleNoCordovaError(err, e => {

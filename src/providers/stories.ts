@@ -9,7 +9,8 @@ import { STORY_KEY } from './db';
 import { Authors } from './authors';
 import { User } from './user';
 import { Globals } from './globals';
-import { Api } from './api/api';
+import { Api } from './shared/api';
+import { UX } from './shared/ux';
 
 const decodeHTML = (s: string) => {
   const txt = document.createElement('textarea');
@@ -31,6 +32,7 @@ export class Stories {
     public storage: Storage,
     public translate: TranslateService,
     public alertCtrl: AlertController,
+    public ux: UX,
   ) {
     this.ready = new Promise((resolve, reject) => {
       this.storage.keys().then(keys => {
@@ -120,13 +122,13 @@ export class Stories {
     const filter = [{ property: 'submission_id', value: parseInt(id) }];
     const params = { filter: JSON.stringify(filter).trim() };
 
-    const loader = this.api.showLoader();
+    const loader = this.ux.showLoader();
     return this.api
       .get('2/submissions/pages', params)
       .map((data: any) => {
         if (loader && !noLoaderDismiss) loader.dismiss();
         if (!data.success) {
-          this.api.showToast();
+          this.ux.showToast();
           return null;
         }
 
@@ -158,7 +160,7 @@ export class Stories {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('stories.getById', [id], error);
         return Observable.of(null);
       });
@@ -182,9 +184,10 @@ export class Stories {
         if (data.success) {
           story.myrating = rating;
         } else if (data.error) {
-          this.api.showToast(data.error);
+          console.error('rate story', data.error);
+          this.ux.showToast();
         } else {
-          this.api.showToast();
+          this.ux.showToast();
         }
       });
   }
@@ -193,11 +196,11 @@ export class Stories {
     // define downloading loop
     const loop = (index: number = 0) => {
       if (index < 1) {
-        this.api.showLoader();
+        this.ux.showLoader();
       }
 
       if (index >= series.length) {
-        this.api.hideLoader();
+        this.ux.hideLoader();
         // done!
         return;
       }
@@ -206,21 +209,19 @@ export class Stories {
           if (s) {
             this.download(s);
           } else {
-            this.translate.get(['SERIES_DOWNLOAD_ERROR']).subscribe(values => {
-              this.api.showToast(values.SERIES_DOWNLOAD_ERROR);
-            });
-            this.api.hideLoader();
+            this.ux.showToast('ERROR', 'SERIES_DOWNLOAD_ERROR');
+            this.ux.hideLoader();
             return;
           }
           // tslint:disable-next-line: prefer-template
-          this.api.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
+          this.ux.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
           loop(index + 1);
         });
         return;
       }
       this.download(series[index]);
       // tslint:disable-next-line: prefer-template
-      this.api.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
+      this.ux.updateLoader(Math.round(index + (1 / series.length) * 100) + '%');
       loop(index + 1);
     };
 
@@ -257,7 +258,7 @@ export class Stories {
 
     let loader;
     if (!page || page < 2) {
-      loader = this.api.showLoader();
+      loader = this.ux.showLoader();
     }
 
     return this.api
@@ -267,7 +268,7 @@ export class Stories {
 
         if (!data.success && !data.submissions) {
           if (!data.hasOwnProperty('total')) {
-            this.api.showToast();
+            this.ux.showToast();
           }
           return [[], 0];
         }
@@ -276,7 +277,7 @@ export class Stories {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('stories.search', [filter, page, sort], error);
         return Observable.of([[], 0]);
       });
@@ -302,7 +303,7 @@ export class Stories {
 
     let loader;
     if (!page || page < 2) {
-      loader = this.api.showLoader();
+      loader = this.ux.showLoader();
     }
 
     return this.api
@@ -316,7 +317,7 @@ export class Stories {
 
         if (!stories) {
           if (!total) {
-            this.api.showToast();
+            this.ux.showToast();
           }
           return [[], 0];
         }
@@ -325,7 +326,7 @@ export class Stories {
       })
       .catch(error => {
         if (loader) loader.dismiss();
-        this.api.showToast();
+        this.ux.showToast();
         console.error('stories.newsearch', [filter, page, tags], error);
         return Observable.of([[], 0]);
       });
@@ -336,7 +337,7 @@ export class Stories {
     delete filter.q;
 
     if (!page || page < 2) {
-      this.api.showLoader();
+      this.ux.showLoader();
     }
 
     // first lookup tag ids
