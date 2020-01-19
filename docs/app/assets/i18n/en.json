@@ -30,26 +30,35 @@
   "SETTINGS_CACHELISTS": "Cache lists between app starts",
   "SETTINGS_EXPORT": "Export data",
   "SETTINGS_IMPORT": "Import data",
-  "SETTINGS_IMPORTFAIL": "Backup either not valid or compatible with this version of the app.",
+  "SETTINGS_IMPORTFAIL": "Backup either not valid or not compatible with this version of the app.",
+  "SETTINGS_EXPORTSFAIL": "Failed to export data.",
   "SETTINGS_EXPORTSUCCESS": "File saved to",
-  "SETTNGS_IMPORTSUCCESS": "Successfully imported",
-  "SETTINGS_GITHUB_LINK": "Visit homepage",
+  "SETTINGS_IMPORTSUCCESS": "Successfully imported",
+  "SETTINGS_GITHUB_LINK": "Visit app homepage",
   "SETTINGS_SAVEERRORLOG": "Save error log",
   "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme",
   "SETTINGS_OFFLINEMODE": "Offline mode",
   "SETTINGS_ENABLELOCK": "Require device unlock to start app",
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
+  "SETTINGS_ABOUTAPP": "About the app",
+  "SETTINGS_ABOUT_DESCRIPTION": "Want to suggest a feature, report a bug or read some more info about the app you are currently using?",
+  "SETTINGS_VERSION": "Current build version",
 
-  "LOAD_ERROR": "Error while communicating with server",
+  "ERROR_TAG": "🔴 Error: ",
+  "INFO_TAG": "🔵 Info: ",
+  "LOAD_ERROR": "Problem while communicating with server",
+  "UPDATE_STARTED": "Checking for updates...",
   "UPDATE_MSG": "There is an update available",
+  "UPDATE_ALREADYDONE": "The most current version is already installed",
   "UPDATE_FAILEDMSG": "Could not check for updates",
   "COPYPROMPT_MSG": "File system couldn't be accessed. Please manually copy this text and save it.",
+  "COPY_TOO_LARGE_MSG": "File system couldn't be accessed. Data is too long to be copied manually either.",
   "PASTEPROMPT_MSG": "File system couldn't be accessed. Please manually paste the needed text here.",
   "NOSUPPORT_MSG": "Unfortunatly this function is not available on this platform.",
-  "OFFLINE_ERROR": "This function is not available in offline mode.",
+  "OFFLINE_ERROR": "This and a lot of other functions are not available in offline mode.",
 
   "LOGIN_TITLE": "Sign in",
-  "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
+  "LOGIN_ERROR": "Unable to sign in",
   "SIGNUP_MESSAGE": "Return to the app and login after you registered on the site",
   "SESSIONTIMEOUT_MSG": "Your session has expired. Please log in again.",
   "UPDATED_MSG": "App successfully updated. Please log in again.",
@@ -62,6 +71,7 @@
   "EDIT_BUTTON": "Edit",
   "BOOKMARK_BUTTON": "Bookmark",
   "DOWNLOAD_BUTTON": "Download",
+  "DOWNLOAD_ALL_BUTTON": "Download all stories",
   "SHARE_BUTTON": "Share",
   "CLOSE_BUTTON": "Close",
   "REFRESH_BUTTON": "Refresh",
@@ -127,8 +137,8 @@
   "AUTHOR_UPDATEDATE": "Last updated",
 
   "SERIES_TITLE": "All stories in this series",
-  "SERIES_DOWNLOAD": "Download all stories",
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
+  "SERIES_DOWNLOAD_SIZEWARNING": "This list contains a lot of stories, are you sure you want to download them all? \nThis might take a while and doesn't always work very well.",
 
   "LIST_PAGECOUNTDIVIDER": "Page: ",
 
@@ -146,7 +156,8 @@
 
   "OPENLINK_DESCRIPTION": "Paste a hyperlink below to open it directly in the app. You can view stories and authorpages this way.",
   "OPENLINK_STORYWARNING": "The first search result should be the correct story.",
-  "OPENLINK_OPENLINK_UNSUPPORTED": "Unsupported link.",
+  "OPENLINK_UNSUPPORTED": "Unsupported link.",
+  "OPENLINK_UNSUPPORTED_POEM": "Reading poems is not supported.",
 
   "DETAILS": "Details",
   "AUTHOR": "Author",
@@ -175,5 +186,9 @@
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",
   "WRITER_TAG": "Writer",
-  "WINNER_TAG": "Winner"
+  "WINNER_TAG": "Winner",
+
+  "LITEROTICA_NOTFOUND": "Either Literotica is offline, or the app is no longer up to date with the Literorica API.",
+  "LITEROTICA_TOOMANYREQUESTS": "You have made too many requests and Literotica has temporarily blocked you, try again later.",
+  "LITEROTICA_TEMPOFFLINE": "Literotica is temporarily offline, take a look at their website to learn more."
 }
