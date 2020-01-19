@@ -54,7 +54,7 @@ export class UX {
           this.activeToasts.splice(this.activeToasts.indexOf(toast), 1);
         });
 
-        if (removePrevious) {
+        if (removePrevious || (type === 'ERROR' && !label)) {
           this.activeToasts.forEach(toast => toast.dismiss());
           this.activeToasts = [toast];
         } else {

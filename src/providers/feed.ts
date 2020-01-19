@@ -89,6 +89,7 @@ export class Feed {
         if (loader) loader.dismiss();
         if (!d.data) {
           this.ux.showToast();
+          console.error('feed.query', [lastid]);
           return [];
         }
 

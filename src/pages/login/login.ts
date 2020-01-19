@@ -44,7 +44,7 @@ export class LoginPage {
         }, 500);
       },
       err => {
-        console.error('login failed', err.error);
+        console.error('login.login', err.error);
         this.ux.showToast('ERROR', `${this.translations.LOGIN_ERROR}: ${err.error.error}`, 3000);
       },
     );

@@ -67,6 +67,7 @@ export class Lists {
         if (loader) loader.dismiss();
         if (d.error) {
           this.ux.showToast();
+          console.error('lists.query', d.error);
           return [];
         }
 
@@ -151,6 +152,7 @@ export class Lists {
       .map((d: any) => {
         if (!d.works.data) {
           this.ux.showToast();
+          console.error('lists.getListPage', [urlname, list, i]);
           return null;
         }
 
@@ -187,10 +189,7 @@ export class Lists {
   addStory(list: List, story: Story) {
     return this.api
       .put(`3/stories/${story.id}/lists/${list.id}`, {})
-      .map((res: any) => {
-        if (!res.success) this.ux.showToast();
-        return res.success;
-      })
+      .map((res: any) => res.success)
       .catch(error => {
         this.ux.showToast();
         console.error('lists.addStory', [list, story], error);
@@ -202,6 +201,9 @@ export class Lists {
           list.stories.push(story);
           list.size += 1;
           this.storage.set(LIST_KEY, this.lists);
+        } else {
+          this.ux.showToast();
+          console.error('lists.addStory', [list, story]);
         }
       });
   }
@@ -209,10 +211,7 @@ export class Lists {
   removeStory(list: List, story: Story) {
     return this.api
       .delete(`3/stories/${story.id}/lists/${list.id}`)
-      .map((res: any) => {
-        if (!res.success) this.ux.showToast();
-        return res.success;
-      })
+      .map((res: any) => res.success)
       .catch(error => {
         this.ux.showToast();
         console.error('lists.removeStory', [list, story], error);
@@ -228,6 +227,9 @@ export class Lists {
           });
           list.size -= 1;
           this.storage.set(LIST_KEY, this.lists);
+        } else {
+          this.ux.showToast();
+          console.error('lists.removeStory', [list, story]);
         }
       });
   }
@@ -244,6 +246,7 @@ export class Lists {
       .map((res: any) => {
         if (!res.success) {
           this.ux.showToast();
+          console.error('lists.add', [list]);
           return false;
         }
 
@@ -282,7 +285,7 @@ export class Lists {
       .map((res: any) => {
         if (!res.success) {
           this.ux.showToast();
-          console.error('update list', res.error);
+          console.error('lists.edit', [list]);
           return false;
         }
 
@@ -310,7 +313,7 @@ export class Lists {
       .map((res: any) => {
         if (!res.success) {
           this.ux.showToast();
-          console.error('delete list', res.error);
+          console.error('lists.delete', [list]);
           return false;
         }
 

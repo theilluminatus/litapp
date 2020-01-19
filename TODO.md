@@ -4,14 +4,18 @@
 
 ## Features
 
-- Add more descriptive error messages
-- Limit amount of failed connection messages (max only one at a time + perhaps link to offline mode?)
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...)
+
+### Meta
+
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)
 - Add mock API for integration testing and demo (in case Literotica servers go down)
-- WebApp: Disable forced account logout on update
-- WebApp: Add links to homepage and promote
-- WebApp: Service worker to cache SPA
+
+### WebApp (WIP)
+
+- Disable forced account logout on update
+- Add links to homepage and promote
+- Service worker to cache SPA
 
 ## Bugs
 
@@ -40,7 +44,7 @@
 
 If you encounter these issues and want to help me fix them, please contact me.
 
-- Fix rating sometimes shows as x.xx
+- Rating sometimes shows as x.xx and some other information in list dissapears
 - Downloaded stories disappearing without internet connection
 - Downloading stories to file doesn't always work (ENCODING_ERR?)
 

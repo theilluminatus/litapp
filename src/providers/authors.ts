@@ -31,6 +31,7 @@ export class Authors {
         if (loader) loader.dismiss();
         if (!data.success) {
           this.ux.showToast();
+          console.error('author.getDetails');
           return null;
         }
 
@@ -65,6 +66,7 @@ export class Authors {
         if (loader) loader.dismiss();
         if (!data.length) {
           this.ux.showToast();
+          console.error('author.getFollowing');
           return [];
         }
 
@@ -85,10 +87,7 @@ export class Authors {
 
     return this.api
       .post(`3/users/follow/${author.id}`, {})
-      .map((res: any) => {
-        if (!res.success) this.ux.showToast();
-        return res.success;
-      })
+      .map((res: any) => res.success)
       .catch(error => {
         this.ux.showToast();
         console.error('author.follow', [author], error);
@@ -99,6 +98,7 @@ export class Authors {
           author.following = true;
         } else {
           this.ux.showToast();
+          console.error('author.follow', [author]);
         }
       });
   }
@@ -106,10 +106,7 @@ export class Authors {
   unfollow(author: Author) {
     return this.api
       .delete(`3/users/follow/${author.id}`)
-      .map((res: any) => {
-        if (!res.success) this.ux.showToast();
-        return res.success;
-      })
+      .map((res: any) => res.success)
       .catch(error => {
         this.ux.showToast();
         console.error('author.unfollow', [author], error);
@@ -118,6 +115,9 @@ export class Authors {
       .subscribe(d => {
         if (d) {
           author.following = false;
+        } else {
+          this.ux.showToast();
+          console.error('author.unfollow', [author]);
         }
       });
   }

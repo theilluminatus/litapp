@@ -128,6 +128,7 @@ export class Stories {
       .map((data: any) => {
         if (loader && !noLoaderDismiss) loader.dismiss();
         if (!data.success) {
+          console.error('stories.getById', [id]);
           this.ux.showToast();
           return null;
         }
@@ -183,11 +184,9 @@ export class Stories {
       .subscribe(data => {
         if (data.success) {
           story.myrating = rating;
-        } else if (data.error) {
-          console.error('rate story', data.error);
-          this.ux.showToast();
         } else {
           this.ux.showToast();
+          console.error('stories.rate', [story, rating], data.error);
         }
       });
   }
@@ -269,6 +268,7 @@ export class Stories {
         if (!data.success && !data.submissions) {
           if (!data.hasOwnProperty('total')) {
             this.ux.showToast();
+            console.error('stories.search', [filter, page, sort]);
           }
           return [[], 0];
         }
@@ -318,6 +318,7 @@ export class Stories {
         if (!stories) {
           if (!total) {
             this.ux.showToast();
+            console.error('stories.newsearch', [filter, page, tags]);
           }
           return [[], 0];
         }

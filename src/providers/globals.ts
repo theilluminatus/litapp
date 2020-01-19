@@ -131,6 +131,7 @@ export class Globals {
         if (loader) loader.dismiss();
         if (!d) {
           this.ux.showToast();
+          console.error('globals.query');
           return null;
         }
 
