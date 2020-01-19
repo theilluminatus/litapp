@@ -116,14 +116,14 @@ export class Globals {
             }
 
             if (d.version > this.version) {
-              this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON).then((toast: any) => {
+              this.api.showToast(values.UPDATE_MSG, 15000, values.DOWNLOAD_BUTTON, true).then((toast: any) => {
                 this.browser.openUrl(d.updatelink || 'https://theilluminatus.github.io/litapp');
               });
             } else {
-              if (manual) this.api.showToast(values.UPDATE_ALREADYDONE);
+              if (manual) this.api.showToast(values.UPDATE_ALREADYDONE, undefined, undefined, true);
             }
           } else {
-            this.api.showToast(values.UPDATE_FAILEDMSG);
+            this.api.showToast(values.UPDATE_FAILEDMSG, undefined, undefined, true);
           }
         });
     });

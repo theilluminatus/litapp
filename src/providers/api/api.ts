@@ -1,7 +1,7 @@
 // tslint:disable: prefer-template
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController, Loading } from 'ionic-angular';
+import { LoadingController, ToastController, Loading, Toast } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ENV } from '../../app/env';
 import { Settings } from '../settings/settings';
@@ -29,6 +29,7 @@ export class Api {
 
   translations;
   loader: Loading;
+  activeToasts: Toast[] = [];
 
   constructor(
     public http: HttpClient,
@@ -142,7 +143,7 @@ export class Api {
     if (this.loader) this.loader.dismiss().catch(() => {});
   }
 
-  showToast(text?: string, timeout?: number, button?: string) {
+  showToast(text?: string, timeout?: number, button?: string, removePrevious?: boolean) {
     return new Promise(resolve => {
       this.translate.get(['LOAD_ERROR', 'CLOSE_BUTTON']).subscribe(values => {
         this.translations = values;
@@ -155,7 +156,15 @@ export class Api {
         toast.present();
         toast.onDidDismiss(data => {
           resolve(toast);
+          this.activeToasts.splice(this.activeToasts.indexOf(toast), 1);
         });
+
+        if (removePrevious) {
+          this.activeToasts.forEach(toast => toast.dismiss());
+          this.activeToasts = [toast];
+        } else {
+          this.activeToasts.push(toast);
+        }
       });
     });
   }
