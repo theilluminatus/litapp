@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# Usage: ./release.sh "password" 1.XX
+# Usage: ./release.sh "keypassword" 1.XX
 
 if [[ $# -eq 0 ]] ; then
-    echo 'Please add the build key password and next version number as argument like so ` ./release.sh "password" 1.XX `'
+    echo 'Please add the build key password and next version number as argument like so ` ./release.sh "keypassword" 1.XX `'
     exit 0
 fi
 

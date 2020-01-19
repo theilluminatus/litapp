@@ -46,7 +46,7 @@ sed -i "5i- [v$newValue](https://theilluminatus.github.io/litapp/releases/litapp
 # Increment version numbers
 # globals.ts
 FILE=./src/providers/globals.ts
-LINE=16
+LINE=19
 orgLine=$(sed "$LINE!d" $FILE)
 orgValue=$(echo $orgLine | grep -o -P '(?<=private version = ).*(?=;)')
 let newValue=$((orgValue + 1))
