@@ -5,7 +5,7 @@
       <ion-icon name="download" *ngIf="story?.downloaded"></ion-icon>
       {{story?.title}}
       <small *ngIf="story?.currentpage > 0 && ishistory">
-        ({{Max.min(100, Math.round((story?.currentpage+1)*100 / story?.length))}}%)
+        ({{Math.min(100, Math.round((story?.currentpage+1)*100 / story?.length))}}%)
       </small>
       <ion-badge *ngIf="story?.iscontestwinner" color="blue">{{'WINNER_TAG' | translate}}</ion-badge>
       <ion-badge *ngIf="story?.ishot" color="red">{{'HOT_TAG' | translate}}</ion-badge>
