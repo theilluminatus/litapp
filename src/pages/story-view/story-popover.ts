@@ -241,7 +241,6 @@ export class StoryPopover {
     } else {
       if (currentLineRatio > 0.5) this.settings.lineheight = Math.floor(this.settings.fontsize * (currentLineRatio - 0.1));
     }
-    console.log(this.settings.lineheight);
   }
 
   changeAlign(dir: string) {

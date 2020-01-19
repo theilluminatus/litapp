@@ -3,8 +3,7 @@ import { IonicPage, NavController, AlertController, PopoverController } from 'io
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
-import { HISTORY_KEY, STORY_KEY } from '../../providers/db';
-import { Stories, Settings } from '../../providers/providers';
+import { Stories, Settings, History } from '../../providers/providers';
 import { Story } from '../../models/story';
 
 @IonicPage({ priority: 'high' })
@@ -25,6 +24,7 @@ export class HistoryPage {
     public alertCtrl: AlertController,
     public storage: Storage,
     public s: Stories,
+    public history: History,
     public settings: Settings,
     private popoverCtrl: PopoverController,
   ) {
@@ -34,7 +34,7 @@ export class HistoryPage {
   }
 
   ionViewWillEnter() {
-    Promise.all([this.s.onReady(), this.settings.load()]).then(() => {
+    Promise.all([this.history.onReady(), this.settings.load()]).then(() => {
       this.onlyDownloaded = this.settings.allSettings.offlineMode;
       this.buildList();
     });
@@ -46,70 +46,14 @@ export class HistoryPage {
   }
 
   private buildList() {
-    if (this.onlyDownloaded) this.buildDownloadedList();
-    else this.buildHistoryList();
-  }
-
-  private buildHistoryList() {
-    this.storage.get(HISTORY_KEY).then(history => {
-      let loadedIndex = 0;
-      if (history) {
-        const temp = [];
-        history.forEach((id, index) => {
-          this.s.getById(id).subscribe(story => {
-            if (story) {
-              temp[history.length - index - 1] = story;
-            }
-
-            loadedIndex += 1;
-            if (loadedIndex === history.length) {
-              this.cleanHistory();
-              this.filteredStories = temp;
-            }
-          });
-        });
-      } else {
-        this.filteredStories = [];
-      }
-    });
-  }
-
-  // TODO: this doesn't work as expected
-  private cleanHistory() {
-    const maxNumberOfStories = 10;
-    const toRemove = this.filteredStories
-      .sort(s => (s.downloadedtimestamp ? new Date(s.downloadedtimestamp.toString()).getTime() : 0))
-      .reverse()
-      .filter((story, i) => {
-        if (i > maxNumberOfStories - 1) {
-          return story;
-        }
-      });
-
-    toRemove.forEach(story => {
-      if (!story.downloaded) {
-        console.log('delete', story);
-        // this.delete(story);
-      }
-    });
-  }
-
-  private buildDownloadedList() {
-    this.storage.length().then(length => {
-      const temp = [];
-      this.storage.forEach((value, key, index) => {
-        if (key.indexOf(STORY_KEY) === 0) {
-          if (value.downloaded) {
-            this.s.getById(value.id).subscribe(story => {
-              temp.push(story);
-            });
-          }
-        }
-        if (index >= length - 1) {
-          this.filteredStories = temp;
-        }
-      });
-    });
+    if (this.onlyDownloaded) {
+      this.history.getDownloadStories().then(list => (this.filteredStories = list));
+    } else {
+      this.filteredStories = this.history
+        .getStories()
+        .slice()
+        .reverse();
+    }
   }
 
   clearAll() {
@@ -122,8 +66,7 @@ export class HistoryPage {
             text: this.translations.OK_BUTTON,
             handler: () => {
               this.onlyDownloaded = false;
-              this.s.uncacheAll(true);
-              this.storage.remove(HISTORY_KEY);
+              this.history.reset();
               this.buildList();
             },
           },
@@ -134,14 +77,7 @@ export class HistoryPage {
   }
 
   delete(story: Story) {
-    // remove from db
-    this.s.uncache(story);
-    this.storage.get(HISTORY_KEY).then(history => {
-      if (history) {
-        history.splice(history.indexOf(story.id), 1);
-        this.storage.set(HISTORY_KEY, history).then(() => this.buildList());
-      }
-    });
+    this.history.remove(story).then(() => this.buildList());
   }
 
   download(story: Story) {

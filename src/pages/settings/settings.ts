@@ -128,13 +128,13 @@ export class SettingsPage {
             })
             .catch(err =>
               handleNoCordovaError(err, e => {
-                console.log('Exported data', data);
+                console.info('Exported data', data);
                 alert(this.translations.COPY_TOO_LARGE_MSG);
               }),
             );
         } catch (error) {
           this.ux.showToast('ERROR', 'SETTINGS_EXPORTSFAIL');
-          console.log('settings.exportData', [data], error);
+          console.info('settings.exportData', [data], error);
         }
       });
   }
@@ -226,7 +226,7 @@ export class SettingsPage {
       })
       .catch(err =>
         handleNoCordovaError(err, e => {
-          console.log('Exported data', data);
+          console.info('Exported data', data);
           alert(this.translations.COPY_TOO_LARGE_MSG);
         }),
       );

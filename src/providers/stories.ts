@@ -371,11 +371,7 @@ export class Stories {
   undownload(story: Story) {
     story.downloaded = false;
     story.downloadedtimestamp = null;
-    if (story.cached) {
-      this.storage.set(`${STORY_KEY}_${story.id}`, story);
-    } else {
-      this.storage.remove(`${STORY_KEY}_${story.id}`);
-    }
+    this.storage.set(`${STORY_KEY}_${story.id}`, story);
   }
 
   cache(story: Story) {
@@ -383,15 +379,14 @@ export class Stories {
     this.storage.set(`${STORY_KEY}_${story.id}`, story);
   }
 
-  uncache(story: Story) {
-    story.cached = false;
-    this.undownload(story);
+  remove(story: Story) {
+    this.storage.remove(`${STORY_KEY}_${story.id}`);
   }
 
-  uncacheAll(excludeDownloaded?: boolean) {
+  removeAll(excludeDownloaded?: boolean) {
     this.stories.forEach(story => {
-      if (!excludeDownloaded || !story.downloaded) {
-        this.uncache(story);
+      if (!(excludeDownloaded && story.downloaded)) {
+        this.remove(story);
       }
     });
   }

@@ -5,8 +5,8 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
-import { STORYSTYLEOPTIONS_KEY, HISTORY_KEY } from '../../providers/db';
-import { Stories, Analytics, Settings, User, UX } from '../../providers/providers';
+import { STORYSTYLEOPTIONS_KEY } from '../../providers/db';
+import { Stories, Analytics, Settings, History, User, UX } from '../../providers/providers';
 import { Story } from '../../models/story';
 
 @IonicPage({ priority: 'low' })
@@ -47,6 +47,7 @@ export class StoryViewPage {
     public user: User,
     public stories: Stories,
     public analytics: Analytics,
+    public history: History,
     private popoverCtrl: PopoverController,
     public ux: UX,
     private androidFullScreen: AndroidFullScreen,
@@ -96,16 +97,7 @@ export class StoryViewPage {
       this.addSlides();
     }
 
-    // add to history
-    this.storage.get(HISTORY_KEY).then(tempHistory => {
-      const history = tempHistory || [];
-      if (history.indexOf(this.story.id) > -1) {
-        history.splice(history.indexOf(this.story.id), 1);
-      }
-
-      history.push(this.story.id);
-      this.storage.set(HISTORY_KEY, history);
-    });
+    this.history.add(this.story);
   }
 
   private addSlides() {

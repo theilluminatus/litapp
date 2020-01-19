@@ -118,7 +118,7 @@ export class ListViewPage {
           })
           .catch(err =>
             handleNoCordovaError(err, () => {
-              console.log('Exported data', data);
+              console.info('Exported data', data);
               alert(this.translations.COPY_TOO_LARGE_MSG);
             }),
           );

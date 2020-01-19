@@ -31,10 +31,6 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
         <ion-label>{{ 'CATEGORY' | translate }}</ion-label>
         <ion-radio value="category" (ionSelect)="save()"></ion-radio>
       </ion-item>
-      <ion-item>
-        <ion-label>{{ 'DOWNLOADED' | translate }}</ion-label>
-        <ion-radio value="-downloadtimestamp" (ionSelect)="save()"></ion-radio>
-      </ion-item>
     </ion-list>
   `,
 })

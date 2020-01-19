@@ -175,7 +175,7 @@ export class StoryDetailPage {
       })
       .catch(err =>
         handleNoCordovaError(err, () => {
-          console.log('Exported data', data);
+          console.info('Exported data', data);
           this.translate.get('COPY_TOO_LARGE_MSG').subscribe(label => alert(label));
         }),
       );
