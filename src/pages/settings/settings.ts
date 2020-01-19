@@ -97,7 +97,6 @@ export class SettingsPage {
     });
   }
 
-  // TODO: JSON.parse fails with "Converting circular structure to JSON", will need to be debugged on device
   exportData() {
     const data = {
       type: exportDataIdentifier,
@@ -121,6 +120,7 @@ export class SettingsPage {
 
         try {
           const textData = JSON.stringify(data);
+
           this.file
             .writeFile(path, filename, textData, { replace: true })
             .then(() => {
@@ -134,7 +134,7 @@ export class SettingsPage {
             );
         } catch (error) {
           this.ux.showToast('ERROR', 'SETTINGS_EXPORTSFAIL');
-          console.info('settings.exportData', [data], error);
+          console.error('settings.exportData', [data], error);
         }
       });
   }

@@ -361,22 +361,28 @@ export class Stories {
     );
   }
 
+  persist(story: Story) {
+    const cleanedStory = Object.assign({}, story);
+    delete cleanedStory.author.stories;
+    this.storage.set(`${STORY_KEY}_${story.id}`, cleanedStory);
+  }
+
   download(story: Story) {
     story.downloaded = true;
     story.downloadedtimestamp = new Date();
     story.cached = true;
-    this.storage.set(`${STORY_KEY}_${story.id}`, story);
+    this.persist(story);
   }
 
   undownload(story: Story) {
     story.downloaded = false;
     story.downloadedtimestamp = null;
-    this.storage.set(`${STORY_KEY}_${story.id}`, story);
+    this.persist(story);
   }
 
   cache(story: Story) {
     story.cached = true;
-    this.storage.set(`${STORY_KEY}_${story.id}`, story);
+    this.persist(story);
   }
 
   remove(story: Story) {
