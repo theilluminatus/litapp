@@ -232,8 +232,11 @@ export class StoryViewPage {
       return;
     }
 
-    this.story.currentpage = currentIndex;
-    this.stories.cache(this.story);
-    this.range.setValue(currentIndex + 1);
+    // only one page
+    if (this.range) {
+      this.range.setValue(currentIndex + 1);
+      this.story.currentpage = currentIndex;
+      this.stories.cache(this.story);
+    }
   }
 }
