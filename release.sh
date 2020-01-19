@@ -2,7 +2,7 @@
 
 # Usage: ./release.sh "keypassword" 1.XX
 
-if [[ $# -eq 0 ]] ; then
+if [[ $# -ne 2 ]] ; then
     echo 'Please add the build key password and next version number as argument like so ` ./release.sh "keypassword" 1.XX `'
     exit 0
 fi
