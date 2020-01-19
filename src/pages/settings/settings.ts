@@ -9,7 +9,15 @@ import { FilePath } from '@ionic-native/file-path';
 import { Device } from '@ionic-native/device';
 
 import { Globals, Api, UX, Settings, User } from '../../providers/providers';
-import { STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY, HISTORY_KEY, STORY_KEY } from '../../providers/db';
+import {
+  STARREDQUERIES_KEY,
+  STORYSTYLEOPTIONS_KEY,
+  FEED_KEY,
+  HISTORY_KEY,
+  STORY_KEY,
+  RECENTQUERIES_KEY,
+  SETTINGS_KEY,
+} from '../../providers/db';
 import { handleNoCordovaError } from '../../app/utils';
 
 const exportDataIdentifier = 'Exported data for Litapp (com.illuminatus.litapp)';
@@ -50,7 +58,7 @@ export class SettingsPage {
   ) {}
 
   ionViewWillEnter() {
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG', 'PASTEPROMPT_MSG']).subscribe(values => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPY_TOO_LARGE_MSG', 'PASTEPROMPT_MSG']).subscribe(values => {
       this.translations = values;
     });
 
@@ -89,6 +97,7 @@ export class SettingsPage {
     });
   }
 
+  // TODO: JSON.parse fails with "Converting circular structure to JSON", will need to be debugged on device
   exportData() {
     const data = {
       type: exportDataIdentifier,
@@ -98,12 +107,11 @@ export class SettingsPage {
 
     this.storage
       .forEach((value, key, i) => {
-        if ([STARREDQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY].indexOf(key) > -1) {
+        if ([STARREDQUERIES_KEY, RECENTQUERIES_KEY, STORYSTYLEOPTIONS_KEY, FEED_KEY, SETTINGS_KEY, HISTORY_KEY].indexOf(key) > -1) {
           data[key] = value;
-        } else if (key.indexOf(STORY_KEY) > -1 && value.downloaded) {
+        } else if (key.indexOf(STORY_KEY) > -1 && (value.downloaded || data[HISTORY_KEY].indexOf(value.id) > -1)) {
+          // add stories that are either downloaded or in history
           data[key] = value;
-          if (!data[HISTORY_KEY]) data[HISTORY_KEY] = [];
-          data[HISTORY_KEY].push(value.id);
         }
       })
       .then(() => {
@@ -111,16 +119,23 @@ export class SettingsPage {
         // tslint:disable-next-line: prefer-template
         const filename = 'litapp-' + Math.round(new Date().getTime() / 1000) + '.json';
 
-        this.file
-          .writeFile(path, filename, JSON.stringify(data), { replace: true })
-          .then(() => {
-            this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
-          })
-          .catch(err =>
-            handleNoCordovaError(err, e => {
-              prompt(this.translations.COPYPROMPT_MSG, JSON.stringify(data));
-            }),
-          );
+        try {
+          const textData = JSON.stringify(data);
+          this.file
+            .writeFile(path, filename, textData, { replace: true })
+            .then(() => {
+              this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
+            })
+            .catch(err =>
+              handleNoCordovaError(err, e => {
+                console.log('Exported data', data);
+                alert(this.translations.COPY_TOO_LARGE_MSG);
+              }),
+            );
+        } catch (error) {
+          this.ux.showToast('ERROR', 'SETTINGS_EXPORTSFAIL');
+          console.log('settings.exportData', [data], error);
+        }
       });
   }
 
@@ -147,6 +162,7 @@ export class SettingsPage {
         });
       } catch (e) {
         console.error('settings.importData', [input], e);
+        this.ux.showToast('ERROR', 'SETTINGS_IMPORTFAIL');
       }
     };
 
@@ -210,7 +226,8 @@ export class SettingsPage {
       })
       .catch(err =>
         handleNoCordovaError(err, e => {
-          prompt(this.translations.COPYPROMPT_MSG, data);
+          console.log('Exported data', data);
+          alert(this.translations.COPY_TOO_LARGE_MSG);
         }),
       );
   }

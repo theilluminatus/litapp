@@ -74,10 +74,11 @@ export class HistoryPage {
     });
   }
 
+  // TODO: this doesn't work as expected
   private cleanHistory() {
-    const maxNumberOfStories = 50;
+    const maxNumberOfStories = 10;
     const toRemove = this.filteredStories
-      .sort(s => (s.downloadedtimestamp ? s.downloadedtimestamp.getTime() : 0))
+      .sort(s => (s.downloadedtimestamp ? new Date(s.downloadedtimestamp.toString()).getTime() : 0))
       .reverse()
       .filter((story, i) => {
         if (i > maxNumberOfStories - 1) {
@@ -87,7 +88,8 @@ export class HistoryPage {
 
     toRemove.forEach(story => {
       if (!story.downloaded) {
-        this.delete(story);
+        console.log('delete', story);
+        // this.delete(story);
       }
     });
   }

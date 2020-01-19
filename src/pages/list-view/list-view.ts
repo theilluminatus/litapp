@@ -37,7 +37,7 @@ export class ListViewPage {
       });
     });
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG']).subscribe(values => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPY_TOO_LARGE_MSG']).subscribe(values => {
       this.translations = values;
     });
   }
@@ -116,7 +116,12 @@ export class ListViewPage {
           .then(() => {
             this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
           })
-          .catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
+          .catch(err =>
+            handleNoCordovaError(err, () => {
+              console.log('Exported data', data);
+              alert(this.translations.COPY_TOO_LARGE_MSG);
+            }),
+          );
       }
     });
   }
