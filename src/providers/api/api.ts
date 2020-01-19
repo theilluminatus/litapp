@@ -30,6 +30,7 @@ export class Api {
   translations;
   loader: Loading;
   activeToasts: Toast[] = [];
+  offlineModeErrorCount = 0;
 
   constructor(
     public http: HttpClient,
@@ -170,9 +171,12 @@ export class Api {
   }
 
   showOfflineModeError() {
-    this.translate.get(['OFFLINE_ERROR']).subscribe(values => {
-      this.showToast(values.OFFLINE_ERROR);
-    });
+    if (this.offlineModeErrorCount < 3) {
+      this.translate.get(['OFFLINE_ERROR']).subscribe(values => {
+        this.showToast(values.OFFLINE_ERROR);
+      });
+      this.offlineModeErrorCount = this.offlineModeErrorCount + 1;
+    }
     this.hideLoader();
     return Observable.of();
   }

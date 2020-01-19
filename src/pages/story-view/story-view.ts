@@ -206,7 +206,7 @@ export class StoryViewPage {
 
   slideChanged() {
     const currentIndex = this.slidesElement.getActiveIndex();
-    if (currentIndex >= this.slides.length && this.story.series) {
+    if (currentIndex >= this.slides.length && this.story.series && !this.appSettings.allSettings.offlineMode) {
       this.stories.getSeries(this.story.series).subscribe(data => {
         for (let i = 0; i < data[0].length - 1; i += 1) {
           if (data[0][i].id === this.story.id) {
