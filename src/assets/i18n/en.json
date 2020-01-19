@@ -43,7 +43,9 @@
   "SETTINGS_ABOUT_DESCRIPTION": "Want to suggest a feature, report a bug or read some more info about the app you are currently using?",
   "SETTINGS_VERSION": "Current build version",
 
-  "LOAD_ERROR": "Error while communicating with server",
+  "ERROR_TAG": "🔴 Error: ",
+  "INFO_TAG": "🔵 Info: ",
+  "LOAD_ERROR": "Problem while communicating with server",
   "UPDATE_STARTED": "Checking for updates...",
   "UPDATE_MSG": "There is an update available",
   "UPDATE_ALREADYDONE": "The most current version is already installed",
@@ -182,5 +184,9 @@
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",
   "WRITER_TAG": "Writer",
-  "WINNER_TAG": "Winner"
+  "WINNER_TAG": "Winner",
+
+  "LITEROTICA_NOTFOUND": "Either Literotica is offline, or the app is no longer up to date with the Literorica API.",
+  "LITEROTICA_TOOMANYREQUESTS": "You have made too many requests and Literotica has temporarily blocked you, try again later.",
+  "LITEROTICA_TEMPOFFLINE": "Literotica is temporarily offline, take a look at their website to learn more."
 }

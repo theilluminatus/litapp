@@ -1,13 +1,13 @@
-// tslint:disable: prefer-template
-import { HttpClient, HttpParams, HttpParameterCodec } from '@angular/common/http';
+/* tslint:disable */
+// disabled because prefer-template and shorthand properties shorthand
+import { HttpClient, HttpParams, HttpParameterCodec, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Loading, Toast } from 'ionic-angular';
 import { ENV } from '../../app/env';
 import { Settings } from '../settings';
 import { UX } from './ux';
+import { Observable } from 'rxjs/Observable';
 
 // Source: https://github.com/angular/angular/issues/11058#issuecomment-351864976
-// tslint:disable-next-line: no-duplicate-imports
 export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
   encodeKey(k: string): string {
     return encodeURIComponent(k);
@@ -23,19 +23,6 @@ export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
   }
 }
 
-const handleAPIError = (error: Error, url: string, data: any, method: string) => {
-  console.info({
-    url,
-    method,
-    data,
-    type: 'API_Error',
-    name: error.name,
-    message: error.message,
-    stack: error.stack,
-  });
-  throw error;
-};
-
 @Injectable()
 export class Api {
   // apikeys and appid are always the same
@@ -43,10 +30,6 @@ export class Api {
   public appid: string = '24b7c3f9d904ebd679299b1ce5506bc305a5ab40';
   public corsProxy: string = ENV.CORS_PROXY || '';
   public urls = this.getUrls();
-
-  loader: Loading;
-  activeToasts: Toast[] = [];
-  offlineModeErrorCount = 0;
 
   constructor(public http: HttpClient, public ux: UX, public settings: Settings) {
     try {
@@ -76,6 +59,26 @@ export class Api {
     ];
   }
 
+  handleAPIError(error: HttpErrorResponse, url: string, data: any, method: string): any {
+    console.error({
+      type: 'API_Error',
+      url,
+      method,
+      data,
+      ...error,
+    });
+
+    if (error.status === 404) {
+      this.ux.showToast('ERROR', 'LITEROTICA_NOTFOUND', 5000);
+    } else if (error.status === 429) {
+      this.ux.showToast('ERROR', 'LITEROTICA_TOOMANYREQUESTS', 5000);
+    } else if (error.status === 503) {
+      this.ux.showToast('ERROR', 'LITEROTICA_TEMPOFFLINE', 5000);
+    }
+
+    return Observable.of();
+  }
+
   get(endpoint: string, params?: any, reqOpts?: any, urlIndex?: number, timeout?: number) {
     if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     let newReqOpts = reqOpts;
@@ -97,7 +100,7 @@ export class Api {
     newReqOpts.params = newReqOpts.params.set('apikey', this.apikey);
     newReqOpts.params = newReqOpts.params.set('appid', this.appid);
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
-    const req = this.http.get(url, newReqOpts).catch(err => handleAPIError(err, url, newReqOpts.params, 'GET'));
+    const req = this.http.get(url, newReqOpts).catch(err => this.handleAPIError(err, url, newReqOpts.params, 'GET'));
     if (timeout) return req.timeout(timeout);
     return req;
   }
@@ -114,24 +117,24 @@ export class Api {
     }
 
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + newEndpoint;
-    return this.http.post(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'POST'));
+    return this.http.post(url, body, reqOpts).catch(err => this.handleAPIError(err, url, body, 'POST'));
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {
     if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     const url = this.urls[0] + '/' + endpoint;
-    return this.http.put(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'PUT'));
+    return this.http.put(url, body, reqOpts).catch(err => this.handleAPIError(err, url, body, 'PUT'));
   }
 
   delete(endpoint: string, reqOpts?: any, urlIndex?: number) {
     if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
-    return this.http.delete(url, reqOpts).catch(err => handleAPIError(err, url, {}, 'DELETE'));
+    return this.http.delete(url, reqOpts).catch(err => this.handleAPIError(err, url, {}, 'DELETE'));
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
     if (this.settings.allSettings.offlineMode) return this.ux.showOfflineModeError();
     const url = this.urls[0] + '/' + endpoint;
-    return this.http.patch(url, body, reqOpts).catch(err => handleAPIError(err, url, body, 'PATCH'));
+    return this.http.patch(url, body, reqOpts).catch(err => this.handleAPIError(err, url, body, 'PATCH'));
   }
 }

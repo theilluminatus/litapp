@@ -39,10 +39,11 @@ export class UX {
     removePrevious?: boolean,
     higher?: boolean,
   ): Promise<Toast> {
+    const tag = `${type}_TAG`;
     return new Promise(resolve => {
-      this.translate.get([label || 'LOAD_ERROR', buttonLabel || 'CLOSE_BUTTON']).subscribe(translations => {
+      this.translate.get([label || 'LOAD_ERROR', buttonLabel || 'CLOSE_BUTTON', tag]).subscribe(translations => {
         const toast = this.toastCtrl.create({
-          message: translations[label] || label || translations.LOAD_ERROR,
+          message: translations[tag] + (translations[label] || label || translations.LOAD_ERROR),
           showCloseButton: true,
           closeButtonText: translations[buttonLabel] || buttonLabel || translations.CLOSE_BUTTON,
           duration: timeout || 3000,
