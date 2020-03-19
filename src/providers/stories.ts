@@ -361,43 +361,45 @@ export class Stories {
     );
   }
 
-  persist(story: Story) {
+  persist(story: Story): Promise<void> {
     const cleanedStory = Object.assign({}, story);
     delete cleanedStory.author.stories;
-    this.storage.set(`${STORY_KEY}_${story.id}`, cleanedStory);
+    return this.storage.set(`${STORY_KEY}_${story.id}`, cleanedStory);
   }
 
-  download(story: Story) {
+  download(story: Story): Promise<void> {
     story.downloaded = true;
     story.downloadedtimestamp = new Date();
     story.cached = true;
-    this.persist(story);
+    return this.persist(story);
   }
 
-  undownload(story: Story) {
+  undownload(story: Story): Promise<void> {
     story.downloaded = false;
     story.downloadedtimestamp = null;
-    this.persist(story);
+    return this.persist(story);
   }
 
-  cache(story: Story) {
+  cache(story: Story): Promise<void> {
     story.cached = true;
-    this.persist(story);
+    return this.persist(story);
   }
 
-  remove(story: Story) {
-    this.storage.remove(`${STORY_KEY}_${story.id}`);
+  remove(story: Story): Promise<void> {
+    return this.storage.remove(`${STORY_KEY}_${story.id}`);
   }
 
-  removeAll(excludeDownloaded?: boolean) {
-    this.stories.forEach(story => {
-      if (!(excludeDownloaded && story.downloaded)) {
-        this.remove(story);
-      }
-    });
+  removeAll(excludeDownloaded?: boolean): Promise<void[]> {
+    return Promise.all(
+      Array.from(this.stories).map(([_, story]) => {
+        if (!(excludeDownloaded && story.downloaded)) {
+          return this.remove(story);
+        }
+      }),
+    );
   }
 
-  extractFromFeed(item) {
+  extractFromFeed(item): Story {
     const cached = this.stories.get(item.what.id);
     if (cached) {
       return cached;
@@ -429,7 +431,7 @@ export class Stories {
     return story;
   }
 
-  extactFromList(item) {
+  extactFromList(item): Story {
     const cached = this.stories.get(item.id);
     if (cached) {
       return cached;
@@ -461,7 +463,7 @@ export class Stories {
     return story;
   }
 
-  extractFromSearch(item) {
+  extractFromSearch(item): Story {
     const cached = this.stories.get(item.id);
     if (cached) {
       return cached;
@@ -492,7 +494,7 @@ export class Stories {
     return story;
   }
 
-  extractFromNewSearch(item) {
+  extractFromNewSearch(item): Story {
     const cached = this.stories.get(item.id);
     if (cached) {
       return cached;

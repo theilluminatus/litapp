@@ -40,7 +40,7 @@ export class History {
     });
   }
 
-  onReady() {
+  onReady(): boolean {
     return this.ready;
   }
 
@@ -67,19 +67,19 @@ export class History {
     });
   }
 
-  getStories() {
+  getStories(): Story[] {
     return this.history.slice();
   }
 
-  getIds() {
+  getIds(): string[] {
     return this.history.map(story => story.id);
   }
 
-  persist() {
+  persist(): Promise<void> {
     return this.storage.set(HISTORY_KEY, this.getIds());
   }
 
-  add(story: Story) {
+  add(story: Story): Promise<void> {
     const index = this.getIds().indexOf(story.id);
     if (index > -1) {
       this.history.splice(index, 1);
@@ -89,42 +89,36 @@ export class History {
     return this.persist();
   }
 
-  remove(story: Story) {
+  remove(story: Story): Promise<void[]> {
     const index = this.getIds().indexOf(story.id);
     if (index > -1) {
       this.history.splice(index, 1);
-      this.stories.remove(story);
-      return this.persist();
+      const promises = [this.persist()];
+      if (!story.downloaded) {
+        promises.push(this.stories.remove(story));
+      }
+      return Promise.all(promises);
     }
   }
 
-  reset() {
+  reset(): void {
     this.history = [];
     this.storage.set(HISTORY_KEY, []);
     this.stories.removeAll();
   }
 
-  clean() {
+  clean(): Promise<void> {
     const maxNumberOfStories = 50;
     return new Promise(resolve => {
-      const toRemove = this.history.filter((story, i) => {
-        if (i > maxNumberOfStories - 1) {
-          return story;
-        }
-      });
+      const toRemove = this.history.slice(0, Math.max(this.history.length - maxNumberOfStories, 0));
 
       if (toRemove.length < 1) {
         resolve();
       } else {
         toRemove.forEach((story, index) => {
-          if (!story.downloaded) {
-            this.remove(story);
-          }
-
-          if (index >= toRemove.length - 1) {
-            resolve();
-          }
+          this.remove(story);
         });
+        resolve();
       }
     });
   }
