@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
 import { Lists, UX, Categories, Stories } from '../../providers/providers';
-import { handleNoCordovaError } from '../../app/utils';
+import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
 
 @IonicPage()
 @Component({
@@ -37,7 +37,7 @@ export class ListViewPage {
       });
     });
 
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPY_TOO_LARGE_MSG']).subscribe(values => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
       this.translations = values;
     });
   }
@@ -116,12 +116,7 @@ export class ListViewPage {
           .then(() => {
             this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
           })
-          .catch(err =>
-            handleNoCordovaError(err, () => {
-              console.info('Exported data', data);
-              alert(this.translations.COPY_TOO_LARGE_MSG);
-            }),
-          );
+          .catch(err => handleNoCordovaError(err, e => downloadTextFile(data, filename)));
       }
     });
   }

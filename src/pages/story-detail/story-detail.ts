@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
 import { Stories, UX, Settings, User, Categories } from '../../providers/providers';
-import { handleNoCordovaError } from '../../app/utils';
+import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
 import { Category } from '../../models/category';
 
 @IonicPage({ priority: 'low' })
@@ -173,12 +173,7 @@ export class StoryDetailPage {
           this.ux.showToast('INFO', `${values.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
         });
       })
-      .catch(err =>
-        handleNoCordovaError(err, () => {
-          console.info('Exported data', data);
-          this.translate.get('COPY_TOO_LARGE_MSG').subscribe(label => alert(label));
-        }),
-      );
+      .catch(err => handleNoCordovaError(err, e => downloadTextFile(data, filename)));
   }
 
   toggleDownload() {

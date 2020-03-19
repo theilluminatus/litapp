@@ -52,7 +52,6 @@
   "UPDATE_ALREADYDONE": "The most current version is already installed",
   "UPDATE_FAILEDMSG": "Could not check for updates",
   "COPYPROMPT_MSG": "File system couldn't be accessed. Please manually copy this text and save it.",
-  "COPY_TOO_LARGE_MSG": "File system couldn't be accessed. Data is too long to be copied manually either.",
   "PASTEPROMPT_MSG": "File system couldn't be accessed. Please manually paste the needed text here.",
   "NOSUPPORT_MSG": "Unfortunatly this function is not available on this platform.",
   "OFFLINE_ERROR": "This and a lot of other functions are not available in offline mode.",

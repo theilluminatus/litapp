@@ -18,7 +18,7 @@ import {
   RECENTQUERIES_KEY,
   SETTINGS_KEY,
 } from '../../providers/db';
-import { handleNoCordovaError } from '../../app/utils';
+import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
 
 const exportDataIdentifier = 'Exported data for Litapp (com.illuminatus.litapp)';
 
@@ -58,7 +58,7 @@ export class SettingsPage {
   ) {}
 
   ionViewWillEnter() {
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPY_TOO_LARGE_MSG', 'PASTEPROMPT_MSG']).subscribe(values => {
+    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'PASTEPROMPT_MSG']).subscribe(values => {
       this.translations = values;
     });
 
@@ -126,12 +126,7 @@ export class SettingsPage {
             .then(() => {
               this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
             })
-            .catch(err =>
-              handleNoCordovaError(err, e => {
-                console.info('Exported data', data);
-                alert(this.translations.COPY_TOO_LARGE_MSG);
-              }),
-            );
+            .catch(err => handleNoCordovaError(err, e => downloadTextFile(textData, filename)));
         } catch (error) {
           this.ux.showToast('ERROR', 'SETTINGS_EXPORTSFAIL');
           console.error('settings.exportData', [data], error);
@@ -224,11 +219,6 @@ export class SettingsPage {
       .then(() => {
         this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
       })
-      .catch(err =>
-        handleNoCordovaError(err, e => {
-          console.info('Exported data', data);
-          alert(this.translations.COPY_TOO_LARGE_MSG);
-        }),
-      );
+      .catch(err => handleNoCordovaError(err, e => downloadTextFile(data, filename)));
   }
 }
