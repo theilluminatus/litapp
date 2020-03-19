@@ -112,7 +112,7 @@ export class Stories {
 
   // Get a story by ID
   getById(id: any, force: boolean = false, noLoaderDismiss = false) {
-    let cached = this.stories.get(id);
+    const cached = this.stories.get(id);
     if (cached && !force) {
       if (cached.length) {
         return Observable.of(cached);
@@ -133,31 +133,25 @@ export class Stories {
           return null;
         }
 
-        if (!cached) {
-          cached = new Story({
-            id: data.pages[0].submission_id,
-            title: data.pages[0].name,
-            url: data.pages[0].url,
-            ratingenabled: data.pages[0].allow_vote,
-          });
-        } else if (force) {
-          cached.title = data.pages[0].name;
-          cached.url = data.pages[0].url;
-          cached.ratingenabled = data.pages[0].allow_vote;
-        }
+        const story = new Story({
+          id: data.pages[0].submission_id,
+          title: data.pages[0].name,
+          url: data.pages[0].url,
+          ratingenabled: data.pages[0].allow_vote,
+        });
 
         const tags = !data.pages[0].tags
           ? []
           : data.pages[0].tags.sort((a, b) => b.submission_count - a.submission_count).map(el => el.name);
 
-        cached.series = data.pages[0].series_id;
-        cached.lang = data.pages[0].lang;
-        cached.length = data.total;
-        cached.tags = tags;
-        cached.content = data.pages.map(p => p.content);
+        story.series = data.pages[0].series_id;
+        story.lang = data.pages[0].lang;
+        story.length = data.total;
+        story.tags = tags;
+        story.content = data.pages.map(p => p.content);
 
-        this.stories.set(cached.id, cached);
-        return cached;
+        this.stories.set(story.id, story);
+        return story;
       })
       .catch(error => {
         if (loader) loader.dismiss();

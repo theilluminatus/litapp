@@ -184,8 +184,9 @@ export class StoryDetailPage {
     }
   }
 
-  // updates only part of story
+  // updates part of story
   refreshStory() {
+    // This only refreshes basic things like seriesId, title, content, tags... no fancy data found during searches
     this.stories.getById(this.story.id, true).subscribe(story => {
       this.updateValues(story);
       this.myrating = this.story.myrating;
@@ -198,9 +199,11 @@ export class StoryDetailPage {
   }
 
   // quick and dirty fix
-  private updateValues(fields) {
+  private updateValues(story: Story) {
+    const fields = Object.assign({}, story);
+    const blackListedKeys = ['downloaded', 'cached', 'currentpage'];
     for (const f in this.story) {
-      if (fields[f] !== undefined) {
+      if (!blackListedKeys.includes(f) && fields[f] !== undefined) {
         // @ts-ignore
         this.story[f] = fields[f];
       }
