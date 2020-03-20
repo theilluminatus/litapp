@@ -14,7 +14,7 @@
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="StatusBarBackgroundColor" value="#111111" />
+    <preference name="StatusBarBackgroundColor" value="#000" />
     <preference name="StatusBarStyle" value="blackopaque" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
