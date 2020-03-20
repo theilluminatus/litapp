@@ -200,7 +200,10 @@ export class Stories {
       if (!series[index].cached) {
         this.getById(series[index].id, false, true).subscribe(s => {
           if (s) {
-            this.download(s);
+            // spread the original data gotten from the series list call to the story content
+            const story = { ...series[index], ...s };
+            this.stories.set(story.id, story); // override the basic version saved in getById
+            this.download(story);
           } else {
             this.ux.showToast('ERROR', 'SERIES_DOWNLOAD_ERROR');
             this.ux.hideLoader();
@@ -282,8 +285,8 @@ export class Stories {
     if (!tags) {
       if (filter.category) {
         filter.categories = filter.category.map(c => parseInt(c));
+        delete filter.category;
       }
-      delete filter.category;
     } else if (Array.isArray(filter.category)) {
       filter.category = parseInt(filter.category[0]);
     }
@@ -357,7 +360,7 @@ export class Stories {
 
   persist(story: Story): Promise<void> {
     const cleanedStory = Object.assign({}, story);
-    delete cleanedStory.author.stories;
+    if (cleanedStory.author && cleanedStory.author.stories) delete cleanedStory.author.stories;
     return this.storage.set(`${STORY_KEY}_${story.id}`, cleanedStory);
   }
 
