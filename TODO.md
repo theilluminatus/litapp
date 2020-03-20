@@ -45,6 +45,7 @@
 If you encounter these issues and want to help me fix them, please contact me.
 
 - Downloaded stories disappearing without internet connection
+- Feed shows repeats itself after a few pages (possibly fixed by logging out and back in)
 - Rating sometimes shows as x.xx and some other information in list disappears (possibly fixed in 1.19)
 - Downloading stories to file doesn't always work (probably fixed since 1.19)
 
