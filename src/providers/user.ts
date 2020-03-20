@@ -5,7 +5,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { USER_KEY, FEED_KEY } from './db';
+import { USER_KEY, FEED_KEY, LIST_KEY } from './db';
 import { Api } from './shared/api';
 import { Settings } from './settings';
 import { UX } from './shared/ux';
@@ -106,14 +106,14 @@ export class User {
     });
   }
 
-  removeStoredUser() {
-    this.storage.remove(USER_KEY);
-    this.storage.remove(FEED_KEY);
+  removeStoredUser(): Promise<void[]> {
+    return Promise.all([this.storage.remove(USER_KEY), this.storage.remove(FEED_KEY), this.storage.remove(LIST_KEY)]);
   }
 
   logout() {
     this.user = null;
-    this.removeStoredUser();
-    window.location.reload();
+    this.removeStoredUser().then(() => {
+      window.location.reload();
+    });
   }
 }
