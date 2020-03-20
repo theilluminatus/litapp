@@ -1,5 +1,11 @@
 <ion-item-sliding approxItemHeight="105px" #slidingItem>
-  <button ion-item (press)="handlePress(story,$event)" (click)="handleClick(story,$event)">
+  <button
+    ion-item
+    (touchstart)="handleTouchStart(story,$event)"
+    (touchend)="handleTouchEnd(story,$event)"
+    (touchmove)="handleTouchMove(story,$event)"
+    (click)="handleClick(story,$event)"
+  >
     <h2>
       <ion-icon name="eye" *ngIf="story?.cached && !story?.downloaded && !ishistory"></ion-icon>
       <ion-icon name="download" *ngIf="story?.downloaded"></ion-icon>

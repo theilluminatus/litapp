@@ -24,16 +24,43 @@ export class StoryListItem {
     public user: User,
   ) {}
 
-  pressTimer;
-  handlePress(story: Story, event) {
+  pressPosition = null;
+  pressTimer = null;
+
+  resetTouch() {
     clearTimeout(this.pressTimer);
+    this.pressPosition = null;
+    this.pressTimer = null;
+  }
+
+  handleTouchStart(story: Story, event: TouchEvent) {
+    this.resetTouch();
+    if (event.touches.length !== 1) return;
+
+    this.pressPosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
     this.pressTimer = setTimeout(() => {
       this.openStoryDetail(story);
-    }, 750);
+    }, 650);
+  }
+
+  handleTouchMove(story: Story, event: TouchEvent) {
+    if (event.touches.length !== 1 || !this.pressPosition) return;
+    const allowedMove = 30;
+
+    if (
+      Math.abs(event.touches[0].clientX - this.pressPosition.x) > allowedMove ||
+      Math.abs(event.touches[0].clientY - this.pressPosition.y) > allowedMove
+    ) {
+      this.resetTouch();
+    }
+  }
+
+  handleTouchEnd(story: Story, event: TouchEvent) {
+    this.resetTouch();
   }
 
   handleClick(story: Story, event) {
-    clearTimeout(this.pressTimer);
+    this.resetTouch();
     this.openStory(story);
   }
 
