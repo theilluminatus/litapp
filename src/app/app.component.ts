@@ -5,6 +5,7 @@ import { WebIntent } from '@ionic-native/web-intent';
 
 import { Globals, Analytics, UX, Stories, Lists, Feed, Settings } from '../providers/providers';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
   template: `
@@ -60,6 +61,7 @@ export class MyApp {
     public l: Lists,
     public f: Feed,
     public faio: FingerprintAIO,
+    public statusBar: StatusBar,
   ) {
     this.initTranslate();
     this.settings.load().then(() => {
@@ -78,6 +80,9 @@ export class MyApp {
         styleSheet.setAttribute('href', './assets/black-theme.css');
         styleSheet.setAttribute('rel', 'stylesheet');
         document.head.appendChild(styleSheet);
+        this.statusBar.backgroundColorByHexString('#000');
+      } else {
+        this.statusBar.backgroundColorByHexString('#111');
       }
     });
 
