@@ -47,7 +47,7 @@ export class Analytics {
     if (this.settings.allSettings.offlineMode) return;
 
     if (this.type === 'android') {
-      this.googleAnalytics.trackView(view).catch();
+      this.googleAnalytics.trackView(view).catch(e => handleNoCordovaError(e));
     } else if (this.type === 'web') {
       gtag('event', 'screem_view', {
         app_name: this.g.getVersion().toString(),
