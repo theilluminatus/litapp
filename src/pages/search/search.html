@@ -33,7 +33,7 @@
   <ion-menu side="right" [content]="stars" class="starredmenu" #panel ion-fixed>
     <ion-list>
       <div class="scroll-content">
-        <ion-item-divider color="light">{{ 'SEARCH_STARREDQUERIES' | translate }}</ion-item-divider>
+        <ion-item-divider color="light" *ngIf="starredQueries.length > 0">{{ 'SEARCH_STARREDQUERIES' | translate }}</ion-item-divider>
 
         <button ion-item *ngFor="let query of starredQueries" (click)="search(query)">
           <ion-label>{{query}}</ion-label>
@@ -43,6 +43,7 @@
         </button>
 
         <ion-item-divider color="light">{{ 'SEARCH_HISTORY' | translate }}</ion-item-divider>
+        <ion-item class="placeholder" *ngIf="recentQueries.length < 1">{{ 'SEARCH_HISTORY_EMPTY' | translate }}</ion-item>
 
         <button ion-item *ngFor="let query of (recentQueries | reverse)" (click)="search(query)">
           <ion-label>{{query}}</ion-label>

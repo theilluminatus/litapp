@@ -86,6 +86,7 @@
   "SEARCH_PLACEHOLDER": "Search stories",
   "SEARCH_STARREDQUERIES": "Starred Queries",
   "SEARCH_HISTORY": "History",
+  "SEARCH_HISTORY_EMPTY": "List is empty",
   "SEARCH_SORT": "Sort results",
   "SEARCH_TAGS": "Search as tags (commas!)",
   "SEARCH_ONLYSPECIAL": "Only show stories that are:",
