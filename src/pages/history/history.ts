@@ -49,10 +49,7 @@ export class HistoryPage {
     if (this.onlyDownloaded) {
       this.history.getDownloadStories().then(list => (this.filteredStories = list));
     } else {
-      this.filteredStories = this.history
-        .getStories()
-        .slice()
-        .reverse();
+      this.filteredStories = this.history.getStories().reverse();
     }
   }
 
@@ -77,7 +74,7 @@ export class HistoryPage {
   }
 
   delete(story: Story) {
-    this.history.remove(story).then(() => this.buildList());
+    this.history.remove(story, this.onlyDownloaded).then(() => this.buildList());
   }
 
   download(story: Story) {

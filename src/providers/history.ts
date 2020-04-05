@@ -89,16 +89,17 @@ export class History {
     return this.persist();
   }
 
-  remove(story: Story): Promise<void[]> {
+  remove(story: Story, deleteDownloaded?: boolean): Promise<void[]> {
     const index = this.getIds().indexOf(story.id);
+    const promises = [];
     if (index > -1) {
       this.history.splice(index, 1);
-      const promises = [this.persist()];
-      if (!story.downloaded) {
-        promises.push(this.stories.remove(story));
-      }
-      return Promise.all(promises);
+      promises.push(this.persist());
     }
+    if (!story.downloaded || deleteDownloaded) {
+      promises.push(this.stories.remove(story));
+    }
+    return Promise.all(promises);
   }
 
   reset(): void {
