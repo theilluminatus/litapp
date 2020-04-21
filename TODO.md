@@ -4,8 +4,9 @@
 
 ## Features
 
-- Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
+- Add random story feature from official app
 - Use new API routes for viewing the Top stories in a category (limit to top this year,  last 90 days or all time)
+- Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
 ### Meta
 
