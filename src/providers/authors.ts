@@ -8,6 +8,9 @@ import { User } from './user';
 import { Api } from './shared/api';
 import { UX } from './shared/ux';
 
+const oldDefaultUserPic = 'https://www.literotica.com/imagesv2/da'; // the old api returns an invalid url to this image
+const defaultUserPic = 'https://www.literotica.com/imagesv2/da_default.jpg';
+
 @Injectable()
 export class Authors {
   private authors: Map<number, Author> = new Map<number, Author>();
@@ -38,7 +41,7 @@ export class Authors {
         if (!cached) {
           cached = new Author({
             id: data.user.profile.id,
-            picture: data.user.profile.userpic,
+            picture: data.user.profile.userpic === oldDefaultUserPic ? defaultUserPic : data.user.profile.userpic,
             name: data.user.profile.username,
           });
         }
@@ -132,7 +135,7 @@ export class Authors {
       cached = new Author({
         id: item.userid,
         name: item.username,
-        picture: item.userpic,
+        picture: item.userpic === oldDefaultUserPic ? defaultUserPic : item.userpic,
       });
     }
 
@@ -152,7 +155,7 @@ export class Authors {
     const author = new Author({
       id: item.id,
       name: item.username,
-      picture: item.userpic,
+      picture: item.userpic === oldDefaultUserPic ? defaultUserPic : item.userpic,
     });
 
     this.authors.set(author.id, author);
