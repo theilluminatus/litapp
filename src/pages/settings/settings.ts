@@ -192,7 +192,7 @@ export class SettingsPage {
     const filename = 'litapp-errorlog-' + Math.round(new Date().getTime() / 1000) + '.json';
 
     // log some device data before saving to file
-    console.info({
+    const runtimeData = {
       unixTime: new Date().getTime(),
       deviceManufacturer: this.device.manufacturer,
       deviceModel: this.device.model,
@@ -210,9 +210,9 @@ export class SettingsPage {
       appId: this.api.appid,
       appSettings: this.settings.allSettings,
       userLoggedIn: this.user.isLoggedIn(),
-    });
+    };
 
-    const data = JSON.stringify(window.consoleLog);
+    const data = JSON.stringify({ runtime: runtimeData, console: window.consoleLog });
 
     this.file
       .writeFile(path, filename, data, { replace: true })

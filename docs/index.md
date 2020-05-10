@@ -34,7 +34,7 @@ Older changelogs can be found on [the releases page](https://github.com/theillum
 
 ## Installation
 
-The app is only supported from Android v4.4 (KitKat, released in 2013) and upward.
+The app is only supported from **Android v4.4** (KitKat, released in 2013) and upward.
 
 Go to `Settings → Security → Unknown Sources` and enable the option called `Allow installation of apps...`. Then downloading the app at the top of the page, once the resulting `.apk` file is downloaded, install the app by pressing the notification or opening the file with a file manager app.
 
@@ -70,20 +70,20 @@ When starting the app it loads for a long time and then shows an error popup wit
 You can check if the bug report or feature you wish to send in has already been logged on my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md).  
 Unfortunately I am sometimes unable to fix or implement these requests due to time or platform constraints:
 
-- Feature: Add setting to disable vertically scrolling when reading a story, spread to multiple pages instead so you can only scroll horizontal.
+- **Feature**: Add setting to disable vertically scrolling when reading a story, spread to multiple pages instead so you can only scroll horizontal.
     > For one, too much work. There is a lot to consider here: changing screen size or font sizes will change amount of pages and the current page, there is a vast array of differently sized phone screens (the official app cuts off the last line of text regularly on my device).  
     > Personally I prefer the current setup for this reason: there is no difference between the site and the app layout-wise, authors sometimes take great care in layouting their stories and it would be a shame to mess with this. I realize the official app does do this and it annoyed me greatly every time a story ended on the last page with only 3 lines.
 
-- Feature: Searching for poems
+- **Feature**: Searching for poems
     > Unfortunately the existence of poems was not taken into account when designing and creating the app. You can read them by accessing the poem specific categories on the Explore page. Unfortunately it would take considerable effort to implement searching for them, as Literotica has a whole set of extra endpoints for dealing with poems. Because of this it is currently not planned to be implemented.
 
-- Feature: Reading illustrated stories in offline mode.
+- **Feature**: Reading illustrated stories in offline mode.
     > As you might have noticed, you can download illustrated stories and read them online, unfortunately the images will not be downloaded locally. This would require completely overhauling the way stories are downloaded and displayed.
 
-- Feature: Listen to stories with audio recordings inside the app
+- **Feature**: Listen to stories with audio recordings inside the app
     > Because this app reuses Literorica's data (mainly from the official app) there is no way to support this (as the offical app doesn't either). You can open the story in a browser by pressing the "Open Externally" button on the detail page and access the recording from there.
 
-- Bug: Sometimes lists of stories (history, search results, lists) don't contain all expected lists (especially when it is a long list)
+- **Bug**: Sometimes lists of stories (history, search results, lists) don't contain all expected lists (especially when it is a long list)
     > This issue originates from Ionic (a package to more easily create apps), this might be fixed by updating to a newer version, but this will take a lot of time and might introduce newer other bugs.  
     > A possible solution is to kill and restart the app or even reboot your phone.
 
