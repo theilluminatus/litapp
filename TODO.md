@@ -5,7 +5,9 @@
 ## Features
 
 - Add random story feature from official app
-- Use new API routes for viewing the Top stories in a category (limit to top this year,  last 90 days or all time)
+- Alternate scrolling mode: add next / prev buttons at bottom instead of swiping / pressing sides
+- Alternate scrolling mode: flip vertically through pages?
+- Use new API routes for viewing the Top stories in a category (limit to top this year, last 90 days or all time)
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
 ### Meta
@@ -21,7 +23,9 @@
 
 ## Bugs
 
+- Fix text colour in category filter popup on search results when using AMOLED mode.
 - Older downloaded stories cannot be added to lists after a while
+- Some of the API routes no longer return a full story URL? causing share functionalities to fail.
 
 # Features / Bugfixes that are currently not planned
 
