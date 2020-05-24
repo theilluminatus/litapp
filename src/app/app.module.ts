@@ -46,6 +46,7 @@ export function provideSettings(storage: Storage) {
     offlineMode: false,
     enableLock: false,
     forceNormalList: false,
+    alternatePagination: false,
   });
 }
 

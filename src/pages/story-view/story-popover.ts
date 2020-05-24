@@ -190,21 +190,25 @@ export class StoryPopover {
       bg: 'rgb(255, 255, 255)',
       fg: 'rgb(0, 0, 0)',
       fglow: 'rgb(128, 128, 128)',
+      buttonStyle: 'dark',
     },
     tan: {
       bg: 'rgb(249, 241, 228)',
       fg: 'rgb(0, 0, 0)',
       fglow: 'rgb(92, 92, 92)',
+      buttonStyle: 'dark',
     },
     grey: {
       bg: 'rgb(76, 75, 80)',
       fg: 'rgb(255, 255, 255)',
       fglow: 'rgb(160, 160, 160)',
+      buttonStyle: 'light',
     },
     black: {
       bg: 'rgb(0, 0, 0)',
       fg: 'rgb(255, 255, 255)',
       fglow: 'rgb(128, 128, 128)',
+      buttonStyle: 'light',
     },
   };
 
@@ -212,14 +216,15 @@ export class StoryPopover {
     this.settings = navParams.get('settings');
   }
 
-  changeBackground(color: any) {
-    this.settings.theme = color;
-    this.settings.background = this.colors[color].bg;
+  changeBackground(theme: any) {
+    this.settings.theme = theme;
+    this.settings.background = this.colors[theme].bg;
+    this.settings.buttonStyle = this.colors[theme].buttonStyle;
 
     if (this.settings.lowcontrast) {
-      this.settings.color = this.colors[color].fglow;
+      this.settings.color = this.colors[theme].fglow;
     } else {
-      this.settings.color = this.colors[color].fg;
+      this.settings.color = this.colors[theme].fg;
     }
   }
 

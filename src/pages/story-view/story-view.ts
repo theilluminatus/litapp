@@ -21,6 +21,7 @@ export class StoryViewPage {
   dir: string = 'ltr';
   webApp: boolean = true;
   slidesPerView: number = 1;
+  alternatePagination: boolean = true;
   fullscreen = false;
   firstTimeNextPage = true;
   story: Story;
@@ -37,6 +38,7 @@ export class StoryViewPage {
     font: 'sans-serif',
     textalign: 'justify',
     lowcontrast: false,
+    buttonStyle: 'light',
   };
 
   constructor(
@@ -113,8 +115,10 @@ export class StoryViewPage {
   }
 
   ionViewWillEnter() {
-    if (this.story.currentpage > 0 && this.slidesElement) {
-      this.slidesElement.slideTo(this.story.currentpage, 0);
+    this.alternatePagination = this.appSettings.allSettings.alternatePagination;
+    if (this.slidesElement) {
+      if (this.alternatePagination) this.slidesElement.lockSwipes(true);
+      if (this.story.currentpage > 0) this.slidesElement.slideTo(this.story.currentpage, 0);
     }
   }
 
@@ -133,17 +137,38 @@ export class StoryViewPage {
     this.androidFullScreen.showSystemUI();
   }
 
-  clickSlides(event) {
+  nextSlide(event?: MouseEvent) {
+    if (event) event.stopPropagation();
+    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
+    if (this.firstTimeNextPage && !this.fullscreen) {
+      this.immersive();
+    }
+
+    this.slidesElement.slideNext();
+    this.firstTimeNextPage = false;
+
+    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
+  }
+
+  prevSlide(event?: MouseEvent) {
+    if (event) event.stopPropagation();
+    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
+    this.slidesElement.slidePrev();
+    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
+  }
+
+  clickSlides(event: MouseEvent) {
+    if (this.alternatePagination) {
+      this.immersive();
+      return;
+    }
+
     if (event.clientX < this.platform.width() / 4) {
       // clicking in left most 25%
-      this.slidesElement.slidePrev();
+      this.prevSlide();
     } else if (event.clientX > (3 * this.platform.width()) / 4) {
       // clicking in right most 25%
-      if (this.firstTimeNextPage && !this.fullscreen) {
-        this.immersive();
-      }
-      this.slidesElement.slideNext();
-      this.firstTimeNextPage = false;
+      this.nextSlide();
     } else {
       this.immersive();
     }
@@ -194,6 +219,12 @@ export class StoryViewPage {
     popover.present({
       ev,
     });
+  }
+
+  slideSelectionChange(event: any) {
+    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
+    this.slidesElement.slideTo(event.value - 1);
+    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
   }
 
   slideChanged() {

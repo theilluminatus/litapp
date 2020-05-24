@@ -118,4 +118,10 @@ page-story-view {
   .pagination.fullscreen {
     bottom: -100px;
   }
+
+  .alternate-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 80px;
+  }
 }

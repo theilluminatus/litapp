@@ -54,6 +54,15 @@
       <ng-container *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5">
         <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
           <p id="slide-content" [innerHTML]="slide.content"></p>
+
+          <div *ngIf="alternatePagination" class="alternate-buttons">
+            <button ion-button (click)="prevSlide($event)" [color]="settings.buttonStyle">
+              <ion-icon name="md-arrow-dropleft-circle"></ion-icon>&nbsp; {{'STORYVIEW_PREV' | translate}}
+            </button>
+            <button ion-button (click)="nextSlide($event)" [color]="settings.buttonStyle">
+              {{'STORYVIEW_NEXT' | translate}} &nbsp;<ion-icon name="md-arrow-dropright-circle"></ion-icon>
+            </button>
+          </div>
         </ng-scrollbar>
       </ng-container>
     </ion-slide>
@@ -72,7 +81,7 @@
 
   <ion-range
     #range
-    (ionChange)="slidesElement.slideTo($event.value-1)"
+    (ionChange)="slideSelectionChange($event)"
     *ngIf="slides.length > 1"
     pin="true"
     [snaps]="slides.length < 15"

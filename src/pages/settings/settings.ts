@@ -77,6 +77,7 @@ export class SettingsPage {
         offlineMode: [this.options.offlineMode],
         enableLock: [this.options.enableLock],
         forceNormalList: [this.options.forceNormalList],
+        alternatePagination: [this.options.alternatePagination],
       });
 
       this.form.valueChanges.subscribe(v => {

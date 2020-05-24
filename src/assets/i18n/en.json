@@ -39,6 +39,7 @@
   "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme",
   "SETTINGS_OFFLINEMODE": "Offline mode",
   "SETTINGS_ENABLELOCK": "Require device unlock to start app",
+  "SETTINGS_ALTERNATE_PAGINATION": "Display next / previous buttons when reading instead of swiping pages",
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
   "SETTINGS_ABOUTAPP": "About the app",
   "SETTINGS_ABOUT_DESCRIPTION": "Want to suggest a feature, report a bug or read some more info about the app you are currently using?",
@@ -102,6 +103,8 @@
 
   "STORY_TOOLTIP_SHOWINFO": "More info",
   "STORY_ENDOFSERIES": "No more stories in this series",
+  "STORYVIEW_NEXT": "Next",
+  "STORYVIEW_PREV": "Previous",
 
   "STORYRELATED_TITLE": "Related stories",
 
