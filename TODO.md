@@ -4,6 +4,7 @@
 
 ## Features
 
+- Turn pages with volume rocker
 - Add random story feature from official app
 - Add setting to only show new stories / submissions in feed (hide bio updates etc)
 - Alternate scrolling mode: flip vertically through pages?
