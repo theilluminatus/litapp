@@ -41,6 +41,7 @@
   "SETTINGS_ENABLELOCK": "Require device unlock to start app",
   "SETTINGS_ALTERNATE_PAGINATION": "Display next / previous buttons when reading instead of swiping pages",
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
+  "SETTINGS_ONLY_STORIES_FEED": "Only display new stories on the feed page (hide bio updates etc...)",
   "SETTINGS_ABOUTAPP": "About the app",
   "SETTINGS_ABOUT_DESCRIPTION": "Want to suggest a feature, report a bug or read some more info about the app you are currently using?",
   "SETTINGS_VERSION": "Current build version",

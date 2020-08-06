@@ -78,6 +78,7 @@ export class SettingsPage {
         enableLock: [this.options.enableLock],
         forceNormalList: [this.options.forceNormalList],
         alternatePagination: [this.options.alternatePagination],
+        onlyShowStoriesInFeed: [this.options.onlyShowStoriesInFeed],
       });
 
       this.form.valueChanges.subscribe(v => {

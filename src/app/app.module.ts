@@ -47,6 +47,7 @@ export function provideSettings(storage: Storage) {
     enableLock: false,
     forceNormalList: false,
     alternatePagination: false,
+    onlyShowStoriesInFeed: false,
   });
 }
 

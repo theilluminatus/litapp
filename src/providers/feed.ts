@@ -93,20 +93,23 @@ export class Feed {
           return [];
         }
 
-        const items = d.data.map(item => {
-          const isStory = item.action === 'published-story';
-          try {
-            return new FeedItem({
-              id: item.id,
-              timestamp: item.when,
-              author: this.a.extractFromFeed(item.who),
-              text: isStory ? [] : Array.isArray(item.what) ? item.what : ['their profile'],
-              story: !isStory ? undefined : this.s.extractFromFeed(item),
-            });
-          } catch (error) {
-            return new FeedItem(null);
-          }
-        });
+        const items = d.data
+          .map(item => {
+            const isStory = item.action === 'published-story';
+            try {
+              return new FeedItem({
+                id: item.id,
+                timestamp: item.when,
+                author: this.a.extractFromFeed(item.who),
+                text: isStory ? [] : Array.isArray(item.what) ? item.what : ['their profile'],
+                story: !isStory ? undefined : this.s.extractFromFeed(item),
+              });
+            } catch (error) {
+              return new FeedItem(null);
+            }
+          })
+          // filter out invalid items and only show stories when setting is true
+          .filter((item: FeedItem) => !!item.id && (!this.settings.allSettings.onlyShowStoriesInFeed || !!item.story));
 
         items.forEach(i => this.feed.push(i));
         this.feedtimeout = new Date().getTime() + this.timeout;

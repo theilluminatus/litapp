@@ -6,7 +6,6 @@
 
 - Turn pages with volume rocker
 - Add random story feature from official app
-- Add setting to only show new stories / submissions in feed (hide bio updates etc)
 - Support stories in other languages
 - Alternate scrolling mode: flip vertically through pages?
 - Use new API routes for viewing the Top stories in a category (limit to top this year, last 90 days or all time)
@@ -25,6 +24,7 @@
 
 ## Bugs
 
+- Opening a story for the first time from certain lists makes the list item break (shows empty data)
 - Fix text colour in category filter popup on search results when using AMOLED mode.
 - Older downloaded stories cannot be added to lists after a while
 - Some of the API routes no longer return a full story URL? causing share functionalities to fail.
