@@ -79,6 +79,7 @@ export class SettingsPage {
         forceNormalList: [this.options.forceNormalList],
         alternatePagination: [this.options.alternatePagination],
         onlyShowStoriesInFeed: [this.options.onlyShowStoriesInFeed],
+        navigateWithVolumeRocker: [this.options.navigateWithVolumeRocker],
       });
 
       this.form.valueChanges.subscribe(v => {

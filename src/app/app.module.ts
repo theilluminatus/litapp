@@ -48,6 +48,7 @@ export function provideSettings(storage: Storage) {
     forceNormalList: false,
     alternatePagination: false,
     onlyShowStoriesInFeed: false,
+    navigateWithVolumeRocker: false,
   });
 }
 

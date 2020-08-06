@@ -114,4 +114,5 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-fingerprint-aio" spec="2.0.0" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
+    <plugin name="com.manueldeveloper.volume-buttons" spec="https://github.com/manueldeveloper/cordova-plugin-volume-buttons.git" />
 </widget>

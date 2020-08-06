@@ -77,6 +77,7 @@
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "ts-md5": "^1.2.4",
+    "volumebuttons": "git+https://github.com/manueldeveloper/cordova-plugin-volume-buttons.git",
     "zone.js": "0.8.18"
   },
   "devDependencies": {
@@ -114,7 +115,8 @@
       "com-darryncampbell-cordova-plugin-intent": {},
       "cordova-plugin-google-analytics": {},
       "cordova-plugin-fingerprint-aio": {},
-      "cordova-plugin-statusbar": {}
+      "cordova-plugin-statusbar": {},
+      "com.manueldeveloper.volume-buttons": {}
     },
     "platforms": []
   },

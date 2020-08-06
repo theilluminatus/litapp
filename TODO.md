@@ -4,7 +4,6 @@
 
 ## Features
 
-- Turn pages with volume rocker
 - Support stories in other languages
 - Alternate scrolling mode: flip vertically through pages?
 - Use new API routes for viewing the Top stories in a category (limit to top this year, last 90 days or all time)

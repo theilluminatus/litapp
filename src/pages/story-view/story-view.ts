@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { IonicPage, Slides, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
@@ -140,6 +140,13 @@ export class StoryViewPage {
   nextSlide(event?: MouseEvent) {
     if (event) event.stopPropagation();
     if (this.alternatePagination) this.slidesElement.lockSwipes(false);
+
+    // try going to next in series on last page
+    if (this.slidesElement.getActiveIndex() >= this.slides.length - 1) {
+      this.goToNextInSeries();
+      return;
+    }
+
     if (this.firstTimeNextPage && !this.fullscreen) {
       this.immersive();
     }
@@ -171,6 +178,17 @@ export class StoryViewPage {
       this.nextSlide();
     } else {
       this.immersive();
+    }
+  }
+
+  @HostListener('window:volumebuttonslistener', ['$event'])
+  onVolumeRocker(event) {
+    if (!this.appSettings.allSettings.navigateWithVolumeRocker) return;
+    if (event.signal === 'volume-up') {
+      this.prevSlide();
+    }
+    if (event.signal === 'volume-down') {
+      this.nextSlide();
     }
   }
 
@@ -230,21 +248,7 @@ export class StoryViewPage {
   slideChanged() {
     const currentIndex = this.slidesElement.getActiveIndex();
     if (currentIndex >= this.slides.length && this.story.series && !this.appSettings.allSettings.offlineMode) {
-      this.stories.getSeries(this.story.series).subscribe(data => {
-        for (let i = 0; i < data[0].length - 1; i += 1) {
-          if (data[0][i].id === this.story.id) {
-            this.navCtrl.push('StoryViewPage', {
-              story: data[0][i + 1],
-              fullscreen: this.fullscreen,
-            });
-            this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()), 1);
-            return;
-          }
-        }
-
-        this.ux.showToast('INFO', 'STORY_ENDOFSERIES', 2000, undefined, undefined, true);
-      });
-
+      this.goToNextInSeries();
       return;
     }
 
@@ -254,5 +258,22 @@ export class StoryViewPage {
       this.story.currentpage = currentIndex;
       this.stories.cache(this.story);
     }
+  }
+
+  goToNextInSeries() {
+    this.stories.getSeries(this.story.series).subscribe(data => {
+      for (let i = 0; i < data[0].length - 1; i += 1) {
+        if (data[0][i].id === this.story.id) {
+          this.navCtrl.push('StoryViewPage', {
+            story: data[0][i + 1],
+            fullscreen: this.fullscreen,
+          });
+          this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()), 1);
+          return;
+        }
+      }
+
+      this.ux.showToast('INFO', 'STORY_ENDOFSERIES', 2000, undefined, undefined, true);
+    });
   }
 }
