@@ -17,13 +17,23 @@
     <ion-card-content>
       <ion-list [class.folded]="foldCats">
         <ion-item-group *ngFor="let catGrp of groupedCats">
-          <button ion-item *ngFor="let cat of catGrp">
-            <button ion-button outline item-end (click)="openCategory(cat, 'top')">Top</button>
-            <button ion-button outline item-end (click)="openCategory(cat, 'new')">New</button>
-
+          <div ion-item *ngFor="let cat of catGrp">
             <h2>{{ cat.name }}</h2>
-            <p>{{ cat.description }}</p>
-          </button>
+            <div class="row">
+              <p>{{ cat.description }}</p>
+              <div>
+                <button ion-button outline item-end (click)="openCategory(cat, 'top')">
+                  {{ 'EXPLORE_TOP' | translate }}
+                </button>
+                <button ion-button outline item-end (click)="openCategory(cat, 'new')">
+                  {{ 'EXPLORE_NEW' | translate }}
+                </button>
+                <button ion-button outline item-end (click)="openCategory(cat, 'random')">
+                  {{ 'EXPLORE_RANDOM' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
           <ion-item-divider></ion-item-divider>
         </ion-item-group>
       </ion-list>

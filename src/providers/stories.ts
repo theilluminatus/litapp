@@ -110,6 +110,16 @@ export class Stories {
     return this.search(filter, page);
   }
 
+  getRandom(id?: any, page?: number) {
+    const filter: any[] = [{ property: 'type', value: 'story' }, { property: 'random', value: 'yes' }];
+
+    if (id) {
+      filter.push({ property: 'category_id', value: parseInt(id) });
+    }
+
+    return this.search(filter, page, null, null, '1/submissions');
+  }
+
   // Get a story by ID
   getById(id: any, force: boolean = false, noLoaderDismiss = false) {
     const cached = this.stories.get(id);

@@ -153,10 +153,14 @@
 
   "TOPLIST_TITLE_PART": "Top",
   "NEWLIST_TITLE_PART": "New",
+  "RANDOMLIST_TITLE_PART": "Random",
 
   "EXPLORE_TOPTAGS": "Most popular tags",
   "EXPLORE_ALLCAT": "All",
   "EXPLORE_ALLCATDESCR": "All Categories",
+  "EXPLORE_TOP": "Top",
+  "EXPLORE_NEW": "New",
+  "EXPLORE_RANDOM": "Random",
 
   "OPENLINK_DESCRIPTION": "Paste a hyperlink below to open it directly in the app. You can view stories and authorpages this way.",
   "OPENLINK_STORYWARNING": "The first search result should be the correct story.",

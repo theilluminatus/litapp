@@ -25,12 +25,18 @@ export class TopListPage {
       return;
     }
 
+    if (this.order === 'top') {
+      this.s.getTop(this.cat.id).subscribe(data => {
+        this.stories = data[0];
+      });
+    }
     if (this.order === 'new') {
       this.s.getNew(this.cat.id).subscribe(data => {
         this.stories = data[0];
       });
-    } else {
-      this.s.getTop(this.cat.id).subscribe(data => {
+    }
+    if (this.order === 'random') {
+      this.s.getRandom(this.cat.id).subscribe(data => {
         this.stories = data[0];
       });
     }
@@ -39,12 +45,20 @@ export class TopListPage {
   loadMore(event) {
     this.currentpage += 1;
 
+    if (this.order === 'top') {
+      this.s.getTop(this.cat.id, this.currentpage).subscribe(data => {
+        this.addNewToList(data, event);
+      });
+    }
+
     if (this.order === 'new') {
       this.s.getNew(this.cat.id, this.currentpage).subscribe(data => {
         this.addNewToList(data, event);
       });
-    } else {
-      this.s.getTop(this.cat.id, this.currentpage).subscribe(data => {
+    }
+
+    if (this.order === 'random') {
+      this.s.getRandom(this.cat.id, this.currentpage).subscribe(data => {
         this.addNewToList(data, event);
       });
     }

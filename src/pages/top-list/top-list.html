@@ -1,12 +1,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <span *ngIf='order=="top"; else new'>
+      <span *ngIf='order=="top"'>
         {{ cat.name }} ({{'TOPLIST_TITLE_PART' | translate}})
       </span>
-      <ng-template #new>
+      <span *ngIf='order=="new"'>
         {{ cat.name }} ({{'NEWLIST_TITLE_PART' | translate}})
-      </ng-template>
+      </span>
+      <span *ngIf='order=="random"'>
+        {{ cat.name }} ({{'RANDOMLIST_TITLE_PART' | translate}})
+      </span>
     </ion-title>
   </ion-navbar>
 </ion-header>

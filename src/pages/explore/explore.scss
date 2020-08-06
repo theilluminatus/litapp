@@ -39,4 +39,17 @@ page-explore {
     min-height: 0px;
     border-bottom: 1px solid #666 !important;
   }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .row p {
+    white-space: initial;
+    margin-right: 5px;
+    max-width: 50%;
+  }
 }
