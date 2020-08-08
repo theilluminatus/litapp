@@ -26,4 +26,4 @@ git commit -m "Release v$2"
 
 git tag -a $2
 
-echo "Please check outputs and run: \` git push && git push origin --tags \`"
+echo "Please check outputs and run: \` git push && git push origin --tags \` or to undo \` git reset --soft HEAD~1 && git tag --delete 1.XX \`"
