@@ -23,7 +23,9 @@
   "TAB5_TITLE": "Lists",
 
   "SETTINGS_TITLE": "Settings",
-  "SETTINGS_RESTART_DISCLAIMER": "(Some of these settings require the app to be restarted)",
+  "SETTINGS_CAT_GENERAL": "App settings",
+  "SETTINGS_CAT_TWEAKS": "Tweaks",
+  "SETTINGS_RESTART_DISCLAIMER": "Some of these settings require the app to be restarted",
   "SETTINGS_CHECKFORFEEDUPDATES": "Automatically check for feed updates",
   "SETTINGS_CHECKFORAPPUPDATES": "Automatically check for app updates",
   "SETTINGS_CHECKFORUPDATES": "Check for app updates",

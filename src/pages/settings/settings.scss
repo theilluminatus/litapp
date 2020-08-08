@@ -1,8 +1,20 @@
 page-settings {
+  .scroll-content {
+    padding-bottom: 30px !important;
+  }
+
   .label {
     white-space: pre-wrap;
   }
   .version {
     opacity: 0.5;
+  }
+
+  h2 {
+    margin-top: 80px !important;
+  }
+
+  h3 {
+    margin-top: 30px !important;
   }
 }

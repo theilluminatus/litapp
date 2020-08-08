@@ -4,9 +4,8 @@
 
 ## Features
 
-- Support stories in other languages
+- Support searching stories from other languages
 - Alternate scrolling mode: flip vertically through pages?
-- Use new API routes for viewing the Top stories in a category (limit to top this year, last 90 days or all time)
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
 ### Meta
@@ -46,3 +45,5 @@ These functions cannot be added to the app because Literotica does not have a wa
 - Find API route for story comments (the needed pages already exist)
 - Find better API route to get more story metadata (especially 'new' badge) for improved story refresh
 - Find better API route for getting author following status together with bio
+- Find better API route for viewing the Top stories in a category (would allow limiting to top this year, last 90 days or all time like on the website)
+- Find a way to consistently support stories from other languages (currently only found 1 endpoint for searching)
