@@ -23,7 +23,9 @@
   "TAB5_TITLE": "Lists",
 
   "SETTINGS_TITLE": "Settings",
-  "SETTINGS_RESTART_DISCLAIMER": "(Some of these settings require the app to be restarted)",
+  "SETTINGS_CAT_GENERAL": "App settings",
+  "SETTINGS_CAT_TWEAKS": "Tweaks",
+  "SETTINGS_RESTART_DISCLAIMER": "Some of these settings require the app to be restarted",
   "SETTINGS_CHECKFORFEEDUPDATES": "Automatically check for feed updates",
   "SETTINGS_CHECKFORAPPUPDATES": "Automatically check for app updates",
   "SETTINGS_CHECKFORUPDATES": "Check for app updates",
@@ -39,10 +41,15 @@
   "SETTINGS_AMOLEDBLACKTHEME": "AMOLED Black theme",
   "SETTINGS_OFFLINEMODE": "Offline mode",
   "SETTINGS_ENABLELOCK": "Require device unlock to start app",
+  "SETTINGS_ALTERNATE_PAGINATION": "Display next / previous buttons when reading instead of swiping pages",
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
+  "SETTINGS_DEFAULTLANG": "Default language for searching stories",
+  "SETTINGS_ONLY_STORIES_FEED": "Only display new stories on the feed page (hide bio updates etc...)",
+  "SETTINGS_NAVIGATE_VOLUME_ROCKER": "Turn pages with the volume rocker buttons",
   "SETTINGS_ABOUTAPP": "About the app",
   "SETTINGS_ABOUT_DESCRIPTION": "Want to suggest a feature, report a bug or read some more info about the app you are currently using?",
   "SETTINGS_VERSION": "Current build version",
+  "SETTINGS_UPDATE_TITLE": "Update",
 
   "ERROR_TAG": "🔴 Error: ",
   "INFO_TAG": "🔵 Info: ",
@@ -71,6 +78,7 @@
   "BOOKMARK_BUTTON": "Bookmark",
   "DOWNLOAD_BUTTON": "Download",
   "DOWNLOAD_ALL_BUTTON": "Download all stories",
+  "VIEW_BUTTON": "View",
   "SHARE_BUTTON": "Share",
   "CLOSE_BUTTON": "Close",
   "REFRESH_BUTTON": "Refresh",
@@ -90,9 +98,12 @@
   "SEARCH_SORT": "Sort results",
   "SEARCH_TAGS": "Search as tags (commas!)",
   "SEARCH_ONLYSPECIAL": "Only show stories that are:",
-  "SEARCH_CATEGORY": "Search in category",
+  "SEARCH_CATEGORY": "Category",
   "SEARCH_ANYCAT": "Any",
   "SEARCH_OPTIONS": "Search options",
+  "SEARCH_TYPE": "Type of search",
+  "SEARCH_FILTER": "Filters",
+  "SEARCH_LANGUAGE": "Language",
 
   "RELEVANCY": "Relevancy",
   "NEWEST": "Newest",
@@ -102,6 +113,8 @@
 
   "STORY_TOOLTIP_SHOWINFO": "More info",
   "STORY_ENDOFSERIES": "No more stories in this series",
+  "STORYVIEW_NEXT": "Next",
+  "STORYVIEW_PREV": "Previous",
 
   "STORYRELATED_TITLE": "Related stories",
 
@@ -149,10 +162,14 @@
 
   "TOPLIST_TITLE_PART": "Top",
   "NEWLIST_TITLE_PART": "New",
+  "RANDOMLIST_TITLE_PART": "Random",
 
   "EXPLORE_TOPTAGS": "Most popular tags",
   "EXPLORE_ALLCAT": "All",
   "EXPLORE_ALLCATDESCR": "All Categories",
+  "EXPLORE_TOP": "Top",
+  "EXPLORE_NEW": "New",
+  "EXPLORE_RANDOM": "Random",
 
   "OPENLINK_DESCRIPTION": "Paste a hyperlink below to open it directly in the app. You can view stories and authorpages this way.",
   "OPENLINK_STORYWARNING": "The first search result should be the correct story.",
