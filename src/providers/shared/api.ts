@@ -56,6 +56,7 @@ export class Api {
       this.corsProxy + 'https://www.literotica.com',
       this.corsProxy + 'https://raw.githubusercontent.com/theilluminatus/litapp/master',
       this.corsProxy + 'https://literotica.com',
+      this.corsProxy + 'https://api.github.com',
     ];
   }
 
@@ -96,9 +97,13 @@ export class Api {
       }
     }
 
-    newReqOpts.withCredentials = true;
-    newReqOpts.params = newReqOpts.params.set('apikey', this.apikey);
-    newReqOpts.params = newReqOpts.params.set('appid', this.appid);
+    // disable api keys for github requests
+    if (urlIndex !== 3 && urlIndex !== 5) {
+      newReqOpts.withCredentials = true;
+      newReqOpts.params = newReqOpts.params.set('apikey', this.apikey);
+      newReqOpts.params = newReqOpts.params.set('appid', this.appid);
+    }
+
     const url = this.urls[urlIndex ? urlIndex : 0] + '/' + endpoint;
     const req = this.http.get(url, newReqOpts).catch(err => this.handleAPIError(err, url, newReqOpts.params, 'GET'));
     if (timeout) return req.timeout(timeout);

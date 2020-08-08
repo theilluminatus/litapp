@@ -54,3 +54,5 @@ updateFile $FILE $LINE $orgValue $newValue
 
 # app.json
 updateFile ./app.json 2 $orgValue $newValue
+
+updateFile ./app.json 3 $orgValue $newValue

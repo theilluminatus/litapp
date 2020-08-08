@@ -5,7 +5,6 @@
 ## Features
 
 - Support searching stories from other languages
-- Alternate scrolling mode: flip vertically through pages?
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
 ### Meta

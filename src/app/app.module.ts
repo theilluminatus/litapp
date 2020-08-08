@@ -24,6 +24,7 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 import { Stories, Categories, Analytics, Authors, Lists, Feed, Globals, History, Settings, User, UX, Api } from '../providers/providers';
 import { MyApp } from './app.component';
+import { UpdatePopoverModule } from '../pages/settings/update-popover.module';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -69,6 +70,7 @@ export function provideSettings(storage: Storage) {
       preloadModules: true,
     }),
     IonicStorageModule.forRoot(),
+    UpdatePopoverModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [MyApp],

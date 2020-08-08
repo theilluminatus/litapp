@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { BrowserTab } from '@ionic-native/browser-tab';
-import { Platform } from 'ionic-angular';
+import { Platform, PopoverController } from 'ionic-angular';
 
 import { Api } from './shared/api';
 import { User } from './user';
 import { GLOBALS_KEY, VERSION_KEY } from './db';
 import { ENV } from '../app/env';
-import { handleNoCordovaError } from '../app/utils';
 import { UX } from './shared/ux';
 
 @Injectable()
@@ -24,8 +22,8 @@ export class Globals {
     public user: User,
     public storage: Storage,
     public translate: TranslateService,
-    private browser: BrowserTab,
     public ux: UX,
+    private popoverCtrl: PopoverController,
   ) {
     this.storage.get(VERSION_KEY).then(v => {
       if (v && v !== this.version) {
@@ -108,9 +106,8 @@ export class Globals {
           }
 
           if (d.version > this.version) {
-            this.ux.showToast('INFO', 'UPDATE_MSG', 15000, 'DOWNLOAD_BUTTON', true).then(() => {
-              const updateLink = d.updatelink || 'https://theilluminatus.github.io/litapp';
-              this.browser.openUrl(updateLink).catch(err => handleNoCordovaError(err, () => window.open(updateLink)));
+            this.ux.showToast('INFO', 'UPDATE_MSG', 15000, 'VIEW_BUTTON', true).then(() => {
+              this.popoverCtrl.create('UpdatePopover', { data: d }, { cssClass: 'dark-backdrop' }).present();
             });
           } else {
             if (manual) this.ux.showToast('INFO', 'UPDATE_ALREADYDONE', undefined, undefined, true);

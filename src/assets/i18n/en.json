@@ -48,6 +48,7 @@
   "SETTINGS_ABOUTAPP": "About the app",
   "SETTINGS_ABOUT_DESCRIPTION": "Want to suggest a feature, report a bug or read some more info about the app you are currently using?",
   "SETTINGS_VERSION": "Current build version",
+  "SETTINGS_UPDATE_TITLE": "Update",
 
   "ERROR_TAG": "🔴 Error: ",
   "INFO_TAG": "🔵 Info: ",
@@ -76,6 +77,7 @@
   "BOOKMARK_BUTTON": "Bookmark",
   "DOWNLOAD_BUTTON": "Download",
   "DOWNLOAD_ALL_BUTTON": "Download all stories",
+  "VIEW_BUTTON": "View",
   "SHARE_BUTTON": "Share",
   "CLOSE_BUTTON": "Close",
   "REFRESH_BUTTON": "Refresh",
