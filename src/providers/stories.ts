@@ -292,6 +292,7 @@ export class Stories {
 
   // api 3 used on search panel for keyword and tag search
   private newsearch(filter: any, page?: number, urlIndex?: number, path?: string, tags = false) {
+    delete filter.astags;
     if (!tags) {
       if (filter.category) {
         filter.categories = filter.category.map(c => parseInt(c));
@@ -343,6 +344,11 @@ export class Stories {
   private tagsearch(filter: any, page?: number, urlIndex?: number, path?: string) {
     const lookup = { params: JSON.stringify({ tags: filter.q.split(',').map(t => t.trim()) }) };
     delete filter.q;
+    delete filter.astags;
+    delete filter.languages;
+    delete filter.popular;
+    delete filter.editorsChoice;
+    delete filter.winner;
 
     if (!page || page < 2) {
       this.ux.showLoader();
@@ -406,6 +412,10 @@ export class Stories {
     );
   }
 
+  parseUrl(url: string): string {
+    return !url.includes('//') ? `https://www.literotica.com/s/${url}` : url;
+  }
+
   extractFromFeed(item): Story {
     const cached = this.stories.get(item.what.id);
     if (cached) {
@@ -424,7 +434,7 @@ export class Stories {
       timestamp: item.when,
       rating: item.what.rate_all,
       viewcount: item.what.view_count,
-      url: item.what.url,
+      url: this.parseUrl(item.what.url),
       tags: !item.what.tags ? [] : item.what.tags.map(t => t.tag),
       ishot: item.what.is_hot,
       isnew: item.what.is_new,
@@ -456,7 +466,7 @@ export class Stories {
       timestamp: Math.round(Date.parse(item.date_added) / 1000),
       rating: item.rate_all,
       viewcount: item.view_count,
-      url: item.url,
+      url: this.parseUrl(item.url),
       tags: !item.tags ? [] : item.tags.map(t => t.tag),
       ishot: item.is_hot,
       isnew: item.is_new,
@@ -488,7 +498,7 @@ export class Stories {
       timestamp: item.timestamp_published,
       rating: item.rate,
       viewcount: item.view_count,
-      url: item.url,
+      url: this.parseUrl(item.url),
       ishot: item.is_hot === 'no' ? false : true,
       isnew: item.is_new === 'no' ? false : true,
       iswriterspick: item.writers_pick === 'no' ? false : true,
@@ -521,7 +531,7 @@ export class Stories {
       timestamp: Math.round(Date.parse(`${timestampParts[2]}-${timestampParts[0]}-${timestampParts[1]}T00:00:00`) / 1000),
       rating: item.rate_all,
       viewcount: item.view_count,
-      url: item.url,
+      url: this.parseUrl(item.url),
       ishot: item.is_hot,
       isnew: item.is_new,
       iswriterspick: item.writers_pick,

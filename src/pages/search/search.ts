@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 
 import { STARREDQUERIES_KEY, RECENTQUERIES_KEY } from '../../providers/db';
 import { Story } from '../../models/story';
-import { Stories } from '../../providers/providers';
+import { Stories, Settings } from '../../providers/providers';
 
 @IonicPage({ priority: 'high' })
 @Component({
@@ -28,17 +28,19 @@ export class SearchPage {
 
   options = {
     sort: '',
+    languages: undefined,
+    category: undefined,
     popular: false,
     editorsChoice: false,
     winner: false,
     astags: false,
-    category: undefined,
   };
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public stories: Stories,
+    public settings: Settings,
     public storage: Storage,
     private popoverCtrl: PopoverController,
     private keyboard: Keyboard,
@@ -55,6 +57,8 @@ export class SearchPage {
         this.starredQueries = value;
       }
     });
+
+    this.settings.load().then(() => (this.options.languages = [this.settings.allSettings.defaultLanguage]));
   }
 
   ionViewDidEnter() {

@@ -68,6 +68,20 @@ export class Globals {
     return null;
   }
 
+  getSearchableLanguages(): { id: string; name: string }[] {
+    if (this.globals.languages) {
+      return Object.entries(this.globals.languages)
+        .filter(lang => !!lang[1].domain)
+        .map((lang: any) => {
+          return {
+            id: lang[1].id,
+            name: lang[1].longname,
+          };
+        });
+    }
+    return [];
+  }
+
   getPopularTags() {
     const params = {
       limit: 100,

@@ -62,6 +62,12 @@
         <ion-label>{{'SETTINGS_FORCENORMALLIST' | translate}}</ion-label>
         <ion-toggle formControlName="forceNormalList"></ion-toggle>
       </ion-item>
+      <ion-item>
+        <ion-label>{{'SETTINGS_DEFAULTLANG' | translate}}</ion-label>
+        <ion-select formControlName="defaultLanguage">
+          <ion-option *ngFor="let lang of languages" [value]="lang.id">{{ lang.name }}</ion-option>
+        </ion-select>
+      </ion-item>
     </ion-list>
   </form>
 

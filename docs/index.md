@@ -87,6 +87,9 @@ Unfortunately I am sometimes unable to fix or implement these requests due to ti
     > This issue originates from Ionic (a package to more easily create apps), this might be fixed by updating to a newer version, but this will take a lot of time and might introduce newer other bugs.  
     > A possible solution is to kill and restart the app or even reboot your phone.
 
+- **Bug**: Not all features work with non-english stories. For example: viewing the rest of the stories in a series.
+    > This is a technical limitation of the way I'm retrieving the stories from Literotica's servers. Since the official app only supports English stories it is currently not possible to improve upon this functionality.
+
 ## Contact
 
 Do you have questions, bug reports, feature requests or even a PR you want to merge? Send me an email at:  

@@ -50,6 +50,7 @@ export function provideSettings(storage: Storage) {
     alternatePagination: false,
     onlyShowStoriesInFeed: false,
     navigateWithVolumeRocker: false,
+    defaultLanguage: 1, // en
   });
 }
 

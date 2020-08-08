@@ -35,6 +35,7 @@ export class SettingsPage {
   form: FormGroup;
 
   translations;
+  languages;
   requireReloadSettings = ['offlineMode', 'amoledBlackTheme', 'forceNormalList'];
 
   private prevOptions: any = {};
@@ -80,6 +81,7 @@ export class SettingsPage {
         alternatePagination: [this.options.alternatePagination],
         onlyShowStoriesInFeed: [this.options.onlyShowStoriesInFeed],
         navigateWithVolumeRocker: [this.options.navigateWithVolumeRocker],
+        defaultLanguage: [this.options.defaultLanguage],
       });
 
       this.form.valueChanges.subscribe(v => {
@@ -98,6 +100,8 @@ export class SettingsPage {
         });
       });
     });
+
+    this.g.onReady().then(() => (this.languages = this.g.getSearchableLanguages()));
   }
 
   exportData() {

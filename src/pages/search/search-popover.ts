@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
-import { Categories } from '../../providers/providers';
+import { Categories, Globals } from '../../providers/providers';
 import { Category } from '../../models/category';
 
 @IonicPage()
@@ -10,8 +10,13 @@ import { Category } from '../../models/category';
     <!--<h5>{{ 'SEARCH_OPTIONS' | translate }}</h5>-->
 
     <ion-list radio-group [(ngModel)]="options.sort">
-      <ion-list-header>{{ 'SEARCH_SORT' | translate }}</ion-list-header>
+      <ion-list-header>{{ 'SEARCH_TYPE' | translate }}</ion-list-header>
+      <ion-item>
+        <ion-checkbox [(ngModel)]="options.astags" (click)="changeDefaultSort()"></ion-checkbox>
+        <ion-label>{{ 'SEARCH_TAGS' | translate }}</ion-label>
+      </ion-item>
 
+      <ion-list-header>{{ 'SEARCH_SORT' | translate }}</ion-list-header>
       <ng-container *ngIf="!options.astags; else tagsSort">
         <ion-item>
           <ion-label>{{ 'RELEVANCY' | translate }}</ion-label>
@@ -59,9 +64,25 @@ import { Category } from '../../models/category';
       </ng-template>
     </ion-list>
 
-    <ion-list-header>{{ 'SEARCH_ONLYSPECIAL' | translate }}</ion-list-header>
+    <ion-list-header>{{ 'SEARCH_FILTER' | translate }}</ion-list-header>
+    <ion-item>
+      <ion-label>{{ 'SEARCH_CATEGORY' | translate }}</ion-label>
+      <ion-select [(ngModel)]="options.category" [multiple]="!options.astags">
+        <ion-option value="" *ngIf="options.astags">{{ 'SEARCH_ANYCAT' | translate }}</ion-option>
+        <ion-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</ion-option>
+      </ion-select>
+    </ion-item>
 
-    <ion-grid>
+    <ion-item *ngIf="!options.astags">
+      <ion-label>{{ 'SEARCH_LANGUAGE' | translate }}</ion-label>
+      <ion-select [(ngModel)]="options.languages" multiple>
+        <ion-option *ngFor="let lang of languages" [value]="lang.id">{{ lang.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-list-header *ngIf="!options.astags">{{ 'SEARCH_ONLYSPECIAL' | translate }}</ion-list-header>
+
+    <ion-grid *ngIf="!options.astags">
       <ion-row>
         <ion-col col-auto>
           <ion-item>
@@ -83,19 +104,6 @@ import { Category } from '../../models/category';
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    <ion-item>
-      <ion-label>{{ 'SEARCH_CATEGORY' | translate }}</ion-label>
-      <ion-select [(ngModel)]="options.category" [multiple]="!options.astags">
-        <ion-option value="" *ngIf="options.astags">{{ 'SEARCH_ANYCAT' | translate }}</ion-option>
-        <ion-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-checkbox [(ngModel)]="options.astags" (click)="changeDefaultSort()"></ion-checkbox>
-      <ion-label>{{ 'SEARCH_TAGS' | translate }}</ion-label>
-    </ion-item>
 
     <button ion-button (click)="save()">{{ 'SEARCH' | translate }}</button>
   `,
@@ -165,10 +173,6 @@ import { Category } from '../../models/category';
         font-size: 0.8em;
       }
 
-      .select {
-        margin: 10px 0;
-      }
-
       .button {
         margin: 15px 10px;
       }
@@ -178,11 +182,15 @@ import { Category } from '../../models/category';
 export class SearchPopover {
   options;
   categories;
+  languages;
 
-  constructor(navParams: NavParams, private viewCtrl: ViewController, public c: Categories) {
+  constructor(navParams: NavParams, private viewCtrl: ViewController, public c: Categories, private globals: Globals) {
     this.options = navParams.get('options');
     this.c.getAllSorted().subscribe((cats: Category[]) => {
       this.categories = cats;
+    });
+    this.globals.onReady().then(() => {
+      this.languages = this.globals.getSearchableLanguages();
     });
   }
 

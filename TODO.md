@@ -4,7 +4,6 @@
 
 ## Features
 
-- Support searching stories from other languages
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
 ### Meta
@@ -20,7 +19,7 @@
 
 ## Bugs
 
-- Opening a story for the first time from certain lists makes the list item break (shows empty data)
+- Opening a story for the first time (from the author page for example) makes the list item break (shows empty data)
 - Fix text colour in category filter popup on search results when using AMOLED mode.
 - Older downloaded stories cannot be added to lists after a while
 - Some of the API routes no longer return a full story URL? causing share functionalities to fail.
