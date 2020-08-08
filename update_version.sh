@@ -19,11 +19,13 @@ function updateFile () {
 # Set new package version string
 # app.json
 FILE=./app.json
-LINE=3
+LINE=4
 newValue=$1
 orgLine=$(sed "$LINE!d" $FILE)
 orgValue=$(echo $orgLine | grep -o -P '(?<=releases/litapp-).*(?=.apk",)')
 updateFile $FILE $LINE $orgValue $1
+
+updateFile ./app.json 3 $orgValue $newValue
 
 # package.json
 updateFile ./package.json 3 $orgValue $newValue
@@ -46,7 +48,7 @@ sed -i "5i- [v$newValue](https://theilluminatus.github.io/litapp/releases/litapp
 # Increment version numbers
 # globals.ts
 FILE=./src/providers/globals.ts
-LINE=19
+LINE=17
 orgLine=$(sed "$LINE!d" $FILE)
 orgValue=$(echo $orgLine | grep -o -P '(?<=private version = ).*(?=;)')
 let newValue=$((orgValue + 1))
@@ -54,5 +56,3 @@ updateFile $FILE $LINE $orgValue $newValue
 
 # app.json
 updateFile ./app.json 2 $orgValue $newValue
-
-updateFile ./app.json 3 $orgValue $newValue
