@@ -36,7 +36,6 @@ If you encounter these issues and want to help me fix them, please contact me.
 - Rating sometimes shows as x.xx and some other information in list disappears (possibly fixed in 1.19)
 - Downloading stories to file doesn't always work (probably fixed since 1.19)
 
-
 ## Missing data
 
 These functions cannot be added to the app because Literotica does not have a way to access the data.
