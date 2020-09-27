@@ -115,4 +115,7 @@
     <plugin name="cordova-plugin-fingerprint-aio" spec="2.0.0" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
     <plugin name="com.manueldeveloper.volume-buttons" spec="https://github.com/manueldeveloper/cordova-plugin-volume-buttons.git" />
+    <plugin name="cordova-plugin-file-opener2" spec="3.0.5">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
 </widget>

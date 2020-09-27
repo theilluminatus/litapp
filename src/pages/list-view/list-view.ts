@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { File } from '@ionic-native/file';
-import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { List } from '../../models/list';
-import { Lists, UX, Categories, Stories } from '../../providers/providers';
-import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
+import { Lists, Categories, Stories, Files } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -16,7 +13,6 @@ import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
 export class ListViewPage {
   list: List;
   stories: Story[];
-  translations;
 
   constructor(
     public navCtrl: NavController,
@@ -24,10 +20,8 @@ export class ListViewPage {
     public l: Lists,
     public c: Categories,
     private popoverCtrl: PopoverController,
-    public translate: TranslateService,
-    public file: File,
-    public ux: UX,
     public s: Stories,
+    public files: Files,
   ) {
     const list = navParams.get('list');
     this.l.onReady().then(() => {
@@ -35,10 +29,6 @@ export class ListViewPage {
         this.list = data;
         this.stories = this.list.stories;
       });
-    });
-
-    this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
-      this.translations = values;
     });
   }
 
@@ -110,13 +100,7 @@ export class ListViewPage {
           });
         }
 
-        const path = this.file.externalRootDirectory;
-        this.file
-          .writeFile(path, filename, data, { replace: true })
-          .then(() => {
-            this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
-          })
-          .catch(err => handleNoCordovaError(err, e => downloadTextFile(data, filename)));
+        this.files.save(filename, data, choice === 'json' ? 'application/json' : 'text/markdown');
       }
     });
   }

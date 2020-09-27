@@ -8,7 +8,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { Device } from '@ionic-native/device';
 
-import { Globals, Api, UX, Settings, User } from '../../providers/providers';
+import { Globals, Api, UX, Settings, User, Files } from '../../providers/providers';
 import {
   STARREDQUERIES_KEY,
   STORYSTYLEOPTIONS_KEY,
@@ -18,7 +18,7 @@ import {
   RECENTQUERIES_KEY,
   SETTINGS_KEY,
 } from '../../providers/db';
-import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
+import { handleNoCordovaError } from '../../app/utils';
 
 const exportDataIdentifier = 'Exported data for Litapp (com.illuminatus.litapp)';
 
@@ -54,12 +54,13 @@ export class SettingsPage {
     public translate: TranslateService,
     public storage: Storage,
     public file: File,
+    public files: Files,
     public fileChooser: FileChooser,
     public filePath: FilePath,
   ) {}
 
   ionViewWillEnter() {
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'PASTEPROMPT_MSG']).subscribe(values => {
+    this.translate.get(['PASTEPROMPT_MSG']).subscribe(values => {
       this.translations = values;
     });
 
@@ -121,21 +122,13 @@ export class SettingsPage {
         }
       })
       .then(() => {
-        const path = this.file.externalRootDirectory;
-        // tslint:disable-next-line: prefer-template
-        const filename = 'litapp-' + Math.round(new Date().getTime() / 1000) + '.json';
-
         try {
+          const filename = `litapp-${Math.round(new Date().getTime() / 1000)}.json`;
           const textData = JSON.stringify(data);
-
-          this.file
-            .writeFile(path, filename, textData, { replace: true })
-            .then(() => {
-              this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
-            })
-            .catch(err => handleNoCordovaError(err, e => downloadTextFile(textData, filename)));
+          this.files.save(filename, textData, 'application/json');
+          // in case json stringify crashes
         } catch (error) {
-          this.ux.showToast('ERROR', 'SETTINGS_EXPORTSFAIL');
+          this.ux.showToast('ERROR', 'FILE_EXPORT_FAIL');
           console.error('settings.exportData', [data], error);
         }
       });
@@ -194,7 +187,6 @@ export class SettingsPage {
   }
 
   saveErrorLog() {
-    const path = this.file.externalRootDirectory;
     // tslint:disable-next-line: prefer-template
     const filename = 'litapp-errorlog-' + Math.round(new Date().getTime() / 1000) + '.json';
 
@@ -215,17 +207,13 @@ export class SettingsPage {
       appVersion: this.g.getVersion(),
       apiKey: this.api.apikey,
       appId: this.api.appid,
+      appWebApp: !this.platform.is('cordova'),
+      appIsDev: this.g.isDev(),
       appSettings: this.settings.allSettings,
       userLoggedIn: this.user.isLoggedIn(),
     };
 
     const data = JSON.stringify({ runtime: runtimeData, console: window.consoleLog });
-
-    this.file
-      .writeFile(path, filename, data, { replace: true })
-      .then(() => {
-        this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
-      })
-      .catch(err => handleNoCordovaError(err, e => downloadTextFile(data, filename)));
+    this.files.save(filename, data, 'application/json');
   }
 }

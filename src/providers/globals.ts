@@ -95,9 +95,14 @@ export class Globals {
     return this.version;
   }
 
+  isDev() {
+    // Override to show everything when developing in browser
+    return ENV.DEV;
+  }
+
   isWebApp() {
     // Override to show everything when developing in browser
-    return !this.platform.is('cordova') && !ENV.DEV;
+    return !this.platform.is('cordova') && !this.isDev();
   }
 
   checkForUpdates(manual: boolean = false) {

@@ -50,9 +50,11 @@ export class UX {
           cssClass: higher ? 'overui' : '',
         });
         toast.present();
-        toast.onDidDismiss(data => {
-          resolve(toast);
-          this.activeToasts.splice(this.activeToasts.indexOf(toast), 1);
+        toast.onDidDismiss((data, role) => {
+          if (role === 'close') {
+            resolve(toast);
+            this.activeToasts.splice(this.activeToasts.indexOf(toast), 1);
+          }
         });
 
         if (removePrevious || (type === 'ERROR' && !label)) {

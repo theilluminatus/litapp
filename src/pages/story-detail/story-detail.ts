@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { BrowserTab } from '@ionic-native/browser-tab';
-import { File } from '@ionic-native/file';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Story } from '../../models/story';
 import { Author } from '../../models/author';
-import { Stories, UX, Settings, User, Categories } from '../../providers/providers';
-import { handleNoCordovaError, downloadTextFile } from '../../app/utils';
+import { Stories, Settings, User, Categories, Files } from '../../providers/providers';
+import { handleNoCordovaError } from '../../app/utils';
 import { Category } from '../../models/category';
 
 @IonicPage({ priority: 'low' })
@@ -32,8 +31,7 @@ export class StoryDetailPage {
     public user: User,
     private socialSharing: SocialSharing,
     private browser: BrowserTab,
-    public file: File,
-    public ux: UX,
+    public files: Files,
   ) {
     this.story = navParams.get('story');
 
@@ -165,15 +163,7 @@ export class StoryDetailPage {
 </html>
   `;
 
-    const path = this.file.externalRootDirectory;
-    this.file
-      .writeFile(path, filename, data, { replace: true })
-      .then(() => {
-        this.translate.get(['SETTINGS_EXPORTSUCCESS']).subscribe(values => {
-          this.ux.showToast('INFO', `${values.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
-        });
-      })
-      .catch(err => handleNoCordovaError(err, e => downloadTextFile(data, filename)));
+    this.files.save(filename, data, 'text/html');
   }
 
   toggleDownload() {

@@ -7,7 +7,6 @@
 - Change sorting in an user's list (date, alphabetically, rating, view count...).
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 - Add https://opendyslexic.org/ font option
-- Add "View" option to open a saved file (story, list)
 
 ### Meta
 

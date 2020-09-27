@@ -17,12 +17,27 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
+import { FileOpener } from '@ionic-native/file-opener';
 import { WebIntent } from '@ionic-native/web-intent';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Device } from '@ionic-native/device';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
-import { Stories, Categories, Analytics, Authors, Lists, Feed, Globals, History, Settings, User, UX, Api } from '../providers/providers';
+import {
+  Stories,
+  Categories,
+  Analytics,
+  Authors,
+  Lists,
+  Feed,
+  Globals,
+  History,
+  Settings,
+  User,
+  UX,
+  Api,
+  Files,
+} from '../providers/providers';
 import { MyApp } from './app.component';
 import { UpdatePopoverModule } from '../pages/settings/update-popover.module';
 
@@ -88,6 +103,7 @@ export function provideSettings(storage: Storage) {
     History,
     User,
     UX,
+    Files,
     // packages
     AndroidFullScreen,
     BrowserTab,
@@ -101,6 +117,7 @@ export function provideSettings(storage: Storage) {
     File,
     FileChooser,
     FilePath,
+    FileOpener,
     WebIntent,
     Device,
     FingerprintAIO,

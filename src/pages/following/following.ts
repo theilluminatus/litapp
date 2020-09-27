@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { File } from '@ionic-native/file';
-import { TranslateService } from '@ngx-translate/core';
 
 import { Author } from '../../models/author';
-import { Authors, UX } from '../../providers/providers';
-import { handleNoCordovaError } from '../../app/utils';
+import { Authors, Files } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -15,23 +12,16 @@ import { handleNoCordovaError } from '../../app/utils';
 export class FollowingPage {
   authors: Author[];
   sortingProp: string = '';
-  translations;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public a: Authors,
     private popoverCtrl: PopoverController,
-    public file: File,
-    public ux: UX,
-    public translate: TranslateService,
+    public files: Files,
   ) {
     this.a.getFollowing().subscribe(authors => {
       this.authors = authors;
-    });
-
-    this.translate.get(['SETTINGS_EXPORTSUCCESS', 'COPYPROMPT_MSG']).subscribe(values => {
-      this.translations = values;
     });
   }
 
@@ -90,14 +80,7 @@ export class FollowingPage {
 `;
           });
         }
-
-        const path = this.file.externalRootDirectory;
-        this.file
-          .writeFile(path, filename, data, { replace: true })
-          .then(() => {
-            this.ux.showToast('INFO', `${this.translations.SETTINGS_EXPORTSUCCESS}: ${path}${filename}`);
-          })
-          .catch(err => handleNoCordovaError(err, () => prompt(this.translations.COPYPROMPT_MSG, data)));
+        this.files.save(filename, data, choice === 'json' ? 'application/json' : 'text/markdown');
       }
     });
   }
