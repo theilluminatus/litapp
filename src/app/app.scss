@@ -1,5 +1,13 @@
 // http://ionicframework.com/docs/v2/theming/
 
+@font-face {
+  font-family: 'OpenDyslexic';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/opendyslexic-0.9.10/OpenDyslexic-Regular.woff') format('woff'),
+    url('../assets/fonts/opendyslexic-0.9.10/OpenDyslexic-Regular.otf') format('opentype');
+}
+
 .bar-buttons button {
   margin: 0 5px;
 }

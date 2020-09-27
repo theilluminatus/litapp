@@ -55,6 +55,10 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
         <ion-label>Serif</ion-label>
         <ion-radio value="'Times New Roman', serif"></ion-radio>
       </ion-item>
+      <ion-item class="popover-text-OpenDyslexic">
+        <ion-label>OpenDyslexic</ion-label>
+        <ion-radio value="'OpenDyslexic', serif"></ion-radio>
+      </ion-item>
     </ion-list>
   `,
   styles: [
@@ -126,12 +130,17 @@ import { IonicPage, NavParams, Platform } from 'ionic-angular';
         border-color: #327eff;
       }
 
-      .popover-text-sans-serid {
+      .popover-text-sans-serif {
         font-family: sans-serif;
       }
 
       .popover-text-serif {
         font-family: 'Times New Roman', serif;
+      }
+
+      .popover-text-OpenDyslexic {
+        font-family: 'OpenDyslexic', serif;
+        font-size: 0.85em;
       }
 
       /*
