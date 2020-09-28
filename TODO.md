@@ -13,13 +13,12 @@
 
 ### WebApp (WIP)
 
-- Disable forced account logout on update
 - Add links to homepage and promote
 - Service worker to cache SPA
 
 ## Bugs
 
-- Opening a story for the first time (from the author page for example) makes the list item break (shows empty data)
+- Opening an already cached story from the series or related pages removes previous data and breaks detail page
 - Fix text colour in category filter popup on search results when using AMOLED mode.
 - Older downloaded stories cannot be added to lists after a while
 - Some of the API routes no longer return a full story URL? causing share functionalities to fail.
