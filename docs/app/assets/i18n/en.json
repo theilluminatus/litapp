@@ -33,8 +33,6 @@
   "SETTINGS_EXPORT": "Export data",
   "SETTINGS_IMPORT": "Import data",
   "SETTINGS_IMPORTFAIL": "Backup either not valid or not compatible with this version of the app.",
-  "SETTINGS_EXPORTSFAIL": "Failed to export data.",
-  "SETTINGS_EXPORTSUCCESS": "File saved to",
   "SETTINGS_IMPORTSUCCESS": "Successfully imported",
   "SETTINGS_GITHUB_LINK": "Visit app homepage",
   "SETTINGS_SAVEERRORLOG": "Save error log",
@@ -88,7 +86,6 @@
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",
-  "HISTORY_SORT": "Sort stories",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
@@ -199,6 +196,12 @@
   "TITLE": "Title",
   "DOWNLOADED": "Download time",
   "FIRST_ACCESSED": "Default",
+
+  "FILE_VIEW": "View",
+  "FILE_EXPORT_FAIL": "Failed to save data",
+  "FILE_EXPORT_SUCCESS": "File saved to",
+
+  "SORT_TITLE": "Sort stories",
 
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",

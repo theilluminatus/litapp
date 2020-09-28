@@ -19,15 +19,16 @@
 }
 
 .alert-wrapper {
-  background: #111;
-}
-
-.alert-wrapper {
   background: #111 !important;
   color: #fff;
 }
 
+.alert-checkbox-label,
 .alert-message,
 .alert-input {
   color: #fff !important;
+}
+
+.alert-checkbox-group {
+  border-color: #333 !important;
 }
