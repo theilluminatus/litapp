@@ -18,7 +18,6 @@
 
 ## Bugs
 
-- Opening an already cached story from the series or related pages removes previous data and breaks detail page
 - Fix text colour in category filter popup on search results when using AMOLED mode.
 - Older downloaded stories cannot be added to lists after a while
 - Some of the API routes no longer return a full story URL? causing share functionalities to fail.
@@ -31,8 +30,6 @@ If you encounter these issues and want to help me fix them, please contact me.
 
 - Downloaded stories disappearing without internet connection
 - Feed shows repeats itself after a few pages (possibly fixed by logging out and back in)
-- Rating sometimes shows as x.xx and some other information in list disappears (possibly fixed in 1.19)
-- Downloading stories to file doesn't always work (probably fixed since 1.19)
 
 ## Missing data
 

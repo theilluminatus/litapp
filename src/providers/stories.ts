@@ -52,6 +52,9 @@ export class Stories {
         });
       });
     });
+
+    // Use this to see all of the in memory stories
+    (window as any).checkCachedStories = () => console.log(this.stories);
   }
 
   onReady() {
@@ -143,12 +146,14 @@ export class Stories {
           return null;
         }
 
-        const story = new Story({
-          id: data.pages[0].submission_id,
-          title: data.pages[0].name,
-          url: data.pages[0].url,
-          ratingenabled: data.pages[0].allow_vote,
-        });
+        const story =
+          cached ||
+          new Story({
+            id: data.pages[0].submission_id,
+            title: data.pages[0].name,
+            url: data.pages[0].url,
+            ratingenabled: data.pages[0].allow_vote,
+          });
 
         const tags = !data.pages[0].tags
           ? []
