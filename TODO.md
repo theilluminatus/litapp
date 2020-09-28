@@ -19,7 +19,6 @@
 
 ## Bugs
 
-- Icons and read percentage are not vertically aligned
 - Opening a story for the first time (from the author page for example) makes the list item break (shows empty data)
 - Fix text colour in category filter popup on search results when using AMOLED mode.
 - Older downloaded stories cannot be added to lists after a while
