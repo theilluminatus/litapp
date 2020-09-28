@@ -19,7 +19,6 @@
 ## Bugs
 
 - Older downloaded stories cannot be added to lists after a while
-- Some of the API routes no longer return a full story URL? causing share functionalities to fail.
 
 # Features / Bugfixes that are currently not planned
 
