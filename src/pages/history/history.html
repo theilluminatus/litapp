@@ -5,7 +5,7 @@
     </button>
     <ion-title>{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }} ({{filteredStories.length}})</ion-title>
     <ion-buttons end>
-      <button end ion-button icon-only (click)="openSortPopover($event)" [tooltip]="'HISTORY_SORT' | translate" event="press" navTooltip>
+      <button end ion-button icon-only (click)="openSortPopover($event)" [tooltip]="'SORT_TITLE' | translate" event="press" navTooltip>
         <ion-icon name="funnel"></ion-icon>
       </button>
 

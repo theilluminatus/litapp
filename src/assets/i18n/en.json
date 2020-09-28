@@ -86,7 +86,6 @@
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",
-  "HISTORY_SORT": "Sort stories",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search stories",
@@ -201,6 +200,8 @@
   "FILE_VIEW": "View",
   "FILE_EXPORT_FAIL": "Failed to save data",
   "FILE_EXPORT_SUCCESS": "File saved to",
+
+  "SORT_TITLE": "Sort stories",
 
   "HOT_TAG": "Hot",
   "NEW_TAG": "New",

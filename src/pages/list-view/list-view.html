@@ -27,6 +27,9 @@
       <button ion-button icon-only (click)="downloadAll()" [tooltip]="'DOWNLOAD_ALL_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="download"></ion-icon>
       </button>
+      <button end ion-button icon-only (click)="openSortPopover($event)" [tooltip]="'SORT_TITLE' | translate" event="press" navTooltip>
+        <ion-icon name="funnel"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -34,5 +37,5 @@
 <ion-content padding>
   <ion-searchbar debounce="350" [placeholder]="'LISTVIEW_FILTER' | translate" (ionInput)="filter($event)"></ion-searchbar>
 
-  <story-list [stories]="stories"></story-list>
+  <story-list [stories]="stories | orderBy: sortMethod"></story-list>
 </ion-content>

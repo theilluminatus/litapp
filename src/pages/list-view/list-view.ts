@@ -13,6 +13,7 @@ import { Lists, Categories, Stories, Files } from '../../providers/providers';
 export class ListViewPage {
   list: List;
   stories: Story[];
+  sortMethod: string;
 
   constructor(
     public navCtrl: NavController,
@@ -101,6 +102,21 @@ export class ListViewPage {
         }
 
         this.files.save(filename, data, choice === 'json' ? 'application/json' : 'text/markdown');
+      }
+    });
+  }
+
+  openSortPopover(ev: UIEvent) {
+    const popover = this.popoverCtrl.create('SortPopover', {
+      sortMethod: this.sortMethod,
+    });
+
+    popover.present({
+      ev,
+    });
+    popover.onDidDismiss(method => {
+      if (method !== null) {
+        this.sortMethod = method;
       }
     });
   }

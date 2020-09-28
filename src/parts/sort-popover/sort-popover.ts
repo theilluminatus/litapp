@@ -6,7 +6,7 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
   selector: 'sort-popover',
   template: `
     <ion-list radio-group [(ngModel)]="sortMethod">
-      <ion-list-header>{{ 'HISTORY_SORT' | translate }}</ion-list-header>
+      <ion-list-header>{{ 'SORT_TITLE' | translate }}</ion-list-header>
       <ion-item>
         <ion-label>{{ 'FIRST_ACCESSED' | translate }}</ion-label>
         <ion-radio value="" (ionSelect)="save()"></ion-radio>

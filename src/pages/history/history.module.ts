@@ -6,7 +6,7 @@ import { NgPipesModule } from 'ngx-pipes';
 
 import { HistoryPage } from './history';
 import { StoryListPageModule } from '../../parts/story-list/story-list.module';
-import { SortPopoverModule } from './sort-popover.module';
+import { SortPopoverModule } from '../../parts/sort-popover/sort-popover.module';
 
 @NgModule({
   declarations: [HistoryPage],
