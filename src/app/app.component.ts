@@ -191,11 +191,12 @@ export class MyApp {
 
   openURL(url: string) {
     // https://www.literotica.com/s/slave-takes-mistress-to-hawaii
-    const storyRegex = /literotica\.com\/s\/([-a-zA-Z0-9._+]*)/g;
+    // https://www.literotica.com/beta/s/the-year-of-the-cat-ch-10
+    const storyRegex = /literotica\.com\/(beta\/)?s\/([-a-zA-Z0-9._+]*)/g;
     const storyMatch = storyRegex.exec(url);
     if (storyMatch) {
       this.nav.push('SearchPage', {
-        storyurl: storyMatch[1],
+        storyurl: storyMatch[storyMatch.length - 1],
       });
 
       this.ux.showToast('INFO', 'OPENLINK_STORYWARNING', 2500);

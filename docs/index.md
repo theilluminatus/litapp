@@ -90,6 +90,9 @@ Unfortunately I am sometimes unable to fix or implement these requests due to ti
 - **Bug**: Not all features work with non-english stories. For example: viewing the rest of the stories in a series.
     > This is a technical limitation of the way I'm retrieving the stories from Literotica's servers. Since the official app only supports English stories it is currently not possible to improve upon this functionality.
 
+- **Bug**: The story text suddenly is cut off (after a < or > character).
+    > This is both an oversight of the author (they should use `&lt;` or `&gt`; instead) and a bug in the official Literotica app/api. There is nothing wrong with the app itself.
+
 ## Contact
 
 Do you have questions, bug reports, feature requests or even a PR you want to merge? Send me an email at:  
