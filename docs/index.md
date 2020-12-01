@@ -83,6 +83,10 @@ Unfortunately I am sometimes unable to fix or implement these requests due to ti
 - **Feature**: Listen to stories with audio recordings inside the app
     > Because this app reuses Literorica's data (mainly from the official app) there is no way to support this (as the offical app doesn't either). You can open the story in a browser by pressing the "Open Externally" button on the detail page and access the recording from there.
 
+- **Feature**: Update the app name to something less obvious (example "Litapp")
+    > I personally am not a fan of apps that have undescriptive app names as it's harder to find them on your device or when searching the web. It's also bad practice to change the app's name when it has already been released, because a lot of users wouldn't find it after the update.  
+    > However most Android phones allow you to change an app's name yourself, or already include a way to hide or lock away some apps. If not, you can download third party [homescreens](https://play.google.com/store/search?q=launcher&c=apps) or [lockers](https://play.google.com/store/search?q=app+lock&c=apps) from the Play store.
+
 - **Bug**: Sometimes lists of stories (history, search results, lists) don't contain all expected lists (especially when it is a long list)
     > This issue originates from Ionic (a package to more easily create apps), this might be fixed by updating to a newer version, but this will take a lot of time and might introduce newer other bugs.  
     > A possible solution is to kill and restart the app or even reboot your phone.
