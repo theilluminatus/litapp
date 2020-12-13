@@ -5,6 +5,10 @@
 ## Features
 
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
+- Search for text inside a story feature
+- Try to open image in browser when clicked illustration
+- Sort authors submissions list like history etc
+- Explain history story limit
 
 ### Meta
 
@@ -19,6 +23,7 @@
 ## Bugs
 
 - Older downloaded stories cannot be added to lists after a while
+- Check missing config of status bar on Pixel 5
 
 # Features / Bugfixes that are currently not planned
 
