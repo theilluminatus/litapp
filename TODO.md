@@ -22,6 +22,7 @@
 
 ## Bugs
 
+- Adding stories to list doesn't provide feedback (also add a toast message in case the popup already closed)
 - Older downloaded stories cannot be added to lists after a while
 - Check missing config of status bar on Pixel 5
 
