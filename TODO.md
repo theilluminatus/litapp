@@ -8,7 +8,7 @@
 - Search for text inside a story feature
 - Try to open image in browser when clicked illustration
 - Sort authors submissions list like history etc
-- Explain history story limit
+- Explain history story limit and/or increase it
 
 ### Meta
 
@@ -22,9 +22,11 @@
 
 ## Bugs
 
+- Next/Previous page buttons setting breaks opening story where left off
+- Check missing config of status bar on Pixel 5 / Android 11
+- Illustrated stories: cannot search in category / don't show in author page (add type to search queries?)
 - Adding stories to list doesn't provide feedback (also add a toast message in case the popup already closed)
 - Older downloaded stories cannot be added to lists after a while
-- Check missing config of status bar on Pixel 5
 
 # Features / Bugfixes that are currently not planned
 
