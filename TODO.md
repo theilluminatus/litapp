@@ -22,7 +22,6 @@
 
 ## Bugs
 
-- Next/Previous page buttons setting breaks opening story where left off
 - Check missing config of status bar on Pixel 5 / Android 11
 - Illustrated stories: cannot search in category / don't show in author page (add type to search queries?)
 - Adding stories to list doesn't provide feedback (also add a toast message in case the popup already closed)

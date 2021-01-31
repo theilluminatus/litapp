@@ -117,8 +117,8 @@ export class StoryViewPage {
   ionViewWillEnter() {
     this.alternatePagination = this.appSettings.allSettings.alternatePagination;
     if (this.slidesElement) {
+      if (this.story.currentpage > 0) this.slideTo(this.story.currentpage, 0);
       if (this.alternatePagination) this.slidesElement.lockSwipes(true);
-      if (this.story.currentpage > 0) this.slidesElement.slideTo(this.story.currentpage, 0);
     }
   }
 
@@ -137,9 +137,18 @@ export class StoryViewPage {
     this.androidFullScreen.showSystemUI();
   }
 
+  // ----------------------------------------------------------------------
+  // Moving between slides
+  // ----------------------------------------------------------------------
+
+  private slideTo(newPage: number, speed?: number) {
+    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
+    this.slidesElement.slideTo(newPage, speed);
+    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
+  }
+
   nextSlide(event?: MouseEvent) {
     if (event) event.stopPropagation();
-    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
 
     // try going to next in series on last page
     if (this.slidesElement.getActiveIndex() >= this.slides.length - 1) {
@@ -147,21 +156,18 @@ export class StoryViewPage {
       return;
     }
 
+    // hide status bar after reading the first page
     if (this.firstTimeNextPage && !this.fullscreen) {
       this.immersive();
     }
 
-    this.slidesElement.slideNext();
+    this.slideTo(this.slidesElement.getActiveIndex() + 1);
     this.firstTimeNextPage = false;
-
-    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
   }
 
   prevSlide(event?: MouseEvent) {
     if (event) event.stopPropagation();
-    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
-    this.slidesElement.slidePrev();
-    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
+    this.slideTo(this.slidesElement.getActiveIndex() - 1);
   }
 
   clickSlides(event: MouseEvent) {
@@ -203,6 +209,48 @@ export class StoryViewPage {
     this.fullscreen = !this.fullscreen;
   }
 
+  slideSelectionChange(event: any) {
+    this.slideTo(event.value - 1);
+  }
+
+  slideChanged() {
+    const currentIndex = this.slidesElement.getActiveIndex();
+    if (currentIndex >= this.slides.length) {
+      this.goToNextInSeries();
+      return;
+    }
+
+    // only one page
+    if (this.range) {
+      this.range.setValue(currentIndex + 1);
+      this.story.currentpage = currentIndex;
+      this.stories.cache(this.story);
+    }
+  }
+
+  goToNextInSeries() {
+    if (!this.story.series || this.appSettings.allSettings.offlineMode) return;
+
+    this.stories.getSeries(this.story.series).subscribe(data => {
+      for (let i = 0; i < data[0].length - 1; i += 1) {
+        if (data[0][i].id === this.story.id) {
+          this.navCtrl.push('StoryViewPage', {
+            story: data[0][i + 1],
+            fullscreen: this.fullscreen,
+          });
+          this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()), 1);
+          return;
+        }
+      }
+
+      this.ux.showToast('INFO', 'STORY_ENDOFSERIES', 2000, undefined, undefined, true);
+    });
+  }
+
+  // ----------------------------------------------------------------------
+  // Popovers / other pages
+  // ----------------------------------------------------------------------
+
   showPopover(ev: UIEvent) {
     const popover = this.popoverCtrl.create('StoryPopover', {
       settings: this.settings,
@@ -236,44 +284,6 @@ export class StoryViewPage {
 
     popover.present({
       ev,
-    });
-  }
-
-  slideSelectionChange(event: any) {
-    if (this.alternatePagination) this.slidesElement.lockSwipes(false);
-    this.slidesElement.slideTo(event.value - 1);
-    if (this.alternatePagination) this.slidesElement.lockSwipes(true);
-  }
-
-  slideChanged() {
-    const currentIndex = this.slidesElement.getActiveIndex();
-    if (currentIndex >= this.slides.length && this.story.series && !this.appSettings.allSettings.offlineMode) {
-      this.goToNextInSeries();
-      return;
-    }
-
-    // only one page
-    if (this.range) {
-      this.range.setValue(currentIndex + 1);
-      this.story.currentpage = currentIndex;
-      this.stories.cache(this.story);
-    }
-  }
-
-  goToNextInSeries() {
-    this.stories.getSeries(this.story.series).subscribe(data => {
-      for (let i = 0; i < data[0].length - 1; i += 1) {
-        if (data[0][i].id === this.story.id) {
-          this.navCtrl.push('StoryViewPage', {
-            story: data[0][i + 1],
-            fullscreen: this.fullscreen,
-          });
-          this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()), 1);
-          return;
-        }
-      }
-
-      this.ux.showToast('INFO', 'STORY_ENDOFSERIES', 2000, undefined, undefined, true);
     });
   }
 }
