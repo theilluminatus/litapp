@@ -39,7 +39,7 @@ export interface Story {
   ratingenabled: boolean;
   cached: boolean;
   downloaded: boolean;
-  downloadedtimestamp: Date | string;
+  downloadedtimestamp: Date | number;
   lists: List[];
   comments: {
     user: string;

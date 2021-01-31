@@ -58,7 +58,7 @@ export class History {
           if (index >= allStorageLength) {
             // All ids were gathered
             Observable.forkJoin(idsList.map(id => this.stories.getById(id))).subscribe(list => {
-              const sortedList = list.sort((a, b) => b.downloadedtimestamp - a.downloadedtimestamp);
+              const sortedList = list.sort((a, b) => (b.downloadedtimestamp as number) - (a.downloadedtimestamp as number));
               resolve(sortedList);
             });
           }

@@ -19,6 +19,13 @@ const decodeHTML = (s: string) => {
   return value;
 };
 
+/*
+  Angular http typing doesn't seem to handle tuples well
+  so we cast to the more strictly typed SearchResultType in public methods.
+*/
+type ObservableSearchResult = Observable<(Story[] | number)[]>; // array, first param story, second number
+export type SearchResultType = [Story[], number];
+
 @Injectable()
 export class Stories {
   private stories: Map<number, Story> = new Map<number, Story>();
@@ -61,6 +68,10 @@ export class Stories {
     return this.ready;
   }
 
+  // ----------------------------------------------------------------------
+  // Searching
+  // ----------------------------------------------------------------------
+
   searchStory(query: string, options: any, page?: number, limit?: number) {
     const filter = {
       q: query,
@@ -68,29 +79,29 @@ export class Stories {
     };
 
     if (options.astags) {
-      return this.tagsearch(filter, page);
+      return this.tagsearch(filter, page) as Observable<SearchResultType>;
     }
-    return this.newsearch(filter, page);
+    return this.newsearch(filter, page) as Observable<SearchResultType>;
   }
 
   getSeries(id: any) {
     const filter = [{ property: 'series_id', value: parseInt(id) }];
-    return this.search(filter);
+    return this.search(filter) as Observable<SearchResultType>;
   }
 
   getRelated(id: any) {
     const filter = [{ property: 'related_id', value: parseInt(id) }];
-    return this.search(filter);
+    return this.search(filter) as Observable<SearchResultType>;
   }
 
   getAuthorStories(id: any, page?: number) {
     const filter = [{ property: 'user_id', value: parseInt(id) }, { property: 'type', value: 'story' }];
-    return this.search(filter, page, null, null, '1/user-submissions');
+    return this.search(filter, page, null, null, '1/user-submissions') as Observable<SearchResultType>;
   }
 
   getAuthorFavs(id: any, page?: number) {
     const filter = [{ property: 'user_id', value: parseInt(id) }, { property: 'type', value: 'story' }];
-    return this.search(filter, page, null, null, '1/user-favorites');
+    return this.search(filter, page, null, null, '1/user-favorites') as Observable<SearchResultType>;
   }
 
   getTop(id?: any, page?: number) {
@@ -100,7 +111,7 @@ export class Stories {
       filter.push({ property: 'category_id', value: parseInt(id) });
     }
 
-    return this.search(filter, page, null, null, '1/top');
+    return this.search(filter, page, null, null, '1/top') as Observable<SearchResultType>;
   }
 
   getNew(id?: any, page?: number) {
@@ -110,7 +121,7 @@ export class Stories {
       filter.push({ property: 'category_id', value: parseInt(id) });
     }
 
-    return this.search(filter, page);
+    return this.search(filter, page) as Observable<SearchResultType>;
   }
 
   getRandom(id?: any, page?: number) {
@@ -120,11 +131,141 @@ export class Stories {
       filter.push({ property: 'category_id', value: parseInt(id) });
     }
 
-    return this.search(filter, page, null, null, '1/submissions');
+    return this.search(filter, page, null, null, '1/submissions') as Observable<SearchResultType>;
   }
 
+  // helper for similar requests
+  private search(filter: any, page?: number, sort?: string, urlIndex?: number, path?: string): ObservableSearchResult {
+    const params = {
+      page: page ? page : 1,
+      filter: JSON.stringify(filter),
+    };
+
+    let loader;
+    if (!page || page < 2) {
+      loader = this.ux.showLoader();
+    }
+
+    return this.api
+      .get(path ? path : '1/submissions', params, null, urlIndex)
+      .map((data: any) => {
+        if (loader) loader.dismiss();
+
+        if (!data.success && !data.submissions) {
+          if (!data.hasOwnProperty('total')) {
+            this.ux.showToast();
+            console.error('stories.search', [filter, page, sort]);
+          }
+          return [[], 0];
+        }
+
+        const stories = !data.submissions ? [] : data.submissions.map(story => this.extractFromSearch(story));
+        return [stories, data.total as number];
+      })
+      .catch(error => {
+        if (loader) loader.dismiss();
+        this.ux.showToast();
+        console.error('stories.search', [filter, page, sort], error);
+        return Observable.of([[], 0]);
+      });
+  }
+
+  // api 3 used on search panel for keyword and tag search
+  private newsearch(filter: any, page?: number, urlIndex?: number, path?: string, tags = false): ObservableSearchResult {
+    delete filter.astags;
+    if (!tags) {
+      if (filter.category) {
+        filter.categories = filter.category.map(c => parseInt(c));
+        delete filter.category;
+      }
+    } else if (Array.isArray(filter.category)) {
+      filter.category = parseInt(filter.category[0]);
+    }
+
+    const params = {
+      params: JSON.stringify({
+        page: page ? page : 1,
+        ...filter,
+      }),
+    };
+
+    let loader;
+    if (!page || page < 2) {
+      loader = this.ux.showLoader();
+    }
+
+    return this.api
+      .get(path ? path : '3/search/stories', params, null, urlIndex)
+      .map((data: any) => {
+        if (loader) loader.dismiss();
+
+        // tag portals uses new api but level 1 structure of old api :'(
+        const stories = tags ? data.submissions : data.data;
+        const total: number = tags ? data.meta.submissions_count : data.meta.total;
+
+        if (!stories) {
+          if (!total) {
+            this.ux.showToast();
+            console.error('stories.newsearch', [filter, page, tags]);
+          }
+          return [[], 0];
+        }
+
+        return [stories.map(story => this.extractFromNewSearch(story)), total];
+      })
+      .catch(error => {
+        if (loader) loader.dismiss();
+        this.ux.showToast();
+        console.error('stories.newsearch', [filter, page, tags], error);
+        return Observable.of([[], 0]);
+      });
+  }
+
+  private tagsearch(filter: any, page?: number, urlIndex?: number, path?: string): ObservableSearchResult {
+    const lookup = { params: JSON.stringify({ tags: filter.q.split(',').map(t => t.trim()) }) };
+    delete filter.q;
+    delete filter.astags;
+    delete filter.languages;
+    delete filter.popular;
+    delete filter.editorsChoice;
+    delete filter.winner;
+
+    let loader;
+    if (!page || page < 2) {
+      loader = this.ux.showLoader();
+    }
+
+    // first lookup tag ids
+    return this.api
+      .get(path ? path : '3/tagsportal/by-name', lookup, null, urlIndex)
+      .map((data: any) => {
+        return data.map(t => t.id);
+      })
+      .mergeMap(ids => {
+        // then lookup results
+        // don't load any results when the tag doesn't exist (otherwise all stories will be shown)
+        if (ids.length < 1) return Observable.throw('No results');
+
+        const params = {
+          tags: ids,
+          sort_by: filter.sort,
+          ...filter,
+        };
+        return this.newsearch(params, page, 0, '3/tagsportal/stories', true);
+      })
+      .catch(error => {
+        if (loader) loader.dismiss();
+        this.ux.showToast('INFO', 'SEARCH_TAG_NOTFOUND');
+        return Observable.of([[], 0]);
+      });
+  }
+
+  // ----------------------------------------------------------------------
+  // Specific Story/series endpoints
+  // ----------------------------------------------------------------------
+
   // Get a story by ID
-  getById(id: any, force: boolean = false, noLoaderDismiss = false) {
+  getById(id: any, force: boolean = false, noLoaderDismiss = false): Observable<Story | null> {
     const cached = this.stories.get(id);
     if (cached && !force) {
       if (cached.length) {
@@ -176,7 +317,7 @@ export class Stories {
       });
   }
 
-  rate(story: Story, rating: number) {
+  rate(story: Story, rating: number): void {
     const filter = [{ property: 'submission_id', value: parseInt(story.id) }];
     const data = new FormData();
     data.append('user_id', this.user.getId());
@@ -200,7 +341,7 @@ export class Stories {
       });
   }
 
-  downloadSeries(series: Story[]) {
+  downloadSeries(series: Story[]): void {
     // define downloading loop
     const loop = (index: number = 0) => {
       if (index < 1) {
@@ -260,124 +401,9 @@ export class Stories {
     }
   }
 
-  // helper for similar requests
-  private search(filter: any, page?: number, sort?: string, urlIndex?: number, path?: string) {
-    const params = {
-      page: page ? page : 1,
-      filter: JSON.stringify(filter),
-    };
-
-    let loader;
-    if (!page || page < 2) {
-      loader = this.ux.showLoader();
-    }
-
-    return this.api
-      .get(path ? path : '1/submissions', params, null, urlIndex)
-      .map((data: any) => {
-        if (loader) loader.dismiss();
-
-        if (!data.success && !data.submissions) {
-          if (!data.hasOwnProperty('total')) {
-            this.ux.showToast();
-            console.error('stories.search', [filter, page, sort]);
-          }
-          return [[], 0];
-        }
-
-        return [!data.submissions ? [] : data.submissions.map(story => this.extractFromSearch(story)), data.total];
-      })
-      .catch(error => {
-        if (loader) loader.dismiss();
-        this.ux.showToast();
-        console.error('stories.search', [filter, page, sort], error);
-        return Observable.of([[], 0]);
-      });
-  }
-
-  // api 3 used on search panel for keyword and tag search
-  private newsearch(filter: any, page?: number, urlIndex?: number, path?: string, tags = false) {
-    delete filter.astags;
-    if (!tags) {
-      if (filter.category) {
-        filter.categories = filter.category.map(c => parseInt(c));
-        delete filter.category;
-      }
-    } else if (Array.isArray(filter.category)) {
-      filter.category = parseInt(filter.category[0]);
-    }
-
-    const params = {
-      params: JSON.stringify({
-        page: page ? page : 1,
-        ...filter,
-      }),
-    };
-
-    let loader;
-    if (!page || page < 2) {
-      loader = this.ux.showLoader();
-    }
-
-    return this.api
-      .get(path ? path : '3/search/stories', params, null, urlIndex)
-      .map((data: any) => {
-        if (loader) loader.dismiss();
-
-        // tag portals uses new api but level 1 structure of old api :'(
-        const stories = tags ? data.submissions : data.data;
-        const total = tags ? data.meta.submissions_count : data.meta.total;
-
-        if (!stories) {
-          if (!total) {
-            this.ux.showToast();
-            console.error('stories.newsearch', [filter, page, tags]);
-          }
-          return [[], 0];
-        }
-
-        return [stories.map(story => this.extractFromNewSearch(story)), total];
-      })
-      .catch(error => {
-        if (loader) loader.dismiss();
-        this.ux.showToast();
-        console.error('stories.newsearch', [filter, page, tags], error);
-        return Observable.of([[], 0]);
-      });
-  }
-
-  private tagsearch(filter: any, page?: number, urlIndex?: number, path?: string) {
-    const lookup = { params: JSON.stringify({ tags: filter.q.split(',').map(t => t.trim()) }) };
-    delete filter.q;
-    delete filter.astags;
-    delete filter.languages;
-    delete filter.popular;
-    delete filter.editorsChoice;
-    delete filter.winner;
-
-    if (!page || page < 2) {
-      this.ux.showLoader();
-    }
-
-    // first lookup tag ids
-    return (
-      this.api
-        .get(path ? path : '3/tagsportal/by-name', lookup, null, urlIndex)
-        .map((data: any) => {
-          return data.map(t => t.id);
-        })
-
-        // then lookup results
-        .mergeMap(ids => {
-          const params = {
-            tags: ids,
-            sort_by: filter.sort,
-            ...filter,
-          };
-          return this.newsearch(params, page, 0, '3/tagsportal/stories', true);
-        })
-    );
-  }
+  // ----------------------------------------------------------------------
+  // CRUD methods
+  // ----------------------------------------------------------------------
 
   persist(story: Story): Promise<void> {
     const cleanedStory = Object.assign({}, story);
@@ -416,6 +442,10 @@ export class Stories {
       }),
     );
   }
+
+  // ----------------------------------------------------------------------
+  // Helpers
+  // ----------------------------------------------------------------------
 
   parseUrl(url: string): string {
     return !url.includes('//') ? `https://www.literotica.com/s/${url}` : url;

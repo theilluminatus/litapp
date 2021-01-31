@@ -12,6 +12,7 @@
 
 ### Meta
 
+- Add EOL message
 - Build automatic deploy script (GitHub action on tag, ms appcenter?)
 - Add mock API for integration testing and demo (in case Literotica servers go down)
 
@@ -24,7 +25,6 @@
 
 - Check missing config of status bar on Pixel 5 / Android 11
 - Adding stories to list doesn't provide feedback (also add a toast message in case the popup already closed)
-- Do not show results for tag search when tag doesn't exist (now shows all stories)
 - Older downloaded stories cannot be added to lists after a while
 
 # Features / Bugfixes that are currently not planned

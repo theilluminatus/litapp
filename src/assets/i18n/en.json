@@ -94,6 +94,7 @@
   "SEARCH_HISTORY_EMPTY": "List is empty",
   "SEARCH_SORT": "Sort results",
   "SEARCH_TAGS": "Search as tags (commas!)",
+  "SEARCH_TAG_NOTFOUND": "These tag(s) don't exist.",
   "SEARCH_ONLYSPECIAL": "Only show stories that are:",
   "SEARCH_CATEGORY": "Category",
   "SEARCH_ANYCAT": "Any",
