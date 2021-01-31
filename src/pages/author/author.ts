@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { TranslateService } from '@ngx-translate/core';
+import { BrowserTab } from '@ionic-native/browser-tab';
 
-import { Authors, Stories, User } from '../../providers/providers';
+import { Authors, Stories, User, Settings } from '../../providers/providers';
 import { Author } from '../../models/author';
-import { handleNoCordovaError } from '../../app/utils';
+import { handleNoCordovaError, getAuthorPageUrl } from '../../app/utils';
 
 @IonicPage({ priority: 'low' })
 @Component({
@@ -21,6 +22,8 @@ export class AuthorPage {
   openSegment = '';
   currentSubmissionsPage = 1;
   currentFavsPage = 1;
+  missingStoryCount = 0;
+  translations;
 
   constructor(
     private socialSharing: SocialSharing,
@@ -30,8 +33,14 @@ export class AuthorPage {
     public s: Stories,
     public a: Authors,
     public user: User,
+    private browser: BrowserTab,
+    public settings: Settings,
   ) {
     const author = navParams.get('author');
+
+    translate.get(['COPYPROMPT_MSG', 'AUTHOR_MISSING_STORIES']).subscribe(values => {
+      this.translations = values;
+    });
 
     this.a.getDetails(author.id).subscribe(author => {
       this.author = author;
@@ -52,6 +61,7 @@ export class AuthorPage {
     if (!this.author.stories) {
       this.s.getAuthorStories(this.author.id).subscribe(data => {
         this.author.stories = data[0];
+        this.missingStoryCount = this.author.storycount - data[1];
       });
     }
   }
@@ -102,11 +112,16 @@ export class AuthorPage {
   }
 
   share() {
-    const url = `https://www.literotica.com/stories/memberpage.php?uid=${this.author.id}`;
+    const url = getAuthorPageUrl(this.author);
     this.socialSharing.share(null, null, null, url).catch(err =>
       handleNoCordovaError(err, () => {
-        this.translate.get('COPYPROMPT_MSG').subscribe(label => prompt(label, url));
+        prompt(this.translations.COPYPROMPT_MSG, url);
       }),
     );
+  }
+
+  openLink() {
+    const url = getAuthorPageUrl(this.author);
+    this.browser.openUrl(url).catch(err => handleNoCordovaError(err, () => window.open(url)));
   }
 }

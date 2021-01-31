@@ -112,6 +112,7 @@
   "STORY_ENDOFSERIES": "No more stories in this series",
   "STORYVIEW_NEXT": "Next",
   "STORYVIEW_PREV": "Previous",
+  "STORYVIEW_ERROR_IMAGE": "Image could not be found on Literotica servers",
 
   "STORYRELATED_TITLE": "Related stories",
 
@@ -145,6 +146,7 @@
   "AUTHOR_TOOLTIP_FOLLOW": "Toggle following author",
   "AUTHOR_JOINDATE": "Join date",
   "AUTHOR_UPDATEDATE": "Last updated",
+  "AUTHOR_MISSING_STORIES": "The Literotica website contains {value} more stories (illustrated and/or poetry). Click the link above to view them.",
 
   "SERIES_TITLE": "All stories in this series",
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",

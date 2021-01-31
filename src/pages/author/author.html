@@ -2,6 +2,18 @@
   <ion-navbar>
     <ion-title>{{author?.name}}</ion-title>
     <ion-buttons end>
+      <button
+        ion-button
+        icon-only
+        (click)="openLink()"
+        *ngIf="!settings.allSettings.offlineMode"
+        [tooltip]="'OPENLINK_BUTTON' | translate"
+        event="press"
+        navTooltip
+      >
+        <ion-icon name="open"></ion-icon>
+      </button>
+
       <button ion-button icon-only (click)="share()" [tooltip]="'SHARE_BUTTON' | translate" event="press" navTooltip>
         <ion-icon name="share"></ion-icon>
       </button>
@@ -41,6 +53,10 @@
       {{ 'FAVORITES' | translate }} <ng-container *ngIf="author?.favs">({{author?.favs.length}})</ng-container>
     </ion-segment-button>
   </ion-segment>
+
+  <p class="warning" *ngIf="openSegment=='stories' && missingStoryCount > 0">
+    {{translations.AUTHOR_MISSING_STORIES.replace("{value}", missingStoryCount)}}
+  </p>
 
   <story-list-normal
     *ngIf="openSegment=='stories'"

@@ -67,7 +67,7 @@ export class StoryViewPage {
       loader.dismiss();
     }
 
-    translate.get(['STORY_ENDOFSERIES', 'CLOSE_BUTTON']).subscribe(values => {
+    translate.get(['STORY_ENDOFSERIES', 'CLOSE_BUTTON', 'STORYVIEW_ERROR_IMAGE']).subscribe(values => {
       this.translations = values;
     });
 
@@ -105,7 +105,7 @@ export class StoryViewPage {
   private addSlides() {
     this.story.content.forEach((item, index) => {
       // Add fallback handlers for images
-      const parsedContent = item.replace('<img src=', '<img alt="&nbsp;Error while loading image." src=');
+      const parsedContent = item.replace('<img src=', `<img alt='&nbsp;${this.translations.STORYVIEW_ERROR_IMAGE}' src=`);
       this.slides.push({
         content: parsedContent,
         page: index,
