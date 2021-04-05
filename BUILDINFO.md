@@ -32,6 +32,13 @@ import android.webkit.WebView;
 WebView.setWebContentsDebuggingEnabled(true);
 ```
 
+### Recreating the Android platform
+
+Sometimes necessary when something breaks while installing/removing plugins
+
+- `ionic cordova platform rm android`
+- `ionic cordova platform add android`
+
 ## Releasing
 
 > This whole process was automated with `./release.sh`. The following steps are kept here as documentation.
