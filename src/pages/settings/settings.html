@@ -68,6 +68,10 @@
           <ion-option *ngFor="let lang of languages" [value]="lang.id">{{ lang.name }}</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="!g.isWebApp()">
+        <ion-label>{{'SETTINGS_IMMERSIVE_READING' | translate}}</ion-label>
+        <ion-toggle formControlName="enableImmersiveReading"></ion-toggle>
+      </ion-item>
     </ion-list>
   </form>
 

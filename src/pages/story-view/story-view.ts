@@ -19,10 +19,10 @@ export class StoryViewPage {
 
   slides: any[] = [];
   dir: string = 'ltr';
-  webApp: boolean = true;
   slidesPerView: number = 1;
   alternatePagination: boolean = true;
-  fullscreen = false;
+  inFullscreen = false;
+  enableImmersive = false; // TODO: make this a global setting
   firstTimeNextPage = true;
   story: Story;
   translations;
@@ -54,13 +54,11 @@ export class StoryViewPage {
     public ux: UX,
     private androidFullScreen: AndroidFullScreen,
     translate: TranslateService,
-    navParams: NavParams,
+    public navParams: NavParams,
   ) {
     this.dir = platform.dir();
-    this.webApp = !platform.is('cordova');
-    // this.slidesPerView = platform.isPortrait() ? 1 : 2;
+    this.enableImmersive = appSettings.allSettings.enableImmersiveReading && platform.is('cordova');
     this.story = navParams.get('story');
-    this.fullscreen = navParams.get('fullscreen') || this.fullscreen;
 
     const loader = navParams.get('loader');
     if (loader) {
@@ -123,18 +121,33 @@ export class StoryViewPage {
   }
 
   ionViewDidEnter() {
+    this.analytics.track('StoryView');
+
+    // enable fullscreen mode when previous story in series was being read
+    const shouldBeFullscreen = this.navParams.get('fullscreen') || this.inFullscreen;
     setTimeout(() => {
-      if (this.fullscreen) {
-        this.androidFullScreen.immersiveMode();
-      } else {
-        this.androidFullScreen.showUnderSystemUI();
+      if (shouldBeFullscreen) {
+        this.toggleImmersive();
       }
     }, 10);
-    this.analytics.track('StoryView');
   }
 
   ionViewWillLeave() {
-    this.androidFullScreen.showSystemUI();
+    if (this.enableImmersive) {
+      this.androidFullScreen.showSystemUI();
+    }
+  }
+
+  private toggleImmersive() {
+    if (this.enableImmersive) {
+      if (this.inFullscreen) {
+        this.androidFullScreen.showSystemUI();
+        this.androidFullScreen.showUnderSystemUI();
+      } else {
+        this.androidFullScreen.immersiveMode();
+      }
+    }
+    this.inFullscreen = !this.inFullscreen;
   }
 
   // ----------------------------------------------------------------------
@@ -157,8 +170,8 @@ export class StoryViewPage {
     }
 
     // hide status bar after reading the first page
-    if (this.firstTimeNextPage && !this.fullscreen) {
-      this.immersive();
+    if (this.firstTimeNextPage && !this.inFullscreen) {
+      this.toggleImmersive();
     }
 
     this.slideTo(this.slidesElement.getActiveIndex() + 1);
@@ -172,7 +185,7 @@ export class StoryViewPage {
 
   clickSlides(event: MouseEvent) {
     if (this.alternatePagination) {
-      this.immersive();
+      this.toggleImmersive();
       return;
     }
 
@@ -183,7 +196,7 @@ export class StoryViewPage {
       // clicking in right most 25%
       this.nextSlide();
     } else {
-      this.immersive();
+      this.toggleImmersive();
     }
   }
 
@@ -196,17 +209,6 @@ export class StoryViewPage {
     if (event.signal === 'volume-down') {
       this.nextSlide();
     }
-  }
-
-  private immersive() {
-    if (this.fullscreen) {
-      // TODO: find a way to show statusbar under system ui immediately
-      this.androidFullScreen.showSystemUI();
-      this.androidFullScreen.showUnderSystemUI();
-    } else {
-      this.androidFullScreen.immersiveMode();
-    }
-    this.fullscreen = !this.fullscreen;
   }
 
   slideSelectionChange(event: any) {
@@ -236,7 +238,7 @@ export class StoryViewPage {
         if (data[0][i].id === this.story.id) {
           this.navCtrl.push('StoryViewPage', {
             story: data[0][i + 1],
-            fullscreen: this.fullscreen,
+            fullscreen: this.inFullscreen,
           });
           this.navCtrl.remove(this.navCtrl.indexOf(this.navCtrl.last()), 1);
           return;

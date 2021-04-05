@@ -53,7 +53,7 @@ This is purely to get an overview of how many people are using my app, since Git
 
 ## Frequently Asked Questions
 
-If you encounter a problem or have a feature request, please check my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md) first.
+If you encounter a problem or have a feature request, please check the app's settings and my [TODO list](https://github.com/theilluminatus/litapp/blob/master/TODO.md) first.
 
 ### Errors
 

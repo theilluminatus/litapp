@@ -83,6 +83,7 @@ export class SettingsPage {
         onlyShowStoriesInFeed: [this.options.onlyShowStoriesInFeed],
         navigateWithVolumeRocker: [this.options.navigateWithVolumeRocker],
         defaultLanguage: [this.options.defaultLanguage],
+        enableImmersiveReading: [this.options.enableImmersiveReading],
       });
 
       this.form.valueChanges.subscribe(v => {

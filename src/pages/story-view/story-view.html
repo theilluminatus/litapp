@@ -1,4 +1,4 @@
-<ion-header [class]="fullscreen ? 'fullscreen': ''" no-border>
+<ion-header #header no-border class="{{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}">
   <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
     <ion-title>
       {{ story.title }}
@@ -35,7 +35,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content fullscreen="true">
+<ion-content
+  [fullscreen]="enableImmersive ? true : undefined"
+  class="{{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}"
+>
   <ion-slides
     ion-fixed
     #slidesElement
@@ -70,10 +73,9 @@
 </ion-content>
 
 <div
-  class="pagination {{fullscreen ? 'fullscreen': ''}}"
+  class="pagination {{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}"
   [style.background]="settings.background"
   [style.color]="settings.color"
-  [style.paddingBottom]="!webApp ? '50px' : '0'"
 >
   <button ion-button icon-only clear (click)="showPopover($event)">
     <ion-icon name="settings" [style.color]="settings.color"></ion-icon>

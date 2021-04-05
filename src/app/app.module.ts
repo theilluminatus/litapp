@@ -66,6 +66,7 @@ export function provideSettings(storage: Storage) {
     onlyShowStoriesInFeed: false,
     navigateWithVolumeRocker: false,
     defaultLanguage: 1, // en
+    enableImmersiveReading: true,
   });
 }
 

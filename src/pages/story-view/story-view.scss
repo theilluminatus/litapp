@@ -6,11 +6,12 @@ page-story-view {
   }
 
   ion-header.fullscreen {
-    top: -80px;
+    top: calc(-50px - var(--statusbar-height, 30px));
   }
 
-  .toolbar {
-    padding-top: 30px;
+  ion-header.immersive .toolbar {
+    // Compensate for android status bar height
+    padding-top: var(--statusbar-height, 30px);
   }
 
   .toolbar-background {
@@ -78,7 +79,12 @@ page-story-view {
 
   #slide-content {
     margin: 0;
-    padding: 75px 20px 95px 20px;
+    padding: 75px 20px 60px 20px;
+  }
+
+  .immersive #slide-content {
+    padding-top: calc(50px + var(--statusbar-height, 30px));
+    padding-bottom: 100px;
   }
 
   #slide-content img {
@@ -113,6 +119,11 @@ page-story-view {
     .count {
       padding: 0 10px;
     }
+  }
+
+  .pagination.immersive {
+    // Compensate for nav bar height
+    padding-bottom: 50px;
   }
 
   .pagination.fullscreen {

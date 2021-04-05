@@ -42,6 +42,7 @@
   "SETTINGS_ALTERNATE_PAGINATION": "Display next / previous buttons when reading instead of swiping pages",
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
   "SETTINGS_DEFAULTLANG": "Default language for searching stories",
+  "SETTINGS_IMMERSIVE_READING": "Enable immersive mode when reading stories",
   "SETTINGS_ONLY_STORIES_FEED": "Only display new stories on the feed page (hide bio updates etc...)",
   "SETTINGS_NAVIGATE_VOLUME_ROCKER": "Turn pages with the volume rocker buttons",
   "SETTINGS_ABOUTAPP": "About the app",
