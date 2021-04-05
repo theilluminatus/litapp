@@ -28,6 +28,7 @@ export class StoryViewPage {
   translations;
   @ViewChild('slidesElement') slidesElement: Slides;
   @ViewChild('range') range: any;
+  @ViewChild('rootElement') rootElement: any;
 
   settings = {
     fontsize: 15,
@@ -123,12 +124,15 @@ export class StoryViewPage {
   ionViewDidEnter() {
     this.analytics.track('StoryView');
 
-    // enable fullscreen mode when previous story in series was being read
-    const shouldBeFullscreen = this.navParams.get('fullscreen') || this.inFullscreen;
     setTimeout(() => {
+      // enable fullscreen mode when previous story in series was being read
+      const shouldBeFullscreen = this.navParams.get('fullscreen') || this.inFullscreen;
       if (shouldBeFullscreen) {
         this.toggleImmersive();
       }
+
+      // TODO: enable this once we found a way to calculate the statusbar height correctly
+      // this.rootElement.nativeElement.style.setProperty('--statusbar-height', `${statusbarHeight}px`);
     }, 10);
   }
 

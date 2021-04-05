@@ -1,96 +1,98 @@
-<ion-header #header no-border class="{{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}">
-  <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
-    <ion-title>
-      {{ story.title }}
-    </ion-title>
-    <ion-buttons end>
-      <button
-        ion-button
-        icon-only
-        *ngIf="user.isLoggedIn()"
-        (click)="openListPicker($event)"
-        [tooltip]="'BOOKMARK_BUTTON' | translate"
-        event="press"
-        navTooltip
-      >
-        <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
-      </button>
+<div #rootElement>
+  <ion-header #header no-border class="{{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}">
+    <ion-navbar [style.color]="settings.color" [style.background]="settings.background">
+      <ion-title>
+        {{ story.title }}
+      </ion-title>
+      <ion-buttons end>
+        <button
+          ion-button
+          icon-only
+          *ngIf="user.isLoggedIn()"
+          (click)="openListPicker($event)"
+          [tooltip]="'BOOKMARK_BUTTON' | translate"
+          event="press"
+          navTooltip
+        >
+          <ion-icon name="bookmark" [style.color]="settings.color"></ion-icon>
+        </button>
 
-      <button
-        ion-button
-        icon-only
-        *ngIf="story?.series && !appSettings.allSettings.offlineMode"
-        (click)="showSeries(story)"
-        [tooltip]="'STORYDETAIL_SERIES' | translate"
-        event="press"
-        navTooltip
-      >
-        <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
-      </button>
+        <button
+          ion-button
+          icon-only
+          *ngIf="story?.series && !appSettings.allSettings.offlineMode"
+          (click)="showSeries(story)"
+          [tooltip]="'STORYDETAIL_SERIES' | translate"
+          event="press"
+          navTooltip
+        >
+          <ion-icon name="albums" [style.color]="settings.color"></ion-icon>
+        </button>
 
-      <button ion-button icon-only (click)="showInfo(story)" [tooltip]="'STORY_TOOLTIP_SHOWINFO' | translate" event="press" navTooltip>
-        <ion-icon name="information-circle" [style.color]="settings.color"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
+        <button ion-button icon-only (click)="showInfo(story)" [tooltip]="'STORY_TOOLTIP_SHOWINFO' | translate" event="press" navTooltip>
+          <ion-icon name="information-circle" [style.color]="settings.color"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
-<ion-content
-  [fullscreen]="enableImmersive ? true : undefined"
-  class="{{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}"
->
-  <ion-slides
-    ion-fixed
-    #slidesElement
-    (ionSlideDidChange)="slideChanged()"
-    [slidesPerView]="slidesPerView"
-    [dir]="dir"
-    (click)="clickSlides($event)"
-    [style.fontSize]="settings.fontsize + 'px'"
-    [style.lineHeight]="settings.lineheight + 'px'"
-    [style.fontFamily]="settings.font + ', sans-serif'"
-    [style.textAlign]="settings.textalign"
+  <ion-content
+    [fullscreen]="enableImmersive ? true : undefined"
+    class="{{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}"
+  >
+    <ion-slides
+      ion-fixed
+      #slidesElement
+      (ionSlideDidChange)="slideChanged()"
+      [slidesPerView]="slidesPerView"
+      [dir]="dir"
+      (click)="clickSlides($event)"
+      [style.fontSize]="settings.fontsize + 'px'"
+      [style.lineHeight]="settings.lineheight + 'px'"
+      [style.fontFamily]="settings.font + ', sans-serif'"
+      [style.textAlign]="settings.textalign"
+      [style.background]="settings.background"
+      [style.color]="settings.color"
+    >
+      <ion-slide *ngFor="let slide of slides; let i=index">
+        <ng-container *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5">
+          <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
+            <p id="slide-content" [innerHTML]="slide.content"></p>
+
+            <div *ngIf="alternatePagination" class="alternate-buttons">
+              <button ion-button (click)="prevSlide($event)" [color]="settings.buttonStyle">
+                <ion-icon name="md-arrow-dropleft-circle"></ion-icon>&nbsp; {{'STORYVIEW_PREV' | translate}}
+              </button>
+              <button ion-button (click)="nextSlide($event)" [color]="settings.buttonStyle">
+                {{'STORYVIEW_NEXT' | translate}} &nbsp;<ion-icon name="md-arrow-dropright-circle"></ion-icon>
+              </button>
+            </div>
+          </ng-scrollbar>
+        </ng-container>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
+
+  <div
+    class="pagination {{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}"
     [style.background]="settings.background"
     [style.color]="settings.color"
   >
-    <ion-slide *ngFor="let slide of slides; let i=index">
-      <ng-container *ngIf="Math.abs(slidesElement.getActiveIndex() - i) < 5">
-        <ng-scrollbar autoHide="true" [thumbClass]="settings.theme">
-          <p id="slide-content" [innerHTML]="slide.content"></p>
+    <button ion-button icon-only clear (click)="showPopover($event)">
+      <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
+    </button>
 
-          <div *ngIf="alternatePagination" class="alternate-buttons">
-            <button ion-button (click)="prevSlide($event)" [color]="settings.buttonStyle">
-              <ion-icon name="md-arrow-dropleft-circle"></ion-icon>&nbsp; {{'STORYVIEW_PREV' | translate}}
-            </button>
-            <button ion-button (click)="nextSlide($event)" [color]="settings.buttonStyle">
-              {{'STORYVIEW_NEXT' | translate}} &nbsp;<ion-icon name="md-arrow-dropright-circle"></ion-icon>
-            </button>
-          </div>
-        </ng-scrollbar>
-      </ng-container>
-    </ion-slide>
-  </ion-slides>
-</ion-content>
+    <ion-range
+      #range
+      (ionChange)="slideSelectionChange($event)"
+      *ngIf="slides.length > 1"
+      pin="true"
+      [snaps]="slides.length < 15"
+      step="1"
+      min="1"
+      [max]="slides.length"
+    ></ion-range>
 
-<div
-  class="pagination {{inFullscreen ? 'fullscreen' : ''}} {{enableImmersive ? 'immersive': ''}}"
-  [style.background]="settings.background"
-  [style.color]="settings.color"
->
-  <button ion-button icon-only clear (click)="showPopover($event)">
-    <ion-icon name="settings" [style.color]="settings.color"></ion-icon>
-  </button>
-
-  <ion-range
-    #range
-    (ionChange)="slideSelectionChange($event)"
-    *ngIf="slides.length > 1"
-    pin="true"
-    [snaps]="slides.length < 15"
-    step="1"
-    min="1"
-    [max]="slides.length"
-  ></ion-range>
-
-  <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
+    <span class="count">{{Math.min(slides.length,slidesElement.getActiveIndex()+1)}} / {{slides.length}}</span>
+  </div>
 </div>

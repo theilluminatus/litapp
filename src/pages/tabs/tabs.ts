@@ -57,11 +57,4 @@ export class TabsPage {
       this.tab5Title = values['TAB5_TITLE'];
     });
   }
-
-  ionViewDidEnter() {
-    // TODO: Get an accurate statusbar size
-    // used for immersive mode in the story-view component
-    // const statusbarHeight = screen.height - this.platform.height() - 50; // 50px is height of navbar
-    // this.tabs.getNativeElement().style.setProperty('--statusbar-height', `${statusbarHeight}px`);
-  }
 }
