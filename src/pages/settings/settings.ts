@@ -84,6 +84,7 @@ export class SettingsPage {
         navigateWithVolumeRocker: [this.options.navigateWithVolumeRocker],
         defaultLanguage: [this.options.defaultLanguage],
         enableImmersiveReading: [this.options.enableImmersiveReading],
+        largeStatusbarHeight: [this.options.largeStatusbarHeight],
       });
 
       this.form.valueChanges.subscribe(v => {

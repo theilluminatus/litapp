@@ -98,7 +98,7 @@ Unfortunately I am sometimes unable to fix or implement these requests due to ti
     > This is both an oversight of the author (they should use `&lt;` or `&gt`; instead) and a bug in the official Literotica app/api. There is nothing wrong with the app itself.
 
 - **Bug**: The layout of the app breaks when reading a story on a phone with a large notch.
-    > Unfortunately adding decent notch support in this old project is not possible without reworking a large part of the app. Try disabling immersive mode in the settings as a workaround.
+    > Unfortunately adding decent notch support in this old project is not possible without reworking a large part of the app. I've added a notch specific setting instead you can enable.
 
 ## Contact
 

@@ -67,6 +67,7 @@ export function provideSettings(storage: Storage) {
     navigateWithVolumeRocker: false,
     defaultLanguage: 1, // en
     enableImmersiveReading: true,
+    largeStatusbarHeight: false,
   });
 }
 

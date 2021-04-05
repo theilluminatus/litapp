@@ -2,15 +2,11 @@
 
 > Some architectural todo's are defined inside the code itself
 
-## Bugs
-
-- Check missing config of status bar on Pixel 5 / Android 11
-
 ## Features
 
+- Add immediate feedback for adding stories to a list (add a toast message in case the popup already closed?)
 - Try to open image in browser when clicked illustration
 - Sort authors submissions list like history etc
-- Add immediate feedback for adding stories to a list (also add a toast message in case the popup already closed)
 - Search for text inside a story feature
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 

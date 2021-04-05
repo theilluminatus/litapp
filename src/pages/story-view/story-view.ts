@@ -22,7 +22,8 @@ export class StoryViewPage {
   slidesPerView: number = 1;
   alternatePagination: boolean = true;
   inFullscreen = false;
-  enableImmersive = false; // TODO: make this a global setting
+  enableImmersive = false;
+  statusBarHeight = 30;
   firstTimeNextPage = true;
   story: Story;
   translations;
@@ -58,8 +59,11 @@ export class StoryViewPage {
     public navParams: NavParams,
   ) {
     this.dir = platform.dir();
-    this.enableImmersive = appSettings.allSettings.enableImmersiveReading && platform.is('cordova');
     this.story = navParams.get('story');
+
+    // TODO: making this dynamic would be so much better, alas there is no way for ionic 3
+    this.statusBarHeight = appSettings.allSettings.largeStatusbarHeight && platform.is('cordova') ? 60 : this.statusBarHeight;
+    this.enableImmersive = appSettings.allSettings.enableImmersiveReading && platform.is('cordova');
 
     const loader = navParams.get('loader');
     if (loader) {
@@ -129,10 +133,11 @@ export class StoryViewPage {
       const shouldBeFullscreen = this.navParams.get('fullscreen') || this.inFullscreen;
       if (shouldBeFullscreen) {
         this.toggleImmersive();
+      } else if (this.enableImmersive) {
+        this.androidFullScreen.showUnderSystemUI();
       }
 
-      // TODO: enable this once we found a way to calculate the statusbar height correctly
-      // this.rootElement.nativeElement.style.setProperty('--statusbar-height', `${statusbarHeight}px`);
+      this.rootElement.nativeElement.style.setProperty('--statusbar-height', `${this.statusBarHeight}px`);
     }, 10);
   }
 

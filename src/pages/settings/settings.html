@@ -72,6 +72,10 @@
         <ion-label>{{'SETTINGS_IMMERSIVE_READING' | translate}}</ion-label>
         <ion-toggle formControlName="enableImmersiveReading"></ion-toggle>
       </ion-item>
+      <ion-item *ngIf="!g.isWebApp()">
+        <ion-label>{{'SETTINGS_LARGE_STATUSBAR_HEIGHT' | translate}}</ion-label>
+        <ion-toggle formControlName="largeStatusbarHeight"></ion-toggle>
+      </ion-item>
     </ion-list>
   </form>
 

@@ -43,6 +43,7 @@
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
   "SETTINGS_DEFAULTLANG": "Default language for searching stories",
   "SETTINGS_IMMERSIVE_READING": "Enable immersive mode when reading stories",
+  "SETTINGS_LARGE_STATUSBAR_HEIGHT": "Enable this if your phone has a large notch (bigger than default status bar)",
   "SETTINGS_ONLY_STORIES_FEED": "Only display new stories on the feed page (hide bio updates etc...)",
   "SETTINGS_NAVIGATE_VOLUME_ROCKER": "Turn pages with the volume rocker buttons",
   "SETTINGS_ABOUTAPP": "About the app",
