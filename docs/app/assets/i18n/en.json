@@ -42,6 +42,8 @@
   "SETTINGS_ALTERNATE_PAGINATION": "Display next / previous buttons when reading instead of swiping pages",
   "SETTINGS_FORCENORMALLIST": "Use different list rendering \n(only enable when having issues)",
   "SETTINGS_DEFAULTLANG": "Default language for searching stories",
+  "SETTINGS_IMMERSIVE_READING": "Enable immersive mode when reading stories",
+  "SETTINGS_LARGE_STATUSBAR_HEIGHT": "Enable this if your phone has a large notch (bigger than default status bar)",
   "SETTINGS_ONLY_STORIES_FEED": "Only display new stories on the feed page (hide bio updates etc...)",
   "SETTINGS_NAVIGATE_VOLUME_ROCKER": "Turn pages with the volume rocker buttons",
   "SETTINGS_ABOUTAPP": "About the app",
@@ -83,6 +85,7 @@
   "OPENLINK_BUTTON": "Open in browser",
 
   "HISTORY_TITLE": "History",
+  "HISTORY_EMPTY": "This list will show the last 100 read stories. Check out the tabs below to start reading some!",
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",
@@ -94,6 +97,7 @@
   "SEARCH_HISTORY_EMPTY": "List is empty",
   "SEARCH_SORT": "Sort results",
   "SEARCH_TAGS": "Search as tags (commas!)",
+  "SEARCH_TAG_NOTFOUND": "These tag(s) don't exist.",
   "SEARCH_ONLYSPECIAL": "Only show stories that are:",
   "SEARCH_CATEGORY": "Category",
   "SEARCH_ANYCAT": "Any",
@@ -112,6 +116,7 @@
   "STORY_ENDOFSERIES": "No more stories in this series",
   "STORYVIEW_NEXT": "Next",
   "STORYVIEW_PREV": "Previous",
+  "STORYVIEW_ERROR_IMAGE": "Image could not be found on Literotica servers",
 
   "STORYRELATED_TITLE": "Related stories",
 
@@ -145,6 +150,7 @@
   "AUTHOR_TOOLTIP_FOLLOW": "Toggle following author",
   "AUTHOR_JOINDATE": "Join date",
   "AUTHOR_UPDATEDATE": "Last updated",
+  "AUTHOR_MISSING_STORIES": "The Literotica website contains {value} more stories (illustrated and/or poetry). Click the link above to view them.",
 
   "SERIES_TITLE": "All stories in this series",
   "SERIES_DOWNLOAD_ERROR": "Could not download all stories",
