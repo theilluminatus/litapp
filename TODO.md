@@ -14,6 +14,19 @@
 - Search for text inside a story feature
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
+Add midding/more data to existing screens:
+
+- Find API route for story comments (the needed pages already exist)
+  - `https://literotica.com/api/3/stories/<storyId>/comments/after`  
+    (params = `null | {"after": lastCommentIdFromPreviousPage}`)
+- Find better API route to get more story metadata (especially 'new' badge) for improved story refresh
+  - `https://literotica.com/api/3/stories/<storyId>` (`$.submission.is_new`)
+- Find better API route for getting author following status together with bio
+  - `https://literotica.com/api/3/authors/<authorId>`
+- Find better API route for viewing the Top stories in a category (would allow limiting to top this year, last 90 days or all time like on the website)
+  - `https://literotica.com/api/3/stories/popular/<categoryId>`  
+    (params = `{"page": pageNum, "period": "month"|"week"|"all", "pageSize": 10, "language": 1}`)
+
 ### Meta
 
 - Add EOL message
@@ -37,10 +50,6 @@ If you encounter these issues and want to help me fix them, please contact me.
 
 ## Missing data
 
-These functions cannot be added to the app because Literotica does not have a way to access the data.
+These functions cannot be added to the app because Literotica does not have a way to access the data:
 
-- Find API route for story comments (the needed pages already exist)
-- Find better API route to get more story metadata (especially 'new' badge) for improved story refresh
-- Find better API route for getting author following status together with bio
-- Find better API route for viewing the Top stories in a category (would allow limiting to top this year, last 90 days or all time like on the website)
 - Find a way to consistently support stories from other languages (currently only found 1 endpoint for searching)
