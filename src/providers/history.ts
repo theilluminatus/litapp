@@ -109,7 +109,7 @@ export class History {
   }
 
   clean(): Promise<void> {
-    const maxNumberOfStories = 50;
+    const maxNumberOfStories = 100;
     return new Promise(resolve => {
       const toRemove = this.history.slice(0, Math.max(this.history.length - maxNumberOfStories, 0));
 

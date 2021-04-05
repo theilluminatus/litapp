@@ -10,7 +10,6 @@
 
 - Try to open image in browser when clicked illustration
 - Sort authors submissions list like history etc
-- Explain history story limit and/or increase it
 - Add immediate feedback for adding stories to a list (also add a toast message in case the popup already closed)
 - Search for text inside a story feature
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture

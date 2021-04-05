@@ -84,6 +84,7 @@
   "OPENLINK_BUTTON": "Open in browser",
 
   "HISTORY_TITLE": "History",
+  "HISTORY_EMPTY": "This list will show the last 100 read stories. Check out the tabs below to start reading some!",
   "HISTORY_TITLE_DOWNLOADED": "Downloaded",
   "HISTORY_TOOLTIP_DOWNLOADS": "Toggle downloaded-only filter",
   "HISTORY_TOOLTIP_CLEAR": "Clear history",

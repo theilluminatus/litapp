@@ -3,7 +3,10 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }} ({{filteredStories.length}})</ion-title>
+    <ion-title
+      >{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }}
+      ({{filteredStories.length}}<small>/100</small>)</ion-title
+    >
     <ion-buttons end>
       <button end ion-button icon-only (click)="openSortPopover($event)" [tooltip]="'SORT_TITLE' | translate" event="press" navTooltip>
         <ion-icon name="funnel"></ion-icon>
@@ -39,6 +42,7 @@
 </ion-header>
 
 <ion-content padding>
+  <p *ngIf="!filteredStories.length; else listElement" class="empty-placeholder">{{'HISTORY_EMPTY' | translate}}</p>
   <story-list
     [stories]="filteredStories | orderBy: sortMethod"
     (onDeleteBySwiping)="delete($event)"
