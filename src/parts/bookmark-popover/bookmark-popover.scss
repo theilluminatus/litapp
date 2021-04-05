@@ -1,16 +1,21 @@
 .bookmarks {
   max-height: 300px;
   overflow: auto;
-}
 
-.list-md {
-  margin-bottom: 5px;
-}
+  .list-md {
+    margin-bottom: 5px;
+  }
 
-.list-header-md {
-  margin-bottom: -10px;
-}
+  .list-header-md {
+    margin-bottom: -10px;
+  }
 
-[item-end] {
-  margin: 0 !important;
+  [item-end] {
+    margin: 0 !important;
+  }
+
+  .button:active,
+  .button:focus .ion-md-star-outline {
+    color: #3f51b5;
+  }
 }

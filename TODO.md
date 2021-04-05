@@ -4,24 +4,23 @@
 
 ## Features
 
-- Add immediate feedback for adding stories to a list (add a toast message in case the popup already closed?)
-- Try to open image in browser when clicked illustration
 - Sort authors submissions list like history etc
-- Search for text inside a story feature
+- Try to open image in browser when clicked illustration
+- Search for text inside a story feature?
 - Split downloaded stories from history, add separate tab (more functions like search, grouping...) + add undownload button to history swipe gesture
 
-Add midding/more data to existing screens:
+Add missing / more data to existing screens:
 
-- Find API route for story comments (the needed pages already exist)
-  - `https://literotica.com/api/3/stories/<storyId>/comments/after`  
-    (params = `null | {"after": lastCommentIdFromPreviousPage}`)
-- Find better API route to get more story metadata (especially 'new' badge) for improved story refresh
-  - `https://literotica.com/api/3/stories/<storyId>` (`$.submission.is_new`)
 - Find better API route for getting author following status together with bio
   - `https://literotica.com/api/3/authors/<authorId>`
+- Find better API route to get more story metadata (especially 'new' badge) for improved story refresh
+  - `https://literotica.com/api/3/stories/<storyId>` (`$.submission.is_new`)
 - Find better API route for viewing the Top stories in a category (would allow limiting to top this year, last 90 days or all time like on the website)
   - `https://literotica.com/api/3/stories/popular/<categoryId>`  
     (params = `{"page": pageNum, "period": "month"|"week"|"all", "pageSize": 10, "language": 1}`)
+- Find API route for story comments (the needed pages already exist)
+  - `https://literotica.com/api/3/stories/<storyId>/comments/after`  
+    (params = `null | {"after": lastCommentIdFromPreviousPage}`)
 
 ### Meta
 

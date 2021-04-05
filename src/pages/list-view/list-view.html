@@ -1,14 +1,16 @@
 <ion-header>
-  <!-- Color and values here aim to represent the actual story count instead of the 
+  <!-- Color and values here aim to represent the actual story count instead of the
 	potentially incorrect count reported by the lists api. If the counts do not agree,
 	the text is greyed out. -->
   <ion-navbar>
     <ion-title>
-      <ion-icon [name]="!list?.visibility ? 'lock' : ''"></ion-icon>
-      {{ list?.name }}
-      <small [ngStyle]="{'color': (stories && stories.length != list.size) ? '#666' : 'white'}">
+      <ion-icon *ngIf="!list?.visibility" [name]="!list?.visibility ? 'lock' : ''"></ion-icon>
+      <span [tooltip]="list?.name + ' (' + stories?.length + ')'">
+        {{ list?.name }}
+      </span>
+      <small [ngStyle]="{'color': (stories && stories?.length != list.size) ? '#666' : 'white'}">
         <ng-container *ngIf="stories">
-          ({{stories.length}})
+          ({{stories?.length}})
         </ng-container>
       </small>
     </ion-title>

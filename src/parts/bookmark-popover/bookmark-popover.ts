@@ -46,6 +46,10 @@ export class BookmarkPopover {
     } else {
       if (list.stories.indexOf(this.story) > -1) {
         this.l.removeStory(list, this.story);
+
+        // Cheap hack to use the focus state as a loading indicator when adding items
+        // TODO: no indicator when removing items from a list
+        if (document.activeElement) (document.activeElement as HTMLElement).blur();
       } else {
         this.l.addStory(list, this.story);
       }
