@@ -2,6 +2,18 @@
 
 > Some architectural todo's are defined inside the code itself
 
+- Add note about long wait time when contacting me
+
+## Bugs
+
+- When searching by tags, the category filter popup has black text on a dark window
+- Sort settings are not persisted, always defaults when returning to same screen
+- Share link to quickly open story from browser doesn't work in Android 11
+- Downloaded stories disappear after large quantities (1000+)?
+  - Export story list or downloaded stories to separate files?
+- Unauthorized message when loading feed & list data when just logged in (Android 11 Oneplus)
+- Bookmarked status disappears during deep level navigation (related, author favs...)
+
 ## Features
 
 - Sort authors submissions list like history etc
