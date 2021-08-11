@@ -2,6 +2,9 @@
 
 ## Releases (Android)
 
+> ❗ This repo is currently in low-effort maintenance mode (core functionality still works).
+> ❗ Due to recent changes on the Literotica site some functionality (mainly account based, like the feed) might no longer work. As such I've decided to halt development of this project for now in the hope that either a [public API](https://forum.literotica.com/showthread.php?t=1544234) becomes available or an official apps get released.
+
 - [v1.24](https://theilluminatus.github.io/litapp/releases/litapp-1.24.apk) (2021-04-05)
 - [v1.23](https://theilluminatus.github.io/litapp/releases/litapp-1.23.apk) (2020-09-28)
 - [v1.22](https://theilluminatus.github.io/litapp/releases/litapp-1.22.apk) (2020-08-08)
@@ -100,7 +103,7 @@ Unfortunately I am sometimes unable to fix or implement these requests due to ti
 - **Bug**: The layout of the app breaks when reading a story on a phone with a large notch.
     > Unfortunately adding decent notch support in this old project is not possible without reworking a large part of the app. I've added a notch specific setting instead you can enable.
 
-## Contact
+<!-- ## Contact -->
 
-Do you have questions, bug reports, feature requests or even a PR you want to merge? Send me an email at:  
-[theilluminatus@outlook.com](mailto:theilluminatus@outlook.com)
+<!-- Do you have questions, bug reports, feature requests or even a PR you want to merge? Send me an email at:  
+[theilluminatus@outlook.com](mailto:theilluminatus@outlook.com) -->
