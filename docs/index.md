@@ -3,6 +3,7 @@
 ## Releases (Android)
 
 > ❗ This repo is currently in low-effort maintenance mode (core functionality still works).
+> 
 > ❗ Due to recent changes on the Literotica site some functionality (mainly account based, like the feed) might no longer work. As such I've decided to halt development of this project for now in the hope that either a [public API](https://forum.literotica.com/showthread.php?t=1544234) becomes available or an official apps get released.
 
 - [v1.24](https://theilluminatus.github.io/litapp/releases/litapp-1.24.apk) (2021-04-05)
