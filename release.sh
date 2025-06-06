@@ -14,7 +14,7 @@ fi
 
 ./update_version.sh $2
 
-ionic cordova build android --prod --release -- -- --minSdkVersion=19 --keystore=platforms/litapp-key.jks --storePassword=$1 --alias=litapp --password=$1
+./node_modules/.bin/ionic cordova build android --prod --release -- -- --minSdkVersion=19 --keystore=platforms/litapp-key.jks --storePassword=$1 --alias=litapp --password=$1
 
 mv ./platforms/android/app/build/outputs/apk/release/app-release.apk ./docs/releases/litapp-$2.apk
 

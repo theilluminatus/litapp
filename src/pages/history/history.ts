@@ -15,6 +15,8 @@ export class HistoryPage {
   filteredStories: Story[] = [];
   sortMethod: string;
 
+  HISTORY_LIMIT = History.HISTORY_LIMIT;
+
   onlyDownloaded = false;
   private translations;
 

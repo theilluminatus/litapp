@@ -11,6 +11,8 @@ export class History {
   private ready;
   private history: Story[] = []; // ordered from old to new
 
+  static HISTORY_LIMIT = 1000;
+
   constructor(public stories: Stories, public storage: Storage) {
     this.ready = new Promise((resolve, reject) => {
       Promise.all([this.stories.onReady()]).then(() => {
@@ -27,13 +29,13 @@ export class History {
                 loadedIndex += 1;
                 if (loadedIndex === idList.length) {
                   this.history = temp;
-                  this.clean().then(() => resolve());
+                  this.clean().then(() => resolve(true));
                 }
               });
             });
           } else {
             this.history = [];
-            resolve();
+            resolve(true);
           }
         });
       });
@@ -55,7 +57,7 @@ export class History {
               idsList.push(value.id);
             }
           }
-          if (index >= allStorageLength) {
+          if (Number(index) >= allStorageLength) {
             // All ids were gathered
             Observable.forkJoin(idsList.map(id => this.stories.getById(id))).subscribe(list => {
               const sortedList = list.sort((a, b) => (b.downloadedtimestamp as number) - (a.downloadedtimestamp as number));
@@ -109,9 +111,8 @@ export class History {
   }
 
   clean(): Promise<void> {
-    const maxNumberOfStories = 100;
     return new Promise(resolve => {
-      const toRemove = this.history.slice(0, Math.max(this.history.length - maxNumberOfStories, 0));
+      const toRemove = this.history.slice(0, Math.max(this.history.length - History.HISTORY_LIMIT, 0));
 
       if (toRemove.length < 1) {
         resolve();

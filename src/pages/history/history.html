@@ -5,7 +5,7 @@
     </button>
     <ion-title
       >{{ (onlyDownloaded?'HISTORY_TITLE_DOWNLOADED':'HISTORY_TITLE') | translate }}
-      ({{filteredStories.length}}<small>/100</small>)</ion-title
+      ({{filteredStories.length}}<small>/{{HISTORY_LIMIT}}</small>)</ion-title
     >
     <ion-buttons end>
       <button end ion-button icon-only (click)="openSortPopover($event)" [tooltip]="'SORT_TITLE' | translate" event="press" navTooltip>
@@ -42,7 +42,9 @@
 </ion-header>
 
 <ion-content padding>
-  <p *ngIf="!filteredStories.length; else listElement" class="empty-placeholder">{{'HISTORY_EMPTY' | translate}}</p>
+  <p *ngIf="!filteredStories.length; else listElement" class="empty-placeholder">
+    {{ 'HISTORY_EMPTY' | translate:{HISTORY_LIMIT: HISTORY_LIMIT} }}
+  </p>
   <story-list
     [stories]="filteredStories | orderBy: sortMethod"
     (onDeleteBySwiping)="delete($event)"
