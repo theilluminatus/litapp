@@ -1,7 +1,6 @@
 #!/bin/sh
 
-rm -rf build/*
-rm -rf www/*
+n
 
 # Add all needed env variables here
 CORS_PROXY=https://litapp-cors.herokuapp.com/ DEV=false ./node_modules/.bin/ionic build --prod

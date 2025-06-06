@@ -6,9 +6,9 @@
 > 
 > ❗ Due to recent changes on the Literotica site some functionality (mainly account based, like the feed) might no longer work. As such I've decided to halt development of this project for now in the hope that either a [public API](https://forum.literotica.com/showthread.php?t=1544234) becomes available or an official apps get released.
 
+- [v1.25](https://theilluminatus.github.io/litapp/releases/litapp-1.25.apk) (2025-06-06)
 - [v1.24](https://theilluminatus.github.io/litapp/releases/litapp-1.24.apk) (2021-04-05)
 - [v1.23](https://theilluminatus.github.io/litapp/releases/litapp-1.23.apk) (2020-09-28)
-- [v1.22](https://theilluminatus.github.io/litapp/releases/litapp-1.22.apk) (2020-08-08)
 
 Older changelogs can be found on [the releases page](https://github.com/theilluminatus/litapp/releases) (Press `...` after version). Older APKs can be found in the [releases folder](https://github.com/theilluminatus/litapp/tree/master/docs/releases).
 

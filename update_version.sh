@@ -42,8 +42,8 @@ updateFile ./docs/_config.yml 7 $orgValue $newValue
 # index.md
 echo Updating ./docs/index.md
 today=$(date --iso)
-sed -i "7d" ./docs/index.md
-sed -i "5i- [v$newValue](https://theilluminatus.github.io/litapp/releases/litapp-${newValue}.apk) ($today)" ./docs/index.md
+sed -i "11d" ./docs/index.md
+sed -i "9i- [v$newValue](https://theilluminatus.github.io/litapp/releases/litapp-${newValue}.apk) ($today)" ./docs/index.md
 
 # Increment version numbers
 # globals.ts
