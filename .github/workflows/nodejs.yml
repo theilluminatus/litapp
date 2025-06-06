@@ -8,21 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v1
-
-      - name: Cache
-        id: cache
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-4
-          restore-keys: |
-            ${{ runner.os }}-node-
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: '11.x'
+          cache: 'npm'
 
       - name: Install binaries
         run: npm install
